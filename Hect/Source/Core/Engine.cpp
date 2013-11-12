@@ -3,6 +3,7 @@
 using namespace hect;
 
 #include <SFML/Graphics.hpp>
+#include <enet/enet.h>
 
 #ifdef HECT_WINDOWS
 #include <Windows.h>
@@ -89,7 +90,6 @@ Keyboard::Event _translateKeyboardEvent(const sf::Event& event)
 
 Engine::Engine(const std::string& title, const Path& settingsFile)
 {
-
     // Prevent multiple engine instances
     if (_engine)
     {
@@ -142,6 +142,7 @@ Engine::Engine(const std::string& title, const Path& settingsFile)
     }
 
     LOG_INFO("Creating window...");
+
     LOG_INFO(format("Resolution: %dx%dx%d", videoMode.width, videoMode.height, videoMode.bitsPerPixel));
     LOG_INFO(format("Fullscreen: %s", (style & sf::Style::Fullscreen) == sf::Style::Fullscreen ? "yes" : "no"));
 
@@ -150,6 +151,7 @@ Engine::Engine(const std::string& title, const Path& settingsFile)
     _screen.setWidth(videoMode.width);
     _screen.setHeight(videoMode.height);
 
+    LOG_INFO("Done");
     LOG_INFO("Initializing graphics...");
 
     // Initialize gpu
@@ -158,16 +160,34 @@ Engine::Engine(const std::string& title, const Path& settingsFile)
     // Set the last cursor position to avoid a large relative movement on the
     // first movement event
     _lastCursorPosition = _cursorPosition();
+
+    LOG_INFO("Done");
+    LOG_INFO("Initializing ENet...");
+
+    if (enet_initialize() != 0)
+    {
+        throw Error("Failed to initialized ENet");
+    }
+    
+    LOG_INFO("Done");
 }
 
 Engine::~Engine()
 {
+    LOG_INFO("Deinitializing ENet...");
+
+    enet_deinitialize();
+    
+    LOG_INFO("Done");
+
     if (_window)
     {
         LOG_INFO("Closing window...");
 
         _window->close();
         delete _window;
+
+        LOG_INFO("Done");
     }
     _engine = nullptr;
 }

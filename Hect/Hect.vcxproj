@@ -100,7 +100,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\ENet\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -119,7 +119,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -130,7 +130,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\ENet\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -149,7 +149,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -162,7 +162,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\ENet\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -181,7 +181,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -194,7 +194,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Dependencies\PhysFS\Source\;$(SolutionDir)Dependencies\Lua\Source\;$(SolutionDir)Dependencies\Glew\Source\;$(SolutionDir)Dependencies\Sfml\Source\;$(SolutionDir)Dependencies\LodePng\Source\;$(SolutionDir)Dependencies\ENet\Source\;$(SolutionDir)Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -213,7 +213,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -291,7 +291,10 @@
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Screen.h" />
     <ClInclude Include="Source\IO\WriteStream.h" />
+    <ClInclude Include="Source\Network\Client.h" />
     <ClInclude Include="Source\Network\IpAddress.h" />
+    <ClInclude Include="Source\Network\Packet.h" />
+    <ClInclude Include="Source\Network\Server.h" />
     <ClInclude Include="Source\Noise\Random.h" />
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +360,7 @@
     <ClCompile Include="Source\Graphics\Screen.cpp" />
     <ClCompile Include="Source\IO\WriteStream.cpp" />
     <ClCompile Include="Source\Network\IpAddress.cpp" />
+    <ClCompile Include="Source\Network\Packet.cpp" />
     <ClCompile Include="Source\Noise\Random.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,8 @@
+namespace hect
+{
+
+class Client
+{
+};
+
+}
