@@ -24,14 +24,12 @@ ShaderJsonFormat::ShaderJsonFormat()
     _valueTypes["Texture"] = Shader::Value::Texture;
 }
 
-void ShaderJsonFormat::load(Shader& shader, ReadStream& stream, AssetCache& assetCache)
+void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache)
 {
-    DataValue root = JsonParser().parse(stream);
-
     ShaderModule::RefArray modules;
 
     // Add all modules
-    for (const DataValue& module : root["modules"])
+    for (const DataValue& module : dataValue["modules"])
     {
         AssetHandle<ShaderModule> moduleHandle = assetCache.getHandle<ShaderModule>(module.asString());
         modules.push_back(moduleHandle.getShared());
@@ -40,9 +38,9 @@ void ShaderJsonFormat::load(Shader& shader, ReadStream& stream, AssetCache& asse
     Shader::Parameter::Array parameters;
 
     // Add all parameters
-    for (std::string& name : root["parameters"].memberNames())
+    for (std::string& name : dataValue["parameters"].memberNames())
     {
-        parameters.push_back(_parseParameter(name, root["parameters"][name]));
+        parameters.push_back(_parseParameter(name, dataValue["parameters"][name]));
     }
 
     shader = Shader(modules, parameters);

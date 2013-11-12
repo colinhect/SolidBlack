@@ -32,29 +32,27 @@ MeshJsonFormat::MeshJsonFormat()
     _attributeTypes["Float32"] = VertexAttribute::Float32;
 }
 
-void MeshJsonFormat::load(Mesh& mesh, ReadStream& stream)
+void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)
 {
-    DataValue root = JsonParser().parse(stream);
-
     // Index type (optional)
-    if (root["indexType"].isString())
+    if (dataValue["indexType"].isString())
     {
-        Mesh::IndexType indexType = _parseIndexType(root["indexType"].asString());
+        Mesh::IndexType indexType = _parseIndexType(dataValue["indexType"].asString());
         mesh.setIndexType(indexType);
     }
 
     // Primitive type (optional)
-    if (root["primitiveType"].isString())
+    if (dataValue["primitiveType"].isString())
     {
-        Mesh::PrimitiveType primitiveType = _parsePrimitiveType(root["primitiveType"].asString());
+        Mesh::PrimitiveType primitiveType = _parsePrimitiveType(dataValue["primitiveType"].asString());
         mesh.setPrimitiveType(primitiveType);
     }
 
     // Vertex layout (optional)
-    if (root["vertexLayout"].isArray())
+    if (dataValue["vertexLayout"].isArray())
     {
         VertexAttribute::Array attributes;
-        for (const DataValue& attribute : root["vertexLayout"])
+        for (const DataValue& attribute : dataValue["vertexLayout"])
         {
             auto semantic =_parseAttributeSemantic(attribute["semantic"].asString());
             auto type = _parseAttributeType(attribute["type"].asString());
@@ -68,7 +66,7 @@ void MeshJsonFormat::load(Mesh& mesh, ReadStream& stream)
     MeshBuilder meshBuilder(mesh);
 
     // Add the vertices
-    for (const DataValue& vertex : root["vertices"])
+    for (const DataValue& vertex : dataValue["vertices"])
     {
         meshBuilder.addVertex();
 
@@ -92,7 +90,7 @@ void MeshJsonFormat::load(Mesh& mesh, ReadStream& stream)
     }
 
     // Add the indices
-    for (const DataValue& index : root["indices"])
+    for (const DataValue& index : dataValue["indices"])
     {
         unsigned indexValue = index.asUnsigned();
         meshBuilder.addIndex(indexValue);

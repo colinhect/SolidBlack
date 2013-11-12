@@ -5,5 +5,6 @@ using namespace hect;
 void AssetLoader<Mesh>::load(Mesh& mesh, const Path& assetPath, AssetCache& assetCache)
 {
     FileReadStream stream = assetCache.storage().openFileForRead(assetPath);
-    MeshJsonFormat().load(mesh, stream);
+    DataValue dataValue = JsonParser().parse(stream);
+    MeshJsonFormat().load(mesh, dataValue);
 }

@@ -16,8 +16,8 @@ public:
     /// Loads a mesh from a stream of JSON data.
     ///
     /// \param mesh The mesh to load to.
-    /// \param stream The stream containing the JSON data.
-    void load(Mesh& mesh, ReadStream& stream);
+    /// \param dataValue The root data value of the JSON data.
+    void load(Mesh& mesh, const DataValue& dataValue);
 
 private:
     Mesh::IndexType _parseIndexType(const DataValue& dataValue);

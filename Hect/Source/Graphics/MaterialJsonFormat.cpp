@@ -21,24 +21,23 @@ MaterialJsonFormat::MaterialJsonFormat()
     _blendFactors["OneMinusDestAlpha"] = RenderMode::OneMinusDestAlpha;
 }
 
-void MaterialJsonFormat::load(Material& material, ReadStream& stream, AssetCache& assetCache)
+void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, AssetCache& assetCache)
 {
     ShaderJsonFormat shaderJsonFormat;
-    DataValue root = JsonParser().parse(stream);
 
     Technique::Array techniques;
 
     // Base material
-    if (root["base"].isString())
+    if (dataValue["base"].isString())
     {
-        Path basePath = root["base"].asString();
+        Path basePath = dataValue["base"].asString();
         AssetHandle<Material> handle = assetCache.getHandle<Material>(basePath);
         techniques = handle.get()->techniques(); // Copy the base material techniques
     }
 
     // Techniques
     size_t techniqueIndex = 0;
-    for (const DataValue& techniqueValue : root["techniques"])
+    for (const DataValue& techniqueValue : dataValue["techniques"])
     {
         Pass::Array passes;
         if (techniqueIndex < techniques.size())

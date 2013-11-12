@@ -2,8 +2,10 @@ namespace hect
 {
 
 ///
-/// The OS window the engine is rendering to.
-class Window :
+/// The screen that the engine is rendering to.
+///
+/// \remarks In most cases the screen represents the native OS window.
+class Screen :
     public RenderTarget,
     public Uncopyable
 {
@@ -15,7 +17,7 @@ public:
     void bind(Gpu* gpu);
 
 private:
-    Window() { }
+    Screen() { }
 };
 
 }

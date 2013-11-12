@@ -94,8 +94,8 @@ public:
     Gpu& gpu();
 
     ///
-    /// Returns the window.
-    Window& window();
+    /// Returns the screen.
+    Screen& screen();
 
     ///
     /// Returns the settings loaded during engine initialization.
@@ -120,7 +120,7 @@ private:
     Storage _storage;
     Input _input;
     Gpu _gpu;
-    Window _window;
+    Screen _screen;
     DataValue _settings;
 
     Vector2<int> _lastCursorPosition;

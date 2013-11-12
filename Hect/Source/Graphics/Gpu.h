@@ -2,8 +2,8 @@ namespace hect
 {
 
 ///
-/// A higher-level abstraction over a hardware-accelerated graphics API
-/// such as OpenGL or DirectX.
+/// A higher-level abstraction over a hardware-accelerated graphics API such as
+/// OpenGL or DirectX.
 class Gpu :
     public Uncopyable
 {
@@ -43,10 +43,10 @@ public:
     void bindTarget(RenderTarget& renderTarget);
 
     ///
-    /// Selects a window as the active render target.
+    /// Selects a screen as the active render target.
     ///
-    /// \param window The window to bind.
-    void bindWindow(Window& window);
+    /// \param screen The screen to bind.
+    void bindScreen(Screen& screen);
 
     ///
     /// Selects a frame buffer as the active render target.

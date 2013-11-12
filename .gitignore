@@ -8,4 +8,6 @@ Hect/Intermediate/*
 HectSystemTests/Intermediate/*
 HectUnitTests/Intermediate/*
 Judecca/Intermediate/*
-Hect.opensdf
+*.opensdf
+*.sdf
+*.suo

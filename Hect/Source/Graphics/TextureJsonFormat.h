@@ -15,9 +15,9 @@ public:
     /// Loads a texture from a stream of JSON data.
     ///
     /// \param texture The texture to load to.
-    /// \param stream The stream containing the JSON data.
+    /// \param dataValue The root data value of the JSON data.
     /// \param assetCache The asset cache to use to load referenced assets.
-    void load(Texture& texture, ReadStream& stream, AssetCache& assetCache);
+    void load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache);
 
 private:
     Texture::Filter _parseTextureFilter(const DataValue& dataValue);

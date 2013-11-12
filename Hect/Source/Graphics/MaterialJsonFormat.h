@@ -16,9 +16,9 @@ public:
     /// Loads a material from a stream of JSON data.
     ///
     /// \param material The material to load to.
-    /// \param stream The stream containing the JSON data.
+    /// \param dataValue The root data value of the JSON data.
     /// \param assetCache The asset cache to use to load referenced assets.
-    void load(Material& material, ReadStream& stream, AssetCache& assetCache);
+    void load(Material& material, const DataValue& dataValue, AssetCache& assetCache);
 
 private:
     RenderMode::State _parseState(const DataValue& dataValue);

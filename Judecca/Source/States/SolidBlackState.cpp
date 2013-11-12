@@ -58,10 +58,10 @@ SolidBlackState::SolidBlackState(Engine& engine) :
 
 void SolidBlackState::begin()
 {
-    Window& window = engine().window();
+    Screen& screen = engine().screen();
 
     Texture::Array targets;
-    targets.push_back(Texture(window.width(), window.height(), Image::Float16, Image::Rgb, Texture::Nearest, Texture::Nearest, false, false));
+    targets.push_back(Texture(screen.width(), screen.height(), Image::Float16, Image::Rgb, Texture::Nearest, Texture::Nearest, false, false));
     _frameBuffer.reset(new FrameBuffer(targets));
 
     _galaxyScene.addSystem(_cameraSystem);
@@ -92,8 +92,8 @@ void SolidBlackState::render(double delta)
     }
 
     Gpu& gpu = engine().gpu();
-    RenderTarget& renderTarget = *_frameBuffer;
-    RenderTarget& window = engine().window();
+    FrameBuffer& renderTarget = *_frameBuffer;
+    Screen& screen = engine().screen();
 
     Camera& camera = _cameraSystem.camera();
     camera.setAspectRatio(renderTarget.aspectRatio());
@@ -107,7 +107,7 @@ void SolidBlackState::render(double delta)
 
     // Render the tonemapped frame buffer
     gpu.beginFrame();
-    gpu.bindTarget(window);
+    gpu.bindTarget(screen);
     gpu.clear();
 
     gpu.bindShader(*_hdrCompositorShader);
@@ -120,7 +120,7 @@ void SolidBlackState::render(double delta)
     // Draw debug info
     if (debugLevel() == 1)
     {
-        _debugRenderingSystem.renderAll(camera, gpu, window);
+        _debugRenderingSystem.renderAll(camera, gpu, screen);
     }
     gpu.endFrame();
 

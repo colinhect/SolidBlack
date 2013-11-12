@@ -289,8 +289,9 @@
     <ClInclude Include="Source\Math\Vector4.h" />
     <ClInclude Include="Source\Graphics\VertexAttribute.h" />
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
-    <ClInclude Include="Source\Graphics\Window.h" />
+    <ClInclude Include="Source\Graphics\Screen.h" />
     <ClInclude Include="Source\IO\WriteStream.h" />
+    <ClInclude Include="Source\Network\IpAddress.h" />
     <ClInclude Include="Source\Noise\Random.h" />
   </ItemGroup>
   <ItemGroup>
@@ -353,8 +354,9 @@
     <ClCompile Include="Source\Core\Format.cpp" />
     <ClCompile Include="Source\Graphics\VertexAttribute.cpp" />
     <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
-    <ClCompile Include="Source\Graphics\Window.cpp" />
+    <ClCompile Include="Source\Graphics\Screen.cpp" />
     <ClCompile Include="Source\IO\WriteStream.cpp" />
+    <ClCompile Include="Source\Network\IpAddress.cpp" />
     <ClCompile Include="Source\Noise\Random.cpp" />
   </ItemGroup>
   <ItemGroup>

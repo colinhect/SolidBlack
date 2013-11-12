@@ -15,14 +15,14 @@ void GalaxyViewerState::begin()
 {
     SolidBlackState::begin();
 
-    Window& window = engine().window();
+    Screen& screen = engine().screen();
 
     galaxyScene().addSystem(_freeCameraControllerSystem);
 
     // Add a free-controlled camera to the scene
     Entity cameraEntity = galaxyScene().createEntity();
     cameraEntity.addComponent<Transform>(Vector3<>(0, 1000, 30000));
-    cameraEntity.addComponent<Camera>(Angle<>::fromDegrees(80), window.aspectRatio(), 0.01, 250000);
+    cameraEntity.addComponent<Camera>(Angle<>::fromDegrees(80), screen.aspectRatio(), 0.01, 250000);
     cameraEntity.addComponent<FreeCameraController>();
     cameraEntity.activate();
 

@@ -117,7 +117,7 @@ public:
     void removeListener(Listener* listener);
 
     ///
-    /// Sets whether the cursor is locked at the center of the window.
+    /// Sets whether the cursor is locked at the center of the screen.
     ///
     /// \param locked Whether the cursor is locked.
     void setCursorLocked(bool locked);

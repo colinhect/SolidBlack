@@ -14,7 +14,7 @@ const unsigned _defaultHeight = 600;
 const unsigned _defaultBitsPerPixel = 32;
 
 // The SFML window
-sf::Window* _sfmlWindow = nullptr;
+sf::Window* _window = nullptr;
 
 // The engine instance
 Engine* _engine = nullptr;
@@ -146,9 +146,9 @@ Engine::Engine(const std::string& title, const Path& settingsFile)
     LOG_INFO(format("Fullscreen: %s", (style & sf::Style::Fullscreen) == sf::Style::Fullscreen ? "yes" : "no"));
 
     // Create the window
-    _sfmlWindow = new sf::Window(videoMode, title, style);
-    _window.setWidth(videoMode.width);
-    _window.setHeight(videoMode.height);
+    _window = new sf::Window(videoMode, title, style);
+    _screen.setWidth(videoMode.width);
+    _screen.setHeight(videoMode.height);
 
     LOG_INFO("Initializing graphics...");
 
@@ -162,12 +162,12 @@ Engine::Engine(const std::string& title, const Path& settingsFile)
 
 Engine::~Engine()
 {
-    if (_sfmlWindow)
+    if (_window)
     {
         LOG_INFO("Closing window...");
 
-        _sfmlWindow->close();
-        delete _sfmlWindow;
+        _window->close();
+        delete _window;
     }
     _engine = nullptr;
 }
@@ -238,7 +238,7 @@ void Engine::execute()
 
 void Engine::swapBuffers()
 {
-    _sfmlWindow->display();
+    _window->display();
 }
 
 Storage& Engine::storage()
@@ -256,9 +256,9 @@ Gpu& Engine::gpu()
     return _gpu;
 }
 
-Window& Engine::window()
+Screen& Engine::screen()
 {
-    return _window;
+    return _screen;
 }
 
 const DataValue& Engine::settings() const
@@ -279,7 +279,7 @@ bool Engine::_pollEvents()
     Mouse& mouse = _input.mouse();
     Keyboard& keyboard = _input.keyboard();
 
-    sf::Vector2u windowSize = _sfmlWindow->getSize();
+    sf::Vector2u windowSize = _window->getSize();
     sf::Vector2i windowCenter(windowSize.x / 2, windowSize.y / 2);
 
     // Occurs the first time pollEvents() is called after the mouse is locked
@@ -287,11 +287,11 @@ bool Engine::_pollEvents()
     {
 
         // Hide the cursor
-        _sfmlWindow->setMouseCursorVisible(false);
+        _window->setMouseCursorVisible(false);
         cursorVisible = false;
 
         // Move cursor to center of window
-        sf::Mouse::setPosition(windowCenter, *_sfmlWindow);
+        sf::Mouse::setPosition(windowCenter, *_window);
         _lastCursorPosition = _cursorPosition();
     }
 
@@ -300,22 +300,22 @@ bool Engine::_pollEvents()
     {
 
         // Show the cursor
-        _sfmlWindow->setMouseCursorVisible(true);
+        _window->setMouseCursorVisible(true);
         cursorVisible = true;
 
         // Move cursor to center of window
-        sf::Mouse::setPosition(windowCenter, *_sfmlWindow);
+        sf::Mouse::setPosition(windowCenter, *_window);
         _lastCursorPosition = _cursorPosition();
     }
 
     // Poll all pending events and translate/dispatch to the proper systems
     sf::Event event;
-    while (_sfmlWindow->pollEvent(event))
+    while (_window->pollEvent(event))
     {
         switch (event.type)
         {
         case sf::Event::Closed:
-            _sfmlWindow->close();
+            _window->close();
             break;
         case sf::Event::MouseMoved:
         case sf::Event::MouseButtonPressed:
@@ -335,9 +335,9 @@ bool Engine::_pollEvents()
     // If the cursor is locked then move it back to the center of the window
     if (mouse.isCursorLocked())
     {
-        if (sf::Mouse::getPosition(*_sfmlWindow) != windowCenter)
+        if (sf::Mouse::getPosition(*_window) != windowCenter)
         {
-            sf::Mouse::setPosition(windowCenter, *_sfmlWindow);
+            sf::Mouse::setPosition(windowCenter, *_window);
         }
     }
 
@@ -345,13 +345,13 @@ bool Engine::_pollEvents()
     // compute the relative cursor movements
     _lastCursorPosition = _cursorPosition();
 
-    return _sfmlWindow->isOpen();
+    return _window->isOpen();
 }
 
 Vector2<int> Engine::_cursorPosition()
 {
-    sf::Vector2i position = sf::Mouse::getPosition(*_sfmlWindow);
-    return Vector2<int>(position.x, _sfmlWindow->getSize().y - position.y);
+    sf::Vector2i position = sf::Mouse::getPosition(*_window);
+    return Vector2<int>(position.x, _window->getSize().y - position.y);
 }
 
 void Engine::fatalError(const std::string& message)

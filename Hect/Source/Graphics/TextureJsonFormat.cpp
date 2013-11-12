@@ -8,39 +8,37 @@ TextureJsonFormat::TextureJsonFormat()
     _textureFilters["Linear"] = Texture::Linear;
 }
 
-void TextureJsonFormat::load(Texture& texture, ReadStream& stream, AssetCache& assetCache)
+void TextureJsonFormat::load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache)
 {
-    DataValue root = JsonParser().parse(stream);
-
     // Image
-    if (root["image"].isString())
+    if (dataValue["image"].isString())
     {
-        AssetHandle<Image> handle = assetCache.getHandle<Image>(root["image"].asString());
+        AssetHandle<Image> handle = assetCache.getHandle<Image>(dataValue["image"].asString());
         texture = Texture(handle.getShared());
     }
 
     // Min filter
-    if (root["minFilter"].isString())
+    if (dataValue["minFilter"].isString())
     {
-        texture.setMinFilter(_parseTextureFilter(root["minFilter"]));
+        texture.setMinFilter(_parseTextureFilter(dataValue["minFilter"]));
     }
 
     // Mag filter
-    if (root["magFilter"].isString())
+    if (dataValue["magFilter"].isString())
     {
-        texture.setMagFilter(_parseTextureFilter(root["magFilter"]));
+        texture.setMagFilter(_parseTextureFilter(dataValue["magFilter"]));
     }
 
     // Wrapped
-    if (root["wrapped"].isBool())
+    if (dataValue["wrapped"].isBool())
     {
-        texture.setWrapped(root["wrapped"].asBool());
+        texture.setWrapped(dataValue["wrapped"].asBool());
     }
 
     // Mipmapped
-    if (root["mipmapped"].isBool())
+    if (dataValue["mipmapped"].isBool())
     {
-        texture.setMipmapped(root["mipmapped"].asBool());
+        texture.setMipmapped(dataValue["mipmapped"].asBool());
     }
 }
 

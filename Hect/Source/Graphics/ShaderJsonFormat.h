@@ -16,9 +16,9 @@ public:
     /// Loads a shader from a stream of JSON data.
     ///
     /// \param shader The shader to load to.
-    /// \param stream The stream containing the JSON data.
+    /// \param dataValue The root data value of the JSON data.
     /// \param assetCache The asset cache to use to load referenced assets.
-    void load(Shader& shader, ReadStream& stream, AssetCache& assetCache);
+    void load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache);
 
     ///
     /// Parses a shader value of a certain type.

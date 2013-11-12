@@ -241,16 +241,16 @@ void Gpu::bindTarget(RenderTarget& renderTarget)
     renderTarget.bind(this);
 }
 
-void Gpu::bindWindow(Window& window)
+void Gpu::bindScreen(Screen& screen)
 {
     // Avoid binding an already bound target
-    if (&window == _boundTarget)
+    if (&screen == _boundTarget)
     {
         return;
     }
-    _boundTarget = &window;
+    _boundTarget = &screen;
 
-    GL_ASSERT( glViewport(0, 0, window.width(), window.height()); )
+    GL_ASSERT( glViewport(0, 0, screen.width(), screen.height()); )
     GL_ASSERT( glBindFramebuffer(GL_FRAMEBUFFER, 0); )
 }
 
