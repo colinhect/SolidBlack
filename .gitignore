@@ -1,13 +1,11 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+Dependencies/*
+Bin/*
+Win32/*
+x64/*
+Hect/Ignore.txt
+Hect/Doc/*
+Hect/Intermediate/*
+HectSystemTests/Intermediate/*
+HectUnitTests/Intermediate/*
+Judecca/Intermediate/*
+Hect.opensdf
