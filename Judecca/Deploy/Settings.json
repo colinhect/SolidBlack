@@ -1,0 +1,15 @@
+{
+    "videoMode" :
+    {
+        "width" : 1280,
+        "height" : 900,
+        "bitsPerPixel" : 32,
+        "fullscreen" : false
+    },
+    "dataSources" :
+    [
+        "Common",
+        "Galaxies",
+        "Effects"
+    ]
+}

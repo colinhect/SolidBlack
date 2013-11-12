@@ -1,0 +1,16 @@
+{
+    "base" : "Materials/GalacticParticle.material",
+    "techniques" :
+    [
+        [
+            {
+                "shaderArguments" :
+                {
+                    "color" : [ -0.78, -0.9, -0.9, 1 ],
+                    "sizeRange" : [ 1000, 2500 ],
+                    "intensityRange" : [ 0.2, 0.5 ]
+                }
+            }
+        ]
+    ]
+}

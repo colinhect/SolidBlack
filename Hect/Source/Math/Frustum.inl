@@ -1,0 +1,115 @@
+namespace hect
+{
+
+template <typename T>
+Frustum<T>::Frustum()
+{
+}
+
+template <typename T>
+Frustum<T>::Frustum(
+    const Vector3<T>& position,
+    const Vector3<T>& front,
+    const Vector3<T>& up,
+    Angle<T> fieldOfView,
+    T aspectRatio,
+    T nearClip,
+    T farClip) :
+    _position(position)
+{
+    T tangent = (T)std::tan(fieldOfView.toRadians() * (T)0.5);
+
+    T nearHeight = nearClip * tangent;
+    T nearWidth = nearHeight * aspectRatio;
+
+    T farHeight = farClip * tangent;
+    T farWidth = farHeight * aspectRatio;
+
+    Vector3<T> z = -front;
+    z.normalize();
+
+    Vector3<T> x = up.cross(z);
+    x.normalize();
+
+    Vector3<T> y = z.cross(x);
+
+    // Compute center of near/far planes
+    Vector3<T> nearCenter = position - z * nearClip;
+    Vector3<T> farCenter = position - z * farClip;
+
+    // Compute corners of near plane
+    Vector3<T> nearTopLeft = nearCenter + y * nearHeight - x * nearWidth;
+    Vector3<T> nearTopRight = nearCenter + y * nearHeight + x * nearWidth;
+    Vector3<T> nearBottomLeft = nearCenter - y * nearHeight - x * nearWidth;
+    Vector3<T> nearBottomRight = nearCenter - y * nearHeight + x * nearWidth;
+
+    // Compute corners of far plane
+    Vector3<T> farTopLeft = farCenter + y * farHeight - x * farWidth;
+    Vector3<T> farTopRight = farCenter + y * farHeight + x * farWidth;
+    Vector3<T> farBottomLeft = farCenter - y * farHeight - x * farWidth;
+    Vector3<T> farBottomRight = farCenter - y * farHeight + x * farWidth;
+
+    // Build planes from points
+    _planes[Top] = hect::Plane<T>::fromPoints(nearTopRight, nearTopLeft, farTopLeft);
+    _planes[Bottom] = hect::Plane<T>::fromPoints(nearBottomLeft, nearBottomRight, farBottomRight);
+    _planes[Left] = hect::Plane<T>::fromPoints(nearTopLeft, nearBottomLeft, farBottomLeft);
+    _planes[Right] = hect::Plane<T>::fromPoints(nearBottomRight, nearTopRight, farBottomRight);
+    _planes[Near] = hect::Plane<T>::fromPoints(nearTopLeft, nearTopRight, nearBottomRight);
+    _planes[Far] = hect::Plane<T>::fromPoints(farTopRight, farTopLeft, farBottomLeft);
+}
+
+template <typename T>
+typename Frustum<T>::TestResult Frustum<T>::testAxisAlignedBox(const AxisAlignedBox<T>& box) const
+{
+    TestResult result = Inside;
+
+    if (!box.hasSize())
+    {
+        return result;
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        Vector3<T> normal(_planes[i].normal());
+
+        Vector3<T> minimum(box.minimum());
+        Vector3<T> maximum(box.maximum());
+
+        Vector3<T> p(minimum);
+        Vector3<T> n(maximum);
+
+        if (normal.x >= 0)
+        {
+            p.x = maximum.x;
+            n.x = minimum.x;
+        }
+
+        if (normal.y >= 0)
+        {
+            p.y = maximum.y;
+            n.y = minimum.y;
+        }
+
+        if (normal.z >= 0)
+        {
+            p.z = maximum.z;
+            n.z = minimum.z;
+        }
+
+        T distanceP = _planes[i].distance() + normal.dot(p);
+        T distanceN = _planes[i].distance() + normal.dot(n);
+
+        if (distanceP < 0)
+        {
+            return Outside;
+        }
+        else if (distanceN < 0)
+        {
+            result = Intersect;
+        }
+    }
+
+    return result;
+}
+
+}
