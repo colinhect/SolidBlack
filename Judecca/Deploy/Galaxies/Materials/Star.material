@@ -1,0 +1,29 @@
+{
+    "techniques" :
+    [
+        [
+            {
+                "shader" : "Shaders/Star.shader",
+                "textures" :
+                [
+                    "Textures/Star.texture"
+                ],
+                "renderMode" :
+                {
+                    "enabledStates" :
+                    [
+                        "Blend"
+                    ],
+                    "disabledStates" :
+                    [
+                        "DepthTest"
+                    ],
+                    "blendFactors" :
+                    [
+                        "One", "One"
+                    ]
+                }
+            }
+        ]
+    ]
+}

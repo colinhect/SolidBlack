@@ -23,11 +23,11 @@ public:
 
     ///
     /// \copydoc Renderable::render()
-    void render(Camera& camera, RenderingSystem& renderingSystem);
+    void render(const Camera& camera, RenderingSystem& renderingSystem);
 
     ///
     /// \copydoc Renderable::renderDebug()
-    void renderDebug(Camera& camera, DebugRenderingSystem& renderingSystem);
+    void renderDebug(const Camera& camera, DebugRenderingSystem& renderingSystem);
 
 private:
     Mesh::RefArray _meshes;

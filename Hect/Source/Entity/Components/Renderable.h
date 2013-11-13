@@ -16,14 +16,14 @@ public:
     ///
     /// \param camera The camera to render from.
     /// \param renderingSystem The rendering system.
-    virtual void render(Camera& camera, RenderingSystem& renderingSystem) { }
+    virtual void render(const Camera& camera, RenderingSystem& renderingSystem) { }
 
     ///
     /// Renders debug data of the component.
     ///
     /// \param camera The camera to render from.
     /// \param renderingSystem The rendering system.
-    virtual void renderDebug(Camera& camera, DebugRenderingSystem& renderingSystem) { }
+    virtual void renderDebug(const Camera& camera, DebugRenderingSystem& renderingSystem) { }
 };
 
 }

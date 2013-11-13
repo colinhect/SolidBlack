@@ -14,18 +14,26 @@ public:
         StarField* starField;
         Transform transform;
         AxisAlignedBox<> area;
+        double size;
         unsigned depth;
-        //PointCloud pointCloud;
-        //std::vector<Node> children;
+        Mesh::Ref mesh;
+        std::vector<Node> children;
     };
 
     StarField(const Vector3<>& position, double size, unsigned maxDepth, DensitySampler::Ref densitySampler, Material::Ref material);
 
-    //void render(Camera& camera, RenderingSystem& renderingSystem);
-    void renderDebug(Camera& camera, DebugRenderingSystem& renderingSystem);
+    void render(const Camera& camera, RenderingSystem& renderingSystem);
+    void renderDebug(const Camera& camera, DebugRenderingSystem& renderingSystem);
 
 private:
-    //void _renderNode(Camera& camera, RenderingSystem& renderingSystem, bool cull);
+    void _updateNode(Node& node, const Camera& camera);
+    void _renderNode(Node& node, const Camera& camera, RenderingSystem& renderingSystem, bool frustumTest);
+    void _renderNodeDebug(Node& node, const Camera& camera, DebugRenderingSystem& renderingSystem, bool frustumTest);
+
+    void _splitNode(Node& node);
+    void _generateMesh(Node& node);
+
+    unsigned _hashPoint(const Vector3<>& point) const;
 
     unsigned _maxDepth;
     DensitySampler::Ref _densitySampler;

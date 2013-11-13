@@ -15,7 +15,7 @@ void Geometry::addMesh(Mesh::Ref mesh, Material::Ref material)
     _boundingBox.expandToInclude(mesh->boundingBox());
 }
 
-void Geometry::render(Camera& camera, RenderingSystem& renderingSystem)
+void Geometry::render(const Camera& camera, RenderingSystem& renderingSystem)
 {
     size_t i = 0;
     while (i < _meshes.size())
@@ -35,7 +35,7 @@ void Geometry::render(Camera& camera, RenderingSystem& renderingSystem)
     }
 }
 
-void Geometry::renderDebug(Camera& camera, DebugRenderingSystem& renderingSystem)
+void Geometry::renderDebug(const Camera& camera, DebugRenderingSystem& renderingSystem)
 {
     if (_boundingBox.hasSize())
     {

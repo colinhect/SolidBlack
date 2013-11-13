@@ -14,12 +14,14 @@ public:
 private:
     Mouse* _mouse;
 
-    const InputAxis* _viewAxisX;
-    const InputAxis* _viewAxisY;
-    const InputAxis* _moveAxisX;
-    const InputAxis* _moveAxisY;
-    const InputAxis* _rollAxis;
-    const InputAxis* _adjustSpeedAxis;
+    const InputAxis* _viewX;
+    const InputAxis* _viewY;
+
+    const InputAxis* _moveX;
+    const InputAxis* _moveY;
+
+    const InputAxis* _roll;
+    const InputAxis* _adjustSpeed;
 
     double _speed;
 };

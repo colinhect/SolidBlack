@@ -25,6 +25,9 @@ double DensitySampler::_sampleTop(const Vector3<>& point, unsigned channel) cons
     unsigned x = (unsigned)(relativePoint.x * (width - 1));
     unsigned z = (unsigned)(relativePoint.z * (height - 1));
 
+    x = std::min(width - 1, std::max(0u, x));
+    z = std::min(height - 1, std::max(0u, z));
+
     return (double)_top->pixelData()[z * width * bpp + x * bpp + channel] / 255.0;
 }
 
@@ -47,6 +50,9 @@ double DensitySampler::_sampleSide(const Vector3<>& point, unsigned channel) con
 
     unsigned x = (unsigned)(u * (width - 1));
     unsigned y = (unsigned)(v * (height - 1));
+
+    x = std::min(width - 1, std::max(0u, x));
+    y = std::min(height - 1, std::max(0u, y));
 
     return (double)_side->pixelData()[y * width * bpp + x * bpp + channel] / 255.0;
 }

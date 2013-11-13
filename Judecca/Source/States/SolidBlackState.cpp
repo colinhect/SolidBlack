@@ -96,7 +96,6 @@ void SolidBlackState::render(double delta)
     Screen& screen = engine().screen();
 
     Camera& camera = _cameraSystem.camera();
-    camera.setAspectRatio(renderTarget.aspectRatio());
 
     // Render scene to floating point frame buffer
     gpu.beginFrame();

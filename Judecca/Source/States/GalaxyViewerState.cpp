@@ -43,11 +43,13 @@ void GalaxyViewerState::_createGalaxy()
 {
     LOG_INFO("Creating galaxy...");
 
+    // The entire area of the clouds in the galaxy
     AxisAlignedBox<> area(Vector3<>(-50000, -3000, -50000), Vector3<>(50000, 3000, 50000));
-    Image::Ref densityTop = assetCache().get<Image>("Textures/DensityTop.png");
-    Image::Ref densitySide = assetCache().get<Image>("Textures/DensitySide.png");
 
-    DensitySampler::Ref sampler(new DensitySampler(area, densityTop, densitySide));
+    // Create the cloud density sampler
+    Image::Ref cloudDensityTop = assetCache().get<Image>("Textures/CloudDensityTop.png");
+    Image::Ref cloudDensitySide = assetCache().get<Image>("Textures/CloudDensitySide.png");
+    DensitySampler sampler(area, cloudDensityTop, cloudDensitySide);
 
     // Dust
     {
@@ -57,7 +59,7 @@ void GalaxyViewerState::_createGalaxy()
         Transform& transform = dust.addComponent<Transform>();
         Geometry& geometry = dust.addComponent<Geometry>(transform);
 
-        PointCloud pointCloud(123, 800000, area, *sampler, 0);
+        PointCloud pointCloud(123, 800000, area, sampler, 0);
         geometry.addMesh(pointCloud.mesh(), material);
 
         dust.activate();
@@ -71,7 +73,7 @@ void GalaxyViewerState::_createGalaxy()
         Transform& transform = dark.addComponent<Transform>();
         Geometry& geometry = dark.addComponent<Geometry>(transform);
 
-        PointCloud pointCloud(321, 300000, area, *sampler, 1);
+        PointCloud pointCloud(321, 300000, area, sampler, 1);
         geometry.addMesh(pointCloud.mesh(), material);
 
         dark.activate();
@@ -85,7 +87,7 @@ void GalaxyViewerState::_createGalaxy()
         Transform& transform = center.addComponent<Transform>();
         Geometry& geometry = center.addComponent<Geometry>(transform);
 
-        PointCloud pointCloud(123, 24000, area, *sampler, 2);
+        PointCloud pointCloud(123, 24000, area, sampler, 2);
         geometry.addMesh(pointCloud.mesh(), material);
 
         center.activate();
@@ -93,9 +95,28 @@ void GalaxyViewerState::_createGalaxy()
 
     // Star fields
     {
-        Entity starField = galaxyScene().createEntity();
-        starField.addComponent<StarField>(Vector3<>(0, 0, 0), 16000, 5, sampler, Material::Ref());
-        starField.activate();
+        AxisAlignedBox<> area(Vector3<>(-50000, -12500, -50000), Vector3<>(50000, 12500, 50000));
+
+        Image::Ref densityTop = assetCache().get<Image>("Textures/StarDensityTop.png");
+        Image::Ref densitySide = assetCache().get<Image>("Textures/StarDensitySide.png");
+        DensitySampler::Ref sampler(new DensitySampler(area, densityTop, densitySide));
+
+        Material::Ref material = assetCache().get<Material>("Materials/Star.material");
+
+        unsigned maxDepth = 7;
+        double starFieldSize = 40000;
+
+        for (int x = -1; x < 2; x++)
+        {
+            for (int z = -1; z < 2; z++)
+            {
+                Vector3<> position(x, 0, z);
+
+                Entity starField = galaxyScene().createEntity();
+                starField.addComponent<StarField>(position * starFieldSize, starFieldSize, maxDepth, sampler, material);
+                starField.activate();
+            }
+        }
     }
 
     LOG_INFO("Done");
