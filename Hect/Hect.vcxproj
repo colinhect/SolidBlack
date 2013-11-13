@@ -359,8 +359,10 @@
     <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Screen.cpp" />
     <ClCompile Include="Source\IO\WriteStream.cpp" />
+    <ClCompile Include="Source\Network\Client.cpp" />
     <ClCompile Include="Source\Network\IpAddress.cpp" />
     <ClCompile Include="Source\Network\Packet.cpp" />
+    <ClCompile Include="Source\Network\Server.cpp" />
     <ClCompile Include="Source\Noise\Random.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -158,6 +158,7 @@
     <ClInclude Include="Source\AngleTests.h" />
     <ClInclude Include="Source\AnyTests.h" />
     <ClInclude Include="Source\BitFieldTests.h" />
+    <ClInclude Include="Source\ClientServerTests.h" />
     <ClInclude Include="Source\IpAddressTests.h" />
     <ClInclude Include="Source\StorageTests.h" />
     <ClInclude Include="Source\DataValueTests.h" />

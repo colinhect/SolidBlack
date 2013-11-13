@@ -30,3 +30,8 @@ std::string IpAddress::toString() const
 {
     return sf::IpAddress(_address).toString();
 }
+
+uint32_t IpAddress::toInteger() const
+{
+    return _address;
+}

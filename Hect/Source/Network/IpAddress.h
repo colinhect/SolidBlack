@@ -26,10 +26,14 @@ public:
     ///
     /// \param address The 32-bit value of the address.
     IpAddress(uint32_t address);
-
+    
     ///
     /// Returns a string representation of the address.
     std::string toString() const;
+    
+    ///
+    /// Returns an integer representation of the address.
+    uint32_t toInteger() const;
 
 private:
     uint32_t _address;

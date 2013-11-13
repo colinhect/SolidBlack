@@ -2,14 +2,14 @@
 
 using namespace hect;
 
-Packet::Packet(bool reliable) :
-    _reliable(reliable)
+Packet::Packet(uint8_t flags) :
+    _flags(flags)
 {
 }
 
-bool Packet::isReliable() const
+bool Packet::hasFlag(Flag flag) const
 {
-    return _reliable;
+    return (_flags & flag) == flag;
 }
 
 Packet::Data& Packet::data()
