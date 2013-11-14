@@ -1,17 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Windows Desktop
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolidBlack", "SolidBlack", "{D00A1D09-DA28-4741-8729-38B2CEF20207}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "SolidBlack\Common\Common.vcxproj", "{E8A62226-2A4D-4152-A56B-680A6377B639}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
-		{2B692BE6-3355-488B-94F3-1BC09AA2E28F} = {2B692BE6-3355-488B-94F3-1BC09AA2E28F}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "SolidBlack\Client\Client.vcxproj", "{147A1D06-C5FE-447C-95B1-831762A1D0BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Server", "SolidBlack\Server\Server.vcxproj", "{9500614A-3838-4CA6-985C-F4EDA11BD473}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hect", "Hect", "{A76F4576-20FD-472A-87AD-04DEEA7E9C13}"
 EndProject
@@ -19,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C38C781-B8DB-4443-8D16-2532FBC3A265}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hect", "Hect\Hect\Hect.vcxproj", "{EAFD1572-5569-4643-A694-7F8F8D66E3AE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hect", "Hect\Hect.vcxproj", "{EAFD1572-5569-4643-A694-7F8F8D66E3AE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7BA6F903-7248-467B-B171-843BBA603AE0} = {7BA6F903-7248-467B-B171-843BBA603AE0}
 		{6D545E59-6771-4434-9919-58C356610D54} = {6D545E59-6771-4434-9919-58C356610D54}
@@ -46,9 +51,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sfml", "Hect\Dependencies\S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest++", "Hect\Dependencies\UnitTest++\UnitTest++.vcxproj", "{2B692BE6-3355-488B-94F3-1BC09AA2E28F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HectSystemTests", "Hect\Tests\HectSystemTests\HectSystemTests.vcxproj", "{FA8CE9CA-7F5F-4003-8CB0-46A0A8F73642}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SystemTests", "Hect\Tests\SystemTests\SystemTests.vcxproj", "{FA8CE9CA-7F5F-4003-8CB0-46A0A8F73642}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HectUnitTests", "Hect\Tests\HectUnitTests\HectUnitTests.vcxproj", "{EF7E79E2-8551-4604-AE5E-B513DBBB7201}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "Hect\Tests\UnitTests\UnitTests.vcxproj", "{EF7E79E2-8551-4604-AE5E-B513DBBB7201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,7 +69,8 @@ Global
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Debug|Win32.Build.0 = Debug|Win32
-		{E8A62226-2A4D-4152-A56B-680A6377B639}.Debug|x64.ActiveCfg = Debug|Win32
+		{E8A62226-2A4D-4152-A56B-680A6377B639}.Debug|x64.ActiveCfg = Debug|x64
+		{E8A62226-2A4D-4152-A56B-680A6377B639}.Debug|x64.Build.0 = Debug|x64
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|Win32.ActiveCfg = Release|Win32
@@ -74,7 +80,8 @@ Global
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|Win32.ActiveCfg = Debug|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|Win32.Build.0 = Debug|Win32
-		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|x64.ActiveCfg = Debug|Win32
+		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|x64.ActiveCfg = Debug|x64
+		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|x64.Build.0 = Debug|x64
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|Win32.ActiveCfg = Release|Win32
@@ -84,7 +91,8 @@ Global
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|Win32.ActiveCfg = Debug|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|Win32.Build.0 = Debug|Win32
-		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|x64.ActiveCfg = Debug|Win32
+		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|x64.ActiveCfg = Debug|x64
+		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|x64.Build.0 = Debug|x64
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|Win32.ActiveCfg = Release|Win32
