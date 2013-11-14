@@ -9,9 +9,11 @@ Client::Event::Event() :
 {
 }
 
-Client::Client(unsigned channelCount) :
+Client::Client(const IpAddress& serverAddress, uint16_t port, unsigned channelCount) :
     _host(nullptr),
     _peer(nullptr),
+    _serverAddress(serverAddress),
+    _port(port),
     _connected(false)
 {
     _host = enet_host_create(0, 1, channelCount, 0, 0);
@@ -19,79 +21,45 @@ Client::Client(unsigned channelCount) :
     {
         throw Error("Failed to create network client");
     }
+
+    ENetAddress address;
+    enet_address_set_host(&address, serverAddress.toString().c_str());
+    address.port = port;
+
+    _peer = enet_host_connect((ENetHost*)_host, &address, channelCount, 0);
+    if (!_peer)
+    {
+        throw Error("Failed to create network peer");
+    }
 }
 
 Client::~Client()
 {
     if (_connected)
     {
-        disconnect(TimeSpan::fromSeconds(5));
+        enet_peer_disconnect((ENetPeer*)_peer, 0);
+
+        ENetEvent event;
+        while (_connected && enet_host_service((ENetHost*)_host, &event, 5000) > 0)
+        {
+            switch (event.type)
+            {
+            case ENET_EVENT_TYPE_RECEIVE:
+                enet_packet_destroy(event.packet);
+            break;
+            case ENET_EVENT_TYPE_DISCONNECT:
+                _connected = false;
+                break;
+            }
+        }
+
+        enet_peer_reset((ENetPeer*)_peer);
     }
     if (_host)
     {
         enet_host_destroy((ENetHost*)_host);
         _host = nullptr;
     }
-}
-
-bool Client::connect(const IpAddress& serverAddress, uint16_t port, TimeSpan timeOut)
-{
-    if (_connected)
-    {
-        throw Error("The client is already connected");
-    }
-
-    ENetAddress address;
-    address.host = serverAddress.toInteger();
-    address.port = port;
-
-    _peer = enet_host_connect((ENetHost*)_host, &address, ((ENetHost*)_host)->channelLimit, 0);
-    if (!_peer)
-    {
-        return false;
-    }
-    
-    ENetEvent event;
-    if (enet_host_service((ENetHost*)_host, &event, (uint32_t)timeOut.milliseconds()) > 0 &&
-        event.type == ENET_EVENT_TYPE_CONNECT)
-    {
-        _connected = true;
-        return true;
-    }
-    else
-    {
-        enet_peer_reset((ENetPeer*)_peer);
-        _peer = nullptr;
-
-        return false;
-    }
-}
-
-bool Client::disconnect(TimeSpan timeOut)
-{
-    if (!_connected)
-    {
-        throw Error("The client is not connected");
-    }
-    _connected = false;
-    
-    enet_peer_disconnect((ENetPeer*)_peer, 0);
-
-    ENetEvent event;
-    while (enet_host_service((ENetHost*)_host, &event, (uint32_t)timeOut.milliseconds()) > 0)
-    {
-        switch (event.type)
-        {
-        case ENET_EVENT_TYPE_RECEIVE:
-            enet_packet_destroy(event.packet);
-        break;
-        case ENET_EVENT_TYPE_DISCONNECT:
-            return true;
-        }
-    }
-
-    enet_peer_reset((ENetPeer*)_peer);
-    return false;
 }
 
 bool Client::isConnected() const
@@ -101,18 +69,18 @@ bool Client::isConnected() const
 
 Client::Event Client::pollEvent(TimeSpan timeOut)
 {
-    if (!_connected)
-    {
-        throw Error("The client is not connected");
-    }
-
     ENetEvent enetEvent;
     if (enet_host_service((ENetHost*)_host, &enetEvent, (uint32_t)timeOut.milliseconds()) > 0)
     {
         Event event;
         switch (enetEvent.type)
         {
+        case ENET_EVENT_TYPE_CONNECT:
+            _connected = true;
+            event.type = Event::Connect;
+            return event;
         case ENET_EVENT_TYPE_DISCONNECT:
+            _connected = false;
             event.type = Event::Disconnect;
             return event;
         case ENET_EVENT_TYPE_RECEIVE:

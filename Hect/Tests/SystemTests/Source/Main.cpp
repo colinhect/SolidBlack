@@ -14,7 +14,6 @@ Engine* engine;
 const double epsilon = 0.0001;
 
 #include "AssetCacheTests.h"
-#include "ClientServerTests.h"
 #include "MaterialLoadingTests.h"
 #include "MeshLoadingTests.h"
 #include "TaskPoolTests.h"

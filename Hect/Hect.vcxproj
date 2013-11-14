@@ -223,6 +223,7 @@
     <ClInclude Include="Source\Core\Any.h" />
     <ClInclude Include="Source\Core\BitField.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
+    <ClInclude Include="Source\Core\Memory.h" />
     <ClInclude Include="Source\Entity\Components\Renderable.h" />
     <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
     <ClInclude Include="Source\Entity\Systems\RenderingSystem.h" />
@@ -303,6 +304,7 @@
     <ClCompile Include="Source\Asset\AssetCache.cpp" />
     <ClCompile Include="Source\Core\Any.cpp" />
     <ClCompile Include="Source\Core\DataValue.cpp" />
+    <ClCompile Include="Source\Core\Memory.cpp" />
     <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp" />
     <ClCompile Include="Source\IO\JsonFormat.cpp" />

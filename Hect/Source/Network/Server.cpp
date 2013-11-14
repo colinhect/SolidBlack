@@ -42,11 +42,11 @@ Server::Event Server::pollEvent(TimeSpan timeOut)
         {
         case ENET_EVENT_TYPE_CONNECT:
             event.type = Event::Connect;
-            event.clientAddress = IpAddress(enetEvent.peer->address.host);
+            event.clientAddress = IpAddress(reverseBytes(enetEvent.peer->address.host));
             return event;
         case ENET_EVENT_TYPE_DISCONNECT:
             event.type = Event::Disconnect;
-            event.clientAddress = IpAddress(enetEvent.peer->address.host);
+            event.clientAddress = IpAddress(reverseBytes(enetEvent.peer->address.host));
             return event;
         case ENET_EVENT_TYPE_RECEIVE:
             enet_packet_destroy(enetEvent.packet);

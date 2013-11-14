@@ -37,6 +37,7 @@ const double pi = 3.14159265358979323846;
 #include "Core/Uncopyable.h"
 #include "Core/Any.h"
 #include "Core/BitField.h"
+#include "Core/Memory.h"
 #include "Core/DataValue.h"
 #include "Core/TimeSpan.h"
 #include "Core/TaskPool.h"
