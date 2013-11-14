@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolidBlack", "SolidBlack", "{D00A1D09-DA28-4741-8729-38B2CEF20207}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "SolidBlack\Common\Common.vcxproj", "{E8A62226-2A4D-4152-A56B-680A6377B639}"
@@ -85,7 +85,8 @@ Global
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|Win32.ActiveCfg = Release|Win32
 		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|Win32.Build.0 = Release|Win32
-		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|x64.ActiveCfg = Release|Win32
+		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|x64.ActiveCfg = Release|x64
+		{E8A62226-2A4D-4152-A56B-680A6377B639}.Release|x64.Build.0 = Release|x64
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Debug|Win32.ActiveCfg = Debug|Win32
@@ -96,7 +97,8 @@ Global
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|Win32.ActiveCfg = Release|Win32
 		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|Win32.Build.0 = Release|Win32
-		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|x64.ActiveCfg = Release|Win32
+		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|x64.ActiveCfg = Release|x64
+		{147A1D06-C5FE-447C-95B1-831762A1D0BB}.Release|x64.Build.0 = Release|x64
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Debug|Win32.ActiveCfg = Debug|Win32
@@ -107,7 +109,8 @@ Global
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|Win32.ActiveCfg = Release|Win32
 		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|Win32.Build.0 = Release|Win32
-		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|x64.ActiveCfg = Release|Win32
+		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|x64.ActiveCfg = Release|x64
+		{9500614A-3838-4CA6-985C-F4EDA11BD473}.Release|x64.Build.0 = Release|x64
 		{EAFD1572-5569-4643-A694-7F8F8D66E3AE}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{EAFD1572-5569-4643-A694-7F8F8D66E3AE}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{EAFD1572-5569-4643-A694-7F8F8D66E3AE}.Debug|Win32.ActiveCfg = Debug|Win32

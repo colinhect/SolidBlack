@@ -8,16 +8,21 @@ ServerState::ServerState(Engine& engine) :
 
 void ServerState::update(double timeStep)
 {
-    UdpSocket::Event event;
+    Socket::Event event;
     while (_socket.pollEvent(event))
     {
+        Connection connection = event.connection;
+        std::string address = connection.address().toString();
+        Connection::SocketId incomingSocketId = connection.incomingSocketId();
+        Connection::SocketId outgoingSocketId = connection.outgoingSocketId();
+
         switch (event.type)
         {
-        case UdpSocket::Event::Connect:
-            LOG_INFO(format("%s connected", event.address.toString().c_str()));
+        case Socket::Event::Connect:
+            LOG_INFO(format("[in %d out %d] Connect (%s)", incomingSocketId, outgoingSocketId, address.c_str()));
             break;
-        case UdpSocket::Event::Disconnect:
-            LOG_INFO(format("%s disconnected", event.address.toString().c_str()));
+        case Socket::Event::Disconnect:
+            LOG_INFO(format("[in %d out %d] Disconnect (%s)", incomingSocketId, outgoingSocketId, address.c_str()));
             break;
         }
     }

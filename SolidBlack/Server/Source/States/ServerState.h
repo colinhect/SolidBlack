@@ -16,5 +16,5 @@ public:
     void notifyKeyboardEvent(const Keyboard::Event& event);
 
 private:
-    UdpSocket _socket;
+    Socket _socket;
 };

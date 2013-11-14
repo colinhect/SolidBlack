@@ -10,11 +10,13 @@ class ClientState :
 {
 public:
     ClientState(Engine& engine);
+    ~ClientState();
 
     void update(double timeStep);
 
     void notifyKeyboardEvent(const Keyboard::Event& event);
 
 private:
-    UdpSocket _socket;
+    Socket _socket;
+    Connection _connection;
 };
