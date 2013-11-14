@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EAFD1572-5569-4643-A694-7F8F8D66E3AE}</ProjectGuid>
+    <RootNamespace>Hect</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <TargetName>$(ProjectName)Static</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CustomBuildAfterTargets />
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <TargetName>$(ProjectName)Static</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <TargetName>$(ProjectName)Static</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CustomBuildAfterTargets />
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <TargetName>$(ProjectName)Static</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Building Hect.lib</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Building Hect.lib</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Building Hect.lib</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Building Hect.lib</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Core\Any.h" />
+    <ClInclude Include="Source\Core\BitField.h" />
+    <ClInclude Include="Source\Core\DataValue.h" />
+    <ClInclude Include="Source\Entity\Components\Renderable.h" />
+    <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
+    <ClInclude Include="Source\Entity\Systems\RenderingSystem.h" />
+    <ClInclude Include="Source\IO\JsonFormat.h" />
+    <ClInclude Include="Source\IO\JsonParser.h" />
+    <ClInclude Include="Source\Core\State.h" />
+    <ClInclude Include="Source\Entity\Components\Geometry.h" />
+    <ClInclude Include="Source\Entity\EntityAttributes.h" />
+    <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
+    <ClInclude Include="Source\Input\InputAxis.h" />
+    <ClInclude Include="Source\Math\Angle.h" />
+    <ClInclude Include="Source\Asset\AssetCache.h" />
+    <ClInclude Include="Source\Asset\AssetEntry.h" />
+    <ClInclude Include="Source\Asset\AssetHandle.h" />
+    <ClInclude Include="Source\Asset\AssetLoader.h" />
+    <ClInclude Include="Source\Entity\Components\Camera.h" />
+    <ClInclude Include="Source\Entity\EntityComponent.h" />
+    <ClInclude Include="Source\Entity\Entity.h" />
+    <ClInclude Include="Source\Entity\EntitySystem.h" />
+    <ClInclude Include="Source\Core\Error.h" />
+    <ClInclude Include="Source\IO\FileReadStream.h" />
+    <ClInclude Include="Source\IO\Storage.h" />
+    <ClInclude Include="Source\IO\FileWriteStream.h" />
+    <ClInclude Include="Source\Graphics\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\ImagePngFormat.h" />
+    <ClInclude Include="Source\Input\Input.h" />
+    <ClInclude Include="Source\Input\Keyboard.h" />
+    <ClInclude Include="Source\Core\Logging.h" />
+    <ClInclude Include="Source\Graphics\MaterialJsonFormat.h" />
+    <ClInclude Include="Source\Core\Engine.h" />
+    <ClInclude Include="Source\Input\Mouse.h" />
+    <ClInclude Include="Source\Graphics\GpuObject.h" />
+    <ClInclude Include="Source\Hect.h" />
+    <ClInclude Include="Source\Graphics\Image.h" />
+    <ClInclude Include="Source\Graphics\Material.h" />
+    <ClInclude Include="Source\Math\AxisAlignedBox.h" />
+    <ClInclude Include="Source\Math\Frustum.h" />
+    <ClInclude Include="Source\Math\Matrix4.h" />
+    <ClInclude Include="Source\Graphics\Mesh.h" />
+    <ClInclude Include="Source\Graphics\MeshBuilder.h" />
+    <ClInclude Include="Source\Graphics\MeshJsonFormat.h" />
+    <ClInclude Include="Source\Graphics\Gpu.h" />
+    <ClInclude Include="Source\Graphics\Pass.h" />
+    <ClInclude Include="Source\IO\Path.h" />
+    <ClInclude Include="Source\Math\Plane.h" />
+    <ClInclude Include="Source\Math\Quaternion.h" />
+    <ClInclude Include="Source\IO\ReadStream.h" />
+    <ClInclude Include="Source\Graphics\RenderMode.h" />
+    <ClInclude Include="Source\Graphics\RenderTarget.h" />
+    <ClInclude Include="Source\Entity\Scene.h" />
+    <ClInclude Include="Source\Graphics\Shader.h" />
+    <ClInclude Include="Source\Graphics\ShaderJsonFormat.h" />
+    <ClInclude Include="Source\Graphics\ShaderModule.h" />
+    <ClInclude Include="Source\Core\TaskPool.h" />
+    <ClInclude Include="Source\Graphics\Technique.h" />
+    <ClInclude Include="Source\Graphics\Texture.h" />
+    <ClInclude Include="Source\Graphics\TextureJsonFormat.h" />
+    <ClInclude Include="Source\Core\TimeSpan.h" />
+    <ClInclude Include="Source\Entity\Components\Transform.h" />
+    <ClInclude Include="Source\Core\Uncopyable.h" />
+    <ClInclude Include="Source\Core\Format.h" />
+    <ClInclude Include="Source\Math\Vector2.h" />
+    <ClInclude Include="Source\Math\Vector3.h" />
+    <ClInclude Include="Source\Math\Vector4.h" />
+    <ClInclude Include="Source\Graphics\VertexAttribute.h" />
+    <ClInclude Include="Source\Graphics\VertexLayout.h" />
+    <ClInclude Include="Source\Graphics\Screen.h" />
+    <ClInclude Include="Source\IO\WriteStream.h" />
+    <ClInclude Include="Source\Network\Client.h" />
+    <ClInclude Include="Source\Network\IpAddress.h" />
+    <ClInclude Include="Source\Network\Packet.h" />
+    <ClInclude Include="Source\IO\MemoryReadStream.h" />
+    <ClInclude Include="Source\IO\MemoryWriteStream.h" />
+    <ClInclude Include="Source\Network\Server.h" />
+    <ClInclude Include="Source\Noise\Random.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Asset\AssetCache.cpp" />
+    <ClCompile Include="Source\Core\Any.cpp" />
+    <ClCompile Include="Source\Core\DataValue.cpp" />
+    <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
+    <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp" />
+    <ClCompile Include="Source\IO\JsonFormat.cpp" />
+    <ClCompile Include="Source\IO\JsonParser.cpp" />
+    <ClCompile Include="Source\Core\State.cpp" />
+    <ClCompile Include="Source\Entity\Components\Camera.cpp" />
+    <ClCompile Include="Source\Entity\Components\Geometry.cpp" />
+    <ClCompile Include="Source\Entity\Components\Transform.cpp" />
+    <ClCompile Include="Source\Entity\EntityComponent.cpp" />
+    <ClCompile Include="Source\Entity\Entity.cpp" />
+    <ClCompile Include="Source\Core\Error.cpp" />
+    <ClCompile Include="Source\Entity\EntityAttributes.cpp" />
+    <ClCompile Include="Source\Entity\EntitySystem.cpp" />
+    <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
+    <ClCompile Include="Source\Input\InputAxis.cpp" />
+    <ClCompile Include="Source\IO\FileReadStream.cpp" />
+    <ClCompile Include="Source\IO\Storage.cpp" />
+    <ClCompile Include="Source\IO\FileWriteStream.cpp" />
+    <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\ImageLoader.cpp" />
+    <ClCompile Include="Source\Graphics\ImagePngFormat.cpp" />
+    <ClCompile Include="Source\Input\Input.cpp" />
+    <ClCompile Include="Source\Input\Keyboard.cpp" />
+    <ClCompile Include="Source\Core\Logging.cpp" />
+    <ClCompile Include="Source\Graphics\MaterialJsonFormat.cpp" />
+    <ClCompile Include="Source\Graphics\MaterialLoader.cpp" />
+    <ClCompile Include="Source\Core\Engine.cpp" />
+    <ClCompile Include="Source\Input\Mouse.cpp" />
+    <ClCompile Include="Source\Graphics\GpuObject.cpp" />
+    <ClCompile Include="Source\Graphics\Image.cpp" />
+    <ClCompile Include="Source\Graphics\Material.cpp" />
+    <ClCompile Include="Source\Graphics\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Graphics\MeshJsonFormat.cpp" />
+    <ClCompile Include="Source\Graphics\MeshLoader.cpp" />
+    <ClCompile Include="Source\Graphics\Gpu.cpp" />
+    <ClCompile Include="Source\Graphics\Pass.cpp" />
+    <ClCompile Include="Source\IO\Path.cpp" />
+    <ClCompile Include="Source\IO\ReadStream.cpp" />
+    <ClCompile Include="Source\Graphics\RenderMode.cpp" />
+    <ClCompile Include="Source\Graphics\RenderTarget.cpp" />
+    <ClCompile Include="Source\Entity\Scene.cpp" />
+    <ClCompile Include="Source\Graphics\Shader.cpp" />
+    <ClCompile Include="Source\Graphics\ShaderJsonFormat.cpp" />
+    <ClCompile Include="Source\Graphics\ShaderLoader.cpp" />
+    <ClCompile Include="Source\Graphics\ShaderModule.cpp" />
+    <ClCompile Include="Source\Graphics\ShaderModuleLoader.cpp" />
+    <ClCompile Include="Source\Core\TaskPool.cpp" />
+    <ClCompile Include="Source\Graphics\Technique.cpp" />
+    <ClCompile Include="Source\Graphics\Texture.cpp" />
+    <ClCompile Include="Source\Graphics\TextureJsonFormat.cpp" />
+    <ClCompile Include="Source\Graphics\TextureLoader.cpp" />
+    <ClCompile Include="Source\Core\TimeSpan.cpp" />
+    <ClCompile Include="Source\Core\Format.cpp" />
+    <ClCompile Include="Source\Graphics\VertexAttribute.cpp" />
+    <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
+    <ClCompile Include="Source\Graphics\Screen.cpp" />
+    <ClCompile Include="Source\IO\WriteStream.cpp" />
+    <ClCompile Include="Source\Network\Client.cpp" />
+    <ClCompile Include="Source\Network\IpAddress.cpp" />
+    <ClCompile Include="Source\Network\Packet.cpp" />
+    <ClCompile Include="Source\IO\MemoryReadStream.cpp" />
+    <ClCompile Include="Source\IO\MemoryWriteStream.cpp" />
+    <ClCompile Include="Source\Network\Server.cpp" />
+    <ClCompile Include="Source\Noise\Random.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Core\Any.inl" />
+    <None Include="Source\Core\Engine.inl" />
+    <None Include="Source\Core\BitField.inl" />
+    <None Include="Source\Entity\EntitySystem.inl" />
+    <None Include="Source\Graphics\MeshBuilder.inl" />
+    <None Include="Source\Math\Angle.inl" />
+    <None Include="Source\Asset\AssetCache.inl" />
+    <None Include="Source\Asset\AssetEntry.inl" />
+    <None Include="Source\Asset\AssetHandle.inl" />
+    <None Include="Source\Entity\EntityComponent.inl" />
+    <None Include="Source\Entity\Entity.inl" />
+    <None Include="Source\Math\AxisAlignedBox.inl" />
+    <None Include="Source\Math\Frustum.inl" />
+    <None Include="Source\Math\Matrix4.inl" />
+    <None Include="Source\Math\Plane.inl" />
+    <None Include="Source\Math\Quaternion.inl" />
+    <None Include="Source\Entity\Scene.inl" />
+    <None Include="Source\Math\Vector2.inl" />
+    <None Include="Source\Math\Vector3.inl" />
+    <None Include="Source\Math\Vector4.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
