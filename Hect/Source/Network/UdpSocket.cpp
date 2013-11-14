@@ -4,17 +4,34 @@ using namespace hect;
 
 #include <enet/enet.h>
 
-UdpClient::UdpClient(const IpAddress& serverAddress, uint16_t port, unsigned channelCount) :
+UdpSocket::Event::Event() :
+    type(None),
+    address(0)
+{
+}
+
+UdpSocket::UdpSocket(uint16_t port, unsigned maxConnectionCount, unsigned channelCount) :
     _host(nullptr),
-    _peer(nullptr),
-    _serverAddress(serverAddress),
-    _port(port),
-    _connected(false)
+    _peer(nullptr)
+{
+    ENetAddress address;
+    address.host = ENET_HOST_ANY;
+    address.port = port;
+    _host = enet_host_create(&address, maxConnectionCount, channelCount, 0, 0);
+    if (!_host)
+    {
+        throw Error("Failed to create UDP socket");
+    }
+}
+
+UdpSocket::UdpSocket(const IpAddress& serverAddress, uint16_t port, unsigned channelCount) :
+    _host(nullptr),
+    _peer(nullptr)
 {
     _host = enet_host_create(0, 1, channelCount, 0, 0);
     if (!_host)
     {
-        throw Error("Failed to create UDP client");
+        throw Error("Failed to create UDP socket");
     }
 
     ENetAddress address;
@@ -28,14 +45,15 @@ UdpClient::UdpClient(const IpAddress& serverAddress, uint16_t port, unsigned cha
     }
 }
 
-UdpClient::~UdpClient()
+UdpSocket::~UdpSocket()
 {
-    if (_connected)
+    if (_peer && ((ENetPeer*)_peer)->state == ENET_PEER_STATE_CONNECTED)
     {
         enet_peer_disconnect((ENetPeer*)_peer, 0);
 
+        bool disconnectEvent = false;
         ENetEvent event;
-        while (_connected && enet_host_service((ENetHost*)_host, &event, 5000) > 0)
+        while (!disconnectEvent && enet_host_service((ENetHost*)_host, &event, 5000) > 0)
         {
             switch (event.type)
             {
@@ -43,7 +61,7 @@ UdpClient::~UdpClient()
                 enet_packet_destroy(event.packet);
             break;
             case ENET_EVENT_TYPE_DISCONNECT:
-                _connected = false;
+                disconnectEvent = true;
                 break;
             }
         }
@@ -57,33 +75,26 @@ UdpClient::~UdpClient()
     }
 }
 
-bool UdpClient::isConnected() const
-{
-    return _connected;
-}
-
-UdpEvent UdpClient::pollEvent(TimeSpan timeOut)
+bool UdpSocket::pollEvent(Event& event, TimeSpan timeOut)
 {
     ENetEvent enetEvent;
     if (enet_host_service((ENetHost*)_host, &enetEvent, (uint32_t)timeOut.milliseconds()) > 0)
     {
-        UdpEvent event;
         switch (enetEvent.type)
         {
         case ENET_EVENT_TYPE_CONNECT:
-            _connected = true;
-            event.type = UdpEvent::Connect;
+            event.type = Event::Connect;
             event.address = IpAddress(reverseBytes(enetEvent.peer->address.host));
-            return event;
+            return true;
         case ENET_EVENT_TYPE_DISCONNECT:
-            _connected = false;
-            event.type = UdpEvent::Disconnect;
+            event.type = Event::Disconnect;
             event.address = IpAddress(reverseBytes(enetEvent.peer->address.host));
-            return event;
+            return true;
         case ENET_EVENT_TYPE_RECEIVE:
             enet_packet_destroy(enetEvent.packet);
+        break;
         }
     }
 
-    return UdpEvent();
+    return false;
 }

@@ -8,30 +8,16 @@ using namespace hect;
 #endif
 #endif
 
+#include "States/ClientState.h"
+
 int main()
 {
     try
     {
         Engine engine("Solid Black Client", "Settings.json");
-
-        IpAddress address = IpAddress::localAddress();
-
-        UdpClient client(address, 6006, 2);
-
-        TimeSpan time = engine.elapsedTime();
-        while ((engine.elapsedTime() - time).seconds() < 500)
-        {
-            UdpEvent event = client.pollEvent();
-            switch (event.type)
-            {
-            case UdpEvent::Connect:
-                LOG_INFO("Connected");
-                break;
-            case UdpEvent::Disconnect:
-                LOG_INFO("Disconnected");
-                break;
-            }
-        }
+        
+        engine.pushState<ClientState>(engine);
+        engine.execute();
     }
     catch (std::exception& e)
     {

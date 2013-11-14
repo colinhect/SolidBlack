@@ -292,13 +292,11 @@
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Screen.h" />
     <ClInclude Include="Source\IO\WriteStream.h" />
-    <ClInclude Include="Source\Network\UdpClient.h" />
     <ClInclude Include="Source\Network\IpAddress.h" />
     <ClInclude Include="Source\Network\Packet.h" />
     <ClInclude Include="Source\IO\MemoryReadStream.h" />
     <ClInclude Include="Source\IO\MemoryWriteStream.h" />
-    <ClInclude Include="Source\Network\UdpEvent.h" />
-    <ClInclude Include="Source\Network\UdpServer.h" />
+    <ClInclude Include="Source\Network\UdpSocket.h" />
     <ClInclude Include="Source\Noise\Random.h" />
   </ItemGroup>
   <ItemGroup>
@@ -364,13 +362,11 @@
     <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Screen.cpp" />
     <ClCompile Include="Source\IO\WriteStream.cpp" />
-    <ClCompile Include="Source\Network\UdpClient.cpp" />
     <ClCompile Include="Source\Network\IpAddress.cpp" />
     <ClCompile Include="Source\Network\Packet.cpp" />
     <ClCompile Include="Source\IO\MemoryReadStream.cpp" />
     <ClCompile Include="Source\IO\MemoryWriteStream.cpp" />
-    <ClCompile Include="Source\Network\UdpEvent.cpp" />
-    <ClCompile Include="Source\Network\UdpServer.cpp" />
+    <ClCompile Include="Source\Network\UdpSocket.cpp" />
     <ClCompile Include="Source\Noise\Random.cpp" />
   </ItemGroup>
   <ItemGroup>

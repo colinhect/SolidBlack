@@ -8,29 +8,16 @@ using namespace hect;
 #endif
 #endif
 
+#include "States/ServerState.h"
+
 int main()
 {
     try
     {
         Engine engine("Solid Black Server", "Settings.json");
 
-        UdpServer server(6006, 32, 2);
-
-        TimeSpan time = engine.elapsedTime();
-        while ((engine.elapsedTime() - time).seconds() < 30)
-        {
-            UdpEvent event = server.pollEvent();
-            switch (event.type)
-            {
-            case UdpEvent::Connect:
-                LOG_INFO(format("%s connected", event.address.toString().c_str()));
-                break;
-            
-            case UdpEvent::Disconnect:
-                LOG_INFO(format("%s disconnected", event.address.toString().c_str()));
-                break;
-            }
-        }
+        engine.pushState<ServerState>(engine);
+        engine.execute();
     }
     catch (std::exception& e)
     {
