@@ -1,6 +1,5 @@
 SUITE(ClientServer)
 {
-    /*
     TEST(LocalConnectAndDisconnect)
     {
         TaskPool taskPool(4);
@@ -35,5 +34,4 @@ SUITE(ClientServer)
         clientTask.wait();
         serverTask.wait();
     }
-    */
 }
