@@ -16,18 +16,18 @@ int main()
 
         IpAddress address = IpAddress::localAddress();
 
-        Client client(address, 6006, 2);
+        UdpClient client(address, 6006, 2);
 
         TimeSpan time = engine.elapsedTime();
-        while ((engine.elapsedTime() - time).seconds() < 2)
+        while ((engine.elapsedTime() - time).seconds() < 500)
         {
-            Client::Event event = client.pollEvent();
+            UdpEvent event = client.pollEvent();
             switch (event.type)
             {
-            case Client::Event::Connect:
+            case UdpEvent::Connect:
                 LOG_INFO("Connected");
                 break;
-            case Client::Event::Disconnect:
+            case UdpEvent::Disconnect:
                 LOG_INFO("Disconnected");
                 break;
             }

@@ -102,8 +102,9 @@ const double pi = 3.14159265358979323846;
 
 #include "Network/IpAddress.h"
 #include "Network/Packet.h"
-#include "Network/Client.h"
-#include "Network/Server.h"
+#include "Network/UdpEvent.h"
+#include "Network/UdpClient.h"
+#include "Network/UdpServer.h"
 
 #include "Entity/EntityComponent.h"
 #include "Entity/EntityAttributes.h"

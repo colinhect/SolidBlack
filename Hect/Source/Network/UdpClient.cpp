@@ -4,12 +4,7 @@ using namespace hect;
 
 #include <enet/enet.h>
 
-Client::Event::Event() :
-    type(None)
-{
-}
-
-Client::Client(const IpAddress& serverAddress, uint16_t port, unsigned channelCount) :
+UdpClient::UdpClient(const IpAddress& serverAddress, uint16_t port, unsigned channelCount) :
     _host(nullptr),
     _peer(nullptr),
     _serverAddress(serverAddress),
@@ -19,7 +14,7 @@ Client::Client(const IpAddress& serverAddress, uint16_t port, unsigned channelCo
     _host = enet_host_create(0, 1, channelCount, 0, 0);
     if (!_host)
     {
-        throw Error("Failed to create network client");
+        throw Error("Failed to create UDP client");
     }
 
     ENetAddress address;
@@ -29,11 +24,11 @@ Client::Client(const IpAddress& serverAddress, uint16_t port, unsigned channelCo
     _peer = enet_host_connect((ENetHost*)_host, &address, channelCount, 0);
     if (!_peer)
     {
-        throw Error("Failed to create network peer");
+        throw Error("Failed to attempt UDP connection");
     }
 }
 
-Client::~Client()
+UdpClient::~UdpClient()
 {
     if (_connected)
     {
@@ -62,32 +57,33 @@ Client::~Client()
     }
 }
 
-bool Client::isConnected() const
+bool UdpClient::isConnected() const
 {
     return _connected;
 }
 
-Client::Event Client::pollEvent(TimeSpan timeOut)
+UdpEvent UdpClient::pollEvent(TimeSpan timeOut)
 {
     ENetEvent enetEvent;
     if (enet_host_service((ENetHost*)_host, &enetEvent, (uint32_t)timeOut.milliseconds()) > 0)
     {
-        Event event;
+        UdpEvent event;
         switch (enetEvent.type)
         {
         case ENET_EVENT_TYPE_CONNECT:
             _connected = true;
-            event.type = Event::Connect;
+            event.type = UdpEvent::Connect;
+            event.address = IpAddress(reverseBytes(enetEvent.peer->address.host));
             return event;
         case ENET_EVENT_TYPE_DISCONNECT:
             _connected = false;
-            event.type = Event::Disconnect;
+            event.type = UdpEvent::Disconnect;
+            event.address = IpAddress(reverseBytes(enetEvent.peer->address.host));
             return event;
         case ENET_EVENT_TYPE_RECEIVE:
             enet_packet_destroy(enetEvent.packet);
-        break;
         }
     }
 
-    return Event();
+    return UdpEvent();
 }

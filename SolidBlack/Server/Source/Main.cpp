@@ -14,20 +14,20 @@ int main()
     {
         Engine engine("Solid Black Server", "Settings.json");
 
-        Server server(6006, 32, 2);
+        UdpServer server(6006, 32, 2);
 
         TimeSpan time = engine.elapsedTime();
         while ((engine.elapsedTime() - time).seconds() < 30)
         {
-            Server::Event event = server.pollEvent();
+            UdpEvent event = server.pollEvent();
             switch (event.type)
             {
-            case Server::Event::Connect:
-                LOG_INFO(format("%s connected", event.clientAddress.toString().c_str()));
+            case UdpEvent::Connect:
+                LOG_INFO(format("%s connected", event.address.toString().c_str()));
                 break;
             
-            case Server::Event::Disconnect:
-                LOG_INFO(format("%s disconnected", event.clientAddress.toString().c_str()));
+            case UdpEvent::Disconnect:
+                LOG_INFO(format("%s disconnected", event.address.toString().c_str()));
                 break;
             }
         }
