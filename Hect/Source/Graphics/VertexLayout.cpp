@@ -5,10 +5,10 @@ using namespace hect;
 VertexLayout VertexLayout::createDefault()
 {
     VertexAttribute::Array attributes;
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Float32, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Tangent, VertexAttribute::Float32, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::TextureCoords0, VertexAttribute::Float32, 2));
+    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttribute::Tangent, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttribute::TextureCoords0, VertexAttribute::Float, 2));
 
     return VertexLayout(attributes);
 }

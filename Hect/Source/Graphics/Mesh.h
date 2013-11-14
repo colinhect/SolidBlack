@@ -40,9 +40,9 @@ public:
     /// The type of each index in an index sequence.
     enum IndexType
     {
-        Unsigned8,
-        Unsigned16,
-        Unsigned32
+        UnsignedByte,
+        UnsignedShort,
+        UnsignedInt
     };
 
     ///

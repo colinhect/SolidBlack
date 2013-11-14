@@ -4,9 +4,9 @@ using namespace hect;
 
 MeshJsonFormat::MeshJsonFormat()
 {
-    _indexTypes["Unsigned8"] = Mesh::Unsigned8;
-    _indexTypes["Unsigned16"] = Mesh::Unsigned16;
-    _indexTypes["Unsigned32"] = Mesh::Unsigned32;
+    _indexTypes["UnsignedByte"] = Mesh::UnsignedByte;
+    _indexTypes["UnsignedShort"] = Mesh::UnsignedShort;
+    _indexTypes["UnsignedInt"] = Mesh::UnsignedInt;
 
     _primitiveTypes["Triangles"] = Mesh::Triangles;
     _primitiveTypes["TriangleStrip"] = Mesh::TriangleStrip;
@@ -28,8 +28,8 @@ MeshJsonFormat::MeshJsonFormat()
     _attributeSemantics["TextureCoords2"] = VertexAttribute::TextureCoords2;
     _attributeSemantics["TextureCoords3"] = VertexAttribute::TextureCoords3;
 
-    _attributeTypes["Float16"] = VertexAttribute::Float16;
-    _attributeTypes["Float32"] = VertexAttribute::Float32;
+    _attributeTypes["Half"] = VertexAttribute::Half;
+    _attributeTypes["Float"] = VertexAttribute::Float;
 }
 
 void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)

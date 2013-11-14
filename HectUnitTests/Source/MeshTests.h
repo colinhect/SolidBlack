@@ -7,37 +7,37 @@ SUITE(Mesh)
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
         CHECK_EQUAL(VertexAttribute::Position, meshVertexLayout.attributes()[0].semantic());
         CHECK_EQUAL(Mesh::Triangles, mesh.primitiveType());
-        CHECK_EQUAL(Mesh::Unsigned16, mesh.indexType());
+        CHECK_EQUAL(Mesh::UnsignedShort, mesh.indexType());
     }
 
     TEST(Constructor)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
-        attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Float16, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Half, 3));
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::Unsigned8);
+        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::UnsignedByte);
 
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
         CHECK_EQUAL(2, meshVertexLayout.attributes().size());
         CHECK_EQUAL(VertexAttribute::Position, meshVertexLayout.attributes()[0].semantic());
-        CHECK_EQUAL(VertexAttribute::Float32, meshVertexLayout.attributes()[0].type());
+        CHECK_EQUAL(VertexAttribute::Float, meshVertexLayout.attributes()[0].type());
         CHECK_EQUAL(3, meshVertexLayout.attributes()[0].cardinality());
 
         CHECK_EQUAL(Mesh::Triangles, mesh.primitiveType());
-        CHECK_EQUAL(Mesh::Unsigned8, mesh.indexType());
+        CHECK_EQUAL(Mesh::UnsignedByte, mesh.indexType());
     }
 
     TEST(SetVertexData)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::Unsigned8);
+        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::UnsignedByte);
 
         const float rawVertexData[9] =
         {
@@ -56,11 +56,11 @@ SUITE(Mesh)
     TEST(GetVertexData)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::Unsigned8);
+        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::UnsignedByte);
 
         const float rawOriginalVertexData[9] =
         {
@@ -89,11 +89,11 @@ SUITE(Mesh)
     TEST(SetIndexData)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::Unsigned8);
+        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::UnsignedByte);
 
         std::vector<uint8_t> indexData;
         indexData.push_back(0);
@@ -108,14 +108,14 @@ SUITE(Mesh)
         CHECK_EQUAL(6, mesh.indexCount());
     }
 
-    TEST(GetIndexDataUnsigned8)
+    TEST(GetIndexDataUnsignedByte)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::Unsigned8);
+        Mesh mesh(vertexLayout, Mesh::Triangles, Mesh::UnsignedByte);
 
         std::vector<uint8_t> originalIndexData;
         originalIndexData.push_back(0);
@@ -141,7 +141,7 @@ SUITE(Mesh)
     TEST(SetVertexLayout)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Tangent, VertexAttribute::Float32, 3));
+        attributes.push_back(VertexAttribute(VertexAttribute::Tangent, VertexAttribute::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -173,9 +173,9 @@ SUITE(Mesh)
     TEST(SetIndexType)
     {
         Mesh mesh;
-        mesh.setIndexType(Mesh::Unsigned8);
+        mesh.setIndexType(Mesh::UnsignedByte);
 
-        CHECK_EQUAL(Mesh::Unsigned8, mesh.indexType());
+        CHECK_EQUAL(Mesh::UnsignedByte, mesh.indexType());
     }
 
     TEST(SetIndexTypeWithIndexData)
@@ -187,7 +187,7 @@ SUITE(Mesh)
         bool errorThrown = false;
         try
         {
-            mesh.setIndexType(Mesh::Unsigned8);
+            mesh.setIndexType(Mesh::UnsignedByte);
         }
         catch (Error&)
         {

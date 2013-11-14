@@ -87,10 +87,10 @@ int Image::bytesPerPixel() const
 
     switch (_pixelType)
     {
-    case Float16:
+    case Half:
         return componentCount * 2;
         break;
-    case Float32:
+    case Float:
         return componentCount * 4;
         break;
     case Byte:

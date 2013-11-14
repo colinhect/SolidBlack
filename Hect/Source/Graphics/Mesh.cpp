@@ -5,7 +5,7 @@ using namespace hect;
 Mesh::Mesh() :
     _vertexLayout(VertexLayout::createDefault()),
     _primitiveType(Triangles),
-    _indexType(Unsigned16),
+    _indexType(UnsignedShort),
     _vertexCount(0),
     _indexCount(0)
 {
@@ -78,11 +78,11 @@ unsigned Mesh::indexSize() const
 {
     switch (_indexType)
     {
-    case Unsigned8:
+    case UnsignedByte:
         return 1;
-    case Unsigned16:
+    case UnsignedShort:
         return 2;
-    case Unsigned32:
+    case UnsignedInt:
         return 4;
     }
     return 0;

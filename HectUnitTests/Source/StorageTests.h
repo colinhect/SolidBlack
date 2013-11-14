@@ -1,4 +1,4 @@
-void testWriteAndRead(std::function<void(WriteStream*)> writer, std::function<void(ReadStream*)> reader)
+void testWriteAndReadFile(std::function<void(WriteStream*)> writer, std::function<void(ReadStream*)> reader)
 {
     Storage storage;
     Path workingDirectory = storage.workingDirectory();
@@ -136,7 +136,7 @@ SUITE(Storage)
 
     TEST(FileWriteAndReadPastEndOfStream)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
             stream->writeString("Testing");
         }, [] (ReadStream* stream)
@@ -159,7 +159,7 @@ SUITE(Storage)
 
     TEST(WriteAndReadString)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
             stream->writeString("Testing");
         }, [] (ReadStream* stream)
@@ -170,131 +170,131 @@ SUITE(Storage)
         });
     }
 
-    TEST(WriteAndReadSigned8)
+    TEST(WriteAndReadByte)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeSigned8(123);
+            stream->writeByte(123);
         }, [] (ReadStream* stream)
         {
-            int8_t value = stream->readSigned8();
+            int8_t value = stream->readByte();
             CHECK_EQUAL(123, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadUnsigned8)
+    TEST(WriteAndReadUnsignedByte)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeUnsigned8(123);
+            stream->writeUnsignedByte(123);
         }, [] (ReadStream* stream)
         {
-            uint8_t value = stream->readUnsigned8();
+            uint8_t value = stream->readUnsignedByte();
             CHECK_EQUAL(123, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadSigned16)
+    TEST(WriteAndReadShort)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeSigned16(123);
+            stream->writeShort(123);
         }, [] (ReadStream* stream)
         {
-            int16_t value = stream->readSigned16();
+            int16_t value = stream->readShort();
             CHECK_EQUAL(123, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadUnsigned16)
+    TEST(WriteAndReadUnsignedShort)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeUnsigned16(123);
+            stream->writeUnsignedShort(123);
         }, [] (ReadStream* stream)
         {
-            int16_t value = stream->readUnsigned16();
+            int16_t value = stream->readUnsignedShort();
             CHECK_EQUAL(123, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadSigned32)
+    TEST(WriteAndReadInt)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeSigned32(123);
+            stream->writeInt(123);
         }, [] (ReadStream* stream)
         {
-            int32_t value = stream->readSigned32();
+            int32_t value = stream->readInt();
             CHECK_EQUAL(123, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadUnsigned32)
+    TEST(WriteAndReadUnsignedInt)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeUnsigned32(123);
+            stream->writeUnsignedInt(123);
         }, [] (ReadStream* stream)
         {
-            uint32_t value = stream->readUnsigned32();
+            uint32_t value = stream->readUnsignedInt();
             CHECK_EQUAL(123, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadSigned64)
+    TEST(WriteAndReadLong)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeSigned64(123456789);
+            stream->writeLong(123456789);
         }, [] (ReadStream* stream)
         {
-            int64_t value = stream->readSigned64();
+            int64_t value = stream->readLong();
             CHECK_EQUAL(123456789, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadUnsigned64)
+    TEST(WriteAndReadUnsignedLong)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeUnsigned64(123456789);
+            stream->writeUnsignedLong(123456789);
         }, [] (ReadStream* stream)
         {
-            uint64_t value = stream->readUnsigned64();
+            uint64_t value = stream->readUnsignedLong();
             CHECK_EQUAL(123456789, value);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadFloat32)
+    TEST(WriteAndReadFloat)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeFloat32((float)pi);
+            stream->writeFloat((float)pi);
         }, [] (ReadStream* stream)
         {
-            float value = stream->readFloat32();
+            float value = stream->readFloat();
             CHECK_CLOSE(pi, value, epsilon);
             CHECK(stream->endOfStream());
         });
     }
 
-    TEST(WriteAndReadFloat64)
+    TEST(WriteAndReadDouble)
     {
-        testWriteAndRead([] (WriteStream* stream)
+        testWriteAndReadFile([] (WriteStream* stream)
         {
-            stream->writeFloat64(pi);
+            stream->writeDouble(pi);
         }, [] (ReadStream* stream)
         {
-            double value = stream->readFloat64();
+            double value = stream->readDouble();
             CHECK_CLOSE(pi, value, epsilon);
             CHECK(stream->endOfStream());
         });

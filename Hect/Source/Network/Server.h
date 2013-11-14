@@ -8,6 +8,7 @@ public:
     {
         friend class Server;
     public:
+        Event();
 
         enum Type
         {
@@ -18,9 +19,6 @@ public:
 
         Type type;
         IpAddress clientAddress;
-
-    private:
-        Event();
     };
 
     Server(uint16_t port, unsigned maxClientCount, unsigned channelCount);

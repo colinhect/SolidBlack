@@ -9,7 +9,7 @@ SUITE(MeshLoading)
         CHECK_EQUAL(4, mesh->vertexCount());
         CHECK_EQUAL(6, mesh->indexCount());
         CHECK_EQUAL(false, mesh->isUploaded());
-        CHECK_EQUAL(Mesh::Unsigned16, mesh->indexType());
+        CHECK_EQUAL(Mesh::UnsignedShort, mesh->indexType());
         CHECK_EQUAL(Mesh::Triangles, mesh->primitiveType());
     }
 
@@ -19,7 +19,7 @@ SUITE(MeshLoading)
 
         Mesh* mesh = assetCache.getHandle<Mesh>("IndexType.mesh").get();
 
-        CHECK_EQUAL(Mesh::Unsigned8, mesh->indexType());
+        CHECK_EQUAL(Mesh::UnsignedByte, mesh->indexType());
     }
 
     TEST(PrimitiveType)

@@ -25,43 +25,43 @@ public:
 
     ///
     /// Reads a signed 8-bit integer.
-    int8_t readSigned8();
+    int8_t readByte();
 
     ///
     /// Reads an unsigned 16-bit integer.
-    uint8_t readUnsigned8();
+    uint8_t readUnsignedByte();
 
     ///
     /// Reads a signed 16-bit integer.
-    int16_t readSigned16();
+    int16_t readShort();
 
     ///
     /// Reads an unsigned 16-bit integer.
-    uint16_t readUnsigned16();
+    uint16_t readUnsignedShort();
 
     ///
     /// Reads a signed 32-bit integer.
-    int32_t readSigned32();
+    int32_t readInt();
 
     ///
     /// Reads an unsigned 32-bit integer.
-    uint32_t readUnsigned32();
+    uint32_t readUnsignedInt();
 
     ///
     /// Reads a signed 64-bit integer.
-    int64_t readSigned64();
+    int64_t readLong();
 
     ///
     /// Reads an unsigned 64-bit integer.
-    uint64_t readUnsigned64();
+    uint64_t readUnsignedLong();
 
     ///
     /// Reads a 32-bit float.
-    float readFloat32();
+    float readFloat();
 
     ///
     /// Reads a 64-bit float.
-    double readFloat64();
+    double readDouble();
 
     ///
     /// Returns whether the end of the stream has been reached.

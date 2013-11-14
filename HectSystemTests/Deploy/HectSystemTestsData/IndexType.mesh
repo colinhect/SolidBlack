@@ -1,5 +1,5 @@
 {
-    "indexType" : "Unsigned8",
+    "indexType" : "UnsignedByte",
     "vertices" : [ ],
     "indices" : [ ]
 }

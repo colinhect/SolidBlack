@@ -24,6 +24,7 @@ const double epsilon = 0.0001;
 #include "IpAddressTests.h"
 #include "JsonParserTests.h"
 #include "Matrix4Tests.h"
+#include "MemoryStreamTests.h"
 #include "MeshBuilderTests.h"
 #include "MeshTests.h"
 #include "PathTests.h"

@@ -4,13 +4,13 @@ PointCloud::PointCloud(unsigned seed, unsigned pointCount, const AxisAlignedBox<
 {
     VertexAttribute::Array attributes;
     attributes.reserve(4);
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Weight0, VertexAttribute::Float32, 1));
-    attributes.push_back(VertexAttribute(VertexAttribute::Weight1, VertexAttribute::Float32, 1));
-    attributes.push_back(VertexAttribute(VertexAttribute::Weight2, VertexAttribute::Float32, 1));
+    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttribute::Weight0, VertexAttribute::Float, 1));
+    attributes.push_back(VertexAttribute(VertexAttribute::Weight1, VertexAttribute::Float, 1));
+    attributes.push_back(VertexAttribute(VertexAttribute::Weight2, VertexAttribute::Float, 1));
     VertexLayout vertexLayout(attributes);
 
-    _mesh = Mesh::Ref(new Mesh(vertexLayout, Mesh::Points, Mesh::Unsigned32));
+    _mesh = Mesh::Ref(new Mesh(vertexLayout, Mesh::Points, Mesh::UnsignedInt));
 
     MeshBuilder builder(*_mesh);
 

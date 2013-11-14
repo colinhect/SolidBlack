@@ -294,6 +294,8 @@
     <ClInclude Include="Source\Network\Client.h" />
     <ClInclude Include="Source\Network\IpAddress.h" />
     <ClInclude Include="Source\Network\Packet.h" />
+    <ClInclude Include="Source\IO\MemoryReadStream.h" />
+    <ClInclude Include="Source\IO\MemoryWriteStream.h" />
     <ClInclude Include="Source\Network\Server.h" />
     <ClInclude Include="Source\Noise\Random.h" />
   </ItemGroup>
@@ -362,6 +364,8 @@
     <ClCompile Include="Source\Network\Client.cpp" />
     <ClCompile Include="Source\Network\IpAddress.cpp" />
     <ClCompile Include="Source\Network\Packet.cpp" />
+    <ClCompile Include="Source\IO\MemoryReadStream.cpp" />
+    <ClCompile Include="Source\IO\MemoryWriteStream.cpp" />
     <ClCompile Include="Source\Network\Server.cpp" />
     <ClCompile Include="Source\Noise\Random.cpp" />
   </ItemGroup>

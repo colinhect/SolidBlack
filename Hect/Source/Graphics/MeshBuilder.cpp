@@ -40,7 +40,7 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
 
         // If the type matches and the cardinality is large enough then set it
         // all components at the same time
-        if (type == VertexAttribute::Float32 && cardinality >= 2)
+        if (type == VertexAttribute::Float && cardinality >= 2)
         {
             _setAttributeData(*attribute, value);
         }
@@ -77,7 +77,7 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
 
         // If the type matches and the cardinality is large enough then set it
         // all components at the same time
-        if (type == VertexAttribute::Float32 && cardinality >= 3)
+        if (type == VertexAttribute::Float && cardinality >= 3)
         {
             _setAttributeData(*attribute, value);
         }
@@ -113,7 +113,7 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
 
         // If the type matches and the cardinality is large enough then set it
         // all components at the same time
-        if (type == VertexAttribute::Float32 && cardinality >= 4)
+        if (type == VertexAttribute::Float && cardinality >= 4)
         {
             _setAttributeData(*attribute, value);
         }
@@ -159,13 +159,13 @@ void MeshBuilder::addIndex(uint64_t value)
     // Set the index data based on the type
     switch (indexType)
     {
-    case Mesh::Unsigned8:
+    case Mesh::UnsignedByte:
         *(uint8_t*)&_mesh->_indexData[indexDataIndex] = (uint8_t)value;
         break;
-    case Mesh::Unsigned16:
+    case Mesh::UnsignedShort:
         *(uint16_t*)&_mesh->_indexData[indexDataIndex] = (uint16_t)value;
         break;
-    case Mesh::Unsigned32:
+    case Mesh::UnsignedInt:
         *(uint32_t*)&_mesh->_indexData[indexDataIndex] = (uint32_t)value;
         break;
     }
@@ -177,10 +177,10 @@ void MeshBuilder::_setComponentValue(const VertexAttribute* attribute, unsigned 
 {
     switch (attribute->type())
     {
-    case VertexAttribute::Float16:
+    case VertexAttribute::Half:
         throw Error("16-bit floats are not yet implemented");
         break;
-    case VertexAttribute::Float32:
+    case VertexAttribute::Float:
         *(float*)&_mesh->_vertexData[_vertexDataIndex + attribute->offset() + index * 4] = value;
         break;
     }

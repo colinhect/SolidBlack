@@ -61,15 +61,15 @@ void _checkGLError()
 
 GLenum _vertexAttributeTypeLookUp[2] =
 {
-    GL_HALF_FLOAT, // Float16
-    GL_FLOAT // Float32
+    GL_HALF_FLOAT, // Half
+    GL_FLOAT // Float
 };
 
 GLenum _indexTypeLookUp[3] =
 {
-    GL_UNSIGNED_BYTE, // Unsigned8
-    GL_UNSIGNED_SHORT, // Unsigned16
-    GL_UNSIGNED_INT // Unsigned32
+    GL_UNSIGNED_BYTE, // UnsignedByte
+    GL_UNSIGNED_SHORT, // UnsignedShort
+    GL_UNSIGNED_INT // UnsignedInt
 };
 
 GLenum _primitiveTypeLookUp[5] =
@@ -109,8 +109,8 @@ GLenum _textureMipmapFilterLookUp[2] =
 
 GLenum _pixelTypeLookUp[3] =
 {
-    GL_HALF_FLOAT, // Float16
-    GL_FLOAT, // Float32
+    GL_HALF_FLOAT, // Half
+    GL_FLOAT, // Float
     GL_UNSIGNED_BYTE // Byte
 };
 
@@ -126,14 +126,14 @@ GLenum _internalImageFormatLookUp[2][2][3] =
     {
         // Rgb
         {
-            GL_RGB16F, // Float16
-            GL_RGB32F, // Float32
+            GL_RGB16F, // Half
+            GL_RGB32F, // Float
             GL_SRGB8 // Byte
         },
         // Rgba
         {
-            GL_RGBA16F, // Float16
-            GL_RGBA32F, // Float32
+            GL_RGBA16F, // Half
+            GL_RGBA32F, // Float
             GL_SRGB8_ALPHA8 // Byte
         }
     },
@@ -142,14 +142,14 @@ GLenum _internalImageFormatLookUp[2][2][3] =
     {
         // Rgb
         {
-            GL_RGB16F, // Float16
-            GL_RGB32F, // Float32
+            GL_RGB16F, // Half
+            GL_RGB32F, // Float
             GL_RGB8 // Byte
         },
         // Rgba
         {
-            GL_RGBA16F, // Float16
-            GL_RGBA32F, // Float32
+            GL_RGBA16F, // Half
+            GL_RGBA32F, // Float
             GL_RGBA8 // Byte
         }
     }

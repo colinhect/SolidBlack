@@ -29,9 +29,9 @@ unsigned VertexAttribute::size() const
 {
     switch (_type)
     {
-    case Float16:
+    case Half:
         return 2 * _cardinality;
-    case Float32:
+    case Float:
         return 4 * _cardinality;
     }
 

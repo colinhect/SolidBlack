@@ -3,12 +3,12 @@
     [
         {
             "semantic" : "Position",
-            "type" : "Float32",
+            "type" : "Float",
             "cardinality" : 3 
         },
         { 
             "semantic" : "TextureCoords0",
-            "type" : "Float32",
+            "type" : "Float",
             "cardinality" : 2
         }
     ],

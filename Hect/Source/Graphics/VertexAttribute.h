@@ -84,11 +84,11 @@ public:
         ///
         /// A 16-bit float.
         /// \remarks Also known as "half".
-        Float16,
+        Half,
 
         ///
         /// A 32-bit float.
-        Float32
+        Float
     };
 
     ///

@@ -61,7 +61,7 @@ void SolidBlackState::begin()
     Screen& screen = engine().screen();
 
     Texture::Array targets;
-    targets.push_back(Texture(screen.width(), screen.height(), Image::Float16, Image::Rgb, Texture::Nearest, Texture::Nearest, false, false));
+    targets.push_back(Texture(screen.width(), screen.height(), Image::Half, Image::Rgb, Texture::Nearest, Texture::Nearest, false, false));
     _frameBuffer.reset(new FrameBuffer(targets));
 
     _galaxyScene.addSystem(_cameraSystem);

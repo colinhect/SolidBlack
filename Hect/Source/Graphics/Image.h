@@ -22,11 +22,11 @@ public:
     {
         ///
         /// 16-bit floating point.
-        Float16,
+        Half,
 
         ///
         /// 32-bit floating point.
-        Float32,
+        Float,
 
         ///
         /// A byte.

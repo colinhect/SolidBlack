@@ -8,6 +8,7 @@ public:
     {
         friend class Client;
     public:
+        Event();
 
         enum Type
         {
@@ -16,9 +17,6 @@ public:
         };
 
         Type type;
-
-    private:
-        Event();
     };
 
     Client(unsigned channelCount);

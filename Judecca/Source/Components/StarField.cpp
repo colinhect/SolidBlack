@@ -160,11 +160,11 @@ void StarField::_generateMesh(Node& node)
 {
     VertexAttribute::Array attributes;
     attributes.reserve(2);
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Weight0, VertexAttribute::Float32, 1));
+    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttribute::Weight0, VertexAttribute::Float, 1));
     VertexLayout vertexLayout(attributes);
 
-    Mesh::Ref mesh(new Mesh(vertexLayout, Mesh::Points, Mesh::Unsigned32));
+    Mesh::Ref mesh(new Mesh(vertexLayout, Mesh::Points, Mesh::UnsignedInt));
 
     MeshBuilder builder(*mesh);
 

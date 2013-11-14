@@ -76,9 +76,9 @@ void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, G
 void DebugRenderingSystem::_buildBoxMesh()
 {
     VertexAttribute::Array attributes;
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float32, 3));
+    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
 
-    _boxMesh.reset(new Mesh(VertexLayout(attributes), Mesh::Lines, Mesh::Unsigned8));
+    _boxMesh.reset(new Mesh(VertexLayout(attributes), Mesh::Lines, Mesh::UnsignedByte));
 
     // Create vertex data for a wireframe box
     float rawVertexData[] =
