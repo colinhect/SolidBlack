@@ -10,11 +10,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "SolidBlack\Common
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "SolidBlack\Client\Client.vcxproj", "{147A1D06-C5FE-447C-95B1-831762A1D0BB}"
 	ProjectSection(ProjectDependencies) = postProject
+		{E8A62226-2A4D-4152-A56B-680A6377B639} = {E8A62226-2A4D-4152-A56B-680A6377B639}
 		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Server", "SolidBlack\Server\Server.vcxproj", "{9500614A-3838-4CA6-985C-F4EDA11BD473}"
 	ProjectSection(ProjectDependencies) = postProject
+		{E8A62226-2A4D-4152-A56B-680A6377B639} = {E8A62226-2A4D-4152-A56B-680A6377B639}
 		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
 	EndProjectSection
 EndProject
@@ -52,8 +54,16 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest++", "Hect\Dependencies\UnitTest++\UnitTest++.vcxproj", "{2B692BE6-3355-488B-94F3-1BC09AA2E28F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SystemTests", "Hect\Tests\SystemTests\SystemTests.vcxproj", "{FA8CE9CA-7F5F-4003-8CB0-46A0A8F73642}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
+		{2B692BE6-3355-488B-94F3-1BC09AA2E28F} = {2B692BE6-3355-488B-94F3-1BC09AA2E28F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "Hect\Tests\UnitTests\UnitTests.vcxproj", "{EF7E79E2-8551-4604-AE5E-B513DBBB7201}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAFD1572-5569-4643-A694-7F8F8D66E3AE} = {EAFD1572-5569-4643-A694-7F8F8D66E3AE}
+		{2B692BE6-3355-488B-94F3-1BC09AA2E28F} = {2B692BE6-3355-488B-94F3-1BC09AA2E28F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
