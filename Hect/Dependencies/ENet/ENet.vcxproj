@@ -139,7 +139,7 @@
     <ClCompile Include="Source\host.c" />
     <ClCompile Include="Source\list.c" />
     <ClCompile Include="Source\packet.c" />
-    <ClCompile Include="Source\peer.c" />
+    <ClCompile Include="Source\enet_peer.c" />
     <ClCompile Include="Source\protocol.c" />
     <ClCompile Include="Source\unix.c" />
     <ClCompile Include="Source\win32.c" />

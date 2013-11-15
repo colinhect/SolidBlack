@@ -4,15 +4,24 @@ ClientState::ClientState(Engine& engine) :
     State(engine, 1.0 / 60.0),
     _socket(1, 2)
 {
-    _connection = _socket.connect(IpAddress::localAddress(), 6006);
+    _server = _socket.connectToPeer(IpAddress::localAddress(), 6006);
 }
 
 ClientState::~ClientState()
 {
-    if (_connection.state() == Connection::Connected)
+    if (_server.state() == Peer::Connected)
     {
-        LOG_INFO("Disconnecting");
-        _socket.disconnect(_connection);
+        _socket.disconnectFromPeer(_server);
+
+        // Wait for the disconnect event
+        Socket::Event event;
+        while (_socket.pollEvent(event, TimeSpan::fromSeconds(3)))
+        {
+            if (event.type == Socket::Event::Disconnect)
+            {
+                break;
+            }
+        }
     }
 }
 
@@ -21,18 +30,16 @@ void ClientState::update(double timeStep)
     Socket::Event event;
     while (_socket.pollEvent(event))
     {
-        Connection connection = event.connection;
-        std::string address = connection.address().toString();
-        Connection::SocketId incomingSocketId = connection.incomingSocketId();
-        Connection::SocketId outgoingSocketId = connection.outgoingSocketId();
+        Peer peer = event.peer;
+        std::string address = peer.address().toString();
 
         switch (event.type)
         {
         case Socket::Event::Connect:
-            LOG_INFO(format("[in %d out %d] Connect (%s)", incomingSocketId, outgoingSocketId, address.c_str()));
+            LOG_INFO(format("[%d] Connect (%s)", peer.id(), address.c_str()));
             break;
         case Socket::Event::Disconnect:
-            LOG_INFO(format("[in %d out %d] Disconnect (%s)", incomingSocketId, outgoingSocketId, address.c_str()));
+            LOG_INFO(format("[%d] Disconnect (%s)", peer.id(), address.c_str()));
             break;
         }
     }

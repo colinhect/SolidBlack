@@ -3,7 +3,6 @@
 using namespace hect;
 
 #include <SFML/Graphics.hpp>
-#include <enet/enet.h>
 
 #ifdef HECT_WINDOWS
 #include <Windows.h>
@@ -162,24 +161,10 @@ Engine::Engine(const std::string& title, const Path& settingsFile)
     _lastCursorPosition = _cursorPosition();
 
     LOG_INFO("Done");
-    LOG_INFO("Initializing ENet...");
-
-    if (enet_initialize() != 0)
-    {
-        throw Error("Failed to initialized ENet");
-    }
-    
-    LOG_INFO("Done");
 }
 
 Engine::~Engine()
 {
-    LOG_INFO("Deinitializing ENet...");
-
-    enet_deinitialize();
-    
-    LOG_INFO("Done");
-
     if (_window)
     {
         LOG_INFO("Closing window...");

@@ -102,7 +102,7 @@ const double pi = 3.14159265358979323846;
 
 #include "Network/IpAddress.h"
 #include "Network/Packet.h"
-#include "Network/Connection.h"
+#include "Network/Peer.h"
 #include "Network/Socket.h"
 
 #include "Entity/EntityComponent.h"

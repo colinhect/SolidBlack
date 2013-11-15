@@ -18,5 +18,5 @@ public:
 
 private:
     Socket _socket;
-    Connection _connection;
+    Peer _server;
 };
