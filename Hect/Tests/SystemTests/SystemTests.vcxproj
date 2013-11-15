@@ -175,6 +175,8 @@
     <ClInclude Include="Source\AssetCacheTests.h" />
     <ClInclude Include="Source\MaterialLoadingTests.h" />
     <ClInclude Include="Source\MeshLoadingTests.h" />
+    <ClInclude Include="Source\NetworkTests.h" />
+    <ClInclude Include="Source\StorageTests.h" />
     <ClInclude Include="Source\TaskPoolTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

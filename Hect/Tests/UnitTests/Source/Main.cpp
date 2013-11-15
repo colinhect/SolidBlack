@@ -17,7 +17,6 @@ const double epsilon = 0.0001;
 #include "BitFieldTests.h"
 #include "DataValueTests.h"
 #include "EntityTests.h"
-#include "StorageTests.h"
 #include "FormatTests.h"
 #include "FrustumTests.h"
 #include "IpAddressTests.h"

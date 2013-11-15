@@ -161,7 +161,6 @@
     <ClInclude Include="Source\BitFieldTests.h" />
     <ClInclude Include="Source\IpAddressTests.h" />
     <ClInclude Include="Source\MemoryStreamTests.h" />
-    <ClInclude Include="Source\StorageTests.h" />
     <ClInclude Include="Source\DataValueTests.h" />
     <ClInclude Include="Source\FrustumTests.h" />
     <ClInclude Include="Source\JsonParserTests.h" />

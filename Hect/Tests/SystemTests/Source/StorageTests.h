@@ -1,10 +1,6 @@
 void testWriteAndReadFile(std::function<void(WriteStream*)> writer, std::function<void(ReadStream*)> reader)
 {
-    Storage storage;
-    Path workingDirectory = storage.workingDirectory();
-
-    storage.addDataSource(workingDirectory);
-    storage.setWriteDirectory(workingDirectory);
+    Storage& storage = engine->storage();
 
     Path path("File.txt");
 
@@ -24,18 +20,9 @@ void testWriteAndReadFile(std::function<void(WriteStream*)> writer, std::functio
 
 SUITE(Storage)
 {
-    TEST(Constructor)
-    {
-        Storage storage;
-    }
-
     TEST(CreateAndRemoveDirectories)
     {
-        Storage storage;
-        Path workingDirectory = storage.workingDirectory();
-
-        storage.addDataSource(workingDirectory);
-        storage.setWriteDirectory(workingDirectory);
+        Storage& storage = engine->storage();
 
         Path path("Directory");
 
@@ -48,11 +35,7 @@ SUITE(Storage)
 
     TEST(OpenNonExistingFileForWrite)
     {
-        Storage storage;
-        Path workingDirectory = storage.workingDirectory();
-
-        storage.addDataSource(workingDirectory);
-        storage.setWriteDirectory(workingDirectory);
+        Storage& storage = engine->storage();
 
         Path path("File.txt");
 
@@ -67,11 +50,7 @@ SUITE(Storage)
 
     TEST(OpenExistingFileForWrite)
     {
-        Storage storage;
-        Path workingDirectory = storage.workingDirectory();
-
-        storage.addDataSource(workingDirectory);
-        storage.setWriteDirectory(workingDirectory);
+        Storage& storage = engine->storage();
 
         Path path("File.txt");
 
@@ -90,11 +69,7 @@ SUITE(Storage)
 
     TEST(OpenExistingFileForRead)
     {
-        Storage storage;
-        Path workingDirectory = storage.workingDirectory();
-
-        storage.addDataSource(workingDirectory);
-        storage.setWriteDirectory(workingDirectory);
+        Storage& storage = engine->storage();
 
         Path path("File.txt");
 
@@ -113,12 +88,9 @@ SUITE(Storage)
 
     TEST(OpenNonExistingFileForRead)
     {
-        Storage storage;
-        Path workingDirectory = storage.workingDirectory();
+        Storage& storage = engine->storage();
 
-        storage.addDataSource(workingDirectory);
-
-        Path path("File.txt");
+        Path path("DoesNotExist.txt");
 
         bool errorOccurred = false;
 
