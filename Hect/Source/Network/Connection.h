@@ -18,8 +18,7 @@ public:
         DisconnectLater,
         Disconnecting,
         AcknowledgeDisconnect,
-        Zombie,
-        Invalid
+        Zombie
     };
 
     Connection();

@@ -43,7 +43,7 @@ Connection::State Connection::state() const
 {
     if (!_enetPeer)
     {
-        return Invalid;
+        return Disconnected;
     }
     
     return (State)((ENetPeer*)_enetPeer)->state;
