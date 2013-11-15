@@ -138,7 +138,7 @@
     <ClCompile Include="Source\compress.c" />
     <ClCompile Include="Source\host.c" />
     <ClCompile Include="Source\list.c" />
-    <ClCompile Include="Source\packet.c" />
+    <ClCompile Include="Source\enet_packet.c" />
     <ClCompile Include="Source\enet_peer.c" />
     <ClCompile Include="Source\protocol.c" />
     <ClCompile Include="Source\unix.c" />

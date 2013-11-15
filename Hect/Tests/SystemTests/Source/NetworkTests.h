@@ -1,4 +1,4 @@
-void runTestServer(unsigned maxConnectionCount, uint8_t channelCount)
+void runTestServer(unsigned maxConnectionCount, uint8_t channelCount, std::function<void(Socket&, Socket::Event&)> eventHandler)
 {
     Socket socket(6006, maxConnectionCount, channelCount);
 
@@ -8,6 +8,8 @@ void runTestServer(unsigned maxConnectionCount, uint8_t channelCount)
     Socket::Event event;
     while (socket.pollEvent(event, TimeSpan::fromMilliseconds(5000)))
     {
+        eventHandler(socket, event);
+
         if (event.type == Socket::Event::Connect)
         {
             connection = true;
@@ -23,7 +25,7 @@ void runTestServer(unsigned maxConnectionCount, uint8_t channelCount)
     CHECK(disconnection);
 }
 
-void runTestClient(unsigned maxConnectionCount, uint8_t channelCount)
+void runTestClient(unsigned maxConnectionCount, uint8_t channelCount, std::function<void(Socket&, Socket::Event&)> eventHandler)
 {
     Socket socket(maxConnectionCount, channelCount);
     Peer server = socket.connectToPeer(IpAddress::localAddress(), 6006);
@@ -34,6 +36,8 @@ void runTestClient(unsigned maxConnectionCount, uint8_t channelCount)
     Socket::Event event;
     while (socket.pollEvent(event, TimeSpan::fromMilliseconds(500)))
     {
+        eventHandler(socket, event);
+
         if (event.type == Socket::Event::Connect)
         {
             connection = true;
@@ -68,12 +72,50 @@ SUITE(Network)
 
         Task serverTask = taskPool.enqueue([]
         {
-            runTestServer(1, 1);
+            runTestServer(1, 1, [] (Socket&, Socket::Event&) { });
         });
 
         Task clientTask = taskPool.enqueue([]
         {
-            runTestClient(1, 1);
+            runTestClient(1, 1, [] (Socket&, Socket::Event&) { });
+        });
+
+        clientTask.wait();
+        serverTask.wait();
+    }
+
+    TEST(SendAndReceivePacket)
+    {
+        TaskPool taskPool(4);
+
+        Task serverTask = taskPool.enqueue([]
+        {
+            runTestServer(1, 1, [] (Socket& socket, Socket::Event& event)
+            {
+                if (event.type == Socket::Event::Connect)
+                {
+                    Packet packet(Packet::Reliable);
+
+                    MemoryWriteStream stream = packet.writeStream();
+                    stream.writeString("Hello");
+
+                    socket.sendPacket(event.peer, 0, packet);
+                    socket.flush();
+                }
+            });
+        });
+
+        Task clientTask = taskPool.enqueue([]
+        {
+            runTestClient(1, 1, [] (Socket& socket, Socket::Event& event)
+            {
+                if (event.type == Socket::Event::Receive)
+                {
+                    MemoryReadStream stream = event.packet.readStream();
+                    std::string message = stream.readString();
+                    CHECK_EQUAL("Hello", message);
+                }
+            });
         });
 
         clientTask.wait();

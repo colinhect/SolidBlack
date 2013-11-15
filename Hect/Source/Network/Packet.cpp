@@ -7,17 +7,18 @@ Packet::Packet(uint8_t flags) :
 {
 }
 
-bool Packet::hasFlag(Flag flag) const
+MemoryReadStream Packet::readStream() const
 {
-    return (_flags & flag) == flag;
+    return MemoryReadStream(_data);
 }
 
-Packet::Data& Packet::data()
+MemoryWriteStream Packet::writeStream()
 {
-    return _data;
+    return MemoryWriteStream(_data);
 }
 
-const Packet::Data& Packet::data() const
+Packet::Packet(const std::vector<uint8_t>& data) :
+    _data(data),
+    _flags(0)
 {
-    return _data;
 }

@@ -108,12 +108,13 @@ bool Socket::pollEvent(Event& event, TimeSpan timeOut)
     {
         event.type = (Event::Type)enetEvent.type;
         event.peer._enetPeer = enetEvent.peer;
-
-        switch (enetEvent.type)
+        
+        if (enetEvent.type == ENET_EVENT_TYPE_RECEIVE)
         {
-        case ENET_EVENT_TYPE_RECEIVE:
+            std::vector<uint8_t> data(enetEvent.packet->dataLength, 0);
+            std::memcpy(&data[0], enetEvent.packet->data, data.size());
+            event.packet = Packet(data);
             enet_packet_destroy(enetEvent.packet);
-            break;
         }
 
         return true;
@@ -124,11 +125,16 @@ bool Socket::pollEvent(Event& event, TimeSpan timeOut)
 
 void Socket::sendPacket(Peer peer, uint8_t channel, const Packet& packet)
 {
-
+    const std::vector<uint8_t>& data = packet._data;
+    ENetPacket* enetPacket = enet_packet_create(&data[0], data.size(), packet._flags | ENET_PACKET_FLAG_NO_ALLOCATE);
+    enet_peer_send((ENetPeer*)peer._enetPeer, channel, enetPacket);
 }
 
 void Socket::broadcastPacket(uint8_t channel, const Packet& packet)
 {
+    const std::vector<uint8_t>& data = packet._data;
+    ENetPacket* enetPacket = enet_packet_create(&data[0], data.size(), packet._flags | ENET_PACKET_FLAG_NO_ALLOCATE);
+    enet_host_broadcast((ENetHost*)_enetHost, channel, enetPacket);
 }
 
 void Socket::flush()

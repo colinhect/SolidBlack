@@ -24,9 +24,6 @@
     <ClCompile Include="Source\list.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\packet.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\protocol.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\enet_peer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\enet_packet.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

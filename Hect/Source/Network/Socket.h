@@ -49,6 +49,11 @@ public:
         ///
         /// The remote socket triggering the event.
         Peer peer;
+
+        ///
+        /// The packet received (only for events with type
+        /// Socket::Event::Receive).
+        Packet packet;
     };
 
     ///
