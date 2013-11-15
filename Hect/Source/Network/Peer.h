@@ -23,7 +23,7 @@ public:
         ///
         /// Not connected.
         Disconnected,
-        
+
         ///
         /// Connection in progress.
         Connecting,
@@ -51,7 +51,7 @@ public:
         ///
         /// Disconnection in progress.
         Disconnecting,
-        
+
         ///
         /// Acknowledgement of disconnection receieved.
         AcknowledgeDisconnect,

@@ -6,7 +6,7 @@ namespace hect
 class Packet
 {
 public:
-    
+
     ///
     /// Raw data of a packet.
     typedef std::vector<uint8_t> Data;

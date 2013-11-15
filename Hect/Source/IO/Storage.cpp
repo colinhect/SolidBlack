@@ -8,7 +8,7 @@
 
 namespace hect
 {
-    Storage* _storage = nullptr;
+Storage* _storage = nullptr;
 }
 
 using namespace hect;

@@ -38,7 +38,7 @@ Peer::State Peer::state() const
     {
         return Disconnected;
     }
-    
+
     return (State)((ENetPeer*)_enetPeer)->state;
 }
 

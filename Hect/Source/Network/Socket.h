@@ -50,7 +50,7 @@ public:
         /// The remote socket triggering the event.
         Peer peer;
     };
-    
+
     ///
     /// Constructs a socket which does not listen for incoming connections.
     ///
@@ -58,7 +58,7 @@ public:
     /// connections the socket can create.
     /// \param channelCount The number of channels to use.
     Socket(unsigned maxConnectionCount, uint8_t channelCount);
-    
+
     ///
     /// Constructs a socket which listens for incoming connections on a given
     /// port.
@@ -102,7 +102,7 @@ public:
     ///
     /// \returns True if an event was received; false otherwise.
     bool pollEvent(Event& event, TimeSpan timeOut = TimeSpan::fromMilliseconds(0));
-    
+
     ///
     /// Sends a packet to a remote socket.
     ///

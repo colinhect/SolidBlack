@@ -6,7 +6,7 @@ namespace hect
 class IpAddress
 {
 public:
-    
+
     ///
     /// Returns the local IP address.
     static IpAddress localAddress();
@@ -26,11 +26,11 @@ public:
     ///
     /// \param address The 32-bit value of the address.
     IpAddress(uint32_t address);
-    
+
     ///
     /// Returns a string representation of the address.
     std::string toString() const;
-    
+
     ///
     /// Returns an integer representation of the address.
     uint32_t toInteger() const;

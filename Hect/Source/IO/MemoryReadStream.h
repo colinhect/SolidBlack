@@ -1,6 +1,6 @@
 namespace hect
 {
-    
+
 ///
 /// Provides read access to raw data.
 class MemoryReadStream :
