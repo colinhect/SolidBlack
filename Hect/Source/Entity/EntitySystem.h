@@ -43,19 +43,13 @@ protected:
     /// Called when an entity is added to the system.
     ///
     /// \param entity The entity.
-    virtual void onAddEntity(Entity& entity)
-    {
-        entity;
-    }
+    virtual void onAddEntity(Entity& entity);
 
     ///
     /// Called when an entity is removed from the system.
     ///
     /// \param entity The entity.
-    virtual void onRemoveEntity(Entity& entity)
-    {
-        entity;
-    }
+    virtual void onRemoveEntity(Entity& entity);
 
     ///
     /// Returns the entities currently in the system.

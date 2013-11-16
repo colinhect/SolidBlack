@@ -100,8 +100,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -130,8 +130,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -162,8 +162,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -194,8 +194,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>SFML_STATIC;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -229,6 +229,7 @@
     <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />
     <ClInclude Include="Source\Entity\Systems\RenderingSystem.h" />
+    <ClInclude Include="Source\Internal\Bullet.h" />
     <ClInclude Include="Source\IO\JsonFormat.h" />
     <ClInclude Include="Source\IO\JsonParser.h" />
     <ClInclude Include="Source\Core\State.h" />
@@ -262,6 +263,7 @@
     <ClInclude Include="Source\Graphics\Image.h" />
     <ClInclude Include="Source\Graphics\Material.h" />
     <ClInclude Include="Source\Math\AxisAlignedBox.h" />
+    <ClInclude Include="Source\Math\Box.h" />
     <ClInclude Include="Source\Math\Frustum.h" />
     <ClInclude Include="Source\Math\Matrix4.h" />
     <ClInclude Include="Source\Graphics\Mesh.h" />
@@ -311,6 +313,7 @@
     <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp" />
+    <ClCompile Include="Source\Internal\Bullet.cpp" />
     <ClCompile Include="Source\IO\JsonFormat.cpp" />
     <ClCompile Include="Source\IO\JsonParser.cpp" />
     <ClCompile Include="Source\Core\State.cpp" />
@@ -388,6 +391,7 @@
     <None Include="Source\Entity\EntityComponent.inl" />
     <None Include="Source\Entity\Entity.inl" />
     <None Include="Source\Math\AxisAlignedBox.inl" />
+    <None Include="Source\Math\Box.inl" />
     <None Include="Source\Math\Frustum.inl" />
     <None Include="Source\Math\Matrix4.inl" />
     <None Include="Source\Math\Plane.inl" />

@@ -18,6 +18,10 @@ public:
     Scene(size_t entityPoolSize);
 
     ///
+    /// Removes all entities from all systems.
+    ~Scene();
+
+    ///
     /// Adds/removes recently activated/deactivated entities to/from relevant
     /// systems and destroys entities pending destruction.
     void refresh();

@@ -20,12 +20,27 @@ void EntitySystem::removeEntity(Entity& entity)
 
 void EntitySystem::removeAllEntities()
 {
+    for (Entity& entity : _entities)
+    {
+        onRemoveEntity(entity);
+    }
+
     _entities.clear();
 }
 
 const EntityAttributes& EntitySystem::requiredAttributes() const
 {
     return _requiredAttributes;
+}
+
+void EntitySystem::onAddEntity(Entity& entity)
+{
+    entity;
+}
+
+void EntitySystem::onRemoveEntity(Entity& entity)
+{
+    entity;
 }
 
 std::vector<Entity>& EntitySystem::entities()

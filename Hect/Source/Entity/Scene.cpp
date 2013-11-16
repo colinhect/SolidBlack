@@ -9,6 +9,14 @@ Scene::Scene(size_t entityPoolSize) :
 {
 }
 
+Scene::~Scene()
+{
+    for (EntitySystem* system : _systems)
+    {
+        system->removeAllEntities();
+    }
+}
+
 void Scene::refresh()
 {
     // Add all recently activated entities to the systems they belong to

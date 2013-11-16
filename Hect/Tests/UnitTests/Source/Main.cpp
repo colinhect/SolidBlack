@@ -19,7 +19,6 @@ const double epsilon = 0.0001;
 #include "EntityTests.h"
 #include "FormatTests.h"
 #include "FrustumTests.h"
-#include "IpAddressTests.h"
 #include "JsonParserTests.h"
 #include "Matrix4Tests.h"
 #include "MemoryStreamTests.h"

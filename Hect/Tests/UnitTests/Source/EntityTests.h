@@ -182,9 +182,10 @@ SUITE(Entity)
 
     TEST(Systems)
     {
-        Scene scene(16);
         MovementSystem movementSystem;
         NamingSystem namingSystem;
+
+        Scene scene(16);
 
         scene.addSystem(movementSystem);
         scene.addSystem(namingSystem);

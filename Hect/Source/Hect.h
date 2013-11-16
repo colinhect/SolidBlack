@@ -48,6 +48,7 @@ const double pi = 3.14159265358979323846;
 #include "Math/Vector4.h"
 #include "Math/Quaternion.h"
 #include "Math/Matrix4.h"
+#include "Math/Box.h"
 #include "Math/AxisAlignedBox.h"
 #include "Math/Plane.h"
 #include "Math/Frustum.h"
