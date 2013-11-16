@@ -1,6 +1,7 @@
 Bin/*
 Win32/*
 x64/*
+Hect/Dependencies/Bullet/Intermediate/*
 Hect/Dependencies/ENet/Intermediate/*
 Hect/Dependencies/Glew/Intermediate/*
 Hect/Dependencies/JsonCpp/Intermediate/*

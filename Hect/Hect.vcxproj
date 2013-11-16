@@ -119,7 +119,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -149,7 +149,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -181,7 +181,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -213,7 +213,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
