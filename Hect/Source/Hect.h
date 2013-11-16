@@ -115,9 +115,11 @@ const double pi = 3.14159265358979323846;
 #include "Entity/Components/Transform.h"
 #include "Entity/Components/Renderable.h"
 #include "Entity/Components/Geometry.h"
+#include "Entity/Components/RigidBody.h"
 
 #include "Entity/Systems/CameraSystem.h"
 #include "Entity/Systems/RenderingSystem.h"
 #include "Entity/Systems/DebugRenderingSystem.h"
+#include "Entity/Systems/PhysicsSystem.h"
 
 #include "Core/State.h"

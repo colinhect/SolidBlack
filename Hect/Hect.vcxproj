@@ -225,7 +225,9 @@
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Memory.h" />
     <ClInclude Include="Source\Entity\Components\Renderable.h" />
+    <ClInclude Include="Source\Entity\Components\RigidBody.h" />
     <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
+    <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />
     <ClInclude Include="Source\Entity\Systems\RenderingSystem.h" />
     <ClInclude Include="Source\IO\JsonFormat.h" />
     <ClInclude Include="Source\IO\JsonParser.h" />
@@ -305,7 +307,9 @@
     <ClCompile Include="Source\Core\Any.cpp" />
     <ClCompile Include="Source\Core\DataValue.cpp" />
     <ClCompile Include="Source\Core\Memory.cpp" />
+    <ClCompile Include="Source\Entity\Components\RigidBody.cpp" />
     <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
+    <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp" />
     <ClCompile Include="Source\IO\JsonFormat.cpp" />
     <ClCompile Include="Source\IO\JsonParser.cpp" />
