@@ -6,6 +6,6 @@
         "fullscreen" : false
     },
     "dataSources" : [
-        "HectSystemTestsData"
+        "Data"
     ]
 }

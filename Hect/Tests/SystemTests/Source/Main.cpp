@@ -22,10 +22,11 @@ const double epsilon = 0.0001;
 
 int main()
 {
-    Engine engine("HectSystemTests", "HectSystemTestsSettings.json");
+    Engine engine("System Tests", "Settings.json");
     ::engine = &engine;
 
     Storage& storage = engine.storage();
+
     Path workingDirectory = storage.workingDirectory();
     storage.addDataSource(workingDirectory);
     storage.setWriteDirectory(workingDirectory);
