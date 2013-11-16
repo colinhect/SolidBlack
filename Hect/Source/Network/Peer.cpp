@@ -26,10 +26,7 @@ IpAddress Peer::address() const
         return IpAddress(0);
     }
 
-    uint32_t address = ((ENetPeer*)_enetPeer)->address.host;
-    address = reverseBytes(address);
-
-    return IpAddress(address);
+    return IpAddress(((ENetPeer*)_enetPeer)->address.host);
 }
 
 Peer::State Peer::state() const

@@ -1,4 +1,6 @@
-#include "Hect.h"
+#include <cassert>
+
+#include "Random.h"
 
 using namespace hect;
 

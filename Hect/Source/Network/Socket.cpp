@@ -61,7 +61,7 @@ Socket::~Socket()
 Peer Socket::connectToPeer(IpAddress address, uint16_t port)
 {
     ENetAddress enetAddress;
-    enetAddress.host = reverseBytes(address.toInteger());
+    enetAddress.host = (uint32_t)address;
     enetAddress.port = port;
 
     ENetPeer* enetPeer = enet_host_connect((ENetHost*)_enetHost, &enetAddress, ((ENetHost*)_enetHost)->channelLimit, 0);

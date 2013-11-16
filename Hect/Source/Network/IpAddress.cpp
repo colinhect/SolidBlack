@@ -7,17 +7,17 @@ using namespace hect;
 IpAddress IpAddress::localAddress()
 {
     uint32_t address = sf::IpAddress::getLocalAddress().toInteger();
-    return IpAddress(address);
+    return IpAddress(reverseBytes(address));
 }
 
 IpAddress IpAddress::publicAddress()
 {
     uint32_t address = sf::IpAddress::getPublicAddress().toInteger();
-    return IpAddress(address);
+    return IpAddress(reverseBytes(address));
 }
 
 IpAddress::IpAddress(const std::string& address) :
-    _address(sf::IpAddress(address).toInteger())
+    _address(reverseBytes(sf::IpAddress(address).toInteger()))
 {
 }
 
@@ -26,12 +26,17 @@ IpAddress::IpAddress(uint32_t address) :
 {
 }
 
+bool IpAddress::isValid() const
+{
+    return _address != 0;
+}
+
 std::string IpAddress::toString() const
 {
     return sf::IpAddress(_address).toString();
 }
 
-uint32_t IpAddress::toInteger() const
+IpAddress::operator uint32_t() const
 {
     return _address;
 }

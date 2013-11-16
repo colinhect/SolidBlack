@@ -1,3 +1,5 @@
+#pragma once
+
 namespace hect
 {
 
@@ -28,12 +30,16 @@ public:
     IpAddress(uint32_t address);
 
     ///
+    /// Returns whether the address is a valid IP address.
+    bool isValid() const;
+
+    ///
     /// Returns a string representation of the address.
     std::string toString() const;
 
     ///
-    /// Returns an integer representation of the address.
-    uint32_t toInteger() const;
+    /// Casts the address to a 32-bit unsigned integer.
+    operator uint32_t() const;
 
 private:
     uint32_t _address;
