@@ -27,8 +27,7 @@ public:
     ///
     /// \param camera The camera to render from.
     /// \param gpu The GPU.
-    /// \param target The target to render to.
-    void renderAll(Camera& camera, Gpu& gpu, RenderTarget& target);
+    void renderAll(Camera& camera, Gpu& gpu);
 
 private:
     struct BoxTask

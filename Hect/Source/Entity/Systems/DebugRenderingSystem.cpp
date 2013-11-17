@@ -19,12 +19,9 @@ void DebugRenderingSystem::renderWireframeBox(const Vector3<>& position, const V
     _boxTasks.push_back(task);
 }
 
-void DebugRenderingSystem::renderAll(Camera& camera, Gpu& gpu, RenderTarget& target)
+void DebugRenderingSystem::renderAll(Camera& camera, Gpu& gpu)
 {
     _boxTasks.clear();
-
-    gpu.beginFrame();
-    gpu.bindTarget(target);
 
     // Enqueue tasks from all visible renderables
     for (Entity& entity : entities())
@@ -38,8 +35,6 @@ void DebugRenderingSystem::renderAll(Camera& camera, Gpu& gpu, RenderTarget& tar
     {
         _renderBoxTask(task, camera, gpu);
     }
-
-    gpu.endFrame();
 }
 
 void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, Gpu& gpu)

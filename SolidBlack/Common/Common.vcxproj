@@ -136,9 +136,11 @@
   <ItemGroup>
     <ClInclude Include="Source\Common\Components\FreeCameraController.h" />
     <ClInclude Include="Source\Common\Systems\FreeCameraControllerSystem.h" />
+    <ClInclude Include="Source\Common\States\SolidBlackState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Systems\FreeCameraControllerSystem.cpp" />
+    <ClCompile Include="Source\Common\States\SolidBlackState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -47,13 +47,13 @@ def export_mesh(obj, path):
         normal = mesh.vertices[i].normal
 
         out.write("        [\n");
-        out.write("            { \"semantic\" : \"Position\", \"data\" : [ %f, %f, %f ] },\n" % (co[0], co[1], co[2]))
-        out.write("            { \"semantic\" : \"Normal\", \"data\" : [ %f, %f, %f ] }\n" % (normal[0], normal[1], normal[2]))
+        out.write("            { \"semantic\" : \"Position\", \"data\" : [ %f, %f, %f ] },\n" % (co[0], co[2], -co[1]))
+        out.write("            { \"semantic\" : \"Normal\", \"data\" : [ %f, %f, %f ] }\n" % (normal[0], normal[2], -normal[1]))
         if i != vertex_count - 1:
             out.write("        ],\n");
         else:
             out.write("        ]\n");
-    out.write("    ]\n")
+    out.write("    ],\n")
 
     out.write("    \"indices\" :\n")
     out.write("    [\n")
