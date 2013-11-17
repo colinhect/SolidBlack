@@ -4,7 +4,7 @@ bl_info = {
     "name": "Hect Mesh Format (.mesh)",
     "author": "Colin Hill",
     "version": (1, 0),
-    "blender": (2, 5, 9),
+    "blender": (2, 6, 9),
     "api": 37702,
     "location": "File > Export > Hect (.mesh)",
     "description": "Export Hect Mesh Format (.mesh)",
@@ -18,6 +18,58 @@ import bpy
 
 from bpy.props import StringProperty, EnumProperty, BoolProperty
 
+def mesh_triangulate(me):
+    import bmesh
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bmesh.ops.triangulate(bm, faces=bm.faces)
+    bm.to_mesh(me)
+    bm.free()
+
+def export_mesh(obj, path):
+    mesh = obj.data
+
+    if not mesh.tessfaces and mesh.polygons:
+        mesh.calc_tessface()
+
+    mesh.calc_normals()
+
+    mesh_triangulate(mesh)
+
+    out = open(path + "." + obj.name + ".mesh", 'w')
+    out.write("{\n")
+
+    out.write("    \"vertices\" :\n")
+    out.write("    [\n")
+    vertex_count = len(mesh.vertices)
+    for i in range(vertex_count):
+        co = mesh.vertices[i].co
+        normal = mesh.vertices[i].normal
+
+        out.write("        [\n");
+        out.write("            { \"semantic\" : \"Position\", \"data\" : [ %f, %f, %f ] },\n" % (co[0], co[1], co[2]))
+        out.write("            { \"semantic\" : \"Normal\", \"data\" : [ %f, %f, %f ] }\n" % (normal[0], normal[1], normal[2]))
+        if i != vertex_count - 1:
+            out.write("        ],\n");
+        else:
+            out.write("        ]\n");
+    out.write("    ]\n")
+
+    out.write("    \"indices\" :\n")
+    out.write("    [\n")
+    polygon_count = len(mesh.polygons)
+    for i in range(polygon_count):
+        indices = mesh.polygons[i].vertices
+        out.write("        %d, %d, %d" % (indices[0], indices[1], indices[2]))
+        if i != polygon_count - 1:
+            out.write(",\n");
+        else:
+            out.write("\n");
+    out.write("    ]\n")
+
+    out.write("}")
+    out.close()
+
 class HectExporter(bpy.types.Operator):
     """Export to the Hect mesh format (.mesh)"""
 
@@ -28,23 +80,12 @@ class HectExporter(bpy.types.Operator):
 
     def execute(self, context):
         path = bpy.path.ensure_ext(self.filepath, ".mesh")
-        out = open(path, 'w')
-        out.write("{\n")
-        out.write("    \"vertices\" :\n")
-        out.write("    [\n")
+        path = path[:-5]
 
-        scene = bpy.context.scene
-
-        for obj in bpy.context.selected_objects:
+        for obj in bpy.context.scene.objects:
             if obj.type == 'MESH':
-                mesh = obj.data
-                if not mesh.tessfaces and mesh.polygons:
-                    mesh.calc_tessface()
-                for vertex in mesh.vertices:
-                    out.write("        { \"semantic\" : \"Position\", \"data\" : [ %f, %f, %f ]\n" % (vertex.co[0], vertex.co[1], vertex.co[2]))
-        out.write("    ]\n")
-        out.write("}")
-        out.close()
+                export_mesh(obj, path)
+
         return {"FINISHED"}
 
     def invoke(self, context, event):
