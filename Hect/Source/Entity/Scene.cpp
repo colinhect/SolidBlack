@@ -61,6 +61,23 @@ void Scene::refresh()
 void Scene::addSystem(EntitySystem& system)
 {
     _systems.push_back(&system);
+
+    // Add any entities the systems is filtered for
+    size_t entityCount = _attributes.size();
+    for (Entity::Id id = 1; id < entityCount; ++id)
+    {
+        EntityAttributes& attributes = _attributes[id];
+        if (!attributes.isNull() && attributes.contains(system.requiredAttributes()))
+        {
+            system.addEntity(Entity(*this, id));
+        }
+    }
+}
+
+void Scene::removeSystem(EntitySystem& system)
+{
+    system.removeAllEntities();
+    _systems.erase(std::remove(_systems.begin(), _systems.end(), &system), _systems.end());
 }
 
 Entity Scene::createEntity()

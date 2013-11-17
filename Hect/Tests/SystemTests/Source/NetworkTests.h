@@ -96,7 +96,7 @@ SUITE(Network)
                 {
                     Packet packet(Packet::Reliable);
 
-                    MemoryWriteStream stream = packet.writeStream();
+                    PacketWriteStream stream = packet.writeStream();
                     stream.writeString("Hello");
 
                     socket.sendPacket(event.peer, 0, packet);
@@ -111,7 +111,7 @@ SUITE(Network)
             {
                 if (event.type == Socket::Event::Receive)
                 {
-                    MemoryReadStream stream = event.packet.readStream();
+                    PacketReadStream stream = event.packet.readStream();
                     std::string message = stream.readString();
                     CHECK_EQUAL("Hello", message);
                 }

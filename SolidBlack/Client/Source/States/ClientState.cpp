@@ -1,5 +1,7 @@
 #include "ClientState.h"
 
+#include "Common/PacketType.h"
+
 ClientState::ClientState(Engine& engine) :
     State(engine, 1.0 / 60.0),
     _socket(1, 2)
@@ -30,16 +32,16 @@ void ClientState::update(double timeStep)
     Socket::Event event;
     while (_socket.pollEvent(event))
     {
-        Peer peer = event.peer;
-        std::string address = peer.address().toString();
-
         switch (event.type)
         {
         case Socket::Event::Connect:
-            LOG_INFO(format("[%d] Connect (%s)", peer.id(), address.c_str()));
+            LOG_INFO("Connection established");
             break;
         case Socket::Event::Disconnect:
-            LOG_INFO(format("[%d] Disconnect (%s)", peer.id(), address.c_str()));
+            LOG_INFO("Disconnection occurred");
+            break;
+        case Socket::Event::Receive:
+            _receivePacketEvent(event);
             break;
         }
     }
@@ -56,4 +58,32 @@ void ClientState::notifyKeyboardEvent(const Keyboard::Event& event)
     {
         setActive(false);
     }
+}
+
+void ClientState::_receivePacketEvent(Socket::Event& event)
+{
+    PacketReadStream stream = event.packet.readStream();
+
+    uint8_t packetType = stream.readByte();
+    switch (packetType)
+    {
+    case PacketType::AuthorizationRequest:
+        _sendAuthorization();
+        break;
+    }
+}
+
+void ClientState::_sendAuthorization()
+{
+    static const std::string name("Colin");
+
+    LOG_INFO(format("Sending authorization as \"%s\"", name.c_str()));
+
+    Packet packet(Packet::Reliable);
+    PacketWriteStream stream = packet.writeStream();
+    stream.writeByte(PacketType::Authorization);
+    stream.writeString(name);
+
+    _socket.sendPacket(_server, 0, packet);
+    _socket.flush();
 }

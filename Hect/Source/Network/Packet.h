@@ -3,6 +3,9 @@
 namespace hect
 {
 
+typedef MemoryReadStream PacketReadStream;
+typedef MemoryWriteStream PacketWriteStream;
+
 ///
 /// A packet of data transported across a network connection.
 class Packet
@@ -34,11 +37,11 @@ public:
     
     ///
     /// Returns a read stream for the packet data.
-    MemoryReadStream readStream() const;
+    PacketReadStream readStream() const;
 
     ///
     /// Returns a write stream for the packet data.
-    MemoryWriteStream writeStream();
+    PacketWriteStream writeStream();
 
 private:
     Packet(const std::vector<uint8_t>& data);

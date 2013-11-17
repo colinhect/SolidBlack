@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -99,7 +99,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,7 +114,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -131,7 +131,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)SolidBlack\Common\Source\;$(SolutionDir)Hect\Source\;$(SolutionDir)Hect\Dependencies\VisualLeakDetector\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -142,10 +142,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Bubble.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\States\ServerState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Bubble.h" />
+    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\States\ServerState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

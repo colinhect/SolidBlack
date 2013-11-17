@@ -24,6 +24,9 @@
     <ClInclude Include="Source\Common\States\SolidBlackState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Common\PacketType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Common\Systems\FreeCameraControllerSystem.cpp">

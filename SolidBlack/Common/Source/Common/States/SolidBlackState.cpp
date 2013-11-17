@@ -50,7 +50,7 @@ void SolidBlackState::begin()
 {
     Input& input = engine().input();
     input.keyboard().addListener(this);
-    input.mouse().setCursorLocked(true);
+    //input.mouse().setCursorLocked(true);
 }
 
 void SolidBlackState::end()

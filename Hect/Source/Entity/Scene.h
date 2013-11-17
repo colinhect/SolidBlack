@@ -25,12 +25,20 @@ public:
     /// Adds/removes recently activated/deactivated entities to/from relevant
     /// systems and destroys entities pending destruction.
     void refresh();
-
+    
     ///
     /// Adds a system to the scene.
     ///
     /// \param system The system.
     void addSystem(EntitySystem& system);
+    
+    ///
+    /// Removes a system from the scene.
+    ///
+    /// \remarks Any entities the systems has will be removed.
+    ///
+    /// \param system The system.
+    void removeSystem(EntitySystem& system);
 
     ///
     /// Creates a new entity.

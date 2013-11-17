@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\Components\FreeCameraController.h" />
+    <ClInclude Include="Source\Common\PacketType.h" />
     <ClInclude Include="Source\Common\Systems\FreeCameraControllerSystem.h" />
     <ClInclude Include="Source\Common\States\SolidBlackState.h" />
   </ItemGroup>

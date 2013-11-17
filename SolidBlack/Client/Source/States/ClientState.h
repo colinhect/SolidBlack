@@ -17,6 +17,10 @@ public:
     void notifyKeyboardEvent(const Keyboard::Event& event);
 
 private:
+    void _receivePacketEvent(Socket::Event& event);
+
+    void _sendAuthorization();
+
     Socket _socket;
     Peer _server;
 };

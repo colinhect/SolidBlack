@@ -7,14 +7,14 @@ Packet::Packet(uint8_t flags) :
 {
 }
 
-MemoryReadStream Packet::readStream() const
+PacketReadStream Packet::readStream() const
 {
-    return MemoryReadStream(_data);
+    return PacketReadStream(_data);
 }
 
-MemoryWriteStream Packet::writeStream()
+PacketWriteStream Packet::writeStream()
 {
-    return MemoryWriteStream(_data);
+    return PacketWriteStream(_data);
 }
 
 Packet::Packet(const std::vector<uint8_t>& data) :
