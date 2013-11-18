@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E8A62226-2A4D-4152-A56B-680A6377B639}</ProjectGuid>
-    <RootNamespace>Common</RootNamespace>
+    <ProjectGuid>{48BE311A-A0E6-429D-A7AD-B8AFE08FF4B7}</ProjectGuid>
+    <RootNamespace>SolidBlack</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -66,27 +66,27 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
-    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>Intermediate\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Hect\Source\;$(ProjectDir)Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Source\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -97,7 +97,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Hect\Source\;$(ProjectDir)Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Source\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -110,7 +110,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Hect\Source\;$(ProjectDir)Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Source\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -125,7 +125,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Hect\Source\;$(ProjectDir)Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Source\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -134,14 +134,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Common\Components\FreeCameraController.h" />
-    <ClInclude Include="Source\Common\PacketType.h" />
-    <ClInclude Include="Source\Common\Systems\FreeCameraControllerSystem.h" />
-    <ClInclude Include="Source\Common\States\SolidBlackState.h" />
+    <ClCompile Include="Source\Server\Bubble.cpp" />
+    <ClCompile Include="Source\Server\Player.cpp" />
+    <ClCompile Include="Source\States\ClientState.cpp" />
+    <ClCompile Include="Source\States\ServerState.cpp" />
+    <ClCompile Include="Source\States\SolidBlackState.cpp" />
+    <ClCompile Include="Source\Systems\FreeCameraControllerSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Common\Systems\FreeCameraControllerSystem.cpp" />
-    <ClCompile Include="Source\Common\States\SolidBlackState.cpp" />
+    <ClInclude Include="Source\Components\FreeCameraController.h" />
+    <ClInclude Include="Source\PacketType.h" />
+    <ClInclude Include="Source\Server\Bubble.h" />
+    <ClInclude Include="Source\Server\Player.h" />
+    <ClInclude Include="Source\States\ClientState.h" />
+    <ClInclude Include="Source\States\ServerState.h" />
+    <ClInclude Include="Source\States\SolidBlackState.h" />
+    <ClInclude Include="Source\Systems\FreeCameraControllerSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

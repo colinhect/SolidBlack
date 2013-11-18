@@ -18,7 +18,7 @@ Hect/Tests/UnitTests/Intermediate/*
 SolidBlack/Dependencies/Sqlite/Intermediate/*
 SolidBlack/Dependencies/SqliteShell/Intermediate/*
 SolidBlack/AuthenticationServer/Intermediate/*
-SolidBlack/Common/Intermediate/*
+SolidBlack/Intermediate/*
 SolidBlack/Server/Intermediate/*
 SolidBlack/Client/Intermediate/*
 Judecca/Intermediate/*

@@ -1,7 +1,7 @@
 #include "ServerState.h"
 
-#include "Common/PacketType.h"
-#include "Common/Components/FreeCameraController.h"
+#include "PacketType.h"
+#include "Components/FreeCameraController.h"
 
 ServerState::ServerState(Engine& engine) :
     SolidBlackState(engine, 1.0 / 30.0),

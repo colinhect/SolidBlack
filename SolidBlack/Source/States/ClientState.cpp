@@ -1,6 +1,6 @@
 #include "ClientState.h"
 
-#include "Common/PacketType.h"
+#include "PacketType.h"
 
 ClientState::ClientState(Engine& engine) :
     State(engine, 1.0 / 60.0),

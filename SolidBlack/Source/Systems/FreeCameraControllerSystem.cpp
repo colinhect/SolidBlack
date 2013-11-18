@@ -1,6 +1,6 @@
 #include "FreeCameraControllerSystem.h"
 
-#include "Common/Components/FreeCameraController.h"
+#include "Components/FreeCameraController.h"
 
 FreeCameraControllerSystem::FreeCameraControllerSystem(Input& input) :
     _mouse(&input.mouse()),

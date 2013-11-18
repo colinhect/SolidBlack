@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Common/States/SolidBlackState.h"
-#include "Common/Systems/FreeCameraControllerSystem.h"
+#include "States/SolidBlackState.h"
+#include "Systems/FreeCameraControllerSystem.h"
 
-#include "Player.h"
-#include "Bubble.h"
+#include "Server/Player.h"
+#include "Server/Bubble.h"
 
 class ServerState :
     public SolidBlackState
