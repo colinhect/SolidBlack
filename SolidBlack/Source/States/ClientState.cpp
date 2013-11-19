@@ -139,7 +139,7 @@ void ClientState::_sendAuthorization()
 
     LOG_INFO(format("Sending authorization as \"%s\"", name.c_str()));
 
-    Packet packet(Packet::Reliable);
+    Packet packet(PacketFlag::Reliable);
     PacketWriteStream stream = packet.writeStream();
     stream.writeByte(PacketType::Authorization);
     stream.writeString(name);

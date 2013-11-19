@@ -120,7 +120,7 @@ void ServerState::_sendAuthorizationRequest(Peer peer)
 {
     LOG_INFO("Requesting player authorization");
 
-    Packet packet(Packet::Reliable);
+    Packet packet(PacketFlag::Reliable);
     PacketWriteStream stream = packet.writeStream();
     stream.writeByte(PacketType::AuthorizationRequest);
     _socket.sendPacket(peer, 0, packet);

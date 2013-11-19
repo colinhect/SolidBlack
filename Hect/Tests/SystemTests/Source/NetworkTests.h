@@ -94,7 +94,7 @@ SUITE(Network)
             {
                 if (event.type == Socket::Event::Connect)
                 {
-                    Packet packet(Packet::Reliable);
+                    Packet packet(PacketFlag::Reliable);
 
                     PacketWriteStream stream = packet.writeStream();
                     stream.writeString("Hello");

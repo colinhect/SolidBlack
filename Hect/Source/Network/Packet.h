@@ -7,27 +7,27 @@ typedef MemoryReadStream PacketReadStream;
 typedef MemoryWriteStream PacketWriteStream;
 
 ///
+/// A flag describing how a packet is transported.
+enum PacketFlag
+{
+    ///
+    /// Packet must be received by the target peer and resend attempts
+    /// should be made until the packet is delivered.
+    Reliable = 1,
+
+    ///
+    /// Packet will not be sequenced with other packets.
+    ///
+    /// \warning Not supported for reliable packets.
+    Unsequenced = 2
+};
+
+///
 /// A packet of data transported across a network connection.
 class Packet
 {
     friend class Socket;
 public:
-
-    ///
-    /// A flag describing how a packet is transported.
-    enum Flag
-    {
-        ///
-        /// Packet must be received by the target peer and resend attempts
-        /// should be made until the packet is delivered.
-        Reliable = 1,
-
-        ///
-        /// Packet will not be sequenced with other packets.
-        ///
-        /// \warning Not supported for reliable packets.
-        Unsequenced = 2
-    };
 
     ///
     /// Constructs a packet given its flags.
