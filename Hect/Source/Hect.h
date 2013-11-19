@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atomic>
+#include <bitset>
 #include <condition_variable>
 #include <functional>
 #include <iostream>
@@ -36,7 +37,6 @@ const double pi = 3.14159265358979323846;
 #include "Core/Error.h"
 #include "Core/Uncopyable.h"
 #include "Core/Any.h"
-#include "Core/BitField.h"
 #include "Core/Memory.h"
 #include "Core/DataValue.h"
 #include "Core/TimeSpan.h"

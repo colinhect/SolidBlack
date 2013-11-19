@@ -49,7 +49,7 @@ public:
     bool contains(const EntityAttributes& attributes) const;
 
 private:
-    BitField<uint64_t> _bitField;
+    std::bitset<64> _bitset;
 };
 
 }

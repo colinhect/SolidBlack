@@ -221,7 +221,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Any.h" />
-    <ClInclude Include="Source\Core\BitField.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Memory.h" />
     <ClInclude Include="Source\Entity\Components\Renderable.h" />
@@ -381,7 +380,6 @@
   <ItemGroup>
     <None Include="Source\Core\Any.inl" />
     <None Include="Source\Core\Engine.inl" />
-    <None Include="Source\Core\BitField.inl" />
     <None Include="Source\Entity\EntitySystem.inl" />
     <None Include="Source\Graphics\MeshBuilder.inl" />
     <None Include="Source\Math\Angle.inl" />

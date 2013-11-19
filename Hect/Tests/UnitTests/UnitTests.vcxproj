@@ -158,7 +158,6 @@
   <ItemGroup>
     <ClInclude Include="Source\AngleTests.h" />
     <ClInclude Include="Source\AnyTests.h" />
-    <ClInclude Include="Source\BitFieldTests.h" />
     <ClInclude Include="Source\MemoryStreamTests.h" />
     <ClInclude Include="Source\DataValueTests.h" />
     <ClInclude Include="Source\FrustumTests.h" />
