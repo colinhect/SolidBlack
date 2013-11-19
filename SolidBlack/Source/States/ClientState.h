@@ -3,17 +3,21 @@
 #include <Hect.h>
 using namespace hect;
 
+#include "States/SolidBlackState.h"
+#include "Systems/FreeCameraControllerSystem.h"
+
 class ClientState :
-    public State,
-    public Keyboard::Listener
+    public SolidBlackState
 {
 public:
     ClientState(Engine& engine);
     ~ClientState();
 
-    void update(double timeStep);
+    void begin();
+    void end();
 
-    void notifyKeyboardEvent(const Keyboard::Event& event);
+    void update(double timeStep);
+    void render(double delta);
 
 private:
     void _receivePacketEvent(Socket::Event& event);
@@ -22,4 +26,14 @@ private:
 
     Socket _socket;
     Peer _server;
+
+    AssetCache _assetCache;
+
+    CameraSystem _cameraSystem;
+    RenderingSystem _renderingSystem;
+    DebugRenderingSystem _debugRenderingSystem;
+
+    FreeCameraControllerSystem _freeCameraControllerSystem;
+
+    Scene _scene;
 };
