@@ -29,10 +29,10 @@ PhysicsSystem::~PhysicsSystem()
     delete (btDefaultCollisionConfiguration*)_configuration;
 }
 
-void PhysicsSystem::update(double timeStep, unsigned maxSubSteps)
+void PhysicsSystem::update(double timeStep, unsigned maxSubStepCount)
 {
     btDiscreteDynamicsWorld* world = (btDiscreteDynamicsWorld*)_world;
-    world->stepSimulation(timeStep, maxSubSteps);
+    world->stepSimulation(timeStep, maxSubStepCount);
 }
 
 void PhysicsSystem::onAddEntity(Entity& entity)

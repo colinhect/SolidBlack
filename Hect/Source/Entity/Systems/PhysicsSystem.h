@@ -10,7 +10,12 @@ public:
     PhysicsSystem();
     ~PhysicsSystem();
 
-    void update(double timeStep, unsigned maxSubSteps);
+    ///
+    /// Updates all physical bodies.
+    ///
+    /// \param timeStep The time step.
+    /// \param maxSubStepCount The maximum number of sub steps.
+    void update(double timeStep, unsigned maxSubStepCount);
 
 protected:
 
