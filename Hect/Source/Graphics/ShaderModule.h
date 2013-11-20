@@ -4,6 +4,24 @@ namespace hect
 {
 
 ///
+/// A shader module type.
+enum class ShaderModuleType
+{
+
+    ///
+    /// A vertex program module.
+    Vertex,
+
+    ///
+    /// A pixel program module.
+    Pixel,
+
+    ///
+    /// A geometry program module.
+    Geometry
+};
+
+///
 /// A shader module.
 class ShaderModule :
     public GpuObject
@@ -19,24 +37,6 @@ public:
     typedef std::vector<ShaderModule::Ref> RefArray;
 
     ///
-    /// A shader module type.
-    enum Type
-    {
-
-        ///
-        /// A vertex program module.
-        Vertex,
-
-        ///
-        /// A pixel program module.
-        Pixel,
-
-        ///
-        /// A geometry program module.
-        Geometry
-    };
-
-    ///
     /// Constructs an empty shader module.
     ShaderModule();
 
@@ -45,7 +45,7 @@ public:
     ///
     /// \param type The type.
     /// \param source The source.
-    ShaderModule(Type type, const std::string& source);
+    ShaderModule(ShaderModuleType type, const std::string& source);
 
     ///
     /// Destroys the shader if it is uploaded.
@@ -53,13 +53,13 @@ public:
 
     ///
     /// Returns the type.
-    Type type() const;
+    ShaderModuleType type() const;
 
     /// Returns the source.
     const std::string& source() const;
 
 private:
-    Type _type;
+    ShaderModuleType _type;
     std::string _source;
 };
 

@@ -500,7 +500,7 @@ void Gpu::uploadShaderModule(ShaderModule& module)
 
     // Create the shader
     auto data = new ShaderModuleData();
-    GL_ASSERT( data->id = glCreateShader(_shaderModuleTypeLookUp[module.type()]); )
+    GL_ASSERT( data->id = glCreateShader(_shaderModuleTypeLookUp[(int)module.type()]); )
 
     // Compile shader
     const GLchar* source = module.source().c_str();
@@ -730,7 +730,7 @@ void Gpu::uploadMesh(Mesh& mesh)
             glVertexAttribPointer(
                 attributeIndex,
                 attribute.cardinality(),
-                _vertexAttributeTypeLookUp[attribute.type()],
+                _vertexAttributeTypeLookUp[(int)attribute.type()],
                 GL_FALSE,
                 vertexLayout.vertexSize(),
                 (GLfloat*)attribute.offset()

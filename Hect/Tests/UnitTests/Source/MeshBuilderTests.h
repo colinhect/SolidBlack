@@ -1,8 +1,8 @@
 VertexLayout createVetexLayout()
 {
     VertexAttribute::Array attributes;
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::Normal, VertexAttributeType::Float, 3));
 
     return VertexLayout(attributes);
 }
@@ -41,7 +41,7 @@ SUITE(MeshBuilder)
         Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
-        meshBuilder.setAttributeData(VertexAttribute::Position, Vector3<float>(1.0f, 2.0f, 3.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Position, Vector3<float>(1.0f, 2.0f, 3.0f));
 
         CHECK_EQUAL(1, mesh.vertexCount());
         CHECK_EQUAL(0, mesh.indexCount());
@@ -60,7 +60,7 @@ SUITE(MeshBuilder)
         Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
-        meshBuilder.setAttributeData(VertexAttribute::Position, Vector4<float>(1.0f, 2.0f, 3.0f, 4.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Position, Vector4<float>(1.0f, 2.0f, 3.0f, 4.0f));
 
         CHECK_EQUAL(1, mesh.vertexCount());
         CHECK_EQUAL(0, mesh.indexCount());
@@ -79,7 +79,7 @@ SUITE(MeshBuilder)
         Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
-        meshBuilder.setAttributeData(VertexAttribute::Position, Vector2<float>(1.0f, 2.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Position, Vector2<float>(1.0f, 2.0f));
 
         CHECK_EQUAL(1, mesh.vertexCount());
         CHECK_EQUAL(0, mesh.indexCount());
@@ -98,14 +98,14 @@ SUITE(MeshBuilder)
         Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
-        meshBuilder.setAttributeData(VertexAttribute::Position, Vector3<float>(1.0f, 2.0f, 3.0f));
-        meshBuilder.setAttributeData(VertexAttribute::Normal, Vector3<float>(-1.0f, -2.0f, -3.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Position, Vector3<float>(1.0f, 2.0f, 3.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Normal, Vector3<float>(-1.0f, -2.0f, -3.0f));
         meshBuilder.addVertex();
-        meshBuilder.setAttributeData(VertexAttribute::Position, Vector3<float>(4.0f, 5.0f, 6.0f));
-        meshBuilder.setAttributeData(VertexAttribute::Normal, Vector3<float>(-4.0f, -5.0f, -6.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Position, Vector3<float>(4.0f, 5.0f, 6.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Normal, Vector3<float>(-4.0f, -5.0f, -6.0f));
         meshBuilder.addVertex();
-        meshBuilder.setAttributeData(VertexAttribute::Position, Vector3<float>(7.0f, 8.0f, 9.0f));
-        meshBuilder.setAttributeData(VertexAttribute::Normal, Vector3<float>(-7.0f, -8.0f, -9.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Position, Vector3<float>(7.0f, 8.0f, 9.0f));
+        meshBuilder.setAttributeData(VertexAttributeSemantic::Normal, Vector3<float>(-7.0f, -8.0f, -9.0f));
 
         meshBuilder.addIndex(0);
         meshBuilder.addIndex(1);

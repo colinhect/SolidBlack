@@ -14,22 +14,22 @@ MeshJsonFormat::MeshJsonFormat()
     _primitiveTypes["LineStrip"] = PrimitiveType::LineStrip;
     _primitiveTypes["Points"] = PrimitiveType::Points;
 
-    _attributeSemantics["Position"] = VertexAttribute::Position;
-    _attributeSemantics["Normal"] = VertexAttribute::Normal;
-    _attributeSemantics["Color"] = VertexAttribute::Color;
-    _attributeSemantics["Tangent"] = VertexAttribute::Tangent;
-    _attributeSemantics["Binormal"] = VertexAttribute::Binormal;
-    _attributeSemantics["Weight0"] = VertexAttribute::Weight0;
-    _attributeSemantics["Weight1"] = VertexAttribute::Weight1;
-    _attributeSemantics["Weight2"] = VertexAttribute::Weight2;
-    _attributeSemantics["Weight3"] = VertexAttribute::Weight3;
-    _attributeSemantics["TextureCoords0"] = VertexAttribute::TextureCoords0;
-    _attributeSemantics["TextureCoords1"] = VertexAttribute::TextureCoords1;
-    _attributeSemantics["TextureCoords2"] = VertexAttribute::TextureCoords2;
-    _attributeSemantics["TextureCoords3"] = VertexAttribute::TextureCoords3;
+    _attributeSemantics["Position"] = VertexAttributeSemantic::Position;
+    _attributeSemantics["Normal"] = VertexAttributeSemantic::Normal;
+    _attributeSemantics["Color"] = VertexAttributeSemantic::Color;
+    _attributeSemantics["Tangent"] = VertexAttributeSemantic::Tangent;
+    _attributeSemantics["Binormal"] = VertexAttributeSemantic::Binormal;
+    _attributeSemantics["Weight0"] = VertexAttributeSemantic::Weight0;
+    _attributeSemantics["Weight1"] = VertexAttributeSemantic::Weight1;
+    _attributeSemantics["Weight2"] = VertexAttributeSemantic::Weight2;
+    _attributeSemantics["Weight3"] = VertexAttributeSemantic::Weight3;
+    _attributeSemantics["TextureCoords0"] = VertexAttributeSemantic::TextureCoords0;
+    _attributeSemantics["TextureCoords1"] = VertexAttributeSemantic::TextureCoords1;
+    _attributeSemantics["TextureCoords2"] = VertexAttributeSemantic::TextureCoords2;
+    _attributeSemantics["TextureCoords3"] = VertexAttributeSemantic::TextureCoords3;
 
-    _attributeTypes["Half"] = VertexAttribute::Half;
-    _attributeTypes["Float"] = VertexAttribute::Float;
+    _attributeTypes["Half"] = VertexAttributeType::Half;
+    _attributeTypes["Float"] = VertexAttributeType::Float;
 }
 
 void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)
@@ -77,10 +77,10 @@ void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)
 
             switch (semantic)
             {
-            case VertexAttribute::Position:
-            case VertexAttribute::Normal:
-            case VertexAttribute::Tangent:
-            case VertexAttribute::Binormal:
+            case VertexAttributeSemantic::Position:
+            case VertexAttributeSemantic::Normal:
+            case VertexAttributeSemantic::Tangent:
+            case VertexAttributeSemantic::Binormal:
                 meshBuilder.setAttributeData(semantic, parseVector3(attribute["data"]));
                 break;
             default:
@@ -119,7 +119,7 @@ PrimitiveType MeshJsonFormat::_parsePrimitiveType(const DataValue& dataValue)
     return (*it).second;
 }
 
-VertexAttribute::Semantic MeshJsonFormat::_parseAttributeSemantic(const DataValue& dataValue)
+VertexAttributeSemantic MeshJsonFormat::_parseAttributeSemantic(const DataValue& dataValue)
 {
     auto it = _attributeSemantics.find(dataValue.asString());
     if (it == _attributeSemantics.end())
@@ -130,7 +130,7 @@ VertexAttribute::Semantic MeshJsonFormat::_parseAttributeSemantic(const DataValu
     return (*it).second;
 }
 
-VertexAttribute::Type MeshJsonFormat::_parseAttributeType(const DataValue& dataValue)
+VertexAttributeType MeshJsonFormat::_parseAttributeType(const DataValue& dataValue)
 {
     auto it = _attributeTypes.find(dataValue.asString());
     if (it == _attributeTypes.end())

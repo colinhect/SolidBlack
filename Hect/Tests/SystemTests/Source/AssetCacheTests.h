@@ -46,7 +46,7 @@ SUITE(AssetCache)
         AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Screen.frag");
 
         CHECK(a.get() != b.get());
-        CHECK_EQUAL(ShaderModule::Vertex, a.get()->type());
-        CHECK_EQUAL(ShaderModule::Pixel, b.get()->type());
+        CHECK(ShaderModuleType::Vertex == a.get()->type());
+        CHECK(ShaderModuleType::Pixel == b.get()->type());
     }
 }

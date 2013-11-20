@@ -28,7 +28,7 @@ public:
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttribute::Semantic semantic, float value);
+    void setAttributeData(VertexAttributeSemantic semantic, float value);
 
     ///
     /// Sets attribute data of the most recently added vertex for a given
@@ -36,7 +36,7 @@ public:
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttribute::Semantic semantic, const Vector2<float>& value);
+    void setAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value);
 
     ///
     /// Sets attribute data of the most recently added vertex for a given
@@ -44,7 +44,7 @@ public:
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttribute::Semantic semantic, const Vector3<float>& value);
+    void setAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value);
 
     ///
     /// Sets attribute data of the most recently added vertex for a given
@@ -52,7 +52,7 @@ public:
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttribute::Semantic semantic, const Vector4<float>& value);
+    void setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value);
 
     ///
     /// Adds an index.

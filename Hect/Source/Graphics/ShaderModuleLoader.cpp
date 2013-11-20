@@ -6,19 +6,19 @@ void AssetLoader<ShaderModule>::load(ShaderModule& shaderModule, const Path& ass
 {
     FileReadStream stream = assetCache.storage().openFileForRead(assetPath);
 
-    ShaderModule::Type type;
+    ShaderModuleType type;
     std::string extension = assetPath.extension();
     if (extension == "vert")
     {
-        type = ShaderModule::Vertex;
+        type = ShaderModuleType::Vertex;
     }
     else if (extension == "frag")
     {
-        type = ShaderModule::Pixel;
+        type = ShaderModuleType::Pixel;
     }
     else if (extension == "geom")
     {
-        type = ShaderModule::Geometry;
+        type = ShaderModuleType::Geometry;
     }
     else
     {

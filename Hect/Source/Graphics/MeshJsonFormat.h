@@ -24,13 +24,13 @@ public:
 private:
     IndexType _parseIndexType(const DataValue& dataValue);
     PrimitiveType _parsePrimitiveType(const DataValue& dataValue);
-    VertexAttribute::Semantic _parseAttributeSemantic(const DataValue& dataValue);
-    VertexAttribute::Type _parseAttributeType(const DataValue& dataValue);
+    VertexAttributeSemantic _parseAttributeSemantic(const DataValue& dataValue);
+    VertexAttributeType _parseAttributeType(const DataValue& dataValue);
 
     std::map<std::string, IndexType> _indexTypes;
     std::map<std::string, PrimitiveType> _primitiveTypes;
-    std::map<std::string, VertexAttribute::Semantic> _attributeSemantics;
-    std::map<std::string, VertexAttribute::Type> _attributeTypes;
+    std::map<std::string, VertexAttributeSemantic> _attributeSemantics;
+    std::map<std::string, VertexAttributeType> _attributeTypes;
 };
 
 }

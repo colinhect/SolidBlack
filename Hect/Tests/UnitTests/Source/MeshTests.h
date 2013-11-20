@@ -5,7 +5,7 @@ SUITE(Mesh)
         Mesh mesh;
 
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
-        CHECK(VertexAttribute::Position == meshVertexLayout.attributes()[0].semantic());
+        CHECK(VertexAttributeSemantic::Position == meshVertexLayout.attributes()[0].semantic());
         CHECK(PrimitiveType::Triangles == mesh.primitiveType());
         CHECK(IndexType::UnsignedShort == mesh.indexType());
     }
@@ -13,8 +13,8 @@ SUITE(Mesh)
     TEST(Constructor)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
-        attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Half, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Normal, VertexAttributeType::Half, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -22,8 +22,8 @@ SUITE(Mesh)
 
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
         CHECK_EQUAL(2, meshVertexLayout.attributes().size());
-        CHECK_EQUAL(VertexAttribute::Position, meshVertexLayout.attributes()[0].semantic());
-        CHECK_EQUAL(VertexAttribute::Float, meshVertexLayout.attributes()[0].type());
+        CHECK(VertexAttributeSemantic::Position == meshVertexLayout.attributes()[0].semantic());
+        CHECK(VertexAttributeType::Float == meshVertexLayout.attributes()[0].type());
         CHECK_EQUAL(3, meshVertexLayout.attributes()[0].cardinality());
 
         CHECK(PrimitiveType::Triangles == mesh.primitiveType());
@@ -33,7 +33,7 @@ SUITE(Mesh)
     TEST(SetVertexData)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -56,7 +56,7 @@ SUITE(Mesh)
     TEST(GetVertexData)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -89,7 +89,7 @@ SUITE(Mesh)
     TEST(SetIndexData)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -111,7 +111,7 @@ SUITE(Mesh)
     TEST(GetIndexDataUnsignedByte)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -141,7 +141,7 @@ SUITE(Mesh)
     TEST(SetVertexLayout)
     {
         VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttribute::Tangent, VertexAttribute::Float, 3));
+        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Tangent, VertexAttributeType::Float, 3));
 
         VertexLayout vertexLayout(attributes);
 
@@ -149,7 +149,7 @@ SUITE(Mesh)
         mesh.setVertexLayout(vertexLayout);
 
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
-        CHECK_EQUAL(VertexAttribute::Tangent, meshVertexLayout.attributes()[0].semantic());
+        CHECK(VertexAttributeSemantic::Tangent == meshVertexLayout.attributes()[0].semantic());
     }
 
     TEST(SetVertexLayoutWithVertexData)

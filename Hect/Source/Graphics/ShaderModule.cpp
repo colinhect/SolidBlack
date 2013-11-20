@@ -3,7 +3,7 @@
 using namespace hect;
 
 ShaderModule::ShaderModule() :
-    _type(Vertex)
+    _type(ShaderModuleType::Vertex)
 {
 }
 
@@ -15,13 +15,13 @@ ShaderModule::~ShaderModule()
     }
 }
 
-ShaderModule::ShaderModule(Type type, const std::string& source) :
+ShaderModule::ShaderModule(ShaderModuleType type, const std::string& source) :
     _type(type),
     _source(source)
 {
 }
 
-ShaderModule::Type ShaderModule::type() const
+ShaderModuleType ShaderModule::type() const
 {
     return _type;
 }

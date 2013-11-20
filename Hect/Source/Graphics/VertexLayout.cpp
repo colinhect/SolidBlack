@@ -5,10 +5,10 @@ using namespace hect;
 VertexLayout VertexLayout::createDefault()
 {
     VertexAttribute::Array attributes;
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Normal, VertexAttribute::Float, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::Tangent, VertexAttribute::Float, 3));
-    attributes.push_back(VertexAttribute(VertexAttribute::TextureCoords0, VertexAttribute::Float, 2));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::Normal, VertexAttributeType::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::Tangent, VertexAttributeType::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::TextureCoords0, VertexAttributeType::Float, 2));
 
     return VertexLayout(attributes);
 }
@@ -29,7 +29,7 @@ VertexLayout::VertexLayout(const VertexAttribute::Array& attributes) :
     }
 }
 
-const VertexAttribute* VertexLayout::attributeWithSemantic(VertexAttribute::Semantic semantic) const
+const VertexAttribute* VertexLayout::attributeWithSemantic(VertexAttributeSemantic semantic) const
 {
     const VertexAttribute* resultingAttribute = nullptr;
     for (const VertexAttribute& attribute : _attributes)

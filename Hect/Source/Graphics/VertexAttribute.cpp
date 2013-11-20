@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-VertexAttribute::VertexAttribute(Semantic semantic, Type type, unsigned cardinality) :
+VertexAttribute::VertexAttribute(VertexAttributeSemantic semantic, VertexAttributeType type, unsigned cardinality) :
     _semantic(semantic),
     _type(type),
     _cardinality(cardinality),
@@ -10,12 +10,12 @@ VertexAttribute::VertexAttribute(Semantic semantic, Type type, unsigned cardinal
 {
 }
 
-VertexAttribute::Semantic VertexAttribute::semantic() const
+VertexAttributeSemantic VertexAttribute::semantic() const
 {
     return _semantic;
 }
 
-VertexAttribute::Type VertexAttribute::type() const
+VertexAttributeType VertexAttribute::type() const
 {
     return _type;
 }
@@ -29,9 +29,9 @@ unsigned VertexAttribute::size() const
 {
     switch (_type)
     {
-    case Half:
+    case VertexAttributeType::Half:
         return 2 * _cardinality;
-    case Float:
+    case VertexAttributeType::Float:
         return 4 * _cardinality;
     }
 

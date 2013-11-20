@@ -21,7 +21,7 @@ size_t MeshBuilder::addVertex()
     return _mesh->_vertexCount++;
 }
 
-void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, float value)
+void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, float value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -30,17 +30,17 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, float val
     }
 }
 
-void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vector2<float>& value)
+void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
     {
-        VertexAttribute::Type type = attribute->type();
+        VertexAttributeType type = attribute->type();
         unsigned cardinality = attribute->cardinality();
 
         // If the type matches and the cardinality is large enough then set it
         // all components at the same time
-        if (type == VertexAttribute::Float && cardinality >= 2)
+        if (type == VertexAttributeType::Float && cardinality >= 2)
         {
             _setAttributeData(*attribute, value);
         }
@@ -61,10 +61,10 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
     }
 }
 
-void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vector3<float>& value)
+void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value)
 {
     // If this data is a position then expand the bounding box to include it
-    if (semantic == VertexAttribute::Position)
+    if (semantic == VertexAttributeSemantic::Position)
     {
         _mesh->boundingBox().expandToInclude(value);
     }
@@ -72,12 +72,12 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
     {
-        VertexAttribute::Type type = attribute->type();
+        VertexAttributeType type = attribute->type();
         unsigned cardinality = attribute->cardinality();
 
         // If the type matches and the cardinality is large enough then set it
         // all components at the same time
-        if (type == VertexAttribute::Float && cardinality >= 3)
+        if (type == VertexAttributeType::Float && cardinality >= 3)
         {
             _setAttributeData(*attribute, value);
         }
@@ -103,17 +103,17 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
     }
 }
 
-void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vector4<float>& value)
+void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
     {
-        VertexAttribute::Type type = attribute->type();
+        VertexAttributeType type = attribute->type();
         unsigned cardinality = attribute->cardinality();
 
         // If the type matches and the cardinality is large enough then set it
         // all components at the same time
-        if (type == VertexAttribute::Float && cardinality >= 4)
+        if (type == VertexAttributeType::Float && cardinality >= 4)
         {
             _setAttributeData(*attribute, value);
         }
@@ -177,10 +177,10 @@ void MeshBuilder::_setComponentValue(const VertexAttribute* attribute, unsigned 
 {
     switch (attribute->type())
     {
-    case VertexAttribute::Half:
+    case VertexAttributeType::Half:
         throw Error("16-bit floats are not yet implemented");
         break;
-    case VertexAttribute::Float:
+    case VertexAttributeType::Float:
         *(float*)&_mesh->_vertexData[_vertexDataIndex + attribute->offset() + index * 4] = value;
         break;
     }

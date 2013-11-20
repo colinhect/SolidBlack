@@ -28,7 +28,7 @@ public:
     /// exists with the semantic).
     ///
     /// \param semantic The semantic to find the attribute for.
-    const VertexAttribute* attributeWithSemantic(VertexAttribute::Semantic semantic) const;
+    const VertexAttribute* attributeWithSemantic(VertexAttributeSemantic semantic) const;
 
     /// Returns the attributes.
     const VertexAttribute::Array& attributes() const;

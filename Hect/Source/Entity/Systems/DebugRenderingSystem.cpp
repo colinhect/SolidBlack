@@ -71,7 +71,7 @@ void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, G
 void DebugRenderingSystem::_buildBoxMesh()
 {
     VertexAttribute::Array attributes;
-    attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
+    attributes.push_back(VertexAttribute(VertexAttributeSemantic::Position, VertexAttributeType::Float, 3));
 
     _boxMesh.reset(new Mesh(VertexLayout(attributes), PrimitiveType::Lines, IndexType::UnsignedByte));
 
@@ -127,8 +127,8 @@ void DebugRenderingSystem::_buildBoxShader()
         "}\n";
 
     ShaderModule::RefArray modules;
-    modules.push_back(ShaderModule::Ref(new ShaderModule(ShaderModule::Vertex, vertexSource)));
-    modules.push_back(ShaderModule::Ref(new ShaderModule(ShaderModule::Pixel, pixelSource)));
+    modules.push_back(ShaderModule::Ref(new ShaderModule(ShaderModuleType::Vertex, vertexSource)));
+    modules.push_back(ShaderModule::Ref(new ShaderModule(ShaderModuleType::Pixel, pixelSource)));
 
     ShaderParam::Array params;
     params.push_back(ShaderParam("modelViewProjection", ShaderParamBinding::ModelViewProjectionMatrix));
