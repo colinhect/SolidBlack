@@ -2,7 +2,7 @@
 
 #include "Hect.h"
 
-#include "btBulletDynamicsCommon.h"
+#include <btBulletDynamicsCommon.h>
 
 namespace hect
 {

@@ -3,6 +3,8 @@
 namespace hect
 {
 
+class Engine;
+
 ///
 /// A state of the engine (e.g. main menu, single player game, credits).
 class State

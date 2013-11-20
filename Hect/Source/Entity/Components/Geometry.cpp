@@ -23,9 +23,9 @@ void Geometry::render(const Camera& camera, RenderingSystem& renderingSystem)
         Mesh& mesh = *_meshes[i];
         Material& material = *_materials[i];
 
-        if (mesh.vertexCount() > 0 && mesh.indexCount() > 0)
+        if (mesh.indexCount() > 0)
         {
-            if (camera.frustum().testAxisAlignedBox(mesh.boundingBox()))
+            if (camera.frustum().testAxisAlignedBox(mesh.boundingBox()) != FrustumTestResult::Outside)
             {
                 renderingSystem.renderMesh(mesh, material, *_transform);
             }
