@@ -4,6 +4,36 @@ namespace hect
 {
 
 ///
+/// A data value type.
+enum class DataValueType
+{
+
+    ///
+    /// The data value holds no data.
+    Null,
+
+    ///
+    /// A bool value.
+    Bool,
+
+    ///
+    /// A floating point number.
+    Number,
+
+    ///
+    /// A string.
+    String,
+
+    ///
+    /// An collection of other data values.
+    Array,
+
+    ///
+    /// A collection of key/value pairs of data values.
+    Object
+};
+
+///
 /// A hierarchical structure of data.
 ///
 /// \remarks Data values are normally constructed from JSON.  The majority of
@@ -15,41 +45,11 @@ public:
 
     ///
     /// The underlying type used for an array.
-    typedef std::vector<DataValue> ArrayType;
+    typedef std::vector<DataValue> Array;
 
     ///
     /// The underlying type used for an object.
-    typedef std::map<std::string, DataValue> ObjectType;
-
-    ///
-    /// A data value type.
-    enum Type
-    {
-
-        ///
-        /// The data value holds no data.
-        Null,
-
-        ///
-        /// A bool value.
-        Bool,
-
-        ///
-        /// A floating point number.
-        Number,
-
-        ///
-        /// A string.
-        String,
-
-        ///
-        /// An collection of other data values.
-        Array,
-
-        ///
-        /// A collection of key/value pairs of data values.
-        Object
-    };
+    typedef std::map<std::string, DataValue> Object;
 
     ///
     /// Constructs a null data value.
@@ -95,13 +95,13 @@ public:
     /// Constructs an array of data values.
     ///
     /// \param elements The elements.
-    DataValue(const ArrayType& elements);
+    DataValue(const Array& elements);
 
     ///
     /// Constructs an object of data values.
     ///
     /// \param members The members.
-    DataValue(const ObjectType& members);
+    DataValue(const Object& members);
 
     ///
     /// Constructs a data value moved from another.
@@ -111,7 +111,7 @@ public:
 
     ///
     /// Returns the type.
-    Type type() const;
+    DataValueType type() const;
 
     ///
     /// Returns this data value or another one if this data value is null.
@@ -193,20 +193,20 @@ public:
     /// Returns an iterator at the beginning of the elements.
     ///
     /// \remarks Only applies to data values that are arrays.
-    ArrayType::const_iterator begin() const;
+    Array::const_iterator begin() const;
 
     ///
     /// Returns an iterator at the end of the elements.
     ///
     /// \remarks Only applies to data values that are arrays.
-    ArrayType::const_iterator end() const;
+    Array::const_iterator end() const;
 
 private:
-    Type _type;
+    DataValueType _type;
     Any _data;
 
     static const DataValue _null;
-    static const ArrayType _emptyArray;
+    static const Array _emptyArray;
     static const std::string _emptyString;
 };
 

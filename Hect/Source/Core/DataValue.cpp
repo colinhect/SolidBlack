@@ -3,58 +3,58 @@
 using namespace hect;
 
 const DataValue DataValue::_null;
-const DataValue::ArrayType DataValue::_emptyArray;
+const DataValue::Array DataValue::_emptyArray;
 const std::string DataValue::_emptyString;
 
 DataValue::DataValue() :
-    _type(Null)
+    _type(DataValueType::Null)
 {
 }
 
 DataValue::DataValue(bool value) :
-    _type(Bool),
+    _type(DataValueType::Bool),
     _data(value)
 {
 }
 
 DataValue::DataValue(int value) :
-    _type(Number),
+    _type(DataValueType::Number),
     _data((double)value)
 {
 }
 
 DataValue::DataValue(unsigned value) :
-    _type(Number),
+    _type(DataValueType::Number),
     _data((double)value)
 {
 }
 
 DataValue::DataValue(double value) :
-    _type(Number),
+    _type(DataValueType::Number),
     _data(value)
 {
 }
 
 DataValue::DataValue(const char* value) :
-    _type(String),
+    _type(DataValueType::String),
     _data(std::string(value))
 {
 }
 
 DataValue::DataValue(const std::string& value) :
-    _type(String),
+    _type(DataValueType::String),
     _data(value)
 {
 }
 
-DataValue::DataValue(const ArrayType& elements) :
-    _type(Array),
+DataValue::DataValue(const Array& elements) :
+    _type(DataValueType::Array),
     _data(elements)
 {
 }
 
-DataValue::DataValue(const ObjectType& members) :
-    _type(Object),
+DataValue::DataValue(const Object& members) :
+    _type(DataValueType::Object),
     _data(members)
 {
 }
@@ -63,10 +63,10 @@ DataValue::DataValue(DataValue&& dataValue) :
     _type(dataValue._type),
     _data(std::move(dataValue._data))
 {
-    dataValue._type = Null;
+    dataValue._type = DataValueType::Null;
 }
 
-DataValue::Type DataValue::type() const
+DataValueType DataValue::type() const
 {
     return _type;
 }
@@ -85,32 +85,32 @@ const DataValue& DataValue::or(const DataValue& dataValue) const
 
 bool DataValue::isNull() const
 {
-    return _type == Null;
+    return _type == DataValueType::Null;
 }
 
 bool DataValue::isBool() const
 {
-    return _type == Bool;
+    return _type == DataValueType::Bool;
 }
 
 bool DataValue::isNumber() const
 {
-    return _type == Number;
+    return _type == DataValueType::Number;
 }
 
 bool DataValue::isString() const
 {
-    return _type == String;
+    return _type == DataValueType::String;
 }
 
 bool DataValue::isArray() const
 {
-    return _type == Array;
+    return _type == DataValueType::Array;
 }
 
 bool DataValue::isObject() const
 {
-    return _type == Object;
+    return _type == DataValueType::Object;
 }
 
 bool DataValue::asBool() const
@@ -177,11 +177,11 @@ size_t DataValue::size() const
 {
     if (isArray())
     {
-        return _data.as<ArrayType>().size();
+        return _data.as<Array>().size();
     }
     else if (isObject())
     {
-        return _data.as<ObjectType>().size();
+        return _data.as<Object>().size();
     }
 
     return 0;
@@ -192,7 +192,7 @@ std::vector<std::string> DataValue::memberNames() const
     if (isObject())
     {
         std::vector<std::string> result;
-        ObjectType& object = _data.as<ObjectType>();
+        Object& object = _data.as<Object>();
         for (auto& pair : object)
         {
             result.push_back(pair.first);
@@ -209,7 +209,7 @@ const DataValue& DataValue::operator[](size_t index) const
 {
     if (isArray())
     {
-        return _data.as<ArrayType>()[index];
+        return _data.as<Array>()[index];
     }
     else
     {
@@ -221,7 +221,7 @@ const DataValue& DataValue::operator[](const std::string& name) const
 {
     if (isObject())
     {
-        return _data.as<ObjectType>()[name];
+        return _data.as<Object>()[name];
     }
     else
     {
@@ -229,11 +229,11 @@ const DataValue& DataValue::operator[](const std::string& name) const
     }
 }
 
-DataValue::ArrayType::const_iterator DataValue::begin() const
+DataValue::Array::const_iterator DataValue::begin() const
 {
     if (isArray())
     {
-        return _data.as<ArrayType>().begin();
+        return _data.as<Array>().begin();
     }
     else
     {
@@ -241,11 +241,11 @@ DataValue::ArrayType::const_iterator DataValue::begin() const
     }
 }
 
-DataValue::ArrayType::const_iterator DataValue::end() const
+DataValue::Array::const_iterator DataValue::end() const
 {
     if (isArray())
     {
-        return _data.as<ArrayType>().end();
+        return _data.as<Array>().end();
     }
     else
     {

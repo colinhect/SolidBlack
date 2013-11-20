@@ -3,56 +3,56 @@ SUITE(DataValue)
     TEST(Null)
     {
         DataValue value;
-        CHECK_EQUAL(DataValue::Null, value.type());
+        CHECK(value.isNull());
     }
 
     TEST(Bool)
     {
         DataValue value(true);
-        CHECK_EQUAL(DataValue::Bool, value.type());
+        CHECK(value.isBool());
         CHECK(value.asBool());
     }
 
     TEST(Number)
     {
         DataValue value(5.0);
-        CHECK_EQUAL(DataValue::Number, value.type());
+        CHECK(value.isNumber());
         CHECK_EQUAL(5.0, value.asDouble());
     }
 
     TEST(String)
     {
         DataValue value("Testing");
-        CHECK_EQUAL(DataValue::String, value.type());
+        CHECK(value.isString());
         CHECK_EQUAL("Testing", value.asString());
     }
 
     TEST(Array)
     {
-        auto elements = DataValue::ArrayType();
+        auto elements = DataValue::Array();
         elements.push_back(true);
         elements.push_back(5.0);
         elements.push_back("Testing");
 
         DataValue value(elements);
-        CHECK_EQUAL(DataValue::Array, value.type());
+        CHECK(value.isArray());
         CHECK_EQUAL(3, value.size());
 
         for (unsigned i = 0; i < value.size(); ++i)
         {
             if (i == 0)
             {
-                CHECK_EQUAL(DataValue::Bool, value[i].type());
+                CHECK(value[i].isBool());
                 CHECK(value[i].asBool());
             }
             else if (i == 1)
             {
-                CHECK_EQUAL(DataValue::Number, value[i].type());
+                CHECK(value[i].isNumber());
                 CHECK_EQUAL(5.0, value[i].asDouble());
             }
             else if (i == 2)
             {
-                CHECK_EQUAL(DataValue::String, value[i].type());
+                CHECK(value[i].isString());
                 CHECK_EQUAL("Testing", value[i].asString());
             }
         }
@@ -60,26 +60,26 @@ SUITE(DataValue)
 
     TEST(Object)
     {
-        auto members = DataValue::ObjectType();
+        auto members = DataValue::Object();
         members["someBool"] = true;
         members["someNumber"] = 5.0;
         members["someString"] = "Testing";
 
         DataValue value(members);
-        CHECK_EQUAL(DataValue::Object, value.type());
+        CHECK(value.isObject());
         CHECK_EQUAL(3, value.size());
 
-        CHECK_EQUAL(DataValue::Bool, value["someBool"].type());
+        CHECK(value["someBool"].isBool());
         CHECK(value["someBool"].asBool());
-        CHECK_EQUAL(DataValue::Number, value["someNumber"].type());
+        CHECK(value["someNumber"].isNumber());
         CHECK_EQUAL(5.0, value["someNumber"].asDouble());
-        CHECK_EQUAL(DataValue::String, value["someString"].type());
+        CHECK(value["someString"].isString());
         CHECK_EQUAL("Testing", value["someString"].asString());
     }
 
     TEST(MemberNames)
     {
-        auto members = DataValue::ObjectType();
+        auto members = DataValue::Object();
         members["someBool"] = true;
         members["someNumber"] = 5.0;
         members["someString"] = "Testing";
@@ -107,7 +107,7 @@ SUITE(DataValue)
 
     TEST(Iterate)
     {
-        auto elements = DataValue::ArrayType();
+        auto elements = DataValue::Array();
         for (int i = 0; i < 10; ++i)
         {
             elements.push_back((double)i);

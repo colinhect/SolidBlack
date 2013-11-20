@@ -46,7 +46,7 @@ DataValue toDataValue(Json::Value& jsonValue)
     }
     else if (jsonValue.isArray())
     {
-        auto elements = DataValue::ArrayType();
+        auto elements = DataValue::Array();
         for (Json::Value& element : jsonValue)
         {
             elements.push_back(toDataValue(element));
@@ -55,7 +55,7 @@ DataValue toDataValue(Json::Value& jsonValue)
     }
     else if (jsonValue.isObject())
     {
-        auto members = DataValue::ObjectType();
+        auto members = DataValue::Object();
         for (std::string& name : jsonValue.getMemberNames())
         {
             members[name] = toDataValue(jsonValue[name]);
