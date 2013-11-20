@@ -2,14 +2,14 @@
 
 using namespace hect;
 
-Pass::Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const Shader::Argument::Array& shaderArguments) :
+Pass::Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const ShaderArg::Array& shaderArgs) :
     _renderMode(renderMode),
     _textures(textures),
     _shader(shader),
-    _shaderArguments(shaderArguments)
+    _shaderArgs(shaderArgs)
 {
     assert(shader);
-    _resolveShaderArguments();
+    _resolveShaderArgs();
 }
 
 void Pass::prepare(Gpu& gpu) const
@@ -32,11 +32,11 @@ void Pass::prepare(Gpu& gpu) const
     gpu.bindShader(*_shader);
 
     // Set the shader arguments
-    for (auto& pair : _resolvedArguments)
+    for (auto& pair : _resolvedArgs)
     {
-        const Shader::Parameter& parameter = *pair.first;
-        const Shader::Value& value = pair.second;
-        gpu.setShaderParameter(parameter, value);
+        const ShaderParam& param = *pair.first;
+        const ShaderValue& value = pair.second;
+        gpu.setShaderParam(param, value);
     }
 }
 
@@ -60,20 +60,20 @@ const Shader::Ref& Pass::shader() const
     return _shader;
 }
 
-const Shader::Argument::Array& Pass::shaderArguments() const
+const ShaderArg::Array& Pass::shaderArgs() const
 {
-    return _shaderArguments;
+    return _shaderArgs;
 }
 
-void Pass::_resolveShaderArguments()
+void Pass::_resolveShaderArgs()
 {
     assert(_shader);
 
     // Resolve the parameters that the arguments refer to (this would be
     // invalidated if the shader changes)
-    for (const Shader::Argument& argument : _shaderArguments)
+    for (const ShaderArg& arg : _shaderArgs)
     {
-        const Shader::Parameter& parameter = _shader->parameterWithName(argument.parameterName());
-        _resolvedArguments[&parameter] = argument.value();
+        const ShaderParam& param = _shader->paramWithName(arg.paramName());
+        _resolvedArgs[&param] = arg.value();
     }
 }

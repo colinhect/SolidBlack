@@ -89,9 +89,9 @@ public:
     ///
     /// Sets the value of a shader parameter.
     ///
-    /// \param parameter The parameter.
+    /// \param param The parameter.
     /// \param value The new value.
-    void setShaderParameter(const Shader::Parameter& parameter, const Shader::Value& value);
+    void setShaderParam(const ShaderParam& param, const ShaderValue& value);
 
     ///
     /// Uploads a shader module.

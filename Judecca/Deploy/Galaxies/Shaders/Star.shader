@@ -4,7 +4,7 @@
         "Shaders/Star.frag",
         "Shaders/Star.vert"
     ],
-    "parameters" :
+    "params" :
     {
         "colorMap" :
         {

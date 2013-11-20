@@ -4,24 +4,24 @@ using namespace hect;
 
 ShaderJsonFormat::ShaderJsonFormat()
 {
-    _parameterBindings["None"] = Shader::Parameter::None;
-    _parameterBindings["RenderTargetSize"] = Shader::Parameter::RenderTargetSize;
-    _parameterBindings["CameraPosition"] = Shader::Parameter::CameraPosition;
-    _parameterBindings["CameraUp"] = Shader::Parameter::CameraUp;
-    _parameterBindings["ViewMatrix"] = Shader::Parameter::ViewMatrix;
-    _parameterBindings["ProjectionMatrix"] = Shader::Parameter::ProjectionMatrix;
-    _parameterBindings["ViewProjectionMatrix"] = Shader::Parameter::ViewProjectionMatrix;
-    _parameterBindings["ModelMatrix"] = Shader::Parameter::ModelMatrix;
-    _parameterBindings["ModelViewMatrix"] = Shader::Parameter::ModelViewMatrix;
-    _parameterBindings["ModelViewProjectionMatrix"] = Shader::Parameter::ModelViewProjectionMatrix;
+    _paramBindings["None"] = ShaderParamBinding::None;
+    _paramBindings["RenderTargetSize"] = ShaderParamBinding::RenderTargetSize;
+    _paramBindings["CameraPosition"] = ShaderParamBinding::CameraPosition;
+    _paramBindings["CameraUp"] = ShaderParamBinding::CameraUp;
+    _paramBindings["ViewMatrix"] = ShaderParamBinding::ViewMatrix;
+    _paramBindings["ProjectionMatrix"] = ShaderParamBinding::ProjectionMatrix;
+    _paramBindings["ViewProjectionMatrix"] = ShaderParamBinding::ViewProjectionMatrix;
+    _paramBindings["ModelMatrix"] = ShaderParamBinding::ModelMatrix;
+    _paramBindings["ModelViewMatrix"] = ShaderParamBinding::ModelViewMatrix;
+    _paramBindings["ModelViewProjectionMatrix"] = ShaderParamBinding::ModelViewProjectionMatrix;
 
-    _valueTypes["Int"] = Shader::Value::Int;
-    _valueTypes["Float"] = Shader::Value::Float;
-    _valueTypes["Vector2"] = Shader::Value::Vector2;
-    _valueTypes["Vector3"] = Shader::Value::Vector3;
-    _valueTypes["Vector4"] = Shader::Value::Vector4;
-    _valueTypes["Matrix4"] = Shader::Value::Matrix4;
-    _valueTypes["Texture"] = Shader::Value::Texture;
+    _valueTypes["Int"] = ShaderValueType::Int;
+    _valueTypes["Float"] = ShaderValueType::Float;
+    _valueTypes["Vector2"] = ShaderValueType::Vector2;
+    _valueTypes["Vector3"] = ShaderValueType::Vector3;
+    _valueTypes["Vector4"] = ShaderValueType::Vector4;
+    _valueTypes["Matrix4"] = ShaderValueType::Matrix4;
+    _valueTypes["Texture"] = ShaderValueType::Texture;
 }
 
 void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache)
@@ -35,40 +35,40 @@ void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCac
         modules.push_back(moduleHandle.getShared());
     }
 
-    Shader::Parameter::Array parameters;
+    ShaderParam::Array params;
 
     // Add all parameters
-    for (std::string& name : dataValue["parameters"].memberNames())
+    for (std::string& name : dataValue["params"].memberNames())
     {
-        parameters.push_back(_parseParameter(name, dataValue["parameters"][name]));
+        params.push_back(_parseParameter(name, dataValue["params"][name]));
     }
 
-    shader = Shader(modules, parameters);
+    shader = Shader(modules, params);
 }
 
-Shader::Value ShaderJsonFormat::parseValue(Shader::Value::Type type, const DataValue& dataValue) const
+ShaderValue ShaderJsonFormat::parseValue(ShaderValueType type, const DataValue& dataValue) const
 {
     switch (type)
     {
-    case Shader::Value::Int:
-    case Shader::Value::Texture:
-        return Shader::Value(dataValue.asInt(), type);
-    case Shader::Value::Float:
-        return Shader::Value((float)dataValue.asDouble());
-    case Shader::Value::Vector2:
-        return Shader::Value(parseVector2(dataValue));
-    case Shader::Value::Vector3:
-        return Shader::Value(parseVector3(dataValue));
-    case Shader::Value::Vector4:
-        return Shader::Value(parseVector4(dataValue));
-    case Shader::Value::Matrix4:
-        return Shader::Value(parseMatrix4(dataValue));
+    case ShaderValueType::Int:
+    case ShaderValueType::Texture:
+        return ShaderValue(dataValue.asInt(), type);
+    case ShaderValueType::Float:
+        return ShaderValue((float)dataValue.asDouble());
+    case ShaderValueType::Vector2:
+        return ShaderValue(parseVector2(dataValue));
+    case ShaderValueType::Vector3:
+        return ShaderValue(parseVector3(dataValue));
+    case ShaderValueType::Vector4:
+        return ShaderValue(parseVector4(dataValue));
+    case ShaderValueType::Matrix4:
+        return ShaderValue(parseMatrix4(dataValue));
     default:
-        return Shader::Value();
+        return ShaderValue();
     }
 }
 
-Shader::Parameter ShaderJsonFormat::_parseParameter(const std::string& name, const DataValue& dataValue)
+ShaderParam ShaderJsonFormat::_parseParameter(const std::string& name, const DataValue& dataValue)
 {
     if (!dataValue["type"].isNull())
     {
@@ -77,17 +77,17 @@ Shader::Parameter ShaderJsonFormat::_parseParameter(const std::string& name, con
         const DataValue& value = dataValue["value"];
         if (!value.isNull())
         {
-            return Shader::Parameter(name, parseValue(type, value));
+            return ShaderParam(name, parseValue(type, value));
         }
         else
         {
-            return Shader::Parameter(name, type);
+            return ShaderParam(name, type);
         }
     }
     else if (!dataValue["binding"].isNull())
     {
         auto binding = _parseParameterBinding(dataValue["binding"]);
-        return Shader::Parameter(name, binding);
+        return ShaderParam(name, binding);
     }
     else
     {
@@ -95,10 +95,10 @@ Shader::Parameter ShaderJsonFormat::_parseParameter(const std::string& name, con
     }
 }
 
-Shader::Parameter::Binding ShaderJsonFormat::_parseParameterBinding(const DataValue& dataValue)
+ShaderParamBinding ShaderJsonFormat::_parseParameterBinding(const DataValue& dataValue)
 {
-    auto it = _parameterBindings.find(dataValue.asString());
-    if (it == _parameterBindings.end())
+    auto it = _paramBindings.find(dataValue.asString());
+    if (it == _paramBindings.end())
     {
         throw Error(format("Invalid parameter binding '%s'", dataValue.asString().c_str()));
     }
@@ -106,7 +106,7 @@ Shader::Parameter::Binding ShaderJsonFormat::_parseParameterBinding(const DataVa
     return (*it).second;
 }
 
-Shader::Value::Type ShaderJsonFormat::_parseValueType(const DataValue& dataValue)
+ShaderValueType ShaderJsonFormat::_parseValueType(const DataValue& dataValue)
 {
     auto it = _valueTypes.find(dataValue.asString());
     if (it == _valueTypes.end())

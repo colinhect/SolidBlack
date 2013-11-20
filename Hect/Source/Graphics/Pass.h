@@ -22,9 +22,9 @@ public:
     /// \param renderMode The render mode that pass will bind.
     /// \param textures The textures that the pass will bind.
     /// \param shader The shader that the pass will bind.
-    /// \param shaderArguments The argument values for the parameters in the
+    /// \param shaderArgs The argument values for the parameters in the
     /// shader.
-    Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const Shader::Argument::Array& shaderArguments);
+    Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const ShaderArg::Array& shaderArgs);
 
     ///
     /// Prepares a GPU to begin using this pass.
@@ -50,20 +50,20 @@ public:
 
     ///
     /// Returns the shader arguments.
-    const Shader::Argument::Array& shaderArguments() const;
+    const ShaderArg::Array& shaderArgs() const;
 
 private:
 
     // Resolves which shader parameters the shader arguments apply to for fast
     // binding
-    void _resolveShaderArguments();
+    void _resolveShaderArgs();
 
     RenderMode _renderMode;
     Texture::RefArray _textures;
     Shader::Ref _shader;
 
-    Shader::Argument::Array _shaderArguments;
-    std::map<const Shader::Parameter*, Shader::Value> _resolvedArguments;
+    ShaderArg::Array _shaderArgs;
+    std::map<const ShaderParam*, ShaderValue> _resolvedArgs;
 };
 
 }

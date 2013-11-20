@@ -355,11 +355,11 @@ void Gpu::bindShader(Shader& shader)
     GL_ASSERT( glUseProgram(data->id); )
 
     // Pass the default values for each parameter
-    for (const Shader::Parameter& parameter : shader.parameters())
+    for (const ShaderParam& param : shader.params())
     {
-        if (parameter.hasDefaultValue())
+        if (param.hasDefaultValue())
         {
-            setShaderParameter(parameter, parameter.defaultValue());
+            setShaderParam(param, param.defaultValue());
         }
     }
 }
@@ -408,13 +408,13 @@ void Gpu::uploadShader(Shader& shader)
     GL_ASSERT( glUseProgram(data->id); )
 
     // Get the locations of each parameter
-    for (Shader::Parameter& parameter : shader.parameters())
+    for (ShaderParam& param : shader.params())
     {
-        GL_ASSERT( int location = glGetUniformLocation(data->id, parameter.name().c_str()); )
+        GL_ASSERT( int location = glGetUniformLocation(data->id, param.name().c_str()); )
 
         if (location != -1)
         {
-            parameter.setLocation(location);
+            param.setLocation(location);
         }
     }
 
@@ -447,45 +447,45 @@ void Gpu::destroyShader(Shader& shader)
     shader._data = nullptr;
 }
 
-void Gpu::setShaderParameter(const Shader::Parameter& parameter, const Shader::Value& value)
+void Gpu::setShaderParam(const ShaderParam& param, const ShaderValue& value)
 {
     if (!_boundShader)
     {
         throw Error("Attempt to set parameter with no shader bound");
     }
 
-    int location = parameter.location();
+    int location = param.location();
     if (location < 0)
     {
         return;
     }
 
-    Shader::Value::Type type = value.type();
-    if (type == Shader::Value::Int)
+    ShaderValueType type = value.type();
+    if (type == ShaderValueType::Int)
     {
         GL_ASSERT( glUniform1i(location, *(GLint*)value.data()); )
     }
-    else if (type == Shader::Value::Float)
+    else if (type == ShaderValueType::Float)
     {
         GL_ASSERT( glUniform1f(location, *(GLfloat*)value.data()); )
     }
-    else if (type == Shader::Value::Vector2)
+    else if (type == ShaderValueType::Vector2)
     {
         GL_ASSERT( glUniform2fv(location, 1, (GLfloat*)value.data()); )
     }
-    else if (type == Shader::Value::Vector3)
+    else if (type == ShaderValueType::Vector3)
     {
         GL_ASSERT( glUniform3fv(location, 1, (GLfloat*)value.data()); )
     }
-    else if (type == Shader::Value::Vector4)
+    else if (type == ShaderValueType::Vector4)
     {
         GL_ASSERT( glUniform4fv(location, 1, (GLfloat*)value.data()); )
     }
-    else if (type == Shader::Value::Matrix4)
+    else if (type == ShaderValueType::Matrix4)
     {
         GL_ASSERT( glUniformMatrix4fv(location, 1, false, (GLfloat*)value.data()); )
     }
-    else if (type == Shader::Value::Texture)
+    else if (type == ShaderValueType::Texture)
     {
         GL_ASSERT( glUniform1i(location, *(GLint*)value.data()); )
     }

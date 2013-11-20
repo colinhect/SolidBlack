@@ -29,15 +29,15 @@ public:
     /// \param dataValue The data value to parse from.
     ///
     /// \returns The parsed shader value.
-    Shader::Value parseValue(Shader::Value::Type type, const DataValue& dataValue) const;
+    ShaderValue parseValue(ShaderValueType type, const DataValue& dataValue) const;
 
 private:
-    Shader::Parameter _parseParameter(const std::string& name, const DataValue& dataValue);
-    Shader::Parameter::Binding _parseParameterBinding(const DataValue& dataValue);
-    Shader::Value::Type _parseValueType(const DataValue& dataValue);
+    ShaderParam _parseParameter(const std::string& name, const DataValue& dataValue);
+    ShaderParamBinding _parseParameterBinding(const DataValue& dataValue);
+    ShaderValueType _parseValueType(const DataValue& dataValue);
 
-    std::map<std::string, Shader::Parameter::Binding> _parameterBindings;
-    std::map<std::string, Shader::Value::Type> _valueTypes;
+    std::map<std::string, ShaderParamBinding> _paramBindings;
+    std::map<std::string, ShaderValueType> _valueTypes;
 };
 
 }

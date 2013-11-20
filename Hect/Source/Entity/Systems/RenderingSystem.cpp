@@ -56,40 +56,40 @@ void RenderingSystem::_renderMeshTask(const MeshTask& task, Camera& camera, Gpu&
 
     // Set bound parameters
     Shader& shader = *pass.shader();
-    for (const Shader::Parameter& parameter : shader.parameters())
+    for (const ShaderParam& param : shader.params())
     {
-        if (parameter.hasBinding())
+        if (param.hasBinding())
         {
-            Shader::Parameter::Binding binding = parameter.binding();
+            ShaderParamBinding binding = param.binding();
 
             switch (binding)
             {
-            case Shader::Parameter::RenderTargetSize:
-                gpu.setShaderParameter(parameter, Vector2<float>((float)target.width(), (float)target.height()));
+            case ShaderParamBinding::RenderTargetSize:
+                gpu.setShaderParam(param, Vector2<float>((float)target.width(), (float)target.height()));
                 break;
-            case Shader::Parameter::CameraPosition:
-                gpu.setShaderParameter(parameter, (Vector3<float>)camera.position());
+            case ShaderParamBinding::CameraPosition:
+                gpu.setShaderParam(param, (Vector3<float>)camera.position());
                 break;
-            case Shader::Parameter::CameraUp:
-                gpu.setShaderParameter(parameter, (Vector3<float>)camera.up());
+            case ShaderParamBinding::CameraUp:
+                gpu.setShaderParam(param, (Vector3<float>)camera.up());
                 break;
-            case Shader::Parameter::ViewMatrix:
-                gpu.setShaderParameter(parameter, (Matrix4<float>)camera.viewMatrix());
+            case ShaderParamBinding::ViewMatrix:
+                gpu.setShaderParam(param, (Matrix4<float>)camera.viewMatrix());
                 break;
-            case Shader::Parameter::ProjectionMatrix:
-                gpu.setShaderParameter(parameter, (Matrix4<float>)camera.projectionMatrix());
+            case ShaderParamBinding::ProjectionMatrix:
+                gpu.setShaderParam(param, (Matrix4<float>)camera.projectionMatrix());
                 break;
-            case Shader::Parameter::ViewProjectionMatrix:
-                gpu.setShaderParameter(parameter, (Matrix4<float>)(camera.projectionMatrix() * camera.viewMatrix()));
+            case ShaderParamBinding::ViewProjectionMatrix:
+                gpu.setShaderParam(param, (Matrix4<float>)(camera.projectionMatrix() * camera.viewMatrix()));
                 break;
-            case Shader::Parameter::ModelMatrix:
-                gpu.setShaderParameter(parameter, (Matrix4<float>)model);
+            case ShaderParamBinding::ModelMatrix:
+                gpu.setShaderParam(param, (Matrix4<float>)model);
                 break;
-            case Shader::Parameter::ModelViewMatrix:
-                gpu.setShaderParameter(parameter, (Matrix4<float>)(camera.viewMatrix() * model));
+            case ShaderParamBinding::ModelViewMatrix:
+                gpu.setShaderParam(param, (Matrix4<float>)(camera.viewMatrix() * model));
                 break;
-            case Shader::Parameter::ModelViewProjectionMatrix:
-                gpu.setShaderParameter(parameter, (Matrix4<float>)(camera.projectionMatrix() * (camera.viewMatrix() * model)));
+            case ShaderParamBinding::ModelViewProjectionMatrix:
+                gpu.setShaderParam(param, (Matrix4<float>)(camera.projectionMatrix() * (camera.viewMatrix() * model)));
                 break;
             }
         }

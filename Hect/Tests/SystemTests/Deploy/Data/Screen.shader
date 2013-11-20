@@ -3,7 +3,7 @@
         "Screen.frag",
         "Screen.vert"
     ],
-    "parameters" : {
+    "params" : {
         "sourceTexture" : {
             "type" : "Texture",
             "value" : 0

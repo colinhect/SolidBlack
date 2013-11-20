@@ -52,14 +52,14 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
             RenderMode renderMode;
             Texture::RefArray textures;
             Shader::Ref shader;
-            Shader::Argument::Array shaderArguments;
+            ShaderArg::Array shaderArgs;
 
             if (passIndex < passes.size())
             {
                 renderMode = passes[passIndex].renderMode();
                 textures = passes[passIndex].textures();
                 shader = passes[passIndex].shader();
-                shaderArguments = passes[passIndex].shaderArguments();
+                shaderArgs = passes[passIndex].shaderArgs();
             }
 
             // Shader
@@ -70,23 +70,23 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
             }
 
             // Shader arguments
-            const DataValue& shaderArgumentsValue = passValue["shaderArguments"];
-            for (const std::string& name : shaderArgumentsValue.memberNames())
+            const DataValue& shaderArgsValue = passValue["shaderArgs"];
+            for (const std::string& name : shaderArgsValue.memberNames())
             {
                 if (!shader)
                 {
                     throw Error("Cannot have shader arguments without a shader");
                 }
 
-                const Shader::Parameter& parameter = shader->parameterWithName(name);
-                Shader::Value value = shaderJsonFormat.parseValue(parameter.type(), shaderArgumentsValue[name]);
+                const ShaderParam& param = shader->paramWithName(name);
+                ShaderValue value = shaderJsonFormat.parseValue(param.type(), shaderArgsValue[name]);
 
                 bool foundArgument = false;
-                for (Shader::Argument& argument : shaderArguments)
+                for (ShaderArg& arg : shaderArgs)
                 {
-                    if (argument.parameterName() == name)
+                    if (arg.paramName() == name)
                     {
-                        argument = Shader::Argument(name, value);
+                        arg = ShaderArg(name, value);
                         foundArgument = true;
                         break;
                     }
@@ -94,7 +94,7 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
 
                 if (!foundArgument)
                 {
-                    shaderArguments.push_back(Shader::Argument(name, value));
+                    shaderArgs.push_back(ShaderArg(name, value));
                 }
             }
 
@@ -154,13 +154,13 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
             // Append a new texture if needed
             if (passIndex >= passes.size())
             {
-                passes.push_back(Pass(renderMode, textures, shader, shaderArguments));
+                passes.push_back(Pass(renderMode, textures, shader, shaderArgs));
             }
 
             // Otherwise replace the texture already existing at the index
             else
             {
-                passes[passIndex] = Pass(renderMode, textures, shader, shaderArguments);
+                passes[passIndex] = Pass(renderMode, textures, shader, shaderArgs);
             }
 
             ++passIndex;
