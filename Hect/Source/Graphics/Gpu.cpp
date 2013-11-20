@@ -203,7 +203,7 @@ void Gpu::endFrame()
 
 void Gpu::bindMode(const RenderMode& mode)
 {
-    if (mode.isStateEnabled(RenderMode::DepthTest))
+    if (mode.isStateEnabled(RenderState::DepthTest))
     {
         GL_ASSERT( glEnable(GL_DEPTH_TEST); )
     }
@@ -212,7 +212,7 @@ void Gpu::bindMode(const RenderMode& mode)
         GL_ASSERT( glDisable(GL_DEPTH_TEST); )
     }
 
-    if (mode.isStateEnabled(RenderMode::CullFace))
+    if (mode.isStateEnabled(RenderState::CullFace))
     {
         GL_ASSERT( glEnable(GL_CULL_FACE); )
     }
@@ -221,12 +221,12 @@ void Gpu::bindMode(const RenderMode& mode)
         GL_ASSERT( glDisable(GL_CULL_FACE); )
     }
 
-    if (mode.isStateEnabled(RenderMode::Blend))
+    if (mode.isStateEnabled(RenderState::Blend))
     {
         GL_ASSERT( glEnable(GL_BLEND); )
 
-        GLuint sourceFactor = _blendFactorLookUp[mode.sourceBlendFactor()];
-        GLuint destFactor = _blendFactorLookUp[mode.destBlendFactor()];
+        GLuint sourceFactor = _blendFactorLookUp[(int)mode.sourceBlendFactor()];
+        GLuint destFactor = _blendFactorLookUp[(int)mode.destBlendFactor()];
 
         GL_ASSERT( glBlendFunc(sourceFactor, destFactor); )
     }

@@ -4,21 +4,21 @@ using namespace hect;
 
 MaterialJsonFormat::MaterialJsonFormat()
 {
-    _states["Blend"] = RenderMode::Blend;
-    _states["DepthTest"] = RenderMode::DepthTest;
-    _states["DepthWrite"] = RenderMode::DepthWrite;
-    _states["CullFace"] = RenderMode::CullFace;
+    _states["Blend"] = RenderState::Blend;
+    _states["DepthTest"] = RenderState::DepthTest;
+    _states["DepthWrite"] = RenderState::DepthWrite;
+    _states["CullFace"] = RenderState::CullFace;
 
-    _blendFactors["Zero"] = RenderMode::Zero;
-    _blendFactors["One"] = RenderMode::One;
-    _blendFactors["SourceColor"] = RenderMode::SourceColor;
-    _blendFactors["OneMinusSourceColor"] = RenderMode::OneMinusSourceColor;
-    _blendFactors["DestColor"] = RenderMode::DestColor;
-    _blendFactors["OneMinusDestColor"] = RenderMode::OneMinusDestColor;
-    _blendFactors["SourceAlpha"] = RenderMode::SourceAlpha;
-    _blendFactors["OneMinusSourceAlpha"] = RenderMode::OneMinusSourceAlpha;
-    _blendFactors["DestAlpha"] = RenderMode::DestAlpha;
-    _blendFactors["OneMinusDestAlpha"] = RenderMode::OneMinusDestAlpha;
+    _blendFactors["Zero"] = BlendFactor::Zero;
+    _blendFactors["One"] = BlendFactor::One;
+    _blendFactors["SourceColor"] = BlendFactor::SourceColor;
+    _blendFactors["OneMinusSourceColor"] = BlendFactor::OneMinusSourceColor;
+    _blendFactors["DestColor"] = BlendFactor::DestColor;
+    _blendFactors["OneMinusDestColor"] = BlendFactor::OneMinusDestColor;
+    _blendFactors["SourceAlpha"] = BlendFactor::SourceAlpha;
+    _blendFactors["OneMinusSourceAlpha"] = BlendFactor::OneMinusSourceAlpha;
+    _blendFactors["DestAlpha"] = BlendFactor::DestAlpha;
+    _blendFactors["OneMinusDestAlpha"] = BlendFactor::OneMinusDestAlpha;
 }
 
 void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, AssetCache& assetCache)
@@ -181,7 +181,7 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
     material = Material(techniques);
 }
 
-RenderMode::State MaterialJsonFormat::_parseState(const DataValue& dataValue)
+RenderState MaterialJsonFormat::_parseState(const DataValue& dataValue)
 {
     auto it = _states.find(dataValue.asString());
     if (it == _states.end())
@@ -192,7 +192,7 @@ RenderMode::State MaterialJsonFormat::_parseState(const DataValue& dataValue)
     return (*it).second;
 }
 
-RenderMode::BlendFactor MaterialJsonFormat::_parseBlendFactor(const DataValue& dataValue)
+BlendFactor MaterialJsonFormat::_parseBlendFactor(const DataValue& dataValue)
 {
     auto it = _blendFactors.find(dataValue.asString());
     if (it == _blendFactors.end())

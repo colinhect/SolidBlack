@@ -23,11 +23,11 @@ public:
     void load(Material& material, const DataValue& dataValue, AssetCache& assetCache);
 
 private:
-    RenderMode::State _parseState(const DataValue& dataValue);
-    RenderMode::BlendFactor _parseBlendFactor(const DataValue& dataValue);
+    RenderState _parseState(const DataValue& dataValue);
+    BlendFactor _parseBlendFactor(const DataValue& dataValue);
 
-    std::map<std::string, RenderMode::State> _states;
-    std::map<std::string, RenderMode::BlendFactor> _blendFactors;
+    std::map<std::string, RenderState> _states;
+    std::map<std::string, BlendFactor> _blendFactors;
 };
 
 }

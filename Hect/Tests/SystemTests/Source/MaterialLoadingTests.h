@@ -15,11 +15,11 @@ SUITE(MaterialLoading)
         CHECK_EQUAL(screen, pass.shader().get());
 
         const RenderMode& renderMode = pass.renderMode();
-        CHECK(renderMode.isStateEnabled(RenderMode::Blend));
-        CHECK(!renderMode.isStateEnabled(RenderMode::DepthTest));
-        CHECK(!renderMode.isStateEnabled(RenderMode::CullFace));
-        CHECK(RenderMode::Zero == renderMode.sourceBlendFactor());
-        CHECK(RenderMode::OneMinusSourceAlpha == renderMode.destBlendFactor());
+        CHECK(renderMode.isStateEnabled(RenderState::Blend));
+        CHECK(!renderMode.isStateEnabled(RenderState::DepthTest));
+        CHECK(!renderMode.isStateEnabled(RenderState::CullFace));
+        CHECK(BlendFactor::Zero == renderMode.sourceBlendFactor());
+        CHECK(BlendFactor::OneMinusSourceAlpha == renderMode.destBlendFactor());
     }
 
     TEST(WithBase)
@@ -38,10 +38,10 @@ SUITE(MaterialLoading)
         CHECK_EQUAL(basePass.shader().get(), pass.shader().get());
 
         const RenderMode& renderMode = pass.renderMode();
-        CHECK(!renderMode.isStateEnabled(RenderMode::Blend));
-        CHECK(!renderMode.isStateEnabled(RenderMode::DepthTest));
-        CHECK(renderMode.isStateEnabled(RenderMode::CullFace));
-        CHECK(RenderMode::Zero == renderMode.sourceBlendFactor());
-        CHECK(RenderMode::OneMinusSourceAlpha == renderMode.destBlendFactor());
+        CHECK(!renderMode.isStateEnabled(RenderState::Blend));
+        CHECK(!renderMode.isStateEnabled(RenderState::DepthTest));
+        CHECK(renderMode.isStateEnabled(RenderState::CullFace));
+        CHECK(BlendFactor::Zero == renderMode.sourceBlendFactor());
+        CHECK(BlendFactor::OneMinusSourceAlpha == renderMode.destBlendFactor());
     }
 }

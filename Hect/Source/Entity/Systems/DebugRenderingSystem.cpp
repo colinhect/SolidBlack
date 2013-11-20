@@ -58,9 +58,9 @@ void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, G
 
     // Bind the render mode
     RenderMode mode;
-    mode.enableState(RenderMode::Blend);
-    mode.disableState(RenderMode::DepthTest);
-    mode.setBlendFactors(RenderMode::SourceAlpha, RenderMode::OneMinusSourceAlpha);
+    mode.enableState(RenderState::Blend);
+    mode.disableState(RenderState::DepthTest);
+    mode.setBlendFactors(BlendFactor::SourceAlpha, BlendFactor::OneMinusSourceAlpha);
     gpu.bindMode(mode);
 
     // Bind and draw the mesh

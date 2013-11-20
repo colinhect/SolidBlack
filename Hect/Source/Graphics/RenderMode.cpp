@@ -3,23 +3,23 @@
 using namespace hect;
 
 RenderMode::RenderMode() :
-    _stateBits(DepthTest | CullFace),
-    _sourceFactor(One),
-    _destFactor(One)
+    _stateBits(RenderState::DepthTest | RenderState::CullFace),
+    _sourceFactor(BlendFactor::One),
+    _destFactor(BlendFactor::One)
 {
 }
 
-void RenderMode::enableState(State state)
+void RenderMode::enableState(RenderState state)
 {
     _stateBits |= state;
 }
 
-void RenderMode::disableState(State state)
+void RenderMode::disableState(RenderState state)
 {
     _stateBits &= ~state;
 }
 
-bool RenderMode::isStateEnabled(State state) const
+bool RenderMode::isStateEnabled(RenderState state) const
 {
     return (_stateBits & state) == state;
 }
@@ -30,12 +30,12 @@ void RenderMode::setBlendFactors(BlendFactor sourceFactor, BlendFactor destFacto
     _destFactor = destFactor;
 }
 
-RenderMode::BlendFactor RenderMode::sourceBlendFactor() const
+BlendFactor RenderMode::sourceBlendFactor() const
 {
     return _sourceFactor;
 }
 
-RenderMode::BlendFactor RenderMode::destBlendFactor() const
+BlendFactor RenderMode::destBlendFactor() const
 {
     return _destFactor;
 }
