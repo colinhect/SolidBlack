@@ -2,33 +2,30 @@
 
 using namespace hect;
 
-Keyboard::Event::Event() :
-    type(KeyDown),
+KeyboardEvent::KeyboardEvent() :
+    type(KeyboardEventType::KeyDown),
     key(Key::Esc)
 {
 }
 
 bool Keyboard::isKeyDown(Key key) const
 {
-    return _keyStates[key];
+    return _keyStates[(int)key];
 }
 
-void Keyboard::addListener(Listener* listener)
+void Keyboard::addListener(KeyboardListener& listener)
 {
-    assert(listener);
-
-    if (std::find(_listeners.begin(), _listeners.end(), listener) != _listeners.end())
+    if (std::find(_listeners.begin(), _listeners.end(), &listener) != _listeners.end())
     {
         return;  // This listener was already added
     }
 
-    _listeners.push_back(listener);
+    _listeners.push_back(&listener);
 }
 
-void Keyboard::removeListener(Listener* listener)
+void Keyboard::removeListener(KeyboardListener& listener)
 {
-    assert(listener);
-    _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), listener), _listeners.end());
+    _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), &listener), _listeners.end());
 }
 
 Keyboard::Keyboard() :
@@ -36,19 +33,19 @@ Keyboard::Keyboard() :
 {
 }
 
-void Keyboard::_enqueueEvent(const Event& event)
+void Keyboard::_enqueueEvent(const KeyboardEvent& event)
 {
-    _keyStates[event.key] = event.type == Event::Type::KeyDown;
+    _keyStates[(int)event.key] = event.type == KeyboardEventType::KeyDown;
     _events.push_back(event);
 }
 
 void Keyboard::_dispatchEvents()
 {
-    for (const Event& event : _events)
+    for (const KeyboardEvent& event : _events)
     {
-        for (Listener* listener : _listeners)
+        for (KeyboardListener* listener : _listeners)
         {
-            listener->notifyKeyboardEvent(event);
+            listener->receiveKeyboardEvent(event);
         }
     }
 

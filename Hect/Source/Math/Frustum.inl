@@ -50,18 +50,18 @@ Frustum<T>::Frustum(
     Vector3<T> farBottomRight = farCenter - y * farHeight + x * farWidth;
 
     // Build planes from points
-    _planes[Top] = hect::Plane<T>::fromPoints(nearTopRight, nearTopLeft, farTopLeft);
-    _planes[Bottom] = hect::Plane<T>::fromPoints(nearBottomLeft, nearBottomRight, farBottomRight);
-    _planes[Left] = hect::Plane<T>::fromPoints(nearTopLeft, nearBottomLeft, farBottomLeft);
-    _planes[Right] = hect::Plane<T>::fromPoints(nearBottomRight, nearTopRight, farBottomRight);
-    _planes[Near] = hect::Plane<T>::fromPoints(nearTopLeft, nearTopRight, nearBottomRight);
-    _planes[Far] = hect::Plane<T>::fromPoints(farTopRight, farTopLeft, farBottomLeft);
+    _planes[0] = Plane<T>::fromPoints(nearTopRight, nearTopLeft, farTopLeft); // Top
+    _planes[1] = Plane<T>::fromPoints(nearBottomLeft, nearBottomRight, farBottomRight); // Bottom
+    _planes[2] = Plane<T>::fromPoints(nearTopLeft, nearBottomLeft, farBottomLeft); // Left
+    _planes[3] = Plane<T>::fromPoints(nearBottomRight, nearTopRight, farBottomRight); // Right
+    _planes[4] = Plane<T>::fromPoints(nearTopLeft, nearTopRight, nearBottomRight); // Near
+    _planes[5] = Plane<T>::fromPoints(farTopRight, farTopLeft, farBottomLeft); // Far
 }
 
 template <typename T>
-typename Frustum<T>::TestResult Frustum<T>::testAxisAlignedBox(const AxisAlignedBox<T>& box) const
+FrustumTestResult Frustum<T>::testAxisAlignedBox(const AxisAlignedBox<T>& box) const
 {
-    TestResult result = Inside;
+    FrustumTestResult result = FrustumTestResult::Inside;
 
     if (!box.hasSize())
     {
@@ -101,11 +101,11 @@ typename Frustum<T>::TestResult Frustum<T>::testAxisAlignedBox(const AxisAligned
 
         if (distanceP < 0)
         {
-            return Outside;
+            return FrustumTestResult::Outside;
         }
         else if (distanceN < 0)
         {
-            result = Intersect;
+            result = FrustumTestResult::Intersect;
         }
     }
 

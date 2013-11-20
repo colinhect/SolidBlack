@@ -2,13 +2,13 @@
 
 using namespace hect;
 
-InputAxis::InputAxis(const std::string& name, Source source) :
+InputAxis::InputAxis(const std::string& name, InputAxisSource source) :
     _name(name),
     _source(source),
-    _positiveMouseButton(Mouse::Left),
-    _negativeMouseButton(Mouse::Right),
-    _positiveKey(Keyboard::A),
-    _negativeKey(Keyboard::B),
+    _positiveMouseButton(MouseButton::Left),
+    _negativeMouseButton(MouseButton::Right),
+    _positiveKey(Key::A),
+    _negativeKey(Key::B),
     _value(0),
     _acceleration(1),
     _gravity(0)
@@ -20,47 +20,47 @@ const std::string& InputAxis::name() const
     return _name;
 }
 
-InputAxis::Source InputAxis::source() const
+InputAxisSource InputAxis::source() const
 {
     return _source;
 }
 
-Mouse::Button InputAxis::positiveMouseButton() const
+MouseButton InputAxis::positiveMouseButton() const
 {
     return _positiveMouseButton;
 }
 
-void InputAxis::setPositiveMouseButton(Mouse::Button button)
+void InputAxis::setPositiveMouseButton(MouseButton button)
 {
     _positiveMouseButton = button;
 }
 
-Mouse::Button InputAxis::negativeMouseButton() const
+MouseButton InputAxis::negativeMouseButton() const
 {
     return _negativeMouseButton;
 }
 
-void InputAxis::setNegativeMouseButton(Mouse::Button button)
+void InputAxis::setNegativeMouseButton(MouseButton button)
 {
     _negativeMouseButton = button;
 }
 
-Keyboard::Key InputAxis::positiveKey() const
+Key InputAxis::positiveKey() const
 {
     return _positiveKey;
 }
 
-void InputAxis::setPositiveKey(Keyboard::Key key)
+void InputAxis::setPositiveKey(Key key)
 {
     _positiveKey = key;
 }
 
-Keyboard::Key InputAxis::negativeKey() const
+Key InputAxis::negativeKey() const
 {
     return _negativeKey;
 }
 
-void InputAxis::setNegativeKey(Keyboard::Key key)
+void InputAxis::setNegativeKey(Key key)
 {
     _negativeKey = key;
 }

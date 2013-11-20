@@ -18,7 +18,7 @@ public:
     void update(double timeStep);
     void render(double delta);
 
-    void notifyKeyboardEvent(const Keyboard::Event& event);
+    void receiveKeyboardEvent(const KeyboardEvent& event);
 
 private:
     void _connectionEvent(SocketEvent& event);

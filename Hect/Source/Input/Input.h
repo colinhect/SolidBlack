@@ -6,7 +6,7 @@ namespace hect
 ///
 /// Provides access to input peripherals connected to the system.
 class Input :
-    public Mouse::Listener
+    public MouseListener
 {
     friend class Engine;
 public:
@@ -36,14 +36,14 @@ public:
     Keyboard& keyboard();
 
     ///
-    /// \copydoc Mouse::Listener::notifyMouseEvent()
-    void notifyMouseEvent(const Mouse::Event& event);
+    /// \copydoc MouseListener::receiveMouseEvent()
+    void receiveMouseEvent(const MouseEvent& event);
 
 private:
     Input();
 
-    void _enqueueEvent(const Mouse::Event& event);
-    void _enqueueEvent(const Keyboard::Event& event);
+    void _enqueueEvent(const MouseEvent& event);
+    void _enqueueEvent(const KeyboardEvent& event);
     void _dispatchEvents();
 
     void _update(double timeStep);

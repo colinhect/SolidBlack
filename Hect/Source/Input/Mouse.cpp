@@ -2,33 +2,30 @@
 
 using namespace hect;
 
-Mouse::Event::Event() :
-    type(Movement),
-    button(Button::Left)
+MouseEvent::MouseEvent() :
+    type(MouseEventType::Movement),
+    button(MouseButton::Left)
 {
 }
 
-bool Mouse::isButtonDown(Button button) const
+bool Mouse::isButtonDown(MouseButton button) const
 {
-    return _buttonStates[button];
+    return _buttonStates[(int)button];
 }
 
-void Mouse::addListener(Listener* listener)
+void Mouse::addListener(MouseListener& listener)
 {
-    assert(listener);
-
-    if (std::find(_listeners.begin(), _listeners.end(), listener) != _listeners.end())
+    if (std::find(_listeners.begin(), _listeners.end(), &listener) != _listeners.end())
     {
         return;  // This listener was already added
     }
 
-    _listeners.push_back(listener);
+    _listeners.push_back(&listener);
 }
 
-void Mouse::removeListener(Listener* listener)
+void Mouse::removeListener(MouseListener& listener)
 {
-    assert(listener);
-    _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), listener), _listeners.end());
+    _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), &listener), _listeners.end());
 }
 
 void Mouse::setCursorLocked(bool locked)
@@ -52,7 +49,7 @@ Mouse::Mouse() :
 {
 }
 
-void Mouse::_enqueueEvent(const Event& event)
+void Mouse::_enqueueEvent(const MouseEvent& event)
 {
     _cursorPosition = event.cursorPosition;
     _events.push_back(event);
@@ -60,11 +57,11 @@ void Mouse::_enqueueEvent(const Event& event)
 
 void Mouse::_dispatchEvents()
 {
-    for (const Event& event : _events)
+    for (const MouseEvent& event : _events)
     {
-        for (Listener* listener : _listeners)
+        for (MouseListener* listener : _listeners)
         {
-            listener->notifyMouseEvent(event);
+            listener->receiveMouseEvent(event);
         }
     }
 

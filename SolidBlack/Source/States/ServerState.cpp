@@ -51,14 +51,14 @@ void ServerState::render(double delta)
     engine().swapBuffers();
 }
 
-void ServerState::notifyKeyboardEvent(const Keyboard::Event& event)
+void ServerState::receiveKeyboardEvent(const KeyboardEvent& event)
 {
-    if (event.type != Keyboard::Event::KeyDown)
+    if (event.type != KeyboardEventType::KeyDown)
     {
         return;
     }
 
-    if (event.key == Keyboard::Esc)
+    if (event.key == Key::Esc)
     {
         setActive(false);
     }

@@ -20,15 +20,15 @@ sf::Window* _window = nullptr;
 Engine* _engine = nullptr;
 
 // Translates an SFML mouse event to an internal mouse event.
-Mouse::Event _translateMouseEvent(const sf::Event& event, const Vector2<int>& cursorPosition, const Vector2<int>& lastCursorPosition)
+MouseEvent _translateMouseEvent(const sf::Event& event, const Vector2<int>& cursorPosition, const Vector2<int>& lastCursorPosition)
 {
-    Mouse::Event mouseEvent;
+    MouseEvent mouseEvent;
 
     switch (event.type)
     {
     case sf::Event::MouseMoved:
     {
-        mouseEvent.type = Mouse::Event::Movement;
+        mouseEvent.type = MouseEventType::Movement;
     }
     break;
     case sf::Event::MouseButtonPressed:
@@ -43,17 +43,17 @@ Mouse::Event _translateMouseEvent(const sf::Event& event, const Vector2<int>& cu
 
         mouseEvent.type =
             event.type == sf::Event::MouseButtonPressed ?
-            Mouse::Event::ButtonDown :
-            Mouse::Event::ButtonUp;
-        mouseEvent.button = (Mouse::Button)event.mouseButton.button;
+            MouseEventType::ButtonDown :
+            MouseEventType::ButtonUp;
+        mouseEvent.button = (MouseButton)event.mouseButton.button;
     }
     break;
     case sf::Event::MouseWheelMoved:
     {
         mouseEvent.type =
             event.mouseWheel.delta < 0 ?
-            Mouse::Event::ScrollDown :
-            Mouse::Event::ScrollUp;
+            MouseEventType::ScrollDown :
+            MouseEventType::ScrollUp;
     }
     break;
     }
@@ -66,9 +66,9 @@ Mouse::Event _translateMouseEvent(const sf::Event& event, const Vector2<int>& cu
 }
 
 // Translates an SFML keyboard event to an internal keyboard event.
-Keyboard::Event _translateKeyboardEvent(const sf::Event& event)
+KeyboardEvent _translateKeyboardEvent(const sf::Event& event)
 {
-    Keyboard::Event keyboardEvent;
+    KeyboardEvent keyboardEvent;
 
     switch (event.type)
     {
@@ -77,9 +77,9 @@ Keyboard::Event _translateKeyboardEvent(const sf::Event& event)
     {
         keyboardEvent.type =
             event.type == sf::Event::KeyPressed ?
-            Keyboard::Event::KeyDown :
-            Keyboard::Event::KeyUp;
-        keyboardEvent.key = (Keyboard::Key)event.key.code;
+            KeyboardEventType::KeyDown :
+            KeyboardEventType::KeyUp;
+        keyboardEvent.key = (Key)event.key.code;
     }
     break;
     }

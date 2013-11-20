@@ -5,7 +5,7 @@ using namespace hect;
 
 class SolidBlackState :
     public State,
-    public Keyboard::Listener
+    public KeyboardListener
 {
 public:
     SolidBlackState(Engine& engine, double timeStep);
@@ -13,7 +13,7 @@ public:
     virtual void begin();
     virtual void end();
 
-    void notifyKeyboardEvent(const Keyboard::Event& event);
+    void receiveKeyboardEvent(const KeyboardEvent& event);
 
 protected:
     unsigned debugLevel() const;

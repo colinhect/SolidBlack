@@ -14,7 +14,7 @@ SUITE(Frustum)
 
         AxisAlignedBox<T> box(Vector3<T>(-1, -1, 10), Vector3<T>(1, 1, 11));
 
-        CHECK_EQUAL(Frustum<T>::Outside, frustum.testAxisAlignedBox(box));
+        CHECK(FrustumTestResult::Outside == frustum.testAxisAlignedBox(box));
     }
 
     TEST(OutsideBehind)
@@ -37,7 +37,7 @@ SUITE(Frustum)
 
         AxisAlignedBox<T> box(Vector3<T>(-100, -1, -11), Vector3<T>(-101, 1, -10));
 
-        CHECK_EQUAL(Frustum<T>::Outside, frustum.testAxisAlignedBox(box));
+        CHECK(FrustumTestResult::Outside == frustum.testAxisAlignedBox(box));
     }
 
     TEST(OutsideLeft)
@@ -60,7 +60,7 @@ SUITE(Frustum)
 
         AxisAlignedBox<T> box(Vector3<T>(-1, -1, -50), Vector3<T>(1, 1, -51));
 
-        CHECK_EQUAL(Frustum<T>::Inside, frustum.testAxisAlignedBox(box));
+        CHECK(FrustumTestResult::Inside == frustum.testAxisAlignedBox(box));
     }
 
     TEST(Inside)
@@ -83,7 +83,7 @@ SUITE(Frustum)
 
         AxisAlignedBox<T> box(Vector3<T>(-1, -1, -200), Vector3<T>(1, 1, -51));
 
-        CHECK_EQUAL(Frustum<T>::Intersect, frustum.testAxisAlignedBox(box));
+        CHECK(FrustumTestResult::Intersect == frustum.testAxisAlignedBox(box));
     }
 
     TEST(Intersect)

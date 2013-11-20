@@ -34,9 +34,9 @@ Keyboard& Input::keyboard()
     return _keyboard;
 }
 
-void Input::notifyMouseEvent(const Mouse::Event& event)
+void Input::receiveMouseEvent(const MouseEvent& event)
 {
-    if (event.type == Mouse::Event::Movement)
+    if (event.type == MouseEventType::Movement)
     {
         double movementX = (double)event.cursorMovement.x;
         double movementY = (double)event.cursorMovement.y;
@@ -44,23 +44,23 @@ void Input::notifyMouseEvent(const Mouse::Event& event)
         for (InputAxis& axis : _axes)
         {
 
-            if (axis.source() == InputAxis::MouseMoveX)
+            if (axis.source() == InputAxisSource::MouseMoveX)
             {
                 axis.setValue(axis.value() + movementX * axis.acceleration());
             }
-            else if (axis.source() == InputAxis::MouseMoveY)
+            else if (axis.source() == InputAxisSource::MouseMoveY)
             {
                 axis.setValue(axis.value() + movementY * axis.acceleration());
             }
         }
     }
-    else if (event.type == Mouse::Event::ScrollUp || event.type == Mouse::Event::ScrollDown)
+    else if (event.type == MouseEventType::ScrollUp || event.type == MouseEventType::ScrollDown)
     {
-        double movement = event.type == Mouse::Event::ScrollUp ? 1.0 : -1.0;
+        double movement = event.type == MouseEventType::ScrollUp ? 1.0 : -1.0;
 
         for (InputAxis& axis : _axes)
         {
-            if (axis.source() == InputAxis::MouseScroll)
+            if (axis.source() == InputAxisSource::MouseScroll)
             {
                 axis.setValue(axis.value() + movement * axis.acceleration());
             }
@@ -70,15 +70,15 @@ void Input::notifyMouseEvent(const Mouse::Event& event)
 
 Input::Input()
 {
-    _mouse.addListener(this);
+    _mouse.addListener(*this);
 }
 
-void Input::_enqueueEvent(const Mouse::Event& event)
+void Input::_enqueueEvent(const MouseEvent& event)
 {
     _mouse._enqueueEvent(event);
 }
 
-void Input::_enqueueEvent(const Keyboard::Event& event)
+void Input::_enqueueEvent(const KeyboardEvent& event)
 {
     _keyboard._enqueueEvent(event);
 }
@@ -103,7 +103,7 @@ void Input::_update(double timeStep)
             axis.setValue(value - value * std::min(1.0, gravity * timeStep));
         }
 
-        if (axis.source() == InputAxis::Key)
+        if (axis.source() == InputAxisSource::Key)
         {
             if (_keyboard.isKeyDown(axis.positiveKey()))
             {
@@ -115,7 +115,7 @@ void Input::_update(double timeStep)
                 axis.setValue(value - acceleration * timeStep);
             }
         }
-        else if (axis.source() == InputAxis::MouseButton)
+        else if (axis.source() == InputAxisSource::MouseButton)
         {
             if (_mouse.isButtonDown(axis.positiveMouseButton()))
             {

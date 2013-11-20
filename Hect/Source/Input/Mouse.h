@@ -4,6 +4,92 @@ namespace hect
 {
 
 ///
+/// A mouse button.
+enum class MouseButton
+{
+    ///
+    /// The left mouse button.
+    Left,
+
+    ///
+    /// The right mouse button.
+    Right,
+
+    ///
+    /// The middle mouse button.
+    Middle
+};
+
+///
+/// A mouse event type.
+enum class MouseEventType
+{
+    ///
+    /// The mouse was moved.
+    Movement,
+
+    ///
+    /// A mouse button was pressed down.
+    ButtonDown,
+
+    ///
+    /// A mouse button was released up.
+    ButtonUp,
+
+    ///
+    /// The scroll wheel was moved down.
+    ScrollDown,
+
+    ///
+    /// The scroll wheel was moved up.
+    ScrollUp
+};
+
+///
+/// An event caused by the alteration of the mouse.
+class MouseEvent
+{
+public:
+
+    ///
+    /// Constructs a default event.
+    MouseEvent();
+
+    ///
+    /// The type of the event.
+    MouseEventType type;
+
+    ///
+    /// The mouse button related to the event.
+    ///
+    /// \remarks Only relevant for a MouseEvent::ButtonDown or
+    /// MouseEvent::ButtonUp event.
+    MouseButton button;
+
+    ///
+    /// The coordinates of the cursor.
+    Vector2<int> cursorPosition;
+
+    ///
+    /// The movement of the cursor.
+    Vector2<int> cursorMovement;
+};
+
+///
+/// Receives notifications of mouse events.
+class MouseListener
+{
+public:
+    virtual ~MouseListener() { }
+
+    ///
+    /// Notifies the listener of a mouse event.
+    ///
+    /// \param event The mouse event.
+    virtual void receiveMouseEvent(const MouseEvent& event) = 0;
+};
+
+///
 /// Provides access to the system mouse.
 class Mouse
 {
@@ -11,96 +97,10 @@ class Mouse
 public:
 
     ///
-    /// A mouse button.
-    enum Button
-    {
-        ///
-        /// The left mouse button.
-        Left,
-
-        ///
-        /// The right mouse button.
-        Right,
-
-        ///
-        /// The middle mouse button.
-        Middle
-    };
-
-    ///
-    /// An event caused by the alteration of the mouse.
-    class Event
-    {
-    public:
-
-        ///
-        /// A mouse event type.
-        enum Type
-        {
-            ///
-            /// The mouse was moved.
-            Movement,
-
-            ///
-            /// A mouse button was pressed down.
-            ButtonDown,
-
-            ///
-            /// A mouse button was released up.
-            ButtonUp,
-
-            ///
-            /// The scroll wheel was moved down.
-            ScrollDown,
-
-            ///
-            /// The scroll wheel was moved up.
-            ScrollUp
-        };
-
-        ///
-        /// Constructs a default event.
-        Event();
-
-        ///
-        /// The type of the event.
-        Type type;
-
-        ///
-        /// The mouse button related to the event.
-        ///
-        /// \remarks Only relevant for a Mouse::Event::ButtonDown or
-        /// Mouse::Event::ButtonUp event.
-        Button button;
-
-        ///
-        /// The coordinates of the cursor.
-        Vector2<int> cursorPosition;
-
-        ///
-        /// The movement of the cursor.
-        Vector2<int> cursorMovement;
-    };
-
-    ///
-    /// Receives notifications of mouse events.
-    class Listener
-    {
-    public:
-        virtual ~Listener() { }
-
-        ///
-        /// Notifies the listener of a mouse event.
-        ///
-        /// \param event The mouse event.
-        virtual void notifyMouseEvent(const Event& event) = 0;
-    };
-
-    ///
     /// Returns whether the given button is down.
     ///
     /// \param button The button to check if it is down.
-    bool isButtonDown(Button button) const;
+    bool isButtonDown(MouseButton button) const;
 
     ///
     /// Adds a listener to receive dispatched events.
@@ -108,7 +108,7 @@ public:
     /// \remarks If the listener is already added then nothing happens.
     ///
     /// \param listener The listener to add.
-    void addListener(Listener* listener);
+    void addListener(MouseListener& listener);
 
     ///
     /// Removes a listener from receiving dispatched events.
@@ -116,7 +116,7 @@ public:
     /// \remarks If the listener was not added then nothing happens.
     ///
     /// \param listener The listener to remove.
-    void removeListener(Listener* listener);
+    void removeListener(MouseListener& listener);
 
     ///
     /// Sets whether the cursor is locked at the center of the screen.
@@ -135,11 +135,11 @@ public:
 private:
     Mouse();
 
-    void _enqueueEvent(const Event& event);
+    void _enqueueEvent(const MouseEvent& event);
     void _dispatchEvents();
 
-    std::vector<Listener*> _listeners;
-    std::vector<Event> _events;
+    std::vector<MouseListener*> _listeners;
+    std::vector<MouseEvent> _events;
 
     bool _cursorLocked;
     Vector2<int> _cursorPosition;

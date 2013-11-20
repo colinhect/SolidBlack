@@ -4,6 +4,23 @@ namespace hect
 {
 
 ///
+/// The result of a frustum test.
+enum class FrustumTestResult
+{
+    ///
+    /// The tested geometry is outside of the frustum.
+    Outside,
+
+    ///
+    /// The tested geometry is completely inside of the frustum.
+    Inside,
+
+    ///
+    /// The tested geometry is partially inside of the frustum.
+    Intersect
+};
+
+///
 /// A pyramid with a near and far plane cutting the top and bottom.
 ///
 /// \remarks Useful for check if objects are with the bounds of a camera.
@@ -11,52 +28,6 @@ template <typename T = double>
 class Frustum
 {
 public:
-
-    ///
-    /// A plane of the frustm.
-    enum Plane
-    {
-        ///
-        /// The top plane.
-        Top,
-
-        ///
-        /// The bottom plane.
-        Bottom,
-
-        ///
-        /// The left plane.
-        Left,
-
-        ///
-        /// The right plane
-        Right,
-
-        ///
-        /// The far plane.
-        Far,
-
-        ///
-        /// The near plane.
-        Near
-    };
-
-    ///
-    /// The result of a frustum test.
-    enum TestResult
-    {
-        ///
-        /// The tested geometry is outside of the frustum.
-        Outside,
-
-        ///
-        /// The tested geometry is completely inside of the frustum.
-        Inside,
-
-        ///
-        /// The tested geometry is partially inside of the frustum.
-        Intersect
-    };
 
     ///
     /// Constructs a default frustum.
@@ -88,10 +59,10 @@ public:
     /// \param box The box.
     ///
     /// \returns The test result.
-    TestResult testAxisAlignedBox(const AxisAlignedBox<T>& box) const;
+    FrustumTestResult testAxisAlignedBox(const AxisAlignedBox<T>& box) const;
 
 private:
-    hect::Plane<T> _planes[6];
+    Plane<T> _planes[6];
     Vector3<T> _position;
 };
 
