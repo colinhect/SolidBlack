@@ -20,7 +20,7 @@ public:
     void render(double delta);
 
 private:
-    void _receivePacketEvent(Socket::Event& event);
+    void _receivePacketEvent(SocketEvent& event);
 
     void _sendAuthorization();
 

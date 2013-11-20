@@ -4,6 +4,51 @@ namespace hect
 {
 
 ///
+/// An event type.
+enum class SocketEventType
+{
+    ///
+    /// No event occurred.
+    None = 0,
+
+    ///
+    /// A connection to a peer has been established.
+    Connect,
+
+    ///
+    /// A connection to a peer has been lost.
+    Disconnect,
+
+    ///
+    /// A packet has been received from a peer.
+    Receive
+};
+
+///
+/// An event triggered from a remote socket.
+class SocketEvent
+{
+public:
+
+    ///
+    /// Constructs a blank event.
+    SocketEvent();
+
+    ///
+    /// The event type.
+    SocketEventType type;
+
+    ///
+    /// The remote socket triggering the event.
+    Peer peer;
+
+    ///
+    /// The packet received (only for events with type
+    /// Socket::Event::Receive).
+    Packet packet;
+};
+
+///
 /// A local point of contact for remote communication over UDP.
 ///
 /// \remarks A socket can either listen for incoming connections or attempt
@@ -12,51 +57,6 @@ class Socket :
     public Uncopyable
 {
 public:
-
-    ///
-    /// An event triggered from a remote socket.
-    class Event
-    {
-    public:
-
-        ///
-        /// Constructs a blank event.
-        Event();
-
-        ///
-        /// An event type.
-        enum Type
-        {
-            ///
-            /// No event occurred.
-            None = 0,
-
-            ///
-            /// A connection to a peer has been established.
-            Connect,
-
-            ///
-            /// A connection to a peer has been lost.
-            Disconnect,
-
-            ///
-            /// A packet has been received from a peer.
-            Receive
-        };
-
-        ///
-        /// The event type.
-        Type type;
-
-        ///
-        /// The remote socket triggering the event.
-        Peer peer;
-
-        ///
-        /// The packet received (only for events with type
-        /// Socket::Event::Receive).
-        Packet packet;
-    };
 
     ///
     /// Constructs a socket which does not listen for incoming connections.
@@ -108,7 +108,7 @@ public:
     /// \param timeOut The time span to wait for an event to occur.
     ///
     /// \returns True if an event was received; false otherwise.
-    bool pollEvent(Event& event, TimeSpan timeOut = TimeSpan::fromMilliseconds(0));
+    bool pollEvent(SocketEvent& event, TimeSpan timeOut = TimeSpan::fromMilliseconds(0));
 
     ///
     /// Sends a packet to a remote socket.

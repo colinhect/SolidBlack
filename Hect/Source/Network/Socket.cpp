@@ -6,8 +6,8 @@ using namespace hect;
 
 int _enetInitializationCounter = 0;
 
-Socket::Event::Event() :
-    type(None)
+SocketEvent::SocketEvent() :
+    type(SocketEventType::None)
 {
 }
 
@@ -91,7 +91,7 @@ void Socket::disconnectFromPeer(Peer peer)
 
     // Trigger the disconnect
     ENetPeer* enetPeer = (ENetPeer*)peer._enetPeer;
-    if (peer.state() == Peer::Connected)
+    if (peer.state() == PeerState::Connected)
     {
         enet_peer_disconnect(enetPeer, 0);
     }
@@ -101,12 +101,12 @@ void Socket::disconnectFromPeer(Peer peer)
     }
 }
 
-bool Socket::pollEvent(Event& event, TimeSpan timeOut)
+bool Socket::pollEvent(SocketEvent& event, TimeSpan timeOut)
 {
     ENetEvent enetEvent;
     if (enet_host_service((ENetHost*)_enetHost, &enetEvent, (uint32_t)timeOut.milliseconds()) > 0)
     {
-        event.type = (Event::Type)enetEvent.type;
+        event.type = (SocketEventType)enetEvent.type;
         event.peer._enetPeer = enetEvent.peer;
 
         if (enetEvent.type == ENET_EVENT_TYPE_RECEIVE)

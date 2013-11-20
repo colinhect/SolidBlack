@@ -4,6 +4,52 @@ namespace hect
 {
 
 ///
+/// A state that a peer is in.
+enum class PeerState
+{
+    ///
+    /// Not connected.
+    Disconnected,
+
+    ///
+    /// Connection in progress.
+    Connecting,
+
+    ///
+    /// Acknowledgement of connection receieved.
+    AcknowledgingConnect,
+
+    ///
+    /// Connection pending.
+    ConnectionPending,
+
+    ///
+    /// Connection succeeded.
+    ConnectionSucceeded,
+
+    ///
+    /// Connection fully established.
+    Connected,
+
+    ///
+    /// Disconnection will triggered.
+    DisconnectLater,
+
+    ///
+    /// Disconnection in progress.
+    Disconnecting,
+
+    ///
+    /// Acknowledgement of disconnection receieved.
+    AcknowledgeDisconnect,
+
+    ///
+    /// Unknown state.
+    Unknown
+};
+
+
+///
 /// A remote point of contact for remote communication over UDP.
 ///
 /// \remarks Peers are lightweight handles.  Copying a peer will copy the
@@ -19,51 +65,6 @@ public:
     typedef uint16_t Id;
 
     ///
-    /// A state that a peer is in.
-    enum State
-    {
-        ///
-        /// Not connected.
-        Disconnected,
-
-        ///
-        /// Connection in progress.
-        Connecting,
-
-        ///
-        /// Acknowledgement of connection receieved.
-        AcknowledgingConnect,
-
-        ///
-        /// Connection pending.
-        ConnectionPending,
-
-        ///
-        /// Connection succeeded.
-        ConnectionSucceeded,
-
-        ///
-        /// Connection fully established.
-        Connected,
-
-        ///
-        /// Disconnection will triggered.
-        DisconnectLater,
-
-        ///
-        /// Disconnection in progress.
-        Disconnecting,
-
-        ///
-        /// Acknowledgement of disconnection receieved.
-        AcknowledgeDisconnect,
-
-        ///
-        /// Unknown state.
-        Unknown
-    };
-
-    ///
     /// Constructs an invalid peer.
     Peer();
 
@@ -77,7 +78,7 @@ public:
 
     ///
     /// Returns the current state of the peer.
-    State state() const;
+    PeerState state() const;
 
     /// \cond INTERNAL
 

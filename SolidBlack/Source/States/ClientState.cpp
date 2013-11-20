@@ -15,15 +15,15 @@ ClientState::ClientState(Engine& engine) :
 
 ClientState::~ClientState()
 {
-    if (_server.state() == Peer::Connected)
+    if (_server.state() == PeerState::Connected)
     {
         _socket.disconnectFromPeer(_server);
 
         // Wait for the disconnect event
-        Socket::Event event;
+        SocketEvent event;
         while (_socket.pollEvent(event, TimeSpan::fromSeconds(3)))
         {
-            if (event.type == Socket::Event::Disconnect)
+            if (event.type == SocketEventType::Disconnect)
             {
                 break;
             }
@@ -77,18 +77,18 @@ void ClientState::update(double timeStep)
     _freeCameraControllerSystem.update(timeStep);
     _scene.refresh();
 
-    Socket::Event event;
+    SocketEvent event;
     while (_socket.pollEvent(event))
     {
         switch (event.type)
         {
-        case Socket::Event::Connect:
+        case SocketEventType::Connect:
             LOG_INFO("Connection established");
             break;
-        case Socket::Event::Disconnect:
+        case SocketEventType::Disconnect:
             LOG_INFO("Disconnection occurred");
             break;
-        case Socket::Event::Receive:
+        case SocketEventType::Receive:
             _receivePacketEvent(event);
             break;
         }
@@ -120,7 +120,7 @@ void ClientState::render(double delta)
     engine().swapBuffers();
 }
 
-void ClientState::_receivePacketEvent(Socket::Event& event)
+void ClientState::_receivePacketEvent(SocketEvent& event)
 {
     PacketReadStream stream = event.packet.readStream();
 

@@ -29,14 +29,14 @@ IpAddress Peer::address() const
     return IpAddress(((ENetPeer*)_enetPeer)->address.host);
 }
 
-Peer::State Peer::state() const
+PeerState Peer::state() const
 {
     if (!_enetPeer)
     {
-        return Disconnected;
+        return PeerState::Disconnected;
     }
 
-    return (State)((ENetPeer*)_enetPeer)->state;
+    return (PeerState)((ENetPeer*)_enetPeer)->state;
 }
 
 bool Peer::operator==(const Peer& peer) const

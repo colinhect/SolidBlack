@@ -1,20 +1,20 @@
-void runTestServer(unsigned maxConnectionCount, uint8_t channelCount, std::function<void(Socket&, Socket::Event&)> eventHandler)
+void runTestServer(unsigned maxConnectionCount, uint8_t channelCount, std::function<void(Socket&, SocketEvent&)> eventHandler)
 {
     Socket socket(6006, maxConnectionCount, channelCount);
 
     bool connection = false;
     bool disconnection = false;
 
-    Socket::Event event;
+    SocketEvent event;
     while (socket.pollEvent(event, TimeSpan::fromMilliseconds(5000)))
     {
         eventHandler(socket, event);
 
-        if (event.type == Socket::Event::Connect)
+        if (event.type == SocketEventType::Connect)
         {
             connection = true;
         }
-        else if (event.type == Socket::Event::Disconnect)
+        else if (event.type == SocketEventType::Disconnect)
         {
             disconnection = true;
             break;
@@ -25,7 +25,7 @@ void runTestServer(unsigned maxConnectionCount, uint8_t channelCount, std::funct
     CHECK(disconnection);
 }
 
-void runTestClient(unsigned maxConnectionCount, uint8_t channelCount, std::function<void(Socket&, Socket::Event&)> eventHandler)
+void runTestClient(unsigned maxConnectionCount, uint8_t channelCount, std::function<void(Socket&, SocketEvent&)> eventHandler)
 {
     Socket socket(maxConnectionCount, channelCount);
     Peer server = socket.connectToPeer(IpAddress::localAddress(), 6006);
@@ -33,18 +33,18 @@ void runTestClient(unsigned maxConnectionCount, uint8_t channelCount, std::funct
     bool connection = false;
     bool disconnection = false;
 
-    Socket::Event event;
+    SocketEvent event;
     while (socket.pollEvent(event, TimeSpan::fromMilliseconds(500)))
     {
         eventHandler(socket, event);
 
-        if (event.type == Socket::Event::Connect)
+        if (event.type == SocketEventType::Connect)
         {
             connection = true;
         }
     }
 
-    CHECK_EQUAL(Peer::Connected, server.state());
+    CHECK(PeerState::Connected == server.state());
 
     if (connection)
     {
@@ -52,7 +52,7 @@ void runTestClient(unsigned maxConnectionCount, uint8_t channelCount, std::funct
 
         while (socket.pollEvent(event, TimeSpan::fromMilliseconds(500)))
         {
-            if (event.type == Socket::Event::Disconnect)
+            if (event.type == SocketEventType::Disconnect)
             {
                 disconnection = true;
             }
@@ -72,12 +72,12 @@ SUITE(Network)
 
         Task serverTask = taskPool.enqueue([]
         {
-            runTestServer(1, 1, [] (Socket&, Socket::Event&) { });
+            runTestServer(1, 1, [] (Socket&, SocketEvent&) { });
         });
 
         Task clientTask = taskPool.enqueue([]
         {
-            runTestClient(1, 1, [] (Socket&, Socket::Event&) { });
+            runTestClient(1, 1, [] (Socket&, SocketEvent&) { });
         });
 
         clientTask.wait();
@@ -90,9 +90,9 @@ SUITE(Network)
 
         Task serverTask = taskPool.enqueue([]
         {
-            runTestServer(1, 1, [] (Socket& socket, Socket::Event& event)
+            runTestServer(1, 1, [] (Socket& socket, SocketEvent& event)
             {
-                if (event.type == Socket::Event::Connect)
+                if (event.type == SocketEventType::Connect)
                 {
                     Packet packet(PacketFlag::Reliable);
 
@@ -107,9 +107,9 @@ SUITE(Network)
 
         Task clientTask = taskPool.enqueue([]
         {
-            runTestClient(1, 1, [] (Socket& socket, Socket::Event& event)
+            runTestClient(1, 1, [] (Socket& socket, SocketEvent& event)
             {
-                if (event.type == Socket::Event::Receive)
+                if (event.type == SocketEventType::Receive)
                 {
                     PacketReadStream stream = event.packet.readStream();
                     std::string message = stream.readString();
