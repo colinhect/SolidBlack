@@ -2,7 +2,7 @@
 
 namespace hect
 {
-    
+
 ///
 /// Describes how a texture pixel is rendered when magnified or minified.
 enum class TextureFilter

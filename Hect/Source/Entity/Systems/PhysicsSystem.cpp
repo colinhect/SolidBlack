@@ -10,11 +10,11 @@ PhysicsSystem::PhysicsSystem() :
     _broadphase(new btDbvtBroadphase()),
     _solver(new btSequentialImpulseConstraintSolver()),
     _world(new btDiscreteDynamicsWorld(
-        (btCollisionDispatcher*)_dispatcher,
-        (btBroadphaseInterface*)_broadphase,
-        (btConstraintSolver*)_solver,
-        (btCollisionConfiguration*)_configuration
-    ))
+               (btCollisionDispatcher*)_dispatcher,
+               (btBroadphaseInterface*)_broadphase,
+               (btConstraintSolver*)_solver,
+               (btCollisionConfiguration*)_configuration
+           ))
 {
     requireComponent<Transform>();
     requireComponent<RigidBody>();

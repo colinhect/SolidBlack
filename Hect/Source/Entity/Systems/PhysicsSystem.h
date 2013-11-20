@@ -17,7 +17,7 @@ protected:
     ///
     /// \copydoc EntitySystem::onAddEntity()
     void onAddEntity(Entity& entity);
-    
+
     ///
     /// \copydoc EntitySystem::onRemoveEntity()
     void onRemoveEntity(Entity& entity);

@@ -108,7 +108,7 @@ bool Socket::pollEvent(Event& event, TimeSpan timeOut)
     {
         event.type = (Event::Type)enetEvent.type;
         event.peer._enetPeer = enetEvent.peer;
-        
+
         if (enetEvent.type == ENET_EVENT_TYPE_RECEIVE)
         {
             std::vector<uint8_t> data(enetEvent.packet->dataLength, 0);

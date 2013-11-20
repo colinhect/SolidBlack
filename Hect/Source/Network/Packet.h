@@ -34,7 +34,7 @@ public:
     ///
     /// \param flags The flags describing how the packet is transported.
     Packet(uint8_t flags = 0);
-    
+
     ///
     /// Returns a read stream for the packet data.
     PacketReadStream readStream() const;

@@ -32,7 +32,7 @@ RigidBody::~RigidBody()
     delete rigidBody->getMotionState();
     delete rigidBody->getCollisionShape();
     delete rigidBody;
-    
+
     _bulletShape = nullptr;
     _bulletRigidBody = nullptr;
 }
