@@ -9,8 +9,8 @@ SUITE(MeshLoading)
         CHECK_EQUAL(4, mesh->vertexCount());
         CHECK_EQUAL(6, mesh->indexCount());
         CHECK_EQUAL(false, mesh->isUploaded());
-        CHECK_EQUAL(Mesh::UnsignedShort, mesh->indexType());
-        CHECK_EQUAL(Mesh::Triangles, mesh->primitiveType());
+        CHECK(IndexType::UnsignedShort == mesh->indexType());
+        CHECK(PrimitiveType::Triangles == mesh->primitiveType());
     }
 
     TEST(IndexType)
@@ -19,7 +19,7 @@ SUITE(MeshLoading)
 
         Mesh* mesh = assetCache.getHandle<Mesh>("IndexType.mesh").get();
 
-        CHECK_EQUAL(Mesh::UnsignedByte, mesh->indexType());
+        CHECK(IndexType::UnsignedByte == mesh->indexType());
     }
 
     TEST(PrimitiveType)
@@ -28,6 +28,6 @@ SUITE(MeshLoading)
 
         Mesh* mesh = assetCache.getHandle<Mesh>("PrimitiveType.mesh").get();
 
-        CHECK_EQUAL(Mesh::Points, mesh->primitiveType());
+        CHECK(PrimitiveType::Points == mesh->primitiveType());
     }
 }

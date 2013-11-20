@@ -4,15 +4,15 @@ using namespace hect;
 
 MeshJsonFormat::MeshJsonFormat()
 {
-    _indexTypes["UnsignedByte"] = Mesh::UnsignedByte;
-    _indexTypes["UnsignedShort"] = Mesh::UnsignedShort;
-    _indexTypes["UnsignedInt"] = Mesh::UnsignedInt;
+    _indexTypes["UnsignedByte"] = IndexType::UnsignedByte;
+    _indexTypes["UnsignedShort"] = IndexType::UnsignedShort;
+    _indexTypes["UnsignedInt"] = IndexType::UnsignedInt;
 
-    _primitiveTypes["Triangles"] = Mesh::Triangles;
-    _primitiveTypes["TriangleStrip"] = Mesh::TriangleStrip;
-    _primitiveTypes["Lines"] = Mesh::Lines;
-    _primitiveTypes["LineStrip"] = Mesh::LineStrip;
-    _primitiveTypes["Points"] = Mesh::Points;
+    _primitiveTypes["Triangles"] = PrimitiveType::Triangles;
+    _primitiveTypes["TriangleStrip"] = PrimitiveType::TriangleStrip;
+    _primitiveTypes["Lines"] = PrimitiveType::Lines;
+    _primitiveTypes["LineStrip"] = PrimitiveType::LineStrip;
+    _primitiveTypes["Points"] = PrimitiveType::Points;
 
     _attributeSemantics["Position"] = VertexAttribute::Position;
     _attributeSemantics["Normal"] = VertexAttribute::Normal;
@@ -37,14 +37,14 @@ void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)
     // Index type (optional)
     if (dataValue["indexType"].isString())
     {
-        Mesh::IndexType indexType = _parseIndexType(dataValue["indexType"].asString());
+        IndexType indexType = _parseIndexType(dataValue["indexType"].asString());
         mesh.setIndexType(indexType);
     }
 
     // Primitive type (optional)
     if (dataValue["primitiveType"].isString())
     {
-        Mesh::PrimitiveType primitiveType = _parsePrimitiveType(dataValue["primitiveType"].asString());
+        PrimitiveType primitiveType = _parsePrimitiveType(dataValue["primitiveType"].asString());
         mesh.setPrimitiveType(primitiveType);
     }
 
@@ -97,7 +97,7 @@ void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)
     }
 }
 
-Mesh::IndexType MeshJsonFormat::_parseIndexType(const DataValue& dataValue)
+IndexType MeshJsonFormat::_parseIndexType(const DataValue& dataValue)
 {
     auto it = _indexTypes.find(dataValue.asString());
     if (it == _indexTypes.end())
@@ -108,7 +108,7 @@ Mesh::IndexType MeshJsonFormat::_parseIndexType(const DataValue& dataValue)
     return (*it).second;
 }
 
-Mesh::PrimitiveType MeshJsonFormat::_parsePrimitiveType(const DataValue& dataValue)
+PrimitiveType MeshJsonFormat::_parsePrimitiveType(const DataValue& dataValue)
 {
     auto it = _primitiveTypes.find(dataValue.asString());
     if (it == _primitiveTypes.end())

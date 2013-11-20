@@ -18,8 +18,8 @@ SUITE(MaterialLoading)
         CHECK(renderMode.isStateEnabled(RenderMode::Blend));
         CHECK(!renderMode.isStateEnabled(RenderMode::DepthTest));
         CHECK(!renderMode.isStateEnabled(RenderMode::CullFace));
-        CHECK_EQUAL(RenderMode::Zero, renderMode.sourceBlendFactor());
-        CHECK_EQUAL(RenderMode::OneMinusSourceAlpha, renderMode.destBlendFactor());
+        CHECK(RenderMode::Zero == renderMode.sourceBlendFactor());
+        CHECK(RenderMode::OneMinusSourceAlpha == renderMode.destBlendFactor());
     }
 
     TEST(WithBase)
@@ -41,7 +41,7 @@ SUITE(MaterialLoading)
         CHECK(!renderMode.isStateEnabled(RenderMode::Blend));
         CHECK(!renderMode.isStateEnabled(RenderMode::DepthTest));
         CHECK(renderMode.isStateEnabled(RenderMode::CullFace));
-        CHECK_EQUAL(RenderMode::Zero, renderMode.sourceBlendFactor());
-        CHECK_EQUAL(RenderMode::OneMinusSourceAlpha, renderMode.destBlendFactor());
+        CHECK(RenderMode::Zero == renderMode.sourceBlendFactor());
+        CHECK(RenderMode::OneMinusSourceAlpha == renderMode.destBlendFactor());
     }
 }

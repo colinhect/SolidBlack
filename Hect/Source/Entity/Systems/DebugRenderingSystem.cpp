@@ -73,7 +73,7 @@ void DebugRenderingSystem::_buildBoxMesh()
     VertexAttribute::Array attributes;
     attributes.push_back(VertexAttribute(VertexAttribute::Position, VertexAttribute::Float, 3));
 
-    _boxMesh.reset(new Mesh(VertexLayout(attributes), Mesh::Lines, Mesh::UnsignedByte));
+    _boxMesh.reset(new Mesh(VertexLayout(attributes), PrimitiveType::Lines, IndexType::UnsignedByte));
 
     // Create vertex data for a wireframe box
     float rawVertexData[] =

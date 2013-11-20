@@ -11,7 +11,7 @@ SUITE(MeshBuilder)
 {
     TEST(EmptyMesh)
     {
-        Mesh mesh(createVetexLayout(), Mesh::Triangles, Mesh::UnsignedByte);
+        Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
 
         CHECK_EQUAL(0, mesh.vertexCount());
@@ -20,7 +20,7 @@ SUITE(MeshBuilder)
 
     TEST(AddVertexWithoutAttributeData)
     {
-        Mesh mesh(createVetexLayout(), Mesh::Triangles, Mesh::UnsignedByte);
+        Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
 
@@ -38,7 +38,7 @@ SUITE(MeshBuilder)
 
     TEST(SetAttributeDataOfSameTypeAndCardinality)
     {
-        Mesh mesh(createVetexLayout(), Mesh::Triangles, Mesh::UnsignedByte);
+        Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
         meshBuilder.setAttributeData(VertexAttribute::Position, Vector3<float>(1.0f, 2.0f, 3.0f));
@@ -57,7 +57,7 @@ SUITE(MeshBuilder)
 
     TEST(SetAttributeDataOfSameTypeAndLarger)
     {
-        Mesh mesh(createVetexLayout(), Mesh::Triangles, Mesh::UnsignedByte);
+        Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
         meshBuilder.setAttributeData(VertexAttribute::Position, Vector4<float>(1.0f, 2.0f, 3.0f, 4.0f));
@@ -76,7 +76,7 @@ SUITE(MeshBuilder)
 
     TEST(SetAttributeDataOfSameTypeAndSmaller)
     {
-        Mesh mesh(createVetexLayout(), Mesh::Triangles, Mesh::UnsignedByte);
+        Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
         meshBuilder.setAttributeData(VertexAttribute::Position, Vector2<float>(1.0f, 2.0f));
@@ -95,7 +95,7 @@ SUITE(MeshBuilder)
 
     TEST(SimpleMesh)
     {
-        Mesh mesh(createVetexLayout(), Mesh::Triangles, Mesh::UnsignedByte);
+        Mesh mesh(createVetexLayout(), PrimitiveType::Triangles, IndexType::UnsignedByte);
         MeshBuilder meshBuilder(mesh);
         meshBuilder.addVertex();
         meshBuilder.setAttributeData(VertexAttribute::Position, Vector3<float>(1.0f, 2.0f, 3.0f));

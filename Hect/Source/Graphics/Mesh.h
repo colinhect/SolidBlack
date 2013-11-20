@@ -4,6 +4,26 @@ namespace hect
 {
 
 ///
+/// How the primitives of a mesh are rendered.
+enum class PrimitiveType
+{
+    Triangles,
+    TriangleStrip,
+    Lines,
+    LineStrip,
+    Points
+};
+
+///
+/// The type of each index in an index sequence.
+enum class IndexType
+{
+    UnsignedByte,
+    UnsignedShort,
+    UnsignedInt
+};
+
+///
 /// A mesh of vertices and indices.
 class Mesh :
     public GpuObject
@@ -26,26 +46,6 @@ public:
     ///
     /// An array of shared mesh references.
     typedef std::vector<Mesh::Ref> RefArray;
-
-    ///
-    /// How the primitives of the mesh are rendered.
-    enum PrimitiveType
-    {
-        Triangles,
-        TriangleStrip,
-        Lines,
-        LineStrip,
-        Points
-    };
-
-    ///
-    /// The type of each index in an index sequence.
-    enum IndexType
-    {
-        UnsignedByte,
-        UnsignedShort,
-        UnsignedInt
-    };
 
     ///
     /// Constructs a mesh with the default vertex layout, primitive type,

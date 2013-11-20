@@ -146,7 +146,7 @@ void MeshBuilder::setAttributeData(VertexAttribute::Semantic semantic, const Vec
 
 void MeshBuilder::addIndex(uint64_t value)
 {
-    Mesh::IndexType indexType = _mesh->indexType();
+    IndexType indexType = _mesh->indexType();
     size_t indexSize = _mesh->indexSize();
 
     // Push back zeroed data for the added index
@@ -159,13 +159,13 @@ void MeshBuilder::addIndex(uint64_t value)
     // Set the index data based on the type
     switch (indexType)
     {
-    case Mesh::UnsignedByte:
+    case IndexType::UnsignedByte:
         *(uint8_t*)&_mesh->_indexData[indexDataIndex] = (uint8_t)value;
         break;
-    case Mesh::UnsignedShort:
+    case IndexType::UnsignedShort:
         *(uint16_t*)&_mesh->_indexData[indexDataIndex] = (uint16_t)value;
         break;
-    case Mesh::UnsignedInt:
+    case IndexType::UnsignedInt:
         *(uint32_t*)&_mesh->_indexData[indexDataIndex] = (uint32_t)value;
         break;
     }

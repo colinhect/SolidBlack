@@ -786,9 +786,9 @@ void Gpu::draw()
 
     GL_ASSERT(
         glDrawElements(
-            _primitiveTypeLookUp[_boundMesh->primitiveType()],
+            _primitiveTypeLookUp[(int)_boundMesh->primitiveType()],
             (GLsizei)_boundMesh->indexCount(),
-            _indexTypeLookUp[_boundMesh->indexType()],
+            _indexTypeLookUp[(int)_boundMesh->indexType()],
             0
         );
     )
