@@ -2,6 +2,18 @@
 
 namespace hect
 {
+    
+///
+/// Describes how a texture pixel is rendered when magnified or minified.
+enum class TextureFilter
+{
+    ///
+    /// The nearest pixel is selected.
+    Nearest,
+
+    /// The pixel is interpolated linearly.
+    Linear
+};
 
 ///
 /// A 2-dimensional texture.
@@ -24,18 +36,6 @@ public:
     typedef std::vector<Texture::Ref> RefArray;
 
     ///
-    /// Describes how a texture pixel is rendered when magnified or minified.
-    enum Filter
-    {
-        ///
-        /// The nearest pixel is selected.
-        Nearest,
-
-        /// The pixel is interpolated linearly.
-        Linear
-    };
-
-    ///
     /// Constructs a default 2-dimensional texture.
     Texture();
 
@@ -50,7 +50,7 @@ public:
     /// \param magFilter The Magnification filter.
     /// \param mipmapped True if the texture is mipmapped; false otherwise.
     /// \param wrapped True if the texture is wrapped; false otherwise.
-    Texture(unsigned width, unsigned height, Image::PixelType pixelType, Image::PixelFormat pixelFormat, Texture::Filter minFilter, Texture::Filter magFilter, bool mipmapped, bool wrapped);
+    Texture(unsigned width, unsigned height, PixelType pixelType, PixelFormat pixelFormat, TextureFilter minFilter, TextureFilter magFilter, bool mipmapped, bool wrapped);
 
     ///
     /// Constructs a 2-dimensional texture given a source image.
@@ -73,7 +73,7 @@ public:
 
     ///
     /// Returns the minification filter.
-    Filter minFilter() const;
+    TextureFilter minFilter() const;
 
     ///
     /// Sets the minification filter.
@@ -81,11 +81,11 @@ public:
     /// \param filter The new minification filter.
     ///
     /// \throws Error If the texture is uploaded.
-    void setMinFilter(Filter filter);
+    void setMinFilter(TextureFilter filter);
 
     ///
     /// Returns the magnification filter.
-    Filter magFilter() const;
+    TextureFilter magFilter() const;
 
     ///
     /// Sets the magnification filter.
@@ -93,7 +93,7 @@ public:
     /// \param filter The new magnification filter.
     ///
     /// \throws Error If the texture is uploaded.
-    void setMagFilter(Filter filter);
+    void setMagFilter(TextureFilter filter);
 
     ///
     /// Returns whether the texture is mipmapped.
@@ -129,11 +129,11 @@ public:
 
     ///
     /// Returns the pixel type.
-    Image::PixelType pixelType() const;
+    PixelType pixelType() const;
 
     ///
     /// Returns the pixel format.
-    Image::PixelFormat pixelFormat() const;
+    PixelFormat pixelFormat() const;
 
     ///
     /// Returns the number of bytes in a pixel of this texture.
@@ -147,11 +147,11 @@ private:
     unsigned _width;
     unsigned _height;
 
-    Image::PixelType _pixelType;
-    Image::PixelFormat _pixelFormat;
+    PixelType _pixelType;
+    PixelFormat _pixelFormat;
 
-    Filter _minFilter;
-    Filter _magFilter;
+    TextureFilter _minFilter;
+    TextureFilter _magFilter;
 
     bool _mipmapped;
     bool _wrapped;

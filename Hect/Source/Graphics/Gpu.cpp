@@ -579,15 +579,15 @@ void Gpu::uploadTexture(Texture& texture)
             GL_TEXTURE_2D,
             GL_TEXTURE_MIN_FILTER,
             texture.isMipmapped() ?
-            _textureMipmapFilterLookUp[texture.minFilter()] :
-            _textureFilterLookUp[texture.minFilter()]
+            _textureMipmapFilterLookUp[(int)texture.minFilter()] :
+            _textureFilterLookUp[(int)texture.minFilter()]
         );
     )
     GL_ASSERT(
         glTexParameteri(
             GL_TEXTURE_2D,
             GL_TEXTURE_MAG_FILTER,
-            _textureFilterLookUp[texture.magFilter()]
+            _textureFilterLookUp[(int)texture.magFilter()]
         );
     )
 
@@ -609,12 +609,12 @@ void Gpu::uploadTexture(Texture& texture)
         glTexImage2D(
             GL_TEXTURE_2D,
             0,
-            _internalImageFormatLookUp[image->colorSpace()][image->pixelFormat()][image->pixelType()],
+            _internalImageFormatLookUp[(int)image->colorSpace()][(int)image->pixelFormat()][(int)image->pixelType()],
             image->width(),
             image->height(),
             0,
-            _pixelFormatLookUp[image->pixelFormat()],
-            _pixelTypeLookUp[image->pixelType()],
+            _pixelFormatLookUp[(int)image->pixelFormat()],
+            _pixelTypeLookUp[(int)image->pixelType()],
             &image->pixelData()[0]
         );
     )
@@ -665,8 +665,8 @@ Image Gpu::downloadTextureImage(const Texture& texture)
         glGetTexImage(
             GL_TEXTURE_2D,
             0,
-            _pixelFormatLookUp[texture.pixelFormat()],
-            _pixelTypeLookUp[texture.pixelType()],
+            _pixelFormatLookUp[(int)texture.pixelFormat()],
+            _pixelTypeLookUp[(int)texture.pixelType()],
             (GLvoid*)&image.pixelData()[0]
         );
     )

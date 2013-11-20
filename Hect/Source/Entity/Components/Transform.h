@@ -94,7 +94,7 @@ public:
     void transformBy(const Transform& transform);
 
 private:
-    enum DirtyBits
+    enum DirtyBit
     {
         PositionBit = 1,
         ScaleBit = 2,

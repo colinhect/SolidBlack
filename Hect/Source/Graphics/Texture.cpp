@@ -8,14 +8,14 @@ Texture::Texture() :
     _height(_image->height()),
     _pixelType(_image->pixelType()),
     _pixelFormat(_image->pixelFormat()),
-    _minFilter(Filter::Linear),
-    _magFilter(Filter::Linear),
+    _minFilter(TextureFilter::Linear),
+    _magFilter(TextureFilter::Linear),
     _mipmapped(true),
     _wrapped(false)
 {
 }
 
-Texture::Texture(unsigned width, unsigned height, Image::PixelType pixelType, Image::PixelFormat pixelFormat, Texture::Filter minFilter, Texture::Filter magFilter, bool mipmapped, bool wrapped) :
+Texture::Texture(unsigned width, unsigned height, PixelType pixelType, PixelFormat pixelFormat, TextureFilter minFilter, TextureFilter magFilter, bool mipmapped, bool wrapped) :
     _image(Image::Ref(new Image(width, height, pixelType, pixelFormat))),
     _width(width),
     _height(height),
@@ -34,8 +34,8 @@ Texture::Texture(Image::Ref image) :
     _height(_image->height()),
     _pixelType(_image->pixelType()),
     _pixelFormat(_image->pixelFormat()),
-    _minFilter(Filter::Linear),
-    _magFilter(Filter::Linear),
+    _minFilter(TextureFilter::Linear),
+    _magFilter(TextureFilter::Linear),
     _mipmapped(true),
     _wrapped(false)
 {
@@ -68,12 +68,12 @@ Texture::~Texture()
     }
 }
 
-Texture::Filter Texture::minFilter() const
+TextureFilter Texture::minFilter() const
 {
     return _minFilter;
 }
 
-void Texture::setMinFilter(Filter filter)
+void Texture::setMinFilter(TextureFilter filter)
 {
     if (isUploaded())
     {
@@ -83,12 +83,12 @@ void Texture::setMinFilter(Filter filter)
     _minFilter = filter;
 }
 
-Texture::Filter Texture::magFilter() const
+TextureFilter Texture::magFilter() const
 {
     return _magFilter;
 }
 
-void Texture::setMagFilter(Filter filter)
+void Texture::setMagFilter(TextureFilter filter)
 {
     if (isUploaded())
     {
@@ -138,12 +138,12 @@ unsigned Texture::height() const
     return _height;
 }
 
-Image::PixelFormat Texture::pixelFormat() const
+PixelFormat Texture::pixelFormat() const
 {
     return _pixelFormat;
 }
 
-Image::PixelType Texture::pixelType() const
+PixelType Texture::pixelType() const
 {
     return _pixelType;
 }
@@ -154,23 +154,23 @@ int Texture::bytesPerPixel() const
 
     switch (_pixelFormat)
     {
-    case Image::Rgb:
+    case PixelFormat::Rgb:
         componentCount = 3;
         break;
-    case Image::Rgba:
+    case PixelFormat::Rgba:
         componentCount = 4;
         break;
     }
 
     switch (_pixelType)
     {
-    case Image::Half:
+    case PixelType::Half:
         return componentCount * 2;
         break;
-    case Image::Float:
+    case PixelType::Float:
         return componentCount * 4;
         break;
-    case Image::Byte:
+    case PixelType::Byte:
         return componentCount * 1;
         break;
     }

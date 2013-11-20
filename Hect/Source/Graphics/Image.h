@@ -4,6 +4,52 @@ namespace hect
 {
 
 ///
+/// The type of each component in a pixel.
+enum class PixelType
+{
+    ///
+    /// 16-bit floating point.
+    Half,
+
+    ///
+    /// 32-bit floating point.
+    Float,
+
+    ///
+    /// A byte.
+    Byte
+};
+
+///
+/// The layout of the component(s) in a pixel.
+enum class PixelFormat
+{
+    ///
+    /// Red, green, and blue channels.
+    Rgb,
+
+    ///
+    /// Red, green, blue, and alpha channels.
+    Rgba
+};
+
+///
+/// The color space a pixel is in.
+enum class ColorSpace
+{
+    ///
+    /// Non-linear color space (sRGB).
+    ///
+    /// \remarks Only an image with a pixel type of PixelType::Byte can
+    /// be non-linear.
+    NonLinear,
+
+    ///
+    /// Linear color space.
+    Linear
+};
+
+///
 /// A 2-dimensional image.
 class Image
 {
@@ -19,52 +65,6 @@ public:
     typedef std::vector<uint8_t> RawPixelData;
 
     ///
-    /// The type of each component in a pixel.
-    enum PixelType
-    {
-        ///
-        /// 16-bit floating point.
-        Half,
-
-        ///
-        /// 32-bit floating point.
-        Float,
-
-        ///
-        /// A byte.
-        Byte
-    };
-
-    ///
-    /// The layout of the component(s) in a pixel.
-    enum PixelFormat
-    {
-        ///
-        /// Red, green, and blue channels.
-        Rgb,
-
-        ///
-        /// Red, green, blue, and alpha channels.
-        Rgba
-    };
-
-    ///
-    /// The color space a pixel is in.
-    enum ColorSpace
-    {
-        ///
-        /// Non-linear color space (sRGB).
-        ///
-        /// \remarks Only an image with a pixel type of PixelType::Byte can
-        /// be non-linear.
-        NonLinear,
-
-        ///
-        /// Linear color space.
-        Linear
-    };
-
-    ///
     /// Constructs a solid black image.
     ///
     /// \param width The width.
@@ -72,7 +72,7 @@ public:
     /// \param pixelType The pixel type.
     /// \param pixelFormat The pixel format.
     /// \param colorSpace The color space.
-    Image(unsigned width = 1, unsigned height = 1, PixelType pixelType = Byte, PixelFormat pixelFormat = Rgba, ColorSpace colorSpace = Linear);
+    Image(unsigned width = 1, unsigned height = 1, PixelType pixelType = PixelType::Byte, PixelFormat pixelFormat = PixelFormat::Rgba, ColorSpace colorSpace = ColorSpace::Linear);
 
     ///
     /// Constructs an image moved from another.

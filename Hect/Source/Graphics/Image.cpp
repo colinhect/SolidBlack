@@ -56,17 +56,17 @@ unsigned Image::height() const
     return _height;
 }
 
-Image::PixelFormat Image::pixelFormat() const
+PixelFormat Image::pixelFormat() const
 {
     return _pixelFormat;
 }
 
-Image::PixelType Image::pixelType() const
+PixelType Image::pixelType() const
 {
     return _pixelType;
 }
 
-Image::ColorSpace Image::colorSpace() const
+ColorSpace Image::colorSpace() const
 {
     return _colorSpace;
 }
@@ -77,23 +77,23 @@ int Image::bytesPerPixel() const
 
     switch (_pixelFormat)
     {
-    case Rgb:
+    case PixelFormat::Rgb:
         componentCount = 3;
         break;
-    case Rgba:
+    case PixelFormat::Rgba:
         componentCount = 4;
         break;
     }
 
     switch (_pixelType)
     {
-    case Half:
+    case PixelType::Half:
         return componentCount * 2;
         break;
-    case Float:
+    case PixelType::Float:
         return componentCount * 4;
         break;
-    case Byte:
+    case PixelType::Byte:
         return componentCount * 1;
         break;
     }

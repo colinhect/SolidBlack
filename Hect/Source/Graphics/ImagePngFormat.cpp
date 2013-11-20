@@ -24,9 +24,9 @@ void ImagePngFormat::load(Image& image, ReadStream& stream)
 
     image._width = width;
     image._height = height;
-    image._pixelType = Image::Byte;
-    image._pixelFormat = Image::Rgba;
-    image._colorSpace = Image::NonLinear;
+    image._pixelType = PixelType::Byte;
+    image._pixelFormat = PixelFormat::Rgba;
+    image._colorSpace = ColorSpace::NonLinear;
 
     // Flip the image to OpenGL ordering
     image.flipVertical();
@@ -35,7 +35,7 @@ void ImagePngFormat::load(Image& image, ReadStream& stream)
 void ImagePngFormat::save(const Image& image, WriteStream& stream)
 {
     // Verify pixel format and type.
-    if (image.pixelType() != Image::Byte || image.pixelFormat() != Image::Rgba)
+    if (image.pixelType() != PixelType::Byte || image.pixelFormat() != PixelFormat::Rgba)
     {
         throw Error("Attempt to save an image to PNG which does not conform to the 32-bit RGBA format");
     }

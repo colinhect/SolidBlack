@@ -4,8 +4,8 @@ using namespace hect;
 
 TextureJsonFormat::TextureJsonFormat()
 {
-    _textureFilters["Nearest"] = Texture::Nearest;
-    _textureFilters["Linear"] = Texture::Linear;
+    _textureFilters["Nearest"] = TextureFilter::Nearest;
+    _textureFilters["Linear"] = TextureFilter::Linear;
 }
 
 void TextureJsonFormat::load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache)
@@ -42,7 +42,7 @@ void TextureJsonFormat::load(Texture& texture, const DataValue& dataValue, Asset
     }
 }
 
-Texture::Filter TextureJsonFormat::_parseTextureFilter(const DataValue& dataValue)
+TextureFilter TextureJsonFormat::_parseTextureFilter(const DataValue& dataValue)
 {
     auto it = _textureFilters.find(dataValue.asString());
     if (it == _textureFilters.end())

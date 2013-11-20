@@ -22,9 +22,9 @@ public:
     void load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache);
 
 private:
-    Texture::Filter _parseTextureFilter(const DataValue& dataValue);
+    TextureFilter _parseTextureFilter(const DataValue& dataValue);
 
-    std::map<std::string, Texture::Filter> _textureFilters;
+    std::map<std::string, TextureFilter> _textureFilters;
 };
 
 }
