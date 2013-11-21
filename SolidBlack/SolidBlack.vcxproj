@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Server\Bubble.cpp" />
     <ClCompile Include="Source\Server\Player.cpp" />
+    <ClCompile Include="Source\SolidBlackScene.cpp" />
     <ClCompile Include="Source\States\ClientState.cpp" />
     <ClCompile Include="Source\States\ServerState.cpp" />
     <ClCompile Include="Source\States\SolidBlackState.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Source\PacketType.h" />
     <ClInclude Include="Source\Server\Bubble.h" />
     <ClInclude Include="Source\Server\Player.h" />
+    <ClInclude Include="Source\SolidBlackScene.h" />
     <ClInclude Include="Source\States\ClientState.h" />
     <ClInclude Include="Source\States\ServerState.h" />
     <ClInclude Include="Source\States\SolidBlackState.h" />

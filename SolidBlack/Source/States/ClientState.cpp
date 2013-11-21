@@ -8,13 +8,17 @@ ClientState::ClientState(Engine& engine) :
     _socket(1, 2),
     _assetCache(engine.storage()),
     _freeCameraControllerSystem(engine.input()),
-    _scene(128)
+    _scene(_assetCache)
 {
     _server = _socket.connectToPeer(IpAddress::localAddress(), 6006);
+
+    _scene.addSystem(_freeCameraControllerSystem);
 }
 
 ClientState::~ClientState()
 {
+    _scene.removeSystem(_freeCameraControllerSystem);
+
     if (_server.state() == PeerState::Connected)
     {
         _socket.disconnectFromPeer(_server);
@@ -35,17 +39,10 @@ void ClientState::begin()
 {
     SolidBlackState::begin();
 
-    _scene.addSystem(_cameraSystem);
-    _scene.addSystem(_renderingSystem);
-    _scene.addSystem(_debugRenderingSystem);
-    _scene.addSystem(_freeCameraControllerSystem);
-
-    Screen& screen = engine().screen();
-
     // Add a free-controlled camera to the scene
     Entity cameraEntity = _scene.createEntity();
     cameraEntity.addComponent<Transform>(Vector3<>(0, 0, 10));
-    cameraEntity.addComponent<Camera>(Angle<>::fromDegrees(80), screen.aspectRatio(), 0.01, 250000);
+    cameraEntity.addComponent<Camera>(Angle<>::fromDegrees(80), engine().screen().aspectRatio(), 0.01, 250000);
     cameraEntity.addComponent<FreeCameraController>();
     cameraEntity.activate();
     
@@ -63,19 +60,13 @@ void ClientState::begin()
 
 void ClientState::end()
 {
-    _scene.removeSystem(_freeCameraControllerSystem);
-    _scene.removeSystem(_debugRenderingSystem);
-    _scene.removeSystem(_renderingSystem);
-    _scene.removeSystem(_cameraSystem);
-
     SolidBlackState::end();
 }
 
 void ClientState::update(double timeStep)
 {
-    _cameraSystem.update();
+    _scene.update(timeStep);
     _freeCameraControllerSystem.update(timeStep);
-    _scene.refresh();
 
     SocketEvent event;
     while (_socket.pollEvent(event))
@@ -97,27 +88,35 @@ void ClientState::update(double timeStep)
 
 void ClientState::render(double delta)
 {
-    if (!_cameraSystem.hasCamera())
+    _scene.render(engine().gpu(), engine().screen());
+    engine().swapBuffers();
+}
+
+void ClientState::receiveKeyboardEvent(const KeyboardEvent& event)
+{
+    SolidBlackState::receiveKeyboardEvent(event);
+
+    if (event.type != KeyboardEventType::KeyDown)
     {
         return;
     }
 
-    Gpu& gpu = engine().gpu();
-    Screen& screen = engine().screen();
-
-    Camera& camera = _cameraSystem.camera();
-
-    gpu.beginFrame();
-    gpu.bindTarget(screen);
-    gpu.clear();
-    _renderingSystem.renderAll(camera, gpu, screen);
-    if (debugLevel() == 1)
+    if (event.key == Key::X)
     {
-        _debugRenderingSystem.renderAll(camera, gpu);
+        _scene.setExposure(_scene.exposure() * 2.0);
     }
-    gpu.endFrame();
-
-    engine().swapBuffers();
+    else if (event.key == Key::Z)
+    {
+        _scene.setExposure(_scene.exposure() / 2.0);
+    }
+    else if (event.key == Key::V)
+    {
+        _scene.setGamma(_scene.gamma() + 0.1);
+    }
+    else if (event.key == Key::C)
+    {
+        _scene.setGamma(_scene.gamma() - 0.1);
+    }
 }
 
 void ClientState::_receivePacketEvent(SocketEvent& event)

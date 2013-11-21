@@ -3,7 +3,7 @@
         "Shaders/HdrCompositor.frag",
         "Shaders/HdrCompositor.vert"
     ],
-    "parameters" : {
+    "params" : {
         "exposure" : {
             "type" : "Float",
             "value" : 0.0015

@@ -5,9 +5,11 @@ using namespace hect;
 
 #include "States/SolidBlackState.h"
 #include "Systems/FreeCameraControllerSystem.h"
+#include "SolidBlackScene.h"
 
 class ClientState :
-    public SolidBlackState
+    public SolidBlackState,
+    public Uncopyable
 {
 public:
     ClientState(Engine& engine);
@@ -19,6 +21,8 @@ public:
     void update(double timeStep);
     void render(double delta);
 
+    void receiveKeyboardEvent(const KeyboardEvent& event);
+
 private:
     void _receivePacketEvent(SocketEvent& event);
 
@@ -29,11 +33,7 @@ private:
 
     AssetCache _assetCache;
 
-    CameraSystem _cameraSystem;
-    RenderingSystem _renderingSystem;
-    DebugRenderingSystem _debugRenderingSystem;
-
     FreeCameraControllerSystem _freeCameraControllerSystem;
 
-    Scene _scene;
+    SolidBlackScene _scene;
 };

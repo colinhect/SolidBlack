@@ -19,7 +19,7 @@ public:
 
     ///
     /// Removes all entities from all systems.
-    ~Scene();
+    virtual ~Scene();
 
     ///
     /// Adds/removes recently activated/deactivated entities to/from relevant

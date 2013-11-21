@@ -43,5 +43,6 @@ private:
 
     double _gamma;
     double _exposure;
+
     unsigned _debugLevel;
 };
