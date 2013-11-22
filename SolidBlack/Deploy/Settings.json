@@ -1,14 +1,19 @@
 {
     "videoMode" :
     {
-        "width" : 256,
-        "height" : 256,
+        "width" : 1280,
+        "height" : 900,
         "bitsPerPixel" : 32,
         "fullscreen" : false
     },
     "dataSources" :
     [
         "Common",
-        "Effects"
-    ]
+        "DeferredShading"
+    ],
+    "graphics" :
+    {
+        "compositorShader" : "Shaders/Compositor.shader",
+        "screenMesh" : "Meshes/Screen.mesh"
+    }
 }

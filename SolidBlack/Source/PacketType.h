@@ -1,15 +1,10 @@
 #pragma once
 
-#include <Hect.h>
-using namespace hect;
+#include <cstdint>
 
-class PacketType
+enum class PacketType :
+    uint8_t
 {
-public:
-    enum Id :
-        uint8_t
-    {
-        AuthorizationRequest,
-        Authorization
-    };
+    AuthorizationRequest,
+    Authorization
 };

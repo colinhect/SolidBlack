@@ -8,16 +8,10 @@ using namespace hect;
 #endif
 #endif
 
-#include "States/ServerState.h"
-
 int main()
 {
     try
     {
-        Engine engine("Solid Black Server", "Settings.json");
-
-        engine.pushState<ServerState>(engine);
-        engine.execute();
     }
     catch (std::exception& e)
     {

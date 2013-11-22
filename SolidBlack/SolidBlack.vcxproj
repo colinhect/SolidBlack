@@ -18,6 +18,24 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Client.cpp" />
+    <ClCompile Include="Source\DeferredRenderingSystem.cpp" />
+    <ClCompile Include="Source\FreeCameraControllerSystem.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Server.cpp" />
+    <ClCompile Include="Source\TestState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Client.h" />
+    <ClInclude Include="Source\DeferredRenderingSystem.h" />
+    <ClInclude Include="Source\FreeCameraController.h" />
+    <ClInclude Include="Source\FreeCameraControllerSystem.h" />
+    <ClInclude Include="Source\PacketType.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\Server.h" />
+    <ClInclude Include="Source\TestState.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{48BE311A-A0E6-429D-A7AD-B8AFE08FF4B7}</ProjectGuid>
     <RootNamespace>SolidBlack</RootNamespace>
@@ -133,26 +151,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Server\Bubble.cpp" />
-    <ClCompile Include="Source\Server\Player.cpp" />
-    <ClCompile Include="Source\SolidBlackScene.cpp" />
-    <ClCompile Include="Source\States\ClientState.cpp" />
-    <ClCompile Include="Source\States\ServerState.cpp" />
-    <ClCompile Include="Source\States\SolidBlackState.cpp" />
-    <ClCompile Include="Source\Systems\FreeCameraControllerSystem.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Components\FreeCameraController.h" />
-    <ClInclude Include="Source\PacketType.h" />
-    <ClInclude Include="Source\Server\Bubble.h" />
-    <ClInclude Include="Source\Server\Player.h" />
-    <ClInclude Include="Source\SolidBlackScene.h" />
-    <ClInclude Include="Source\States\ClientState.h" />
-    <ClInclude Include="Source\States\ServerState.h" />
-    <ClInclude Include="Source\States\SolidBlackState.h" />
-    <ClInclude Include="Source\Systems\FreeCameraControllerSystem.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -20,15 +20,15 @@ public:
     /// \param mesh The mesh to render.
     /// \param material The material to render the mesh using.
     /// \param transform The global transformation of the mesh.
-    void renderMesh(Mesh& mesh, const Material& material, const Transform& transform);
+    virtual void renderMesh(Mesh& mesh, const Material& material, const Transform& transform);
 
     ///
     /// Draws all visible renderables.
     ///
     /// \param camera The camera to render from.
     /// \param gpu The GPU.
-    /// \param target The render target (for referencing size only).
-    void renderAll(Camera& camera, Gpu& gpu, const RenderTarget& target);
+    /// \param target The render target.
+    virtual void renderAll(Camera& camera, Gpu& gpu, RenderTarget& target);
 
 private:
     struct MeshTask

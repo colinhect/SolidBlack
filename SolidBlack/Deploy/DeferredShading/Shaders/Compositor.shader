@@ -1,8 +1,8 @@
 {
     "modules" :
     [
-        "Shaders/HdrCompositor.frag",
-        "Shaders/HdrCompositor.vert"
+        "Shaders/Compositor.frag",
+        "Shaders/Compositor.vert"
     ],
     "uniforms" :
     {

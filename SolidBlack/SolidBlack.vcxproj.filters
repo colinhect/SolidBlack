@@ -1,69 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Source">
+      <UniqueIdentifier>{c3e6017b-6029-4ea1-9bc5-7167b96edddd}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Server\Bubble.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Client.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Server\Player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\DeferredRenderingSystem.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\States\ClientState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\FreeCameraControllerSystem.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\States\ServerState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\States\SolidBlackState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Server.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Systems\FreeCameraControllerSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SolidBlackScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\TestState.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Server\Bubble.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Client.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Server\Player.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\DeferredRenderingSystem.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\States\ClientState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\FreeCameraController.h">
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\States\ServerState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\States\SolidBlackState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Systems\FreeCameraControllerSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Components\FreeCameraController.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\FreeCameraControllerSystem.h">
+      <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\PacketType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SolidBlackScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Server.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestState.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,15 +3,13 @@
 #include <Hect.h>
 using namespace hect;
 
-class SolidBlackScene :
-    public Scene
+class DeferredRenderingSystem :
+    public RenderingSystem
 {
 public:
-    SolidBlackScene(AssetCache& assetCache);
-    ~SolidBlackScene();
+    DeferredRenderingSystem(AssetCache& assetCache, const DataValue& settings);
 
-    void update(double timeStep);
-    void render(Gpu& gpu, RenderTarget& target);
+    void renderAll(Camera& camera, Gpu& gpu, RenderTarget& target);
 
     double gamma() const;
     void setGamma(double gamma);
@@ -20,13 +18,9 @@ public:
     void setExposure(double exposure);
 
 private:
-    CameraSystem _cameraSystem;
-    RenderingSystem _renderingSystem;
-    DebugRenderingSystem _debugRenderingSystem;
-
     std::unique_ptr<FrameBuffer> _frameBuffer;
 
-    Shader::Ref _hdrCompositorShader;
+    Shader::Ref _compositorShader;
     Mesh::Ref _screenMesh;
 
     const Uniform* _oneOverGammaUniform;

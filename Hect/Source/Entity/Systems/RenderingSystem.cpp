@@ -23,7 +23,7 @@ void RenderingSystem::renderMesh(Mesh& mesh, const Material& material, const Tra
     }
 }
 
-void RenderingSystem::renderAll(Camera& camera, Gpu& gpu, const RenderTarget& target)
+void RenderingSystem::renderAll(Camera& camera, Gpu& gpu, RenderTarget& target)
 {
     _meshTasks.clear();
 
