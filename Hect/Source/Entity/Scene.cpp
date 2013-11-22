@@ -2,16 +2,31 @@
 
 using namespace hect;
 
-Scene::Scene(size_t entityPoolSize) :
+Scene::Scene() :
+    _assetCache(nullptr),
     _nextId(1), // Entity ID 0 is considered null, so start at 1
-    _attributes(std::max<size_t>(2, entityPoolSize)),
-    _components(std::max<size_t>(2, entityPoolSize))
+    _attributes(128),
+    _components(128)
 {
+    registerSerializer<Camera, CameraSerializer>("Camera");
+    registerSerializer<Geometry, GeometrySerializer>("Geometry");
+    registerSerializer<Transform, TransformSerializer>("Transform");
+}
+
+Scene::Scene(AssetCache& assetCache) :
+    _assetCache(&assetCache),
+    _nextId(1),
+    _attributes(128),
+    _components(128)
+{
+    registerSerializer<Camera, CameraSerializer>("Camera");
+    registerSerializer<Geometry, GeometrySerializer>("Geometry");
+    registerSerializer<Transform, TransformSerializer>("Transform");
 }
 
 Scene::~Scene()
 {
-    for (EntitySystem* system : _systems)
+    for (System* system : _systems)
     {
         system->removeAllEntities();
     }
@@ -25,7 +40,7 @@ void Scene::refresh()
         EntityAttributes& attributes = _attributes[entity._id];
         attributes.setActivated(true);
 
-        for (EntitySystem* system : _systems)
+        for (System* system : _systems)
         {
             if (attributes.contains(system->requiredAttributes()))
             {
@@ -39,7 +54,7 @@ void Scene::refresh()
     for (Entity& entity : _destroyedEntities)
     {
         EntityAttributes& attributes = _attributes[entity._id];
-        for (EntitySystem* system : _systems)
+        for (System* system : _systems)
         {
             if (attributes.contains(system->requiredAttributes()))
             {
@@ -58,7 +73,7 @@ void Scene::refresh()
     _destroyedEntities.clear();
 }
 
-void Scene::addSystem(EntitySystem& system)
+void Scene::addSystem(System& system)
 {
     _systems.push_back(&system);
 
@@ -74,7 +89,7 @@ void Scene::addSystem(EntitySystem& system)
     }
 }
 
-void Scene::removeSystem(EntitySystem& system)
+void Scene::removeSystem(System& system)
 {
     system.removeAllEntities();
     _systems.erase(std::remove(_systems.begin(), _systems.end(), &system), _systems.end());
@@ -105,6 +120,34 @@ Entity Scene::createEntity()
 
     Entity entity(*this, id);
     _attributes[id].setNull(false);
+    return entity;
+}
+
+Entity Scene::createEntity(const Path& path)
+{
+    if (!_assetCache)
+    {
+        throw Error("Cannot create an entity from a file without an asset cache");
+    }
+
+    Entity entity = createEntity();
+
+    const DataValue& dataValue = *_assetCache->get<DataValue>(path);
+    for (const std::string& componentTypeName : dataValue.memberNames())
+    {
+        if (_componentTypes.find(componentTypeName) == _componentTypes.end())
+        {
+            throw Error(format("No serializer registered for component type '%s'", componentTypeName.c_str()));
+        }
+
+        ComponentType type = _componentTypes[componentTypeName];
+
+        std::shared_ptr<BaseComponent> component = _componentConstructors[type]();
+        _componentSerializers[type]->_fromDataValue(component.get(), dataValue[componentTypeName], *_assetCache);
+        _addComponentManually(entity, component);
+    }
+
+    entity.activate();
     return entity;
 }
 
@@ -154,9 +197,9 @@ bool Scene::_isNull(const Entity& entity) const
     return _attributes[entity._id].isNull();
 }
 
-void Scene::_addComponentFromFactory(const Entity& entity, const std::shared_ptr<BaseComponent>& component)
+void Scene::_addComponentManually(const Entity& entity, const std::shared_ptr<BaseComponent>& component)
 {
-    EntityComponentType type = component->componentType();
+    ComponentType type = component->componentType();
 
 #ifdef HECT_DEBUG
     assert(!entity.isNull());

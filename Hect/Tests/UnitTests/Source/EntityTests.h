@@ -1,26 +1,26 @@
 class Name :
-    public EntityComponent<Name>
+    public Component<Name>
 {
 public:
     std::string name;
 };
 
 class Position :
-    public EntityComponent<Position>
+    public Component<Position>
 {
 public:
     Vector3<double> position;
 };
 
 class Velocity :
-    public EntityComponent<Velocity>
+    public Component<Velocity>
 {
 public:
     Vector3<double> velocity;
 };
 
 class Animal :
-    public EntityComponent<Animal>
+    public Component<Animal>
 {
 public:
     virtual bool isDog() const = 0;
@@ -56,7 +56,7 @@ public:
 };
 
 class MovementSystem :
-    public EntitySystem
+    public System
 {
 public:
     MovementSystem()
@@ -73,7 +73,7 @@ public:
 };
 
 class NamingSystem :
-    public EntitySystem
+    public System
 {
 public:
     NamingSystem()
@@ -102,7 +102,7 @@ SUITE(Entity)
 {
     TEST(CreateAndDestroy)
     {
-        Scene scene(16);
+        Scene scene;
 
         Entity a = scene.createEntity();
         CHECK(!a.isNull());
@@ -115,7 +115,7 @@ SUITE(Entity)
 
     TEST(Components)
     {
-        Scene scene(16);
+        Scene scene;
         Entity a = scene.createEntity();
 
         CHECK(!a.hasComponent<Name>());
@@ -127,7 +127,7 @@ SUITE(Entity)
 
     TEST(PolymorphicComponents)
     {
-        Scene scene(16);
+        Scene scene;
 
         Entity a = scene.createEntity();
         a.addComponent<Dog>();
@@ -144,7 +144,7 @@ SUITE(Entity)
 
     TEST(ActivationAndDestruction)
     {
-        Scene scene(16);
+        Scene scene;
         Entity a = scene.createEntity();
         CHECK(!a.isActivated());
         a.addComponent<Name>();
@@ -162,10 +162,10 @@ SUITE(Entity)
 
     TEST(PoolResize)
     {
-        Scene scene(4);
+        Scene scene;
 
         std::vector<Entity> entities;
-        for (int i = 0 ; i < 8; ++i)
+        for (int i = 0 ; i < 129; ++i)
         {
             Entity entity = scene.createEntity();
             entity.addComponent<Name>();
@@ -185,7 +185,7 @@ SUITE(Entity)
         MovementSystem movementSystem;
         NamingSystem namingSystem;
 
-        Scene scene(16);
+        Scene scene;
 
         scene.addSystem(movementSystem);
         scene.addSystem(namingSystem);

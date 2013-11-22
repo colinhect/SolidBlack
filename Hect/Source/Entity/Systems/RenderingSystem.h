@@ -6,7 +6,7 @@ namespace hect
 ///
 /// Renders renderables.
 class RenderingSystem :
-    public EntitySystem
+    public System
 {
 public:
 

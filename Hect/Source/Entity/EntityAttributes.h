@@ -33,14 +33,14 @@ public:
     /// Returns whether the entity has a component of a certain type.
     ///
     /// \param type The component type.
-    bool hasComponent(EntityComponentType type) const;
+    bool hasComponent(ComponentType type) const;
 
     ///
     /// Sets whether the entity as a component of a certain type.
     ///
     /// \param type The component type.
     /// \param value True if the entity has the component; false otherwise.
-    void setHasComponent(EntityComponentType type, bool value);
+    void setHasComponent(ComponentType type, bool value);
 
     ///
     /// Returns whether these attributes have all of the given attributes.

@@ -6,7 +6,7 @@ namespace hect
 ///
 /// Renders debug information.
 class DebugRenderingSystem :
-    public EntitySystem
+    public System
 {
 public:
 

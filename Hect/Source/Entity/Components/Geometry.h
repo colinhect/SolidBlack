@@ -42,7 +42,7 @@ private:
 
 
 class GeometrySerializer :
-    public EntityComponentSerializer<Geometry>
+    public ComponentSerializer<Geometry>
 {
 public:
     void fromDataValue(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const;

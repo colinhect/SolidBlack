@@ -37,9 +37,8 @@
     <ClCompile Include="Source\Entity\Components\Transform.cpp" />
     <ClCompile Include="Source\Entity\Entity.cpp" />
     <ClCompile Include="Source\Entity\EntityAttributes.cpp" />
-    <ClCompile Include="Source\Entity\EntityComponent.cpp" />
-    <ClCompile Include="Source\Entity\EntityFactory.cpp" />
-    <ClCompile Include="Source\Entity\EntitySystem.cpp" />
+    <ClCompile Include="Source\Entity\Component.cpp" />
+    <ClCompile Include="Source\Entity\System.cpp" />
     <ClCompile Include="Source\Entity\Scene.cpp" />
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
@@ -120,10 +119,9 @@
     <ClInclude Include="Source\Entity\Components\Transform.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Entity\EntityAttributes.h" />
-    <ClInclude Include="Source\Entity\EntityComponent.h" />
-    <ClInclude Include="Source\Entity\EntityComponentSerializer.h" />
-    <ClInclude Include="Source\Entity\EntityFactory.h" />
-    <ClInclude Include="Source\Entity\EntitySystem.h" />
+    <ClInclude Include="Source\Entity\Component.h" />
+    <ClInclude Include="Source\Entity\ComponentSerializer.h" />
+    <ClInclude Include="Source\Entity\System.h" />
     <ClInclude Include="Source\Entity\Scene.h" />
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
@@ -193,9 +191,8 @@
     <None Include="Source\Core\Any.inl" />
     <None Include="Source\Core\Engine.inl" />
     <None Include="Source\Entity\Entity.inl" />
-    <None Include="Source\Entity\EntityComponent.inl" />
-    <None Include="Source\Entity\EntityFactory.inl" />
-    <None Include="Source\Entity\EntitySystem.inl" />
+    <None Include="Source\Entity\Component.inl" />
+    <None Include="Source\Entity\System.inl" />
     <None Include="Source\Entity\Scene.inl" />
     <None Include="Source\Graphics\MeshBuilder.inl" />
     <None Include="Source\Math\Angle.inl" />

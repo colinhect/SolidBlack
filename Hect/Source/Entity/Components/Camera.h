@@ -8,7 +8,7 @@ class Transform;
 ///
 /// A camera component.
 class Camera :
-    public EntityComponent<Camera>
+    public Component<Camera>
 {
 public:
 
@@ -119,7 +119,7 @@ private:
 };
 
 class CameraSerializer :
-    public EntityComponentSerializer<Camera>
+    public ComponentSerializer<Camera>
 {
 public:
     void fromDataValue(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const;

@@ -6,7 +6,7 @@ namespace hect
 ///
 /// A combination of a position, scale, and rotation.
 class Transform :
-    public EntityComponent<Transform>
+    public Component<Transform>
 {
 public:
 
@@ -109,7 +109,7 @@ private:
 };
 
 class TransformSerializer :
-    public EntityComponentSerializer<Transform>
+    public ComponentSerializer<Transform>
 {
 public:
     void fromDataValue(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const;

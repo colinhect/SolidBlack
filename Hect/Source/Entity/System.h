@@ -5,17 +5,17 @@ namespace hect
 
 ///
 /// A system which handles entities which have specific components.
-class EntitySystem
+class System
 {
 public:
 
     ///
     /// A shared reference to an entity system.
-    typedef std::shared_ptr<EntitySystem> Ref;
+    typedef std::shared_ptr<System> Ref;
 
     ///
     /// Construct an entity system without an update priority.
-    EntitySystem();
+    System();
 
     ///
     /// Adds an entity to the system.
@@ -71,4 +71,4 @@ private:
 
 }
 
-#include "EntitySystem.inl"
+#include "System.inl"

@@ -1,8 +1,8 @@
 {
     "videoMode" :
     {
-        "width" : 1280,
-        "height" : 900,
+        "width" : 256,
+        "height" : 256,
         "bitsPerPixel" : 32,
         "fullscreen" : false
     },

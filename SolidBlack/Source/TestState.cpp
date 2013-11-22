@@ -8,10 +8,9 @@ TestState::TestState(Engine& engine) :
     _assetCache(engine.storage()),
     _renderingSystem(_assetCache, engine.settings()),
     _freeCameraControllerSystem(engine.input()),
-    _scene(128),
-    _factory(_scene, _assetCache)
+    _scene(_assetCache)
 {
-    _factory.registerSerializer<FreeCameraController, EntityComponentSerializer<FreeCameraController>>("FreeCameraController");
+    _scene.registerSerializer<FreeCameraController, ComponentSerializer<FreeCameraController>>("FreeCameraController");
 }
 
 void TestState::begin()
@@ -26,8 +25,8 @@ void TestState::begin()
     Mouse& mouse = engine().input().mouse();
     mouse.setCursorLocked(true);
 
-    _factory.createEntity("Entities/FreeCamera.entity");
-    _factory.createEntity("Entities/TestCube.entity");
+    _scene.createEntity("Entities/FreeCamera.entity");
+    _scene.createEntity("Entities/TestCube.entity");
 
     _scene.refresh();
 }

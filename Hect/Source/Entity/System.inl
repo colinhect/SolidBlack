@@ -2,7 +2,7 @@ namespace hect
 {
 
 template <typename T>
-void EntitySystem::requireComponent()
+void System::requireComponent()
 {
     _requiredAttributes.setHasComponent(T::type(), true);
 }

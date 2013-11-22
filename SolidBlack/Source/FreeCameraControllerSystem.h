@@ -4,7 +4,7 @@
 using namespace hect;
 
 class FreeCameraControllerSystem :
-    public EntitySystem
+    public System
 {
 public:
     FreeCameraControllerSystem(Input& input);

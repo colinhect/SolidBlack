@@ -4,7 +4,7 @@ namespace hect
 {
 
 class PhysicsSystem :
-    public EntitySystem
+    public System
 {
 public:
     PhysicsSystem();
@@ -20,11 +20,11 @@ public:
 protected:
 
     ///
-    /// \copydoc EntitySystem::onAddEntity()
+    /// \copydoc System::onAddEntity()
     void onAddEntity(Entity& entity);
 
     ///
-    /// \copydoc EntitySystem::onRemoveEntity()
+    /// \copydoc System::onRemoveEntity()
     void onRemoveEntity(Entity& entity);
 
 private:

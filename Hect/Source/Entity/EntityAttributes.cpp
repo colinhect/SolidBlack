@@ -26,12 +26,12 @@ void EntityAttributes::setActivated(bool value)
     _bitset.set(_activatedBit, value);
 }
 
-bool EntityAttributes::hasComponent(EntityComponentType type) const
+bool EntityAttributes::hasComponent(ComponentType type) const
 {
     return _bitset.test(type);
 }
 
-void EntityAttributes::setHasComponent(EntityComponentType type, bool value)
+void EntityAttributes::setHasComponent(ComponentType type, bool value)
 {
     _bitset.set(type, value);
 }

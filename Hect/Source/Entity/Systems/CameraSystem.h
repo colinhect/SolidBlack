@@ -6,7 +6,7 @@ namespace hect
 ///
 /// Provides access to the active camera in the scene.
 class CameraSystem :
-    public EntitySystem
+    public System
 {
 public:
 

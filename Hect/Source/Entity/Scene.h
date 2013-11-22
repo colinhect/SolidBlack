@@ -9,14 +9,17 @@ class Scene :
     public Uncopyable
 {
     friend class Entity;
-    friend class EntityFactory;
 public:
+    
+    ///
+    /// Constructs a scene.
+    Scene();
 
     ///
-    /// Constructs a scene with a entity pool size.
+    /// Constructs a scene given an asset cache.
     ///
-    /// \param entityPoolSize The size of the entity pool.
-    Scene(size_t entityPoolSize);
+    /// \param assetCache An asset cache.
+    Scene(AssetCache& assetCache);
 
     ///
     /// Removes all entities from all systems.
@@ -31,7 +34,7 @@ public:
     /// Adds a system to the scene.
     ///
     /// \param system The system.
-    void addSystem(EntitySystem& system);
+    void addSystem(System& system);
 
     ///
     /// Removes a system from the scene.
@@ -39,13 +42,18 @@ public:
     /// \remarks Any entities the systems has will be removed.
     ///
     /// \param system The system.
-    void removeSystem(EntitySystem& system);
+    void removeSystem(System& system);
 
     ///
     /// Creates a new entity.
     ///
     /// \returns The new entity.
     Entity createEntity();
+
+    Entity createEntity(const Path& path);
+
+    template <typename ComponentType, typename SerializerType>
+    void registerSerializer(const std::string& componentTypeName);
 
 private:
     void _activateEntity(const Entity& entity);
@@ -59,10 +67,12 @@ private:
     template <typename T>
     T& _addComponent(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
 
-    void _addComponentFromFactory(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
+    void _addComponentManually(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
 
     template <typename T>
     T& _component(const Entity& entity);
+
+    AssetCache* _assetCache;
 
     // The next entity ID to use when creating an entity (if the queue is
     // empty)
@@ -75,7 +85,7 @@ private:
     std::vector<EntityAttributes> _attributes;
 
     // For each entity, its components mapped by type
-    std::vector<std::map<EntityComponentType, std::shared_ptr<BaseComponent>>> _components;
+    std::vector<std::map<ComponentType, std::shared_ptr<BaseComponent>>> _components;
 
     // Entities activated since the last call to refresh()
     std::vector<Entity> _activatedEntities;
@@ -84,7 +94,11 @@ private:
     std::vector<Entity> _destroyedEntities;
 
     // Systems involved in the scene
-    std::vector<EntitySystem*> _systems;
+    std::vector<System*> _systems;
+
+    std::map<std::string, ComponentType> _componentTypes;
+    std::map<ComponentType, std::shared_ptr<BaseComponentSerializer>> _componentSerializers;
+    std::map<ComponentType, std::function<std::shared_ptr<BaseComponent>()>> _componentConstructors;
 };
 
 }

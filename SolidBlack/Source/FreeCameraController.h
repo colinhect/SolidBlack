@@ -4,6 +4,6 @@
 using namespace hect;
 
 class FreeCameraController :
-    public EntityComponent<FreeCameraController>
+    public Component<FreeCameraController>
 {
 };

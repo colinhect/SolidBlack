@@ -129,12 +129,6 @@
     <ClCompile Include="Source\Entity\EntityAttributes.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity\EntityComponent.cpp">
-      <Filter>Source\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Entity\EntitySystem.cpp">
-      <Filter>Source\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Entity\Scene.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
@@ -291,11 +285,14 @@
     <ClCompile Include="Source\Noise\Random.cpp">
       <Filter>Source\Noise</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity\EntityFactory.cpp">
-      <Filter>Source\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\DataValueLoader.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity\Component.cpp">
+      <Filter>Source\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity\System.cpp">
+      <Filter>Source\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -375,12 +372,6 @@
       <Filter>Source\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\EntityAttributes.h">
-      <Filter>Source\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity\EntityComponent.h">
-      <Filter>Source\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity\EntitySystem.h">
       <Filter>Source\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\Scene.h">
@@ -551,11 +542,16 @@
     <ClInclude Include="Source\Noise\Random.h">
       <Filter>Source\Noise</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Hect.h" />
-    <ClInclude Include="Source\Entity\EntityComponentSerializer.h">
+    <ClInclude Include="Source\Hect.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\ComponentSerializer.h">
       <Filter>Source\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entity\EntityFactory.h">
+    <ClInclude Include="Source\Entity\Component.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\System.h">
       <Filter>Source\Entity</Filter>
     </ClInclude>
   </ItemGroup>
@@ -576,12 +572,6 @@
       <Filter>Source\Core</Filter>
     </None>
     <None Include="Source\Entity\Entity.inl">
-      <Filter>Source\Entity</Filter>
-    </None>
-    <None Include="Source\Entity\EntityComponent.inl">
-      <Filter>Source\Entity</Filter>
-    </None>
-    <None Include="Source\Entity\EntitySystem.inl">
       <Filter>Source\Entity</Filter>
     </None>
     <None Include="Source\Entity\Scene.inl">
@@ -620,7 +610,10 @@
     <None Include="Source\Math\Vector4.inl">
       <Filter>Source\Math</Filter>
     </None>
-    <None Include="Source\Entity\EntityFactory.inl">
+    <None Include="Source\Entity\Component.inl">
+      <Filter>Source\Entity</Filter>
+    </None>
+    <None Include="Source\Entity\System.inl">
       <Filter>Source\Entity</Filter>
     </None>
   </ItemGroup>

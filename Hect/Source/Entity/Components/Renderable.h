@@ -9,7 +9,7 @@ class DebugRenderingSystem;
 ///
 /// A component that can enqueue rendering tasks to a job.
 class Renderable :
-    public EntityComponent<Renderable>
+    public Component<Renderable>
 {
 public:
 

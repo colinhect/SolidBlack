@@ -109,12 +109,11 @@ const double pi = 3.14159265358979323846;
 #include "Network/Peer.h"
 #include "Network/Socket.h"
 
-#include "Entity/EntityComponent.h"
+#include "Entity/Component.h"
 #include "Entity/EntityAttributes.h"
 #include "Entity/Entity.h"
-#include "Entity/EntitySystem.h"
-#include "Entity/EntityComponentSerializer.h"
-#include "Entity/EntityFactory.h"
+#include "Entity/System.h"
+#include "Entity/ComponentSerializer.h"
 #include "Entity/Scene.h"
 
 #include "Entity/Components/Camera.h"

@@ -3,9 +3,11 @@
 namespace hect
 {
 
+/// \cond INTERNAL
+
 class BaseComponentSerializer
 {
-    friend class EntityFactory;
+    friend class Scene;
 public:
     virtual ~BaseComponentSerializer() { }
 
@@ -13,9 +15,11 @@ protected:
     virtual void _fromDataValue(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const = 0;
     virtual DataValue _toDataValue(const BaseComponent* component) const = 0;
 };
+
+/// \endcond
     
 template <typename T>
-class EntityComponentSerializer :
+class ComponentSerializer :
     public BaseComponentSerializer
 {
 public:
@@ -36,4 +40,4 @@ private:
 
 }
 
-#include "EntityComponentSerializer.h"
+#include "ComponentSerializer.h"

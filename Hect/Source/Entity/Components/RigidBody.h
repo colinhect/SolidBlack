@@ -4,7 +4,7 @@ namespace hect
 {
 
 class RigidBody :
-    public EntityComponent<RigidBody>
+    public Component<RigidBody>
 {
     friend class PhysicsSystem;
 public:
