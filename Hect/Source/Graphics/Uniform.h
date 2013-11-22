@@ -4,8 +4,9 @@ namespace hect
 {
 
 ///
-/// A semantic binding to a built-in value.
-enum class ShaderParamBinding
+/// A binding from a shader uniform variable to a built-in value in the
+/// rendering pipeline.
+enum class UniformBinding
 {
     ///
     /// No binding.
@@ -16,11 +17,11 @@ enum class ShaderParamBinding
     RenderTargetSize,
 
     ///
-    /// Bound to the position of the active camera.
+    /// Bound to the world-space position of the active camera.
     CameraPosition,
 
     ///
-    /// Bound to the up direction of the active camera.
+    /// Bound to the world-space up direction of the active camera.
     CameraUp,
 
     ///
@@ -49,57 +50,59 @@ enum class ShaderParamBinding
 };
 
 ///
-/// A parameter to a shader.
-class ShaderParam
+/// A global variable of a shader which serves as parameter.
+class Uniform
 {
 public:
 
     ///
-    /// An array of parameters.
-    typedef std::vector<ShaderParam> Array;
+    /// An array of uniforms.
+    typedef std::vector<Uniform> Array;
 
     ///
-    /// Constructs a parameter given a name and a type.
+    /// Constructs a uniform given its name and type.
     ///
     /// \param name The name.
     /// \param type The type.
-    ShaderParam(const std::string& name, ShaderValueType type);
+    Uniform(const std::string& name, UniformType type);
+
     ///
-    /// Constructs a parameter given a name and a binding
+    /// Constructs a uniform given its name and binding
     ///
     /// \param name The name.
     /// \param binding The binding.
-    ShaderParam(const std::string& name, ShaderParamBinding binding);
+    Uniform(const std::string& name, UniformBinding binding);
 
     ///
-    /// Constructs a parameter given a name an a default value.
+    /// Constructs a uniform given its name and default value.
     ///
     /// \param name The name.
-    /// \param defaultValue The default value.
-    ShaderParam(const std::string& name, const ShaderValue& defaultValue);
+    /// \param defaultValue The default value which will be set when the shader
+    /// is bound (see Gpu::bindShader()).
+    Uniform(const std::string& name, const UniformValue& defaultValue);
 
     ///
-    /// Returns the value type that parameter is.
-    ShaderValueType type() const;
+    /// Returns the uniform type.
+    UniformType type() const;
 
     ///
-    /// Returns the binding.
-    ShaderParamBinding binding() const;
+    /// Returns the uniform binding.
+    UniformBinding binding() const;
 
     ///
-    /// Returns whether the parameter has a binding.
+    /// Returns whether the uniform has a binding.
     bool hasBinding() const;
 
     ///
     /// Returns the default value.
-    const ShaderValue& defaultValue() const;
+    const UniformValue& defaultValue() const;
 
     ///
-    /// Returns whether the parameter has a default value.
+    /// Returns whether the uniform has a default value.
     bool hasDefaultValue() const;
 
     ///
-    /// Returns the name of the parameter.
+    /// Returns the name of the uniform.
     const std::string& name() const;
 
     ///
@@ -115,12 +118,12 @@ public:
 private:
     std::string _name;
 
-    ShaderValueType _type;
+    UniformType _type;
 
-    ShaderParamBinding _binding;
+    UniformBinding _binding;
 
     bool _defaultValueSet;
-    ShaderValue _defaultValue;
+    UniformValue _defaultValue;
 
     int _location;
 };

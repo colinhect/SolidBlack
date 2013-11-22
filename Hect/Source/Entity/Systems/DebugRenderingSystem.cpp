@@ -51,10 +51,10 @@ void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, G
     Matrix4<> model;
     transform.buildMatrix(model);
 
-    // Set the model-view-projection parameter
+    // Set the model-view-projection uniform
     Matrix4<float> modelViewProjection = camera.projectionMatrix() * (camera.viewMatrix() * model);
-    gpu.setShaderParam(_boxShader->params()[0], modelViewProjection);
-    gpu.setShaderParam(_boxShader->params()[1], (Vector4<float>)task.color);
+    gpu.setUniform(_boxShader->uniforms()[0], modelViewProjection);
+    gpu.setUniform(_boxShader->uniforms()[1], (Vector4<float>)task.color);
 
     // Bind the render mode
     RenderMode mode;
@@ -130,9 +130,9 @@ void DebugRenderingSystem::_buildBoxShader()
     modules.push_back(ShaderModule::Ref(new ShaderModule(ShaderModuleType::Vertex, vertexSource)));
     modules.push_back(ShaderModule::Ref(new ShaderModule(ShaderModuleType::Pixel, pixelSource)));
 
-    ShaderParam::Array params;
-    params.push_back(ShaderParam("modelViewProjection", ShaderParamBinding::ModelViewProjectionMatrix));
-    params.push_back(ShaderParam("color", ShaderValueType::Vector3));
+    Uniform::Array uniforms;
+    uniforms.push_back(Uniform("modelViewProjection", UniformBinding::ModelViewProjectionMatrix));
+    uniforms.push_back(Uniform("color", UniformType::Vector3));
 
-    _boxShader.reset(new Shader(modules, params));
+    _boxShader.reset(new Shader(modules, uniforms));
 }

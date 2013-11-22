@@ -87,11 +87,11 @@ public:
     void destroyShader(Shader& shader);
 
     ///
-    /// Sets the value of a shader parameter.
+    /// Sets the value of a uniform.
     ///
-    /// \param param The parameter.
+    /// \param uniform The uniform.
     /// \param value The new value.
-    void setShaderParam(const ShaderParam& param, const ShaderValue& value);
+    void setUniform(const Uniform& uniform, const UniformValue& value);
 
     ///
     /// Uploads a shader module.

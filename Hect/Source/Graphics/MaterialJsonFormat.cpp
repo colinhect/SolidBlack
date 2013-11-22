@@ -52,14 +52,14 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
             RenderMode renderMode;
             Texture::RefArray textures;
             Shader::Ref shader;
-            ShaderArg::Array shaderArgs;
+            PassUniformValue::Array uniformValues;
 
             if (passIndex < passes.size())
             {
                 renderMode = passes[passIndex].renderMode();
                 textures = passes[passIndex].textures();
                 shader = passes[passIndex].shader();
-                shaderArgs = passes[passIndex].shaderArgs();
+                uniformValues = passes[passIndex].uniformValues();
             }
 
             // Shader
@@ -69,32 +69,32 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
                 shader = assetCache.get<Shader>(path);
             }
 
-            // Shader arguments
-            const DataValue& shaderArgsValue = passValue["shaderArgs"];
-            for (const std::string& name : shaderArgsValue.memberNames())
+            // Uniform values
+            const DataValue& uniformValue = passValue["uniformValues"];
+            for (const std::string& name : uniformValue.memberNames())
             {
                 if (!shader)
                 {
-                    throw Error("Cannot have shader arguments without a shader");
+                    throw Error("Cannot have uniform values without a shader");
                 }
 
-                const ShaderParam& param = shader->paramWithName(name);
-                ShaderValue value = shaderJsonFormat.parseValue(param.type(), shaderArgsValue[name]);
+                const Uniform& uniform = shader->uniformWithName(name);
+                UniformValue value = shaderJsonFormat.parseValue(uniform.type(), uniformValue[name]);
 
-                bool foundArgument = false;
-                for (ShaderArg& arg : shaderArgs)
+                bool foundUniformValue = false;
+                for (PassUniformValue& uniformValue : uniformValues)
                 {
-                    if (arg.paramName() == name)
+                    if (uniformValue.uniformName() == name)
                     {
-                        arg = ShaderArg(name, value);
-                        foundArgument = true;
+                        uniformValue = PassUniformValue(name, value);
+                        foundUniformValue = true;
                         break;
                     }
                 }
 
-                if (!foundArgument)
+                if (!foundUniformValue)
                 {
-                    shaderArgs.push_back(ShaderArg(name, value));
+                    uniformValues.push_back(PassUniformValue(name, value));
                 }
             }
 
@@ -154,13 +154,13 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
             // Append a new texture if needed
             if (passIndex >= passes.size())
             {
-                passes.push_back(Pass(renderMode, textures, shader, shaderArgs));
+                passes.push_back(Pass(renderMode, textures, shader, uniformValues));
             }
 
             // Otherwise replace the texture already existing at the index
             else
             {
-                passes[passIndex] = Pass(renderMode, textures, shader, shaderArgs);
+                passes[passIndex] = Pass(renderMode, textures, shader, uniformValues);
             }
 
             ++passIndex;

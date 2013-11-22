@@ -6,9 +6,9 @@ Shader::Shader()
 {
 }
 
-Shader::Shader(const ShaderModule::RefArray& modules, const ShaderParam::Array& params) :
+Shader::Shader(const ShaderModule::RefArray& modules, const Uniform::Array& uniforms) :
     _modules(modules),
-    _params(params)
+    _uniforms(uniforms)
 {
 }
 
@@ -25,25 +25,25 @@ const ShaderModule::RefArray& Shader::modules() const
     return _modules;
 }
 
-ShaderParam::Array& Shader::params()
+Uniform::Array& Shader::uniforms()
 {
-    return _params;
+    return _uniforms;
 }
 
-const ShaderParam::Array& Shader::params() const
+const Uniform::Array& Shader::uniforms() const
 {
-    return _params;
+    return _uniforms;
 }
 
-const ShaderParam& Shader::paramWithName(const std::string& name) const
+const Uniform& Shader::uniformWithName(const std::string& name) const
 {
-    for (const ShaderParam& param : _params)
+    for (const Uniform& uniform : _uniforms)
     {
-        if (param.name() == name)
+        if (uniform.name() == name)
         {
-            return param;
+            return uniform;
         }
     }
 
-    throw Error(format("Shader does not have parameter '%s'", name.c_str()));
+    throw Error(format("Shader does not have uniform '%s'", name.c_str()));
 }

@@ -4,24 +4,24 @@ using namespace hect;
 
 ShaderJsonFormat::ShaderJsonFormat()
 {
-    _paramBindings["None"] = ShaderParamBinding::None;
-    _paramBindings["RenderTargetSize"] = ShaderParamBinding::RenderTargetSize;
-    _paramBindings["CameraPosition"] = ShaderParamBinding::CameraPosition;
-    _paramBindings["CameraUp"] = ShaderParamBinding::CameraUp;
-    _paramBindings["ViewMatrix"] = ShaderParamBinding::ViewMatrix;
-    _paramBindings["ProjectionMatrix"] = ShaderParamBinding::ProjectionMatrix;
-    _paramBindings["ViewProjectionMatrix"] = ShaderParamBinding::ViewProjectionMatrix;
-    _paramBindings["ModelMatrix"] = ShaderParamBinding::ModelMatrix;
-    _paramBindings["ModelViewMatrix"] = ShaderParamBinding::ModelViewMatrix;
-    _paramBindings["ModelViewProjectionMatrix"] = ShaderParamBinding::ModelViewProjectionMatrix;
+    _uniformBindings["None"] = UniformBinding::None;
+    _uniformBindings["RenderTargetSize"] = UniformBinding::RenderTargetSize;
+    _uniformBindings["CameraPosition"] = UniformBinding::CameraPosition;
+    _uniformBindings["CameraUp"] = UniformBinding::CameraUp;
+    _uniformBindings["ViewMatrix"] = UniformBinding::ViewMatrix;
+    _uniformBindings["ProjectionMatrix"] = UniformBinding::ProjectionMatrix;
+    _uniformBindings["ViewProjectionMatrix"] = UniformBinding::ViewProjectionMatrix;
+    _uniformBindings["ModelMatrix"] = UniformBinding::ModelMatrix;
+    _uniformBindings["ModelViewMatrix"] = UniformBinding::ModelViewMatrix;
+    _uniformBindings["ModelViewProjectionMatrix"] = UniformBinding::ModelViewProjectionMatrix;
 
-    _valueTypes["Int"] = ShaderValueType::Int;
-    _valueTypes["Float"] = ShaderValueType::Float;
-    _valueTypes["Vector2"] = ShaderValueType::Vector2;
-    _valueTypes["Vector3"] = ShaderValueType::Vector3;
-    _valueTypes["Vector4"] = ShaderValueType::Vector4;
-    _valueTypes["Matrix4"] = ShaderValueType::Matrix4;
-    _valueTypes["Texture"] = ShaderValueType::Texture;
+    _valueTypes["Int"] = UniformType::Int;
+    _valueTypes["Float"] = UniformType::Float;
+    _valueTypes["Vector2"] = UniformType::Vector2;
+    _valueTypes["Vector3"] = UniformType::Vector3;
+    _valueTypes["Vector4"] = UniformType::Vector4;
+    _valueTypes["Matrix4"] = UniformType::Matrix4;
+    _valueTypes["Texture"] = UniformType::Texture;
 }
 
 void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache)
@@ -35,59 +35,59 @@ void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCac
         modules.push_back(moduleHandle.getShared());
     }
 
-    ShaderParam::Array params;
+    Uniform::Array uniforms;
 
-    // Add all parameters
-    for (std::string& name : dataValue["params"].memberNames())
+    // Add all uniforms
+    for (std::string& name : dataValue["uniforms"].memberNames())
     {
-        params.push_back(_parseParameter(name, dataValue["params"][name]));
+        uniforms.push_back(_parseUniform(name, dataValue["uniforms"][name]));
     }
 
-    shader = Shader(modules, params);
+    shader = Shader(modules, uniforms);
 }
 
-ShaderValue ShaderJsonFormat::parseValue(ShaderValueType type, const DataValue& dataValue) const
+UniformValue ShaderJsonFormat::parseValue(UniformType type, const DataValue& dataValue) const
 {
     switch (type)
     {
-    case ShaderValueType::Int:
-    case ShaderValueType::Texture:
-        return ShaderValue(dataValue.asInt(), type);
-    case ShaderValueType::Float:
-        return ShaderValue((float)dataValue.asDouble());
-    case ShaderValueType::Vector2:
-        return ShaderValue(parseVector2(dataValue));
-    case ShaderValueType::Vector3:
-        return ShaderValue(parseVector3(dataValue));
-    case ShaderValueType::Vector4:
-        return ShaderValue(parseVector4(dataValue));
-    case ShaderValueType::Matrix4:
-        return ShaderValue(parseMatrix4(dataValue));
+    case UniformType::Int:
+    case UniformType::Texture:
+        return UniformValue(dataValue.asInt(), type);
+    case UniformType::Float:
+        return UniformValue((float)dataValue.asDouble());
+    case UniformType::Vector2:
+        return UniformValue(parseVector2(dataValue));
+    case UniformType::Vector3:
+        return UniformValue(parseVector3(dataValue));
+    case UniformType::Vector4:
+        return UniformValue(parseVector4(dataValue));
+    case UniformType::Matrix4:
+        return UniformValue(parseMatrix4(dataValue));
     default:
-        return ShaderValue();
+        return UniformValue();
     }
 }
 
-ShaderParam ShaderJsonFormat::_parseParameter(const std::string& name, const DataValue& dataValue)
+Uniform ShaderJsonFormat::_parseUniform(const std::string& name, const DataValue& dataValue)
 {
     if (!dataValue["type"].isNull())
     {
-        auto type = _parseValueType(dataValue["type"]);
+        auto type = _parseType(dataValue["type"]);
 
-        const DataValue& value = dataValue["value"];
-        if (!value.isNull())
+        const DataValue& defaultValue = dataValue["defaultValue"];
+        if (!defaultValue.isNull())
         {
-            return ShaderParam(name, parseValue(type, value));
+            return Uniform(name, parseValue(type, defaultValue));
         }
         else
         {
-            return ShaderParam(name, type);
+            return Uniform(name, type);
         }
     }
     else if (!dataValue["binding"].isNull())
     {
-        auto binding = _parseParameterBinding(dataValue["binding"]);
-        return ShaderParam(name, binding);
+        auto binding = _parseUniformBinding(dataValue["binding"]);
+        return Uniform(name, binding);
     }
     else
     {
@@ -95,23 +95,23 @@ ShaderParam ShaderJsonFormat::_parseParameter(const std::string& name, const Dat
     }
 }
 
-ShaderParamBinding ShaderJsonFormat::_parseParameterBinding(const DataValue& dataValue)
+UniformBinding ShaderJsonFormat::_parseUniformBinding(const DataValue& dataValue)
 {
-    auto it = _paramBindings.find(dataValue.asString());
-    if (it == _paramBindings.end())
+    auto it = _uniformBindings.find(dataValue.asString());
+    if (it == _uniformBindings.end())
     {
-        throw Error(format("Invalid parameter binding '%s'", dataValue.asString().c_str()));
+        throw Error(format("Invalid uniform binding '%s'", dataValue.asString().c_str()));
     }
 
     return (*it).second;
 }
 
-ShaderValueType ShaderJsonFormat::_parseValueType(const DataValue& dataValue)
+UniformType ShaderJsonFormat::_parseType(const DataValue& dataValue)
 {
     auto it = _valueTypes.find(dataValue.asString());
     if (it == _valueTypes.end())
     {
-        throw Error(format("Invalid parameter type '%s'", dataValue.asString().c_str()));
+        throw Error(format("Invalid uniform type '%s'", dataValue.asString().c_str()));
     }
 
     return (*it).second;

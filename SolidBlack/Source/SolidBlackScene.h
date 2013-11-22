@@ -29,8 +29,8 @@ private:
     Shader::Ref _hdrCompositorShader;
     Mesh::Ref _screenMesh;
 
-    const ShaderParam* _oneOverGammaParam;
-    const ShaderParam* _exposureParam;
+    const Uniform* _oneOverGammaUniform;
+    const Uniform* _exposureUniform;
 
     double _gamma;
     double _exposure;

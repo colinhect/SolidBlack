@@ -1,20 +1,25 @@
 {
-    "modules" : [
+    "modules" :
+    [
         "Shaders/HdrCompositor.frag",
         "Shaders/HdrCompositor.vert"
     ],
-    "params" : {
-        "exposure" : {
+    "uniforms" :
+    {
+        "exposure" :
+        {
             "type" : "Float",
-            "value" : 0.0015
+            "defaultValue" : 0.0015
         },
-        "oneOverGamma" : {
+        "oneOverGamma" :
+        {
             "type" : "Float",
-            "value" : 0.4545
+            "defaultValue" : 0.4545
         },
-        "sourceTexture" : {
+        "sourceTexture" :
+        {
             "type" : "Texture",
-            "value" : 0
+            "defaultValue" : 0
         }
     }
 }

@@ -23,21 +23,21 @@ public:
     void load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache);
 
     ///
-    /// Parses a shader value of a certain type.
+    /// Parses a uniform value of a certain type.
     ///
-    /// \param type The shader value type.
+    /// \param type The uniform value type.
     /// \param dataValue The data value to parse from.
     ///
-    /// \returns The parsed shader value.
-    ShaderValue parseValue(ShaderValueType type, const DataValue& dataValue) const;
+    /// \returns The parsed uniform value.
+    UniformValue parseValue(UniformType type, const DataValue& dataValue) const;
 
 private:
-    ShaderParam _parseParameter(const std::string& name, const DataValue& dataValue);
-    ShaderParamBinding _parseParameterBinding(const DataValue& dataValue);
-    ShaderValueType _parseValueType(const DataValue& dataValue);
+    Uniform _parseUniform(const std::string& name, const DataValue& dataValue);
+    UniformBinding _parseUniformBinding(const DataValue& dataValue);
+    UniformType _parseType(const DataValue& dataValue);
 
-    std::map<std::string, ShaderParamBinding> _paramBindings;
-    std::map<std::string, ShaderValueType> _valueTypes;
+    std::map<std::string, UniformBinding> _uniformBindings;
+    std::map<std::string, UniformType> _valueTypes;
 };
 
 }

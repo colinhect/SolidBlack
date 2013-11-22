@@ -2,14 +2,14 @@
 
 using namespace hect;
 
-Pass::Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const ShaderArg::Array& shaderArgs) :
+Pass::Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const PassUniformValue::Array& uniformValues) :
     _renderMode(renderMode),
     _textures(textures),
     _shader(shader),
-    _shaderArgs(shaderArgs)
+    _uniformValues(uniformValues)
 {
     assert(shader);
-    _resolveShaderArgs();
+    _resolvePassUniformValues();
 }
 
 void Pass::prepare(Gpu& gpu) const
@@ -31,12 +31,12 @@ void Pass::prepare(Gpu& gpu) const
     // Bind the shader
     gpu.bindShader(*_shader);
 
-    // Set the shader arguments
-    for (auto& pair : _resolvedArgs)
+    // Set the uniform values
+    for (auto& pair : _resolvedUniformValues)
     {
-        const ShaderParam& param = *pair.first;
-        const ShaderValue& value = pair.second;
-        gpu.setShaderParam(param, value);
+        const Uniform& uniform = *pair.first;
+        const UniformValue& value = pair.second;
+        gpu.setUniform(uniform, value);
     }
 }
 
@@ -60,20 +60,20 @@ const Shader::Ref& Pass::shader() const
     return _shader;
 }
 
-const ShaderArg::Array& Pass::shaderArgs() const
+const PassUniformValue::Array& Pass::uniformValues() const
 {
-    return _shaderArgs;
+    return _uniformValues;
 }
 
-void Pass::_resolveShaderArgs()
+void Pass::_resolvePassUniformValues()
 {
     assert(_shader);
 
-    // Resolve the parameters that the arguments refer to (this would be
+    // Resolve the uniforms that the uniform values refer to (this would be
     // invalidated if the shader changes)
-    for (const ShaderArg& arg : _shaderArgs)
+    for (const PassUniformValue& uniformValue : _uniformValues)
     {
-        const ShaderParam& param = _shader->paramWithName(arg.paramName());
-        _resolvedArgs[&param] = arg.value();
+        const Uniform& uniform = _shader->uniformWithName(uniformValue.uniformName());
+        _resolvedUniformValues[&uniform] = uniformValue.value();
     }
 }

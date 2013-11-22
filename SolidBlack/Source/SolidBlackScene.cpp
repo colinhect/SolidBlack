@@ -4,8 +4,8 @@ SolidBlackScene::SolidBlackScene(AssetCache& assetCache) :
     Scene(128),
     _hdrCompositorShader(assetCache.get<Shader>("Shaders/HdrCompositor.shader")),
     _screenMesh(assetCache.get<Mesh>("Meshes/Screen.mesh")),
-    _oneOverGammaParam(&_hdrCompositorShader->paramWithName("oneOverGamma")),
-    _exposureParam(&_hdrCompositorShader->paramWithName("exposure")),
+    _oneOverGammaUniform(&_hdrCompositorShader->uniformWithName("oneOverGamma")),
+    _exposureUniform(&_hdrCompositorShader->uniformWithName("exposure")),
     _gamma(2.2),
     _exposure(0.025)
 {
@@ -57,8 +57,8 @@ void SolidBlackScene::render(Gpu& gpu, RenderTarget& target)
     gpu.clear();
 
     gpu.bindShader(*_hdrCompositorShader);
-    gpu.setShaderParam(*_oneOverGammaParam, 1.0f / (float)_gamma);
-    gpu.setShaderParam(*_exposureParam, (float)_exposure);
+    gpu.setUniform(*_oneOverGammaUniform, 1.0f / (float)_gamma);
+    gpu.setUniform(*_exposureUniform, (float)_exposure);
     gpu.bindTexture(_frameBuffer->targets()[0], 0);
     gpu.bindMesh(*_screenMesh);
     gpu.draw();

@@ -3,10 +3,10 @@
         "Screen.frag",
         "Screen.vert"
     ],
-    "params" : {
+    "uniforms" : {
         "sourceTexture" : {
             "type" : "Texture",
-            "value" : 0
+            "defaultValue" : 0
         }
     }
 }

@@ -15,15 +15,15 @@ public:
     typedef std::shared_ptr<Shader> Ref;
 
     ///
-    /// Constructs a shader without any modules or parameter values.
+    /// Constructs a shader without any modules or uniforms.
     Shader();
 
     ///
-    /// Constructs a shader given its modules and parameter.
+    /// Constructs a shader given its modules and uniforms.
     ///
     /// \param modules The modules.
-    /// \param params The parameters.
-    Shader(const ShaderModule::RefArray& modules, const ShaderParam::Array& params);
+    /// \param uniforms The uniforms.
+    Shader(const ShaderModule::RefArray& modules, const Uniform::Array& uniforms);
 
     ///
     /// Destroys the shader if it is uploaded.
@@ -34,24 +34,24 @@ public:
     const ShaderModule::RefArray& modules() const;
 
     ///
-    /// Returns the parameters.
-    ShaderParam::Array& params();
+    /// Returns the uniforms.
+    Uniform::Array& uniforms();
 
     ///
-    /// Returns the parameters.
-    const ShaderParam::Array& params() const;
+    /// Returns the uniforms.
+    const Uniform::Array& uniforms() const;
 
     ///
-    /// Returns the parameter with the given name.
+    /// Returns the uniform with the given name.
     ///
-    /// \param name The name of the parameter.
+    /// \param name The name of the uniform.
     ///
-    /// \throws Error If no parameter with the given name exists.
-    const ShaderParam& paramWithName(const std::string& name) const;
+    /// \throws Error If no uniform with the given name exists.
+    const Uniform& uniformWithName(const std::string& name) const;
 
 private:
     ShaderModule::RefArray _modules;
-    ShaderParam::Array _params;
+    Uniform::Array _uniforms;
 };
 
 }

@@ -6,7 +6,7 @@ namespace hect
 ///
 /// A step in a material technique.
 ///
-/// \remarks Contains the render mode, textures, shader, and shader arguments
+/// \remarks Contains the render mode, textures, shader, and uniform values
 /// used when rendering geometry for this step in the technique.
 class Pass
 {
@@ -22,9 +22,8 @@ public:
     /// \param renderMode The render mode that pass will bind.
     /// \param textures The textures that the pass will bind.
     /// \param shader The shader that the pass will bind.
-    /// \param shaderArgs The argument values for the parameters in the
-    /// shader.
-    Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const ShaderArg::Array& shaderArgs);
+    /// \param uniformValues The values for the uniforms in the shader.
+    Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const PassUniformValue::Array& uniformValues);
 
     ///
     /// Prepares a GPU to begin using this pass.
@@ -49,21 +48,21 @@ public:
     const Shader::Ref& shader() const;
 
     ///
-    /// Returns the shader arguments.
-    const ShaderArg::Array& shaderArgs() const;
+    /// Returns the uniform values.
+    const PassUniformValue::Array& uniformValues() const;
 
 private:
 
-    // Resolves which shader parameters the shader arguments apply to for fast
+    // Resolves which uniforms the uniform values apply to for fast
     // binding
-    void _resolveShaderArgs();
+    void _resolvePassUniformValues();
 
     RenderMode _renderMode;
     Texture::RefArray _textures;
     Shader::Ref _shader;
 
-    ShaderArg::Array _shaderArgs;
-    std::map<const ShaderParam*, ShaderValue> _resolvedArgs;
+    PassUniformValue::Array _uniformValues;
+    std::map<const Uniform*, UniformValue> _resolvedUniformValues;
 };
 
 }

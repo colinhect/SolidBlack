@@ -228,9 +228,9 @@
     <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />
     <ClInclude Include="Source\Entity\Systems\RenderingSystem.h" />
-    <ClInclude Include="Source\Graphics\ShaderArg.h" />
-    <ClInclude Include="Source\Graphics\ShaderParam.h" />
-    <ClInclude Include="Source\Graphics\ShaderValue.h" />
+    <ClInclude Include="Source\Graphics\PassUniformValue.h" />
+    <ClInclude Include="Source\Graphics\Uniform.h" />
+    <ClInclude Include="Source\Graphics\UniformValue.h" />
     <ClInclude Include="Source\Internal\Bullet.h" />
     <ClInclude Include="Source\IO\JsonFormat.h" />
     <ClInclude Include="Source\IO\JsonParser.h" />
@@ -315,9 +315,9 @@
     <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp" />
-    <ClCompile Include="Source\Graphics\ShaderArg.cpp" />
-    <ClCompile Include="Source\Graphics\ShaderParam.cpp" />
-    <ClCompile Include="Source\Graphics\ShaderValue.cpp" />
+    <ClCompile Include="Source\Graphics\PassUniformValue.cpp" />
+    <ClCompile Include="Source\Graphics\Uniform.cpp" />
+    <ClCompile Include="Source\Graphics\UniformValue.cpp" />
     <ClCompile Include="Source\Internal\Bullet.cpp" />
     <ClCompile Include="Source\IO\JsonFormat.cpp" />
     <ClCompile Include="Source\IO\JsonParser.cpp" />

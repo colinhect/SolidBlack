@@ -4,7 +4,7 @@
         "Shaders/Default.frag",
         "Shaders/Default.vert"
     ],
-    "params" :
+    "uniforms" :
     {
         "modelViewProjection" :
         {
