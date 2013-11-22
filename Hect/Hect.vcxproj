@@ -289,7 +289,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -319,7 +319,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -351,7 +351,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -383,7 +383,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

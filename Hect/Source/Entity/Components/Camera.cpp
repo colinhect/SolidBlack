@@ -2,6 +2,9 @@
 
 using namespace hect;
 
+#include "lua.hpp"
+#include "LuaBridge/LuaBridge.h"
+
 Camera::Camera() :
     _fieldOfView(Angle<>::fromDegrees(90)),
     _aspectRatio(1),
@@ -146,3 +149,20 @@ void CameraSerializer::deserialize(Camera& camera, const DataValue& dataValue, A
         camera.setFarClip(farClip.asDouble());
     }
 }
+
+/*
+void CameraSerializer::bind(lua_State* lua)
+{
+    using namespace luabridge;
+
+    getGlobalNamespace(lua)
+        .beginClass<Angle<>>("Angle")
+            .addStaticFunction("fromDegrees", &Angle<>::fromDegrees)
+            .addFunction("degrees", &Angle<>::degrees)
+        .endClass()
+        .beginClass<Camera>("Camera")
+            .addProperty("nearClip", &Camera::nearClip, &Camera::setNearClip)
+            .addProperty("fieldOfView", &Camera::fieldOfView, &Camera::setFieldOfView)
+        .endClass();
+}
+*/
