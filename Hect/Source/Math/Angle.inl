@@ -20,13 +20,13 @@ Angle<T>::Angle():
 }
 
 template <typename T>
-T Angle<T>::toDegrees() const
+T Angle<T>::degrees() const
 {
     return ((T)180 / (T)pi) * _radians;
 }
 
 template <typename T>
-T Angle<T>::toRadians() const
+T Angle<T>::radians() const
 {
     return _radians;
 }

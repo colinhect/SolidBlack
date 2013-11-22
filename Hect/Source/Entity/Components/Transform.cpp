@@ -108,3 +108,20 @@ void Transform::transformBy(const Transform& transform)
     _rotation = transform._rotation * _rotation;
     _dirtyBits = PositionBit | ScaleBit | RotationBit;
 }
+
+void TransformSerializer::fromDataValue(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const
+{
+    JsonFormat jsonFormat;
+
+    const DataValue& position = dataValue["position"];
+    if (position.isArray())
+    {
+        transform.setPosition(jsonFormat.parseVector3(position));
+    }
+}
+
+DataValue TransformSerializer::toDataValue(const Transform& transform) const
+{
+    DataValue::Object members;
+    return DataValue(members);
+}

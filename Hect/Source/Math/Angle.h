@@ -32,11 +32,11 @@ public:
 
     ///
     /// Returns the value of the angle in degrees.
-    T toDegrees() const;
+    T degrees() const;
 
     ///
     /// Returns the value of the angle in radians.
-    T toRadians() const;
+    T radians() const;
 
     ///
     /// Returns the sum of the angle and another angle.

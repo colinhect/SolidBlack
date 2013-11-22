@@ -108,4 +108,12 @@ private:
     Quaternion<> _rotation;
 };
 
+class TransformSerializer :
+    public EntityComponentSerializer<Transform>
+{
+public:
+    void fromDataValue(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const;
+    DataValue toDataValue(const Transform& transform) const;
+};
+
 }

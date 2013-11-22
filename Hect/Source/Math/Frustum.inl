@@ -17,7 +17,7 @@ Frustum<T>::Frustum(
     T farClip) :
     _position(position)
 {
-    T tangent = (T)std::tan(fieldOfView.toRadians() * (T)0.5);
+    T tangent = (T)std::tan(fieldOfView.radians() * (T)0.5);
 
     T nearHeight = nearClip * tangent;
     T nearWidth = nearHeight * aspectRatio;

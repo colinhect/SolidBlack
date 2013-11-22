@@ -8,8 +8,10 @@ TestState::TestState(Engine& engine) :
     _assetCache(engine.storage()),
     _renderingSystem(_assetCache, engine.settings()),
     _freeCameraControllerSystem(engine.input()),
-    _scene(128)
+    _scene(128),
+    _factory(_scene, _assetCache)
 {
+    _factory.registerSerializer<FreeCameraController, EntityComponentSerializer<FreeCameraController>>("FreeCameraController");
 }
 
 void TestState::begin()
@@ -24,21 +26,8 @@ void TestState::begin()
     Mouse& mouse = engine().input().mouse();
     mouse.setCursorLocked(true);
 
-    // Add a free-controlled camera to the scene
-    Entity cameraEntity = _scene.createEntity();
-    cameraEntity.addComponent<Transform>(Vector3<>(0, 0, 10));
-    cameraEntity.addComponent<Camera>(Angle<>::fromDegrees(80), engine().screen().aspectRatio(), 0.01, 250000);
-    cameraEntity.addComponent<FreeCameraController>();
-    cameraEntity.activate();
-    
-    Mesh::Ref mesh = _assetCache.get<Mesh>("Meshes/Test.Cube.mesh");
-    Material::Ref material = _assetCache.get<Material>("Materials/Default.material");
-      
-    Entity meshEntity = _scene.createEntity();
-    Transform& transform = meshEntity.addComponent<Transform>(Vector3<>(0, 0, 0));
-    Geometry& geometry = meshEntity.addComponent<Geometry>(transform);
-    geometry.addMesh(mesh, material);
-    meshEntity.activate();
+    _factory.createEntity("Entities/FreeCamera.entity");
+    _factory.createEntity("Entities/TestCube.entity");
 
     _scene.refresh();
 }
@@ -68,6 +57,7 @@ void TestState::render(double delta)
     }
 
     Camera& camera = _cameraSystem.camera();
+    camera.setAspectRatio(engine().screen().aspectRatio());
     _renderingSystem.renderAll(camera, engine().gpu(), engine().screen());
 
     engine().swapBuffers();

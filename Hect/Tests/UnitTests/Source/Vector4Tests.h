@@ -121,30 +121,30 @@ SUITE(Vector4)
     template <typename T>
     void testAngleFrom()
     {
-        CHECK_CLOSE((T)0.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitX()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)180.0, Vector4<T>::unitX().angleFrom(-Vector4<T>::unitX()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitX()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, Vector4<T>::unitX().angleFrom(-Vector4<T>::unitX()).degrees(), (T)epsilon);
 
-        CHECK_CLOSE((T)0.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitY()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)180.0, Vector4<T>::unitY().angleFrom(-Vector4<T>::unitY()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitY()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, Vector4<T>::unitY().angleFrom(-Vector4<T>::unitY()).degrees(), (T)epsilon);
 
-        CHECK_CLOSE((T)0.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitZ()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)180.0, Vector4<T>::unitZ().angleFrom(-Vector4<T>::unitZ()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitZ()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, Vector4<T>::unitZ().angleFrom(-Vector4<T>::unitZ()).degrees(), (T)epsilon);
 
-        CHECK_CLOSE((T)0.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitW()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)180.0, Vector4<T>::unitW().angleFrom(-Vector4<T>::unitW()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitW()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, Vector4<T>::unitW().angleFrom(-Vector4<T>::unitW()).degrees(), (T)epsilon);
 
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitY()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitZ()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitW()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitX()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitZ()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitW()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitX()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitY()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitW()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitX()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitY()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitZ()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitY()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitZ()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitX().angleFrom(Vector4<T>::unitW()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitX()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitZ()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitY().angleFrom(Vector4<T>::unitW()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitX()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitY()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitZ().angleFrom(Vector4<T>::unitW()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitX()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitY()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector4<T>::unitW().angleFrom(Vector4<T>::unitZ()).degrees(), (T)epsilon);
     }
 
     TEST(AngleFrom)

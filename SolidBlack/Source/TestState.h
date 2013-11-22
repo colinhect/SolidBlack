@@ -30,4 +30,5 @@ private:
     FreeCameraControllerSystem _freeCameraControllerSystem;
 
     Scene _scene;
+    EntityFactory _factory;
 };

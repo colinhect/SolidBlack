@@ -17,6 +17,18 @@ public:
     virtual ~BaseComponent() { }
 
     ///
+    /// Called when the entity of the component is activated.
+    ///
+    /// \param entity The entity of the component.
+    virtual void onActivate(Entity& entity) { }
+
+    ///
+    /// Called when the entity of the component is deactivated.
+    ///
+    /// \param entity The entity of the component.
+    virtual void onDeactivate(Entity& entity) { }
+
+    ///
     /// Returns the component type of the component.
     virtual EntityComponentType componentType() const = 0;
 

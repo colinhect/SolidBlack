@@ -1,0 +1,11 @@
+{
+    "Transform" :
+    {
+        "position" : [ 0, 0, 0 ]
+    },
+    "Geometry" :
+    {
+        "mesh" : "Meshes/Test.Cube.mesh",
+        "material" : "Materials/Default.material"
+    }
+}

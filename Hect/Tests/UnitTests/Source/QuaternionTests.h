@@ -92,7 +92,7 @@ SUITE(Quaternion)
         CHECK_CLOSE((T)0.0, axis.x, (T)epsilon);
         CHECK_CLOSE((T)1.0, axis.y, (T)epsilon);
         CHECK_CLOSE((T)0.0, axis.z, (T)epsilon);
-        CHECK_CLOSE((T)180.0, angle.toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, angle.degrees(), (T)epsilon);
     }
 
     TEST(AxisAngle)
@@ -117,7 +117,7 @@ SUITE(Quaternion)
         CHECK_CLOSE((T)0.0, axis.x, (T)epsilon);
         CHECK_CLOSE((T)1.0, axis.y, (T)epsilon);
         CHECK_CLOSE((T)0.0, axis.z, (T)epsilon);
-        CHECK_CLOSE((T)270.0, angle.toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)270.0, angle.degrees(), (T)epsilon);
 
         a = Quaternion<T>::fromAxisAngle(Vector3<T>::unitY(), Angle<T>::fromDegrees((T)90.0));
         b = Quaternion<T>::fromAxisAngle(Vector3<T>::unitY(), Angle<T>::fromDegrees((T)180.0));
@@ -127,7 +127,7 @@ SUITE(Quaternion)
         CHECK_CLOSE((T)0.0, axis.x, (T)epsilon);
         CHECK_CLOSE((T)1.0, axis.y, (T)epsilon);
         CHECK_CLOSE((T)0.0, axis.z, (T)epsilon);
-        CHECK_CLOSE((T)270.0, angle.toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)270.0, angle.degrees(), (T)epsilon);
     }
 
     TEST(Multiply)

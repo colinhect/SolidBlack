@@ -4,8 +4,8 @@ SUITE(Angle)
     void testDefaultConstructor()
     {
         Angle<T> a;
-        CHECK_CLOSE((T)0.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)0.0, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, a.radians(), (T)epsilon);
     }
 
     TEST(DefaultConstructor)
@@ -18,8 +18,8 @@ SUITE(Angle)
     void testFromAndToDegrees()
     {
         Angle<T> a = Angle<T>::fromDegrees((T)180.0);
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(FromAndToDegrees)
@@ -32,8 +32,8 @@ SUITE(Angle)
     void testFromAndToRadians()
     {
         Angle<T> a = Angle<T>::fromRadians((T)pi);
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(FromAndToRadians)
@@ -47,8 +47,8 @@ SUITE(Angle)
     {
         Angle<T> a = Angle<T>::fromRadians((T)pi);
         a = -a;
-        CHECK_CLOSE((T)-180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)-pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)-180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)-pi, a.radians(), (T)epsilon);
     }
 
     TEST(Negate)
@@ -61,8 +61,8 @@ SUITE(Angle)
     void testAdd()
     {
         Angle<T> a = Angle<T>::fromDegrees(45.0) + Angle<T>::fromDegrees(135.0);
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(Add)
@@ -76,8 +76,8 @@ SUITE(Angle)
     {
         Angle<T> a = Angle<T>::fromDegrees((T)45.0);
         a += Angle<T>::fromDegrees((T)135.0);
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(AddEquals)
@@ -90,8 +90,8 @@ SUITE(Angle)
     void testSubtract()
     {
         Angle<T> a = Angle<T>::fromDegrees((T)270.0) - Angle<T>::fromDegrees((T)90.0);
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(Subtract)
@@ -105,8 +105,8 @@ SUITE(Angle)
     {
         Angle<T> a = Angle<T>::fromDegrees((T)270.0);
         a -= Angle<T>::fromDegrees((T)90.0);
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(SubtractEquals)
@@ -119,8 +119,8 @@ SUITE(Angle)
     void testMultiply()
     {
         Angle<T> a = Angle<T>::fromDegrees((T)90.0) * (T)2.0;
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(Multiply)
@@ -134,8 +134,8 @@ SUITE(Angle)
     {
         Angle<T> a = Angle<T>::fromDegrees((T)90.0);
         a *= (T)2.0;
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(MultiplyEquals)
@@ -148,8 +148,8 @@ SUITE(Angle)
     void testDivide()
     {
         Angle<T> a = Angle<T>::fromDegrees((T)360.0) / (T)2.0;
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(Divide)
@@ -163,8 +163,8 @@ SUITE(Angle)
     {
         Angle<T> a = Angle<T>::fromDegrees((T)360.0);
         a /= (T)2.0;
-        CHECK_CLOSE((T)180.0, a.toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)pi, a.toRadians(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, a.degrees(), (T)epsilon);
+        CHECK_CLOSE((T)pi, a.radians(), (T)epsilon);
     }
 
     TEST(DivideEquals)
@@ -179,8 +179,8 @@ SUITE(Angle)
         Angle<T> a = Angle<T>::fromDegrees((T)45.0);
         Angle<U> b = a;
 
-        CHECK_CLOSE(a.toDegrees(), b.toDegrees(), (T)epsilon);
-        CHECK_CLOSE(a.toRadians(), b.toRadians(), (T)epsilon);
+        CHECK_CLOSE(a.degrees(), b.degrees(), (T)epsilon);
+        CHECK_CLOSE(a.radians(), b.radians(), (T)epsilon);
     }
 
     TEST(Cast)

@@ -2,6 +2,17 @@
 
 using namespace hect;
 
+Camera::Camera() :
+    _fieldOfView(Angle<>::fromDegrees(90)),
+    _aspectRatio(1),
+    _nearClip(0.1),
+    _farClip(1000),
+    _front(-Vector3<>::unitZ()),
+    _up(Vector3<>::unitY()),
+    _right(_front.cross(_up).normalized())
+{
+}
+
 Camera::Camera(Angle<> fieldOfView, double aspectRatio, double nearClip, double farClip) :
     _fieldOfView(fieldOfView),
     _aspectRatio(aspectRatio),
@@ -103,4 +114,44 @@ void Camera::setFarClip(double farClip)
 const Frustum<>& Camera::frustum() const
 {
     return _frustum;
+}
+
+void CameraSerializer::fromDataValue(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const
+{
+    // Field of view
+    const DataValue& fieldOfView = dataValue["fieldOfView"];
+    if (fieldOfView.isNumber())
+    {
+        camera.setFieldOfView(Angle<>::fromDegrees(fieldOfView.asDouble()));
+    }
+
+    // Aspect ratio
+    const DataValue& aspectRatio = dataValue["aspectRatio"];
+    if (aspectRatio.isNumber())
+    {
+        camera.setAspectRatio(aspectRatio.asDouble());
+    }
+
+    // Near clip
+    const DataValue& nearClip = dataValue["nearClip"];
+    if (nearClip.isNumber())
+    {
+        camera.setNearClip(nearClip.asDouble());
+    }
+
+    // Far clip
+    const DataValue& farClip = dataValue["farClip"];
+    if (farClip.isNumber())
+    {
+        camera.setFarClip(farClip.asDouble());
+    }
+}
+
+DataValue CameraSerializer::toDataValue(const Camera& camera) const
+{
+    // Field of view
+    DataValue::Object members;
+    members["fieldOfView"] = camera.fieldOfView().degrees();
+
+    return DataValue(members);
 }

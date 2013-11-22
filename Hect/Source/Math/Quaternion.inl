@@ -4,7 +4,7 @@ namespace hect
 template <typename T>
 Quaternion<T> Quaternion<T>::fromAxisAngle(const Vector3<T>& axis, Angle<T> angle)
 {
-    T halfRadians = angle.toRadians() / (T)2.0;
+    T halfRadians = angle.radians() / (T)2.0;
 
     Vector3<T> v = axis.normalized() * (T)std::sin(halfRadians);
     T w = (T)std::cos(halfRadians);

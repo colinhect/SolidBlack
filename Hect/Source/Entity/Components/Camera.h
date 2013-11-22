@@ -13,6 +13,10 @@ class Camera :
 public:
 
     ///
+    /// Constructs a camera component with sensible default values.
+    Camera();
+
+    ///
     /// Constructs a camera component.
     ///
     /// \param fieldOfView The horizontal field of view.
@@ -112,6 +116,14 @@ private:
     Matrix4<> _projectionMatrix;
 
     Frustum<> _frustum;
+};
+
+class CameraSerializer :
+    public EntityComponentSerializer<Camera>
+{
+public:
+    void fromDataValue(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const;
+    DataValue toDataValue(const Camera& camera) const;
 };
 
 }

@@ -9,6 +9,7 @@ class Scene :
     public Uncopyable
 {
     friend class Entity;
+    friend class EntityFactory;
 public:
 
     ///
@@ -57,6 +58,8 @@ private:
 
     template <typename T>
     T& _addComponent(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
+
+    void _addComponentFromFactory(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
 
     template <typename T>
     T& _component(const Entity& entity);

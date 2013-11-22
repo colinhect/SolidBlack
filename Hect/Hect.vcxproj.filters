@@ -291,6 +291,12 @@
     <ClCompile Include="Source\Noise\Random.cpp">
       <Filter>Source\Noise</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity\EntityFactory.cpp">
+      <Filter>Source\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\DataValueLoader.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -546,6 +552,12 @@
       <Filter>Source\Noise</Filter>
     </ClInclude>
     <ClInclude Include="Source\Hect.h" />
+    <ClInclude Include="Source\Entity\EntityComponentSerializer.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\EntityFactory.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -607,6 +619,9 @@
     </None>
     <None Include="Source\Math\Vector4.inl">
       <Filter>Source\Math</Filter>
+    </None>
+    <None Include="Source\Entity\EntityFactory.inl">
+      <Filter>Source\Entity</Filter>
     </None>
   </ItemGroup>
 </Project>

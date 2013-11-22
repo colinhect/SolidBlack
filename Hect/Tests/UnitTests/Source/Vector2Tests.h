@@ -113,14 +113,14 @@ SUITE(Vector2)
     template <typename T>
     void testAngleFrom()
     {
-        CHECK_CLOSE((T)0.0, Vector2<T>::unitX().angleFrom(Vector2<T>::unitX()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)180.0, Vector2<T>::unitX().angleFrom(-Vector2<T>::unitX()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, Vector2<T>::unitX().angleFrom(Vector2<T>::unitX()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, Vector2<T>::unitX().angleFrom(-Vector2<T>::unitX()).degrees(), (T)epsilon);
 
-        CHECK_CLOSE((T)0.0, Vector2<T>::unitY().angleFrom(Vector2<T>::unitY()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)180.0, Vector2<T>::unitY().angleFrom(-Vector2<T>::unitY()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)0.0, Vector2<T>::unitY().angleFrom(Vector2<T>::unitY()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)180.0, Vector2<T>::unitY().angleFrom(-Vector2<T>::unitY()).degrees(), (T)epsilon);
 
-        CHECK_CLOSE((T)90.0, Vector2<T>::unitX().angleFrom(Vector2<T>::unitY()).toDegrees(), (T)epsilon);
-        CHECK_CLOSE((T)90.0, Vector2<T>::unitY().angleFrom(Vector2<T>::unitX()).toDegrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector2<T>::unitX().angleFrom(Vector2<T>::unitY()).degrees(), (T)epsilon);
+        CHECK_CLOSE((T)90.0, Vector2<T>::unitY().angleFrom(Vector2<T>::unitX()).degrees(), (T)epsilon);
     }
 
     TEST(AngleFrom)

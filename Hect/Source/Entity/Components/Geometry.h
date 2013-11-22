@@ -11,10 +11,12 @@ class Geometry :
 public:
 
     ///
-    /// Constructs a geometry component given the transform
+    /// Constructs a geometry component.
+    Geometry();
+
     ///
-    /// \param transform The transform.
-    Geometry(Transform& transform);
+    /// \copydoc BaseComponent::onActivate()
+    void onActivate(Entity& entity);
 
     ///
     /// Adds a mesh to the geometry with a material.
@@ -36,6 +38,15 @@ private:
     Material::RefArray _materials;
     Transform* _transform;
     AxisAlignedBox<> _boundingBox;
+};
+
+
+class GeometrySerializer :
+    public EntityComponentSerializer<Geometry>
+{
+public:
+    void fromDataValue(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const;
+    DataValue toDataValue(const Geometry& geometry) const;
 };
 
 }

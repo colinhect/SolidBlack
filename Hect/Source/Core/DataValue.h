@@ -44,6 +44,10 @@ class DataValue
 public:
 
     ///
+    /// A shared reference to a data value.
+    typedef std::shared_ptr<DataValue> Ref;
+
+    ///
     /// The underlying type used for an array.
     typedef std::vector<DataValue> Array;
 

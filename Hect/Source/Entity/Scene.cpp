@@ -122,6 +122,13 @@ void Scene::_activateEntity(const Entity& entity)
     }
 #endif
 
+    // Call onActivate for all components
+    auto& components = _components[entity._id];
+    for (auto& pair : components)
+    {
+        pair.second->onActivate(Entity(entity));
+    }
+
     _activatedEntities.push_back(entity);
 }
 
@@ -145,4 +152,28 @@ bool Scene::_isActivated(const Entity& entity) const
 bool Scene::_isNull(const Entity& entity) const
 {
     return _attributes[entity._id].isNull();
+}
+
+void Scene::_addComponentFromFactory(const Entity& entity, const std::shared_ptr<BaseComponent>& component)
+{
+    EntityComponentType type = component->componentType();
+
+#ifdef HECT_DEBUG
+    assert(!entity.isNull());
+    if(_attributes[entity._id].hasComponent(type))
+    {
+        throw Error("Attempt to add a component an entity already has");
+    }
+
+    if (_isActivated(entity))
+    {
+        throw Error("Attempt to add a component to an activated entity");
+    }
+#endif
+
+    // Add the existence of a component of this type to the entity's attributes
+    _attributes[entity._id].setHasComponent(type, true);
+
+    // Add the component to the entity's components
+    _components[entity._id][type] = component;
 }

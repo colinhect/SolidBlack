@@ -72,7 +72,7 @@ Matrix4<T> Matrix4<T>::createPerspective(Angle<T> fieldOfView, T aspectRatio, T 
 {
     Matrix4 m;
 
-    T h = (T)1.0 / std::tan(fieldOfView.toRadians() * (T)0.5);
+    T h = (T)1.0 / std::tan(fieldOfView.radians() * (T)0.5);
     m[ 0] = h / aspectRatio;
     m[ 5] = h;
     m[10] = (farClip + nearClip) / (nearClip - farClip);
