@@ -1,5 +1,4 @@
 #include <Hect.h>
-
 using namespace hect;
 
 #ifdef HECT_WINDOWS

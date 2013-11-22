@@ -4,6 +4,10 @@ namespace hect
 {
 
 ///
+/// An Internet Protocol port.
+typedef uint16_t Port;
+
+///
 /// An event type.
 enum class SocketEventType
 {
@@ -74,7 +78,7 @@ public:
     /// \param maxConnectionCount The maximum number of simultaneous incoming
     /// connections the socket can accept.
     /// \param channelCount The number of channels to use.
-    Socket(uint16_t port, unsigned maxConnectionCount, uint8_t channelCount);
+    Socket(Port port, unsigned maxConnectionCount, uint8_t channelCount);
 
     ///
     /// Destroys the socket.
@@ -90,7 +94,7 @@ public:
     ///
     /// \param address The address of the remote socket.
     /// \param port The port the remote socket is listening on.
-    Peer connectToPeer(IpAddress address, uint16_t port);
+    Peer connectToPeer(IpAddress address, Port port);
 
     ///
     /// Triggers a disconnection handshake attempt with a remote socket.

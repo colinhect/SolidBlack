@@ -7,7 +7,7 @@ class Client :
     public Uncopyable
 {
 public:
-    Client();
+    Client(IpAddress serverAddress, Port port);
     ~Client();
 
     void update();

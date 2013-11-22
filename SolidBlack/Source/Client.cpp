@@ -2,10 +2,10 @@
 
 #include "PacketType.h"
 
-Client::Client() :
+Client::Client(IpAddress serverAddress, Port port) :
     _socket(1, 2)
 {
-    _server = _socket.connectToPeer(IpAddress::localAddress(), 6006);
+    _server = _socket.connectToPeer(serverAddress, port);
 }
 
 Client::~Client()

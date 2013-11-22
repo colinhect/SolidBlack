@@ -30,7 +30,7 @@ Socket::Socket(unsigned maxConnectionCount, uint8_t channelCount) :
     }
 }
 
-Socket::Socket(uint16_t port, unsigned maxConnectionCount, uint8_t channelCount) :
+Socket::Socket(Port port, unsigned maxConnectionCount, uint8_t channelCount) :
     _enetHost(nullptr)
 {
     ENetAddress address;
@@ -58,7 +58,7 @@ Socket::~Socket()
     }
 }
 
-Peer Socket::connectToPeer(IpAddress address, uint16_t port)
+Peer Socket::connectToPeer(IpAddress address, Port port)
 {
     ENetAddress enetAddress;
     enetAddress.host = (uint32_t)address;
