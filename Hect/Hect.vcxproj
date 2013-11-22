@@ -190,6 +190,7 @@
     <None Include="Source\Asset\AssetHandle.inl" />
     <None Include="Source\Core\Any.inl" />
     <None Include="Source\Core\Engine.inl" />
+    <None Include="Source\Entity\ComponentSerializer.inl" />
     <None Include="Source\Entity\Entity.inl" />
     <None Include="Source\Entity\Component.inl" />
     <None Include="Source\Entity\System.inl" />

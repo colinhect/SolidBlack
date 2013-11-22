@@ -10,7 +10,7 @@ TestState::TestState(Engine& engine) :
     _freeCameraControllerSystem(engine.input()),
     _scene(_assetCache)
 {
-    _scene.registerSerializer<FreeCameraController, ComponentSerializer<FreeCameraController>>("FreeCameraController");
+    _scene.registerComponent<FreeCameraController, FreeCameraControllerSerializer>("FreeCameraController");
 }
 
 void TestState::begin()

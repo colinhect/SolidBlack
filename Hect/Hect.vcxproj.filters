@@ -616,5 +616,8 @@
     <None Include="Source\Entity\System.inl">
       <Filter>Source\Entity</Filter>
     </None>
+    <None Include="Source\Entity\ComponentSerializer.inl">
+      <Filter>Source\Entity</Filter>
+    </None>
   </ItemGroup>
 </Project>

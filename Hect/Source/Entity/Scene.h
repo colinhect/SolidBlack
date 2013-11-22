@@ -23,7 +23,7 @@ public:
 
     ///
     /// Removes all entities from all systems.
-    virtual ~Scene();
+    ~Scene();
 
     ///
     /// Adds/removes recently activated/deactivated entities to/from relevant
@@ -50,10 +50,22 @@ public:
     /// \returns The new entity.
     Entity createEntity();
 
+    ///
+    /// Creates a new entity from an asset.
+    ///
+    /// \param path The path to the entity asset.
+    ///
+    /// \throws Error If the scene does not have access to an asset cache.
     Entity createEntity(const Path& path);
 
-    template <typename ComponentType, typename SerializerType>
-    void registerSerializer(const std::string& componentTypeName);
+    ///
+    /// Registers a component with a serializer.
+    ///
+    /// \param componentTypeName The type name of the component.
+    ///
+    /// \throws Error If the component type is already registered.
+    template <typename T, typename S>
+    void registerComponent(const std::string& componentTypeName);
 
 private:
     void _activateEntity(const Entity& entity);
@@ -85,7 +97,7 @@ private:
     std::vector<EntityAttributes> _attributes;
 
     // For each entity, its components mapped by type
-    std::vector<std::map<ComponentType, std::shared_ptr<BaseComponent>>> _components;
+    std::vector<std::map<ComponentTypeId, std::shared_ptr<BaseComponent>>> _components;
 
     // Entities activated since the last call to refresh()
     std::vector<Entity> _activatedEntities;
@@ -96,9 +108,14 @@ private:
     // Systems involved in the scene
     std::vector<System*> _systems;
 
-    std::map<std::string, ComponentType> _componentTypes;
-    std::map<ComponentType, std::shared_ptr<BaseComponentSerializer>> _componentSerializers;
-    std::map<ComponentType, std::function<std::shared_ptr<BaseComponent>()>> _componentConstructors;
+    // Component type names mapped to component types
+    std::map<std::string, ComponentTypeId> _componentTypes;
+
+    // Component types mapped to registered component serializers
+    std::map<ComponentTypeId, std::shared_ptr<BaseComponentSerializer>> _componentSerializers;
+
+    // Component types mapped to component constructors
+    std::map<ComponentTypeId, std::function<std::shared_ptr<BaseComponent>()>> _componentConstructors;
 };
 
 }

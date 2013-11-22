@@ -2,16 +2,16 @@ namespace hect
 {
 
 template <typename T>
-ComponentType Component<T>::componentType() const
+ComponentTypeId Component<T>::componentTypeId() const
 {
-    return type();
+    return typeId();
 }
 
 template <typename T>
-ComponentType Component<T>::type()
+ComponentTypeId Component<T>::typeId()
 {
-    static const ComponentType type = BaseComponent::nextType();
-    return type;
+    static const ComponentTypeId typeId = BaseComponent::nextTypeId();
+    return typeId;
 }
 
 }

@@ -64,7 +64,7 @@ void Geometry::renderDebug(const Camera& camera, DebugRenderingSystem& rendering
     }
 }
 
-void GeometrySerializer::fromDataValue(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const
+void GeometrySerializer::deserialize(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const
 {
     Mesh::Ref mesh;
     Material::Ref material;
@@ -82,10 +82,4 @@ void GeometrySerializer::fromDataValue(Geometry& geometry, const DataValue& data
     }
 
     geometry.addMesh(mesh, material);
-}
-
-DataValue GeometrySerializer::toDataValue(const Geometry& geometry) const
-{
-    DataValue::Object members;
-    return DataValue(members);
 }

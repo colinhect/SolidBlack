@@ -2,8 +2,8 @@
 
 using namespace hect;
 
-ComponentType BaseComponent::nextType()
+ComponentTypeId BaseComponent::nextTypeId()
 {
-    static ComponentType nextType = 0;
-    return nextType++;
+    static ComponentTypeId nextTypeId = 0;
+    return nextTypeId++;
 }

@@ -1,24 +1,24 @@
 namespace hect
 {
 
-template <typename ComponentType, typename SerializerType>
-void Scene::registerSerializer(const std::string& componentTypeName)
+template <typename T, typename S>
+void Scene::registerComponent(const std::string& componentTypeName)
 {
     if (_componentTypes.find(componentTypeName) != _componentTypes.end())
     {
-        throw Error(format("Component type '%s' already has a serializer registered", componentTypeName.c_str()));
+        throw Error(format("Component type '%s' is already registered", componentTypeName.c_str()));
     }
 
-    _componentTypes[componentTypeName] = ComponentType::type();
-    _componentSerializers[ComponentType::type()] = std::shared_ptr<BaseComponentSerializer>(new SerializerType());
-    _componentConstructors[ComponentType::type()] = [] { return std::make_shared<ComponentType>(); };
+    _componentTypes[componentTypeName] = T::typeId();
+    _componentSerializers[T::typeId()] = std::shared_ptr<BaseComponentSerializer>(new S());
+    _componentConstructors[T::typeId()] = [] { return std::make_shared<T>(); };
 }
 
 template <typename T>
 bool Scene::_hasComponent(const Entity& entity) const
 {
     assert(!entity.isNull());
-    return _attributes[entity._id].hasComponent(Component<T>::type());
+    return _attributes[entity._id].hasComponent(Component<T>::typeId());
 }
 
 template <typename T>
@@ -36,13 +36,13 @@ T& Scene::_addComponent(const Entity& entity, const std::shared_ptr<BaseComponen
     }
 #endif
 
-    ComponentType type = component->componentType();
+    ComponentTypeId typeId = component->componentTypeId();
 
     // Add the existence of a component of this type to the entity's attributes
-    _attributes[entity._id].setHasComponent(type, true);
+    _attributes[entity._id].setHasComponent(typeId, true);
 
     // Add the component to the entity's components
-    _components[entity._id][type] = component;
+    _components[entity._id][typeId] = component;
 
     // Return the new component
     return *(T*)component.get();
@@ -59,7 +59,7 @@ T& Scene::_component(const Entity& entity)
 #endif
 
     // Return the component at the type index
-    return *dynamic_cast<T*>(_components[entity._id][Component<T>::type()].get());
+    return *dynamic_cast<T*>(_components[entity._id][Component<T>::typeId()].get());
 }
 
 }

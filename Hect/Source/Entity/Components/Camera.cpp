@@ -116,7 +116,7 @@ const Frustum<>& Camera::frustum() const
     return _frustum;
 }
 
-void CameraSerializer::fromDataValue(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const
+void CameraSerializer::deserialize(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const
 {
     // Field of view
     const DataValue& fieldOfView = dataValue["fieldOfView"];
@@ -145,13 +145,4 @@ void CameraSerializer::fromDataValue(Camera& camera, const DataValue& dataValue,
     {
         camera.setFarClip(farClip.asDouble());
     }
-}
-
-DataValue CameraSerializer::toDataValue(const Camera& camera) const
-{
-    // Field of view
-    DataValue::Object members;
-    members["fieldOfView"] = camera.fieldOfView().degrees();
-
-    return DataValue(members);
 }

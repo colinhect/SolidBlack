@@ -7,7 +7,7 @@ class Entity;
 
 ///
 /// A number identifying a component type.
-typedef uint32_t ComponentType;
+typedef uint32_t ComponentTypeId;
 
 ///
 /// Base entity component.
@@ -30,11 +30,11 @@ public:
 
     ///
     /// Returns the component type of the component.
-    virtual ComponentType componentType() const = 0;
+    virtual ComponentTypeId componentTypeId() const = 0;
 
     ///
     /// Returns the next valid component type.
-    static ComponentType nextType();
+    static ComponentTypeId nextTypeId();
 };
 
 ///
@@ -46,12 +46,12 @@ class Component :
 public:
 
     ///
-    /// \copydoc BaseComponent::componentType()
-    ComponentType componentType() const;
+    /// \copydoc BaseComponent::componentTypeId()
+    ComponentTypeId componentTypeId() const;
 
     ///
-    /// Returns the component type for this type of component.
-    static ComponentType type();
+    /// Returns the component type ID for this type of component.
+    static ComponentTypeId typeId();
 };
 
 }

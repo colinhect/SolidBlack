@@ -112,8 +112,7 @@ class TransformSerializer :
     public ComponentSerializer<Transform>
 {
 public:
-    void fromDataValue(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const;
-    DataValue toDataValue(const Transform& transform) const;
+    void deserialize(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const;
 };
 
 }

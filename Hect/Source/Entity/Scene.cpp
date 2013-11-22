@@ -8,9 +8,9 @@ Scene::Scene() :
     _attributes(128),
     _components(128)
 {
-    registerSerializer<Camera, CameraSerializer>("Camera");
-    registerSerializer<Geometry, GeometrySerializer>("Geometry");
-    registerSerializer<Transform, TransformSerializer>("Transform");
+    registerComponent<Camera, CameraSerializer>("Camera");
+    registerComponent<Geometry, GeometrySerializer>("Geometry");
+    registerComponent<Transform, TransformSerializer>("Transform");
 }
 
 Scene::Scene(AssetCache& assetCache) :
@@ -19,9 +19,9 @@ Scene::Scene(AssetCache& assetCache) :
     _attributes(128),
     _components(128)
 {
-    registerSerializer<Camera, CameraSerializer>("Camera");
-    registerSerializer<Geometry, GeometrySerializer>("Geometry");
-    registerSerializer<Transform, TransformSerializer>("Transform");
+    registerComponent<Camera, CameraSerializer>("Camera");
+    registerComponent<Geometry, GeometrySerializer>("Geometry");
+    registerComponent<Transform, TransformSerializer>("Transform");
 }
 
 Scene::~Scene()
@@ -140,10 +140,10 @@ Entity Scene::createEntity(const Path& path)
             throw Error(format("No serializer registered for component type '%s'", componentTypeName.c_str()));
         }
 
-        ComponentType type = _componentTypes[componentTypeName];
+        ComponentTypeId type = _componentTypes[componentTypeName];
 
         std::shared_ptr<BaseComponent> component = _componentConstructors[type]();
-        _componentSerializers[type]->_fromDataValue(component.get(), dataValue[componentTypeName], *_assetCache);
+        _componentSerializers[type]->_deserialize(component.get(), dataValue[componentTypeName], *_assetCache);
         _addComponentManually(entity, component);
     }
 
@@ -199,7 +199,7 @@ bool Scene::_isNull(const Entity& entity) const
 
 void Scene::_addComponentManually(const Entity& entity, const std::shared_ptr<BaseComponent>& component)
 {
-    ComponentType type = component->componentType();
+    ComponentTypeId type = component->componentTypeId();
 
 #ifdef HECT_DEBUG
     assert(!entity.isNull());

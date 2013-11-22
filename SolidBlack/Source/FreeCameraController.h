@@ -7,3 +7,8 @@ class FreeCameraController :
     public Component<FreeCameraController>
 {
 };
+
+class FreeCameraControllerSerializer :
+    public ComponentSerializer<FreeCameraController>
+{
+};
