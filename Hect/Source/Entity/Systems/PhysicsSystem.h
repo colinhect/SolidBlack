@@ -3,18 +3,23 @@
 namespace hect
 {
 
+///
+/// Simulates physical interactions of physical bodies.
 class PhysicsSystem :
     public System
 {
 public:
+
+    ///
+    /// Constructs the system.
     PhysicsSystem();
     ~PhysicsSystem();
 
     ///
     /// Updates all physical bodies.
     ///
-    /// \param timeStep The time step.
-    /// \param maxSubStepCount The maximum number of sub steps.
+    /// \param timeStep The time between last frame and this one.
+    /// \param maxSubStepCount The maximum number of sub-steps.
     void update(double timeStep, unsigned maxSubStepCount);
 
 protected:

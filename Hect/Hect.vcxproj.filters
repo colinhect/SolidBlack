@@ -297,6 +297,9 @@
     <ClCompile Include="Source\Entity\Systems\BehaviorSystem.cpp">
       <Filter>Source\Entity\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity\Components\Behavior.cpp">
+      <Filter>Source\Entity\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
