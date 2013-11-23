@@ -15,7 +15,6 @@ const double epsilon = 0.0001;
 #include "AngleTests.h"
 #include "AnyTests.h"
 #include "DataValueTests.h"
-#include "EntityTests.h"
 #include "FormatTests.h"
 #include "FrustumTests.h"
 #include "JsonParserTests.h"

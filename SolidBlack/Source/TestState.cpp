@@ -7,8 +7,7 @@ TestState::TestState(Engine& engine) :
     State(engine, 1.0 / 60.0),
     _assetCache(engine.storage()),
     _renderingSystem(_assetCache, engine.settings()),
-    _freeCameraControllerSystem(engine.input()),
-    _scene(_assetCache)
+    _scene(engine, _assetCache)
 {
     _scene.registerComponent<FreeCameraController, FreeCameraControllerSerializer>("FreeCameraController");
 }
@@ -17,7 +16,7 @@ void TestState::begin()
 {
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
-    _scene.addSystem(_freeCameraControllerSystem);
+    _scene.addSystem(_behaviorSystem);
 
     Keyboard& keyboard = engine().input().keyboard();
     keyboard.addListener(*this);
@@ -36,7 +35,7 @@ void TestState::end()
     Keyboard& keyboard = engine().input().keyboard();
     keyboard.removeListener(*this);
 
-    _scene.addSystem(_freeCameraControllerSystem);
+    _scene.addSystem(_behaviorSystem);
     _scene.addSystem(_renderingSystem);
     _scene.addSystem(_cameraSystem);
 }
@@ -44,7 +43,7 @@ void TestState::end()
 void TestState::update(double timeStep)
 {
     _cameraSystem.update();
-    _freeCameraControllerSystem.update(timeStep);
+    _behaviorSystem.update(timeStep);
     _scene.refresh();
 }
 

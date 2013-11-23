@@ -5,7 +5,9 @@
     },
     "Geometry" :
     {
-        "mesh" : "Meshes/Test.Cube.mesh",
-        "material" : "Materials/Default.material"
+        "meshes" :
+        [
+            [ "Meshes/Test.Cube.mesh", "Materials/Default.material" ]
+        ]
     }
 }

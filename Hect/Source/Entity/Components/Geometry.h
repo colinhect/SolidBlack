@@ -40,7 +40,6 @@ private:
     AxisAlignedBox<> _boundingBox;
 };
 
-
 class GeometrySerializer :
     public ComponentSerializer<Geometry>
 {

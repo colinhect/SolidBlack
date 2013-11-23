@@ -13,13 +13,16 @@ public:
     
     ///
     /// Constructs a scene.
-    Scene();
+    ///
+    /// \param engine The engine.
+    Scene(Engine& engine);
 
     ///
     /// Constructs a scene given an asset cache.
     ///
+    /// \param engine The engine.
     /// \param assetCache An asset cache.
-    Scene(AssetCache& assetCache);
+    Scene(Engine& engine, AssetCache& assetCache);
 
     ///
     /// Removes all entities from all systems.
@@ -29,6 +32,10 @@ public:
     /// Adds/removes recently activated/deactivated entities to/from relevant
     /// systems and destroys entities pending destruction.
     void refresh();
+
+    ///
+    /// Returns the engine.
+    Engine& engine();
 
     ///
     /// Adds a system to the scene.
@@ -84,6 +91,7 @@ private:
     template <typename T>
     T& _component(const Entity& entity);
 
+    Engine* _engine;
     AssetCache* _assetCache;
 
     // The next entity ID to use when creating an entity (if the queue is

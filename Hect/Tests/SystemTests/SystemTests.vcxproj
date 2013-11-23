@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AssetCacheTests.h" />
+    <ClInclude Include="Source\EntityTests.h" />
     <ClInclude Include="Source\MaterialLoadingTests.h" />
     <ClInclude Include="Source\MeshLoadingTests.h" />
     <ClInclude Include="Source\NetworkTests.h" />

@@ -40,6 +40,7 @@
     <ClCompile Include="Source\Entity\Component.cpp" />
     <ClCompile Include="Source\Entity\System.cpp" />
     <ClCompile Include="Source\Entity\Scene.cpp" />
+    <ClCompile Include="Source\Entity\Systems\BehaviorSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="Source\Core\TaskPool.h" />
     <ClInclude Include="Source\Core\TimeSpan.h" />
     <ClInclude Include="Source\Core\Uncopyable.h" />
+    <ClInclude Include="Source\Entity\Components\Behavior.h" />
     <ClInclude Include="Source\Entity\Components\Camera.h" />
     <ClInclude Include="Source\Entity\Components\Geometry.h" />
     <ClInclude Include="Source\Entity\Components\Renderable.h" />
@@ -123,6 +125,7 @@
     <ClInclude Include="Source\Entity\ComponentSerializer.h" />
     <ClInclude Include="Source\Entity\System.h" />
     <ClInclude Include="Source\Entity\Scene.h" />
+    <ClInclude Include="Source\Entity\Systems\BehaviorSystem.h" />
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />

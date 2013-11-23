@@ -118,15 +118,11 @@ private:
     Frustum<> _frustum;
 };
 
-//#include "lua.hpp"
-
 class CameraSerializer :
     public ComponentSerializer<Camera>
 {
 public:
     void deserialize(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const;
-
-    //void bind(lua_State* lua);
 };
 
 }

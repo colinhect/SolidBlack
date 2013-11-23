@@ -209,7 +209,15 @@ const DataValue& DataValue::operator[](size_t index) const
 {
     if (isArray())
     {
-        return _data.as<Array>()[index];
+        Array& array = _data.as<Array>();
+        if (index < array.size())
+        {
+            return array[index];
+        }
+        else
+        {
+            return _null;
+        }
     }
     else
     {

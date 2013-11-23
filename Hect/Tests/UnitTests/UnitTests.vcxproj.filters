@@ -10,9 +10,6 @@
     <ClInclude Include="Source\DataValueTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EntityTests.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\FormatTests.h">
       <Filter>Source</Filter>
     </ClInclude>

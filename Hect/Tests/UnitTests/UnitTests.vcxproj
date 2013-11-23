@@ -175,7 +175,6 @@
     <ClInclude Include="Source\Vector4Tests.h" />
     <ClInclude Include="Source\VertexAttributeTests.h" />
     <ClInclude Include="Source\VertexLayoutTests.h" />
-    <ClInclude Include="Source\EntityTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

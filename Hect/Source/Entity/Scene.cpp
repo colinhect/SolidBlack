@@ -2,7 +2,8 @@
 
 using namespace hect;
 
-Scene::Scene() :
+Scene::Scene(Engine& engine) :
+    _engine(&engine),
     _assetCache(nullptr),
     _nextId(1), // Entity ID 0 is considered null, so start at 1
     _attributes(128),
@@ -13,7 +14,8 @@ Scene::Scene() :
     registerComponent<Transform, TransformSerializer>("Transform");
 }
 
-Scene::Scene(AssetCache& assetCache) :
+Scene::Scene(Engine& engine, AssetCache& assetCache) :
+    _engine(&engine),
     _assetCache(&assetCache),
     _nextId(1),
     _attributes(128),
@@ -71,6 +73,11 @@ void Scene::refresh()
         _nextIds.push(id);
     }
     _destroyedEntities.clear();
+}
+
+Engine& Scene::engine()
+{
+    return *_engine;
 }
 
 void Scene::addSystem(System& system)

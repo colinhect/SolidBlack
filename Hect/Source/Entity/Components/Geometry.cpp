@@ -66,20 +66,13 @@ void Geometry::renderDebug(const Camera& camera, DebugRenderingSystem& rendering
 
 void GeometrySerializer::deserialize(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const
 {
-    Mesh::Ref mesh;
-    Material::Ref material;
-
-    const DataValue& meshValue = dataValue["mesh"];
-    if (meshValue.isString())
+    for (const DataValue& meshValue : dataValue["meshes"])
     {
-        mesh = assetCache.get<Mesh>(meshValue.asString());
+        if (meshValue.isArray())
+        {
+            Mesh::Ref mesh = assetCache.get<Mesh>(meshValue[0].asString());
+            Material::Ref material = assetCache.get<Material>(meshValue[1].asString());
+            geometry.addMesh(mesh, material);
+        }
     }
-
-    const DataValue& materialValue = dataValue["material"];
-    if (materialValue.isString())
-    {
-        material = assetCache.get<Material>(materialValue.asString());
-    }
-
-    geometry.addMesh(mesh, material);
 }

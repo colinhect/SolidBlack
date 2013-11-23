@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Client.cpp" />
     <ClCompile Include="Source\DeferredRenderingSystem.cpp" />
-    <ClCompile Include="Source\FreeCameraControllerSystem.cpp" />
+    <ClCompile Include="Source\FreeCameraController.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Server.cpp" />
     <ClCompile Include="Source\TestState.cpp" />
@@ -30,7 +30,6 @@
     <ClInclude Include="Source\Client.h" />
     <ClInclude Include="Source\DeferredRenderingSystem.h" />
     <ClInclude Include="Source\FreeCameraController.h" />
-    <ClInclude Include="Source\FreeCameraControllerSystem.h" />
     <ClInclude Include="Source\PacketType.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Server.h" />

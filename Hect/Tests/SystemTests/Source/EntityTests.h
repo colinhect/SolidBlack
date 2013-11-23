@@ -102,7 +102,7 @@ SUITE(Entity)
 {
     TEST(CreateAndDestroy)
     {
-        Scene scene;
+        Scene scene(*engine);
 
         Entity a = scene.createEntity();
         CHECK(!a.isNull());
@@ -115,7 +115,7 @@ SUITE(Entity)
 
     TEST(Components)
     {
-        Scene scene;
+        Scene scene(*engine);
         Entity a = scene.createEntity();
 
         CHECK(!a.hasComponent<Name>());
@@ -127,7 +127,7 @@ SUITE(Entity)
 
     TEST(PolymorphicComponents)
     {
-        Scene scene;
+        Scene scene(*engine);
 
         Entity a = scene.createEntity();
         a.addComponent<Dog>();
@@ -144,7 +144,7 @@ SUITE(Entity)
 
     TEST(ActivationAndDestruction)
     {
-        Scene scene;
+        Scene scene(*engine);
         Entity a = scene.createEntity();
         CHECK(!a.isActivated());
         a.addComponent<Name>();
@@ -162,7 +162,7 @@ SUITE(Entity)
 
     TEST(PoolResize)
     {
-        Scene scene;
+        Scene scene(*engine);
 
         std::vector<Entity> entities;
         for (int i = 0 ; i < 129; ++i)
@@ -185,7 +185,7 @@ SUITE(Entity)
         MovementSystem movementSystem;
         NamingSystem namingSystem;
 
-        Scene scene;
+        Scene scene(*engine);
 
         scene.addSystem(movementSystem);
         scene.addSystem(namingSystem);
