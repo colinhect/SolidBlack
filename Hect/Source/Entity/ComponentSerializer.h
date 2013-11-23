@@ -17,7 +17,7 @@ protected:
 };
 
 /// \endcond
-   
+
 ///
 /// Provides functionality for serializing/deserializing entity components.
 template <typename T>

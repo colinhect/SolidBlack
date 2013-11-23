@@ -98,7 +98,7 @@ public:
     ///
     /// Returns the frustum.
     const Frustum<>& frustum() const;
-    
+
 private:
     Angle<> _fieldOfView;
 

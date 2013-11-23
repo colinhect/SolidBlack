@@ -10,7 +10,7 @@ class Scene :
 {
     friend class Entity;
 public:
-    
+
     ///
     /// Constructs a scene.
     ///
