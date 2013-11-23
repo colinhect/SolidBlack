@@ -1,0 +1,18 @@
+{
+    "techniques" :
+    [
+        [
+            {
+                "shader" : "Shaders/Diffuse.shader",
+                "uniformValues" :
+                {
+                    "diffuseIntensityRange" : [ 1, 2]
+                },
+                "textures" :
+                [
+                    "Textures/Checker.texture"
+                ]
+            }
+        ]
+    ]
+}

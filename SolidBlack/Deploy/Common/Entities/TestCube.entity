@@ -7,7 +7,7 @@
     {
         "meshes" :
         [
-            [ "Meshes/Test.Cube.mesh", "Materials/Default.material" ]
+            [ "Meshes/Test.Cube.mesh", "Materials/Diffuse.material" ]
         ]
     }
 }
