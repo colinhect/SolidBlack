@@ -2,9 +2,6 @@
 
 using namespace hect;
 
-#include "lua.hpp"
-#include "LuaBridge/LuaBridge.h"
-
 Camera::Camera() :
     _fieldOfView(Angle<>::fromDegrees(90)),
     _aspectRatio(1),

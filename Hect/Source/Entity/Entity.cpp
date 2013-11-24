@@ -26,6 +26,12 @@ void Entity::activate()
     _scene->_activateEntity(*this);
 }
 
+void Entity::deactivate()
+{
+    assert(_scene);
+    _scene->_deactivateEntity(*this);
+}
+
 bool Entity::isActivated() const
 {
     assert(_scene);

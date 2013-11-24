@@ -4,7 +4,7 @@ namespace hect
 {
 
 ///
-/// A scene filled with entities.
+/// A scene of entities.
 class Scene :
     public Uncopyable
 {
@@ -14,11 +14,17 @@ public:
     ///
     /// Constructs a scene.
     ///
+    /// \remarks Entity components often need access to engine which is why the
+    /// scene is given the engine.
+    ///
     /// \param engine The engine.
     Scene(Engine& engine);
 
     ///
     /// Constructs a scene given an asset cache.
+    ///
+    /// \remarks Entity components often need access to engine which is why the
+    /// scene is given the engine.
     ///
     /// \param engine The engine.
     /// \param assetCache An asset cache.
@@ -75,8 +81,11 @@ public:
     void registerComponent(const std::string& componentTypeName);
 
 private:
-    void _activateEntity(const Entity& entity);
-    void _destroyEntity(const Entity& entity);
+    void _destroyEntity(Entity& entity);
+
+    void _activateEntity(Entity& entity);
+    void _deactivateEntity(Entity& entity);
+
     bool _isActivated(const Entity& entity) const;
     bool _isNull(const Entity& entity) const;
 
@@ -84,9 +93,9 @@ private:
     bool _hasComponent(const Entity& entity) const;
 
     template <typename T>
-    T& _addComponent(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
+    T& _addComponent(Entity& entity, const std::shared_ptr<BaseComponent>& component);
 
-    void _addComponentManually(const Entity& entity, const std::shared_ptr<BaseComponent>& component);
+    void _addComponentManually(Entity& entity, const std::shared_ptr<BaseComponent>& component);
 
     template <typename T>
     T& _component(const Entity& entity);
@@ -102,10 +111,16 @@ private:
     std::queue<Entity::Id> _nextIds;
 
     // For each entity, the attributes it possesses
+    std::vector<EntityAttributes> _deactivatedAttributes;
+    
+    // For each entity, the attributes it possesses
     std::vector<EntityAttributes> _attributes;
 
     // For each entity, its components mapped by type
     std::vector<std::map<ComponentTypeId, std::shared_ptr<BaseComponent>>> _components;
+    
+    // Entities deactivated since the last call to refresh()
+    std::vector<Entity> _deactivatedEntities;
 
     // Entities activated since the last call to refresh()
     std::vector<Entity> _activatedEntities;

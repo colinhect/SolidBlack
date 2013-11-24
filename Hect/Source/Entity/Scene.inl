@@ -22,7 +22,7 @@ bool Scene::_hasComponent(const Entity& entity) const
 }
 
 template <typename T>
-T& Scene::_addComponent(const Entity& entity, const std::shared_ptr<BaseComponent>& component)
+T& Scene::_addComponent(Entity& entity, const std::shared_ptr<BaseComponent>& component)
 {
 #ifdef HECT_DEBUG
     if (_hasComponent<T>(entity))

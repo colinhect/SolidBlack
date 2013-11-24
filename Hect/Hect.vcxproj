@@ -293,7 +293,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -312,7 +312,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -323,7 +323,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
@@ -342,7 +342,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -355,7 +355,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -374,7 +374,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>
@@ -387,7 +387,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Lua\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\LuaBridge\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Hect\Dependencies\PhysFS\Source\;$(SolutionDir)Hect\Dependencies\Glew\Source\;$(SolutionDir)Hect\Dependencies\Sfml\Source\;$(SolutionDir)Hect\Dependencies\LodePng\Source\;$(SolutionDir)Hect\Dependencies\ENet\Source\;$(SolutionDir)Hect\Dependencies\Bullet\Source\;$(SolutionDir)Hect\Dependencies\JsonCpp\Source\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -406,7 +406,7 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)Lua.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
+      <Command>lib /OUT:$(TargetDir)Hect.lib $(TargetDir)HectStatic.lib $(TargetDir)PhysFS.lib $(TargetDir)JsonCpp.lib $(TargetDir)Glew.lib $(TargetDir)sfml-audio-s.lib $(TargetDir)sfml-graphics-s.lib $(TargetDir)sfml-network-s.lib $(TargetDir)sfml-system-s.lib $(TargetDir)sfml-window-s.lib $(TargetDir)LodePng.lib $(TargetDir)ENet.lib $(TargetDir)Bullet.lib &gt; $(ProjectDir)Ignore.txt</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Building Hect.lib</Message>

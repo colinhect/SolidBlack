@@ -10,10 +10,6 @@ class System
 public:
 
     ///
-    /// A shared reference to an entity system.
-    typedef std::shared_ptr<System> Ref;
-
-    ///
     /// Construct an entity system without an update priority.
     System();
 

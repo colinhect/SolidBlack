@@ -6,6 +6,7 @@ Scene::Scene(Engine& engine) :
     _engine(&engine),
     _assetCache(nullptr),
     _nextId(1), // Entity ID 0 is considered null, so start at 1
+    _deactivatedAttributes(128),
     _attributes(128),
     _components(128)
 {
@@ -18,6 +19,7 @@ Scene::Scene(Engine& engine, AssetCache& assetCache) :
     _engine(&engine),
     _assetCache(&assetCache),
     _nextId(1),
+    _deactivatedAttributes(128),
     _attributes(128),
     _components(128)
 {
@@ -120,6 +122,7 @@ Entity Scene::createEntity()
         if (id >= _components.size())
         {
             size_t size = _components.size() * 2;
+            _deactivatedAttributes.resize(size);
             _attributes.resize(size);
             _components.resize(size);
         }
@@ -158,31 +161,7 @@ Entity Scene::createEntity(const Path& path)
     return entity;
 }
 
-void Scene::_activateEntity(const Entity& entity)
-{
-#ifdef HECT_DEBUG
-    if (_isNull(entity))
-    {
-        throw Error("Attempt to activate a null entity");
-    }
-
-    if (_isActivated(entity))
-    {
-        throw Error("Attempt to activate an activated entity");
-    }
-#endif
-
-    // Call onActivate for all components
-    auto& components = _components[entity._id];
-    for (auto& pair : components)
-    {
-        pair.second->onActivate(Entity(entity));
-    }
-
-    _activatedEntities.push_back(entity);
-}
-
-void Scene::_destroyEntity(const Entity& entity)
+void Scene::_destroyEntity(Entity& entity)
 {
 #ifdef HECT_DEBUG
     if (_isNull(entity))
@@ -192,6 +171,46 @@ void Scene::_destroyEntity(const Entity& entity)
 #endif
 
     _destroyedEntities.push_back(entity);
+}
+
+void Scene::_activateEntity(Entity& entity)
+{
+#ifdef HECT_DEBUG
+    if (_isActivated(entity))
+    {
+        throw Error("Attempt to activate an activated entity");
+    }
+#endif
+
+    // Call onActivate() for all components
+    auto& components = _components[entity._id];
+    for (auto& pair : components)
+    {
+        pair.second->onActivate(entity);
+    }
+
+    _activatedEntities.push_back(entity);
+}
+
+void Scene::_deactivateEntity(Entity& entity)
+{
+#ifdef HECT_DEBUG
+    if (!_isActivated(entity))
+    {
+        throw Error("Attempt to deactivate a deactivated entity");
+    }
+#endif
+
+    // Call onDeactivate() for all components
+    auto& components = _components[entity._id];
+    for (auto& pair : components)
+    {
+        pair.second->onDeactivate(entity);
+    }
+
+    // Keep the attributes the entity had on deactivation
+    _deactivatedAttributes[entity._id] = _attributes[entity._id];
+    _deactivatedEntities.push_back(entity);
 }
 
 bool Scene::_isActivated(const Entity& entity) const
@@ -204,7 +223,7 @@ bool Scene::_isNull(const Entity& entity) const
     return _attributes[entity._id].isNull();
 }
 
-void Scene::_addComponentManually(const Entity& entity, const std::shared_ptr<BaseComponent>& component)
+void Scene::_addComponentManually(Entity& entity, const std::shared_ptr<BaseComponent>& component)
 {
     ComponentTypeId type = component->componentTypeId();
 
