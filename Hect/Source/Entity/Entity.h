@@ -148,6 +148,14 @@ public:
     T& addComponent(A0&& a0, A1&& a1, A2&& a2, A3&& a3, A4&& a4);
 
     ///
+    /// Removes a component of a certain type from the entity.
+    ///
+    /// \throws Error If the entity is activated or already does not have a
+    /// component of the type (debug builds only).
+    template <typename T>
+    void removeComponent();
+
+    ///
     /// Returns the component of a certain type from an entity.
     ///
     /// \throws Error If the entity does not have a component of the type

@@ -3,6 +3,19 @@
 namespace hect
 {
 
+/// \cond INTERNAL
+
+enum class EntityAttribute
+{
+    MarkedForDestruction = 59,
+    MarkedForActivation = 60,
+    MarkedForDeactivation = 61,
+    Activated = 62,
+    Exists = 63
+};
+
+/// \endcond
+
 ///
 /// Contains metadata for an entity.
 class EntityAttributes
@@ -10,24 +23,17 @@ class EntityAttributes
 public:
 
     ///
-    /// Returns whether the entity is null.
-    bool isNull() const;
+    /// Returns whether it has the given attribute.
+    //
+    /// \param attribute The attribute.
+    bool hasAttribute(EntityAttribute attribute) const;
 
     ///
-    /// Sets whether the entity is null.
-    ///
-    /// \param value True if the null is activated; false otherwise.
-    void setNull(bool value);
-
-    ///
-    /// Returns whether the entity is activated.
-    bool isActivated() const;
-
-    ///
-    /// Sets whether the entity is activated.
-    ///
-    /// \param value True if the entity is activated; false otherwise.
-    void setActivated(bool value);
+    /// Sets the value of a specific attribute.
+    //
+    /// \param attribute The attribute.
+    /// \param value The new value.
+    void setAttribute(EntityAttribute attribute, bool value);
 
     ///
     /// Returns whether the entity has a component of a certain type.
@@ -47,6 +53,14 @@ public:
     ///
     /// \param attributes The attributes.
     bool contains(const EntityAttributes& attributes) const;
+
+    ///
+    /// Returns the attributes which are different than the given attributes.
+    ///
+    /// \param attributes The attributes.
+    ///
+    /// \returns The differing attributes.
+    EntityAttributes difference(const EntityAttributes& attributes) const;
 
 private:
     std::bitset<64> _bitset;

@@ -58,6 +58,14 @@ T& Entity::addComponent(A0&& a0, A1&& a1, A2&& a2, A3&& a3, A4&& a4)
 }
 
 template <typename T>
+void Entity::removeComponent()
+{
+    assert(_id);
+    assert(_scene);
+    return _scene->_removeComponent<T>(*this);
+}
+
+template <typename T>
 T& Entity::component()
 {
     assert(_id);

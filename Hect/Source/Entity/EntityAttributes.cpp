@@ -2,28 +2,14 @@
 
 using namespace hect;
 
-// Bits 0-61 are used for component existence by type
-const size_t _nullBit = 63;
-const size_t _activatedBit = 62;
-
-bool EntityAttributes::isNull() const
+bool EntityAttributes::hasAttribute(EntityAttribute attribute) const
 {
-    return !_bitset.test(_nullBit);
+    return _bitset.test((size_t)attribute);
 }
 
-void EntityAttributes::setNull(bool value)
+void EntityAttributes::setAttribute(EntityAttribute attribute, bool value)
 {
-    _bitset.set(_nullBit, !value);
-}
-
-bool EntityAttributes::isActivated() const
-{
-    return _bitset.test(_activatedBit);
-}
-
-void EntityAttributes::setActivated(bool value)
-{
-    _bitset.set(_activatedBit, value);
+    _bitset.set((size_t)attribute, value);
 }
 
 bool EntityAttributes::hasComponent(ComponentTypeId type) const
@@ -41,4 +27,17 @@ bool EntityAttributes::contains(const EntityAttributes& attributes) const
     uint64_t theseAttributes = _bitset.to_ullong();
     uint64_t thoseAttributes = attributes._bitset.to_ullong();
     return (theseAttributes & thoseAttributes) == thoseAttributes;
+}
+
+EntityAttributes EntityAttributes::difference(const EntityAttributes& attributes) const
+{
+    uint64_t theseAttributes = _bitset.to_ullong();
+    uint64_t thoseAttributes = attributes._bitset.to_ullong();
+
+    uint64_t mask = theseAttributes ^ thoseAttributes;
+
+    EntityAttributes result;
+    result._bitset = theseAttributes & mask;
+
+    return result;
 }

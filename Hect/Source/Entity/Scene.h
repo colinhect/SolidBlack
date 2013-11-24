@@ -35,8 +35,12 @@ public:
     ~Scene();
 
     ///
-    /// Adds/removes recently activated/deactivated entities to/from relevant
-    /// systems and destroys entities pending destruction.
+    /// Refreshes entity membership of all systems.
+    ///
+    /// \remarks If an entity was created/activated since the last refresh then
+    /// it will be added to each system based on its components.  If an entity
+    /// was deactivated since the last refresh then it will be removed from all
+    /// systems it was a member of.
     void refresh();
 
     ///
@@ -45,6 +49,9 @@ public:
 
     ///
     /// Adds a system to the scene.
+    ///
+    /// \remarks Any entities that belong to the system based on their
+    /// components will be added to the system.
     ///
     /// \param system The system.
     void addSystem(System& system);
@@ -81,6 +88,11 @@ public:
     void registerComponent(const std::string& componentTypeName);
 
 private:
+    enum
+    {
+        InitialPoolSize = 128
+    };
+
     void _destroyEntity(Entity& entity);
 
     void _activateEntity(Entity& entity);
@@ -91,14 +103,20 @@ private:
 
     template <typename T>
     bool _hasComponent(const Entity& entity) const;
-
+    
     template <typename T>
     T& _addComponent(Entity& entity, const std::shared_ptr<BaseComponent>& component);
+
+    template <typename T>
+    void _removeComponent(Entity& entity);
 
     void _addComponentManually(Entity& entity, const std::shared_ptr<BaseComponent>& component);
 
     template <typename T>
     T& _component(const Entity& entity);
+
+    void _registerComponents();
+    void _growPool();
 
     Engine* _engine;
     AssetCache* _assetCache;

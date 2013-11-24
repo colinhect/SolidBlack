@@ -238,4 +238,66 @@ SUITE(Entity)
         CHECK(!namingSystem.hasEntity(joe));
         CHECK(!namingSystem.hasEntity(namelessHerold));
     }
+
+    TEST(DeactivationAndSystems)
+    {
+        MovementSystem movementSystem;
+        NamingSystem namingSystem;
+
+        Scene scene(*engine);
+
+        scene.addSystem(movementSystem);
+        scene.addSystem(namingSystem);
+
+        Entity joe = scene.createEntity();
+        joe.addComponent<Name>().name = "Joe";
+        joe.activate();
+
+        scene.refresh();
+        
+        CHECK(!movementSystem.hasEntity(joe));
+        CHECK(namingSystem.hasEntity(joe));
+
+        joe.deactivate();
+        joe.removeComponent<Name>();
+        joe.addComponent<Position>();
+        joe.addComponent<Velocity>();
+        joe.activate();
+
+        scene.refresh();
+        
+        CHECK(movementSystem.hasEntity(joe));
+        CHECK(!namingSystem.hasEntity(joe));
+    }
+
+    TEST(DeactivationAndSystemsPartialRequirements)
+    {
+        MovementSystem movementSystem;
+        NamingSystem namingSystem;
+
+        Scene scene(*engine);
+
+        scene.addSystem(movementSystem);
+        scene.addSystem(namingSystem);
+
+        Entity joe = scene.createEntity();
+        joe.addComponent<Name>().name = "Joe";
+        joe.addComponent<Position>();
+        joe.addComponent<Velocity>();
+        joe.activate();
+
+        scene.refresh();
+        
+        CHECK(movementSystem.hasEntity(joe));
+        CHECK(namingSystem.hasEntity(joe));
+
+        joe.deactivate();
+        joe.removeComponent<Position>();
+        joe.activate();
+
+        scene.refresh();
+        
+        CHECK(!movementSystem.hasEntity(joe));
+        CHECK(namingSystem.hasEntity(joe));
+    }
 }
