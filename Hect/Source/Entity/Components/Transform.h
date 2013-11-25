@@ -15,20 +15,6 @@ public:
     Transform();
 
     ///
-    /// Constructs a transform given the position.
-    ///
-    /// \param position The position.
-    Transform(const Vector3<>& position);
-
-    ///
-    /// Constructs a transform given the position, scale, and rotation.
-    ///
-    /// \param position The position.
-    /// \param scale The scale.
-    /// \param rotation The rotation.
-    Transform(const Vector3<>& position, const Vector3<>& scale, const Quaternion<>& rotation);
-
-    ///
     /// Builds a transformation matrix.
     ///
     /// \param matrix The matrix to assign the transformation matrix to.

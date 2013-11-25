@@ -5,8 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading materials from JSON.
-class MaterialJsonFormat :
-    public JsonFormat
+class MaterialJsonFormat
 {
 public:
 

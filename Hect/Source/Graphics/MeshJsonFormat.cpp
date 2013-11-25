@@ -81,10 +81,10 @@ void MeshJsonFormat::load(Mesh& mesh, const DataValue& dataValue)
             case VertexAttributeSemantic::Normal:
             case VertexAttributeSemantic::Tangent:
             case VertexAttributeSemantic::Binormal:
-                meshBuilder.setAttributeData(semantic, parseVector3(attribute["data"]));
+                meshBuilder.setAttributeData(semantic, attribute["data"].asVector3());
                 break;
             default:
-                meshBuilder.setAttributeData(semantic, parseVector2(attribute["data"]));
+                meshBuilder.setAttributeData(semantic, attribute["data"].asVector2());
             }
         }
     }

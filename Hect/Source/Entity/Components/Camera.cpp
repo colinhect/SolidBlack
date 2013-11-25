@@ -13,17 +13,6 @@ Camera::Camera() :
 {
 }
 
-Camera::Camera(Angle<> fieldOfView, double aspectRatio, double nearClip, double farClip) :
-    _fieldOfView(fieldOfView),
-    _aspectRatio(aspectRatio),
-    _nearClip(nearClip),
-    _farClip(farClip),
-    _front(-Vector3<>::unitZ()),
-    _up(Vector3<>::unitY()),
-    _right(_front.cross(_up).normalized())
-{
-}
-
 void Camera::transformTo(const Transform& transform)
 {
     const Vector3<>& position = transform.position();

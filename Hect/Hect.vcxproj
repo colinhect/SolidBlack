@@ -84,7 +84,6 @@
     <ClCompile Include="Source\Internal\Bullet.cpp" />
     <ClCompile Include="Source\IO\FileReadStream.cpp" />
     <ClCompile Include="Source\IO\FileWriteStream.cpp" />
-    <ClCompile Include="Source\IO\JsonFormat.cpp" />
     <ClCompile Include="Source\IO\JsonParser.cpp" />
     <ClCompile Include="Source\IO\MemoryReadStream.cpp" />
     <ClCompile Include="Source\IO\MemoryWriteStream.cpp" />
@@ -164,7 +163,6 @@
     <ClInclude Include="Source\Internal\Bullet.h" />
     <ClInclude Include="Source\IO\FileReadStream.h" />
     <ClInclude Include="Source\IO\FileWriteStream.h" />
-    <ClInclude Include="Source\IO\JsonFormat.h" />
     <ClInclude Include="Source\IO\JsonParser.h" />
     <ClInclude Include="Source\IO\MemoryReadStream.h" />
     <ClInclude Include="Source\IO\MemoryWriteStream.h" />

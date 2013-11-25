@@ -9,11 +9,15 @@ Geometry::Geometry() :
 
 void Geometry::onActivate(Entity& entity)
 {
-    _transform = nullptr;
     if (entity.hasComponent<Transform>())
     {
         _transform = &entity.component<Transform>();
     }
+}
+
+void Geometry::onDeactivate(Entity& entity)
+{
+    _transform = nullptr;
 }
 
 void Geometry::addMesh(Mesh::Ref mesh, Material::Ref material)

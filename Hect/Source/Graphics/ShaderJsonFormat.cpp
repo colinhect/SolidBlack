@@ -56,13 +56,13 @@ UniformValue ShaderJsonFormat::parseValue(UniformType type, const DataValue& dat
     case UniformType::Float:
         return UniformValue((float)dataValue.asDouble());
     case UniformType::Vector2:
-        return UniformValue(parseVector2(dataValue));
+        return UniformValue(dataValue.asVector2());
     case UniformType::Vector3:
-        return UniformValue(parseVector3(dataValue));
+        return UniformValue(dataValue.asVector3());
     case UniformType::Vector4:
-        return UniformValue(parseVector4(dataValue));
+        return UniformValue(dataValue.asVector4());
     case UniformType::Matrix4:
-        return UniformValue(parseMatrix4(dataValue));
+        return UniformValue(dataValue.asMatrix4());
     default:
         return UniformValue();
     }

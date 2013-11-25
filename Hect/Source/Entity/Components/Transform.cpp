@@ -8,21 +8,6 @@ Transform::Transform() :
 {
 }
 
-Transform::Transform(const Vector3<>& position) :
-    _dirtyBits(PositionBit),
-    _position(position),
-    _scale(Vector3<>::one())
-{
-}
-
-Transform::Transform(const Vector3<>& position, const Vector3<>& scale, const Quaternion<>& rotation) :
-    _dirtyBits(PositionBit | ScaleBit | RotationBit),
-    _position(position),
-    _scale(scale),
-    _rotation(rotation)
-{
-}
-
 void Transform::buildMatrix(Matrix4<>& matrix) const
 {
     matrix = Matrix4<>();
@@ -111,11 +96,9 @@ void Transform::transformBy(const Transform& transform)
 
 void TransformSerializer::deserialize(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const
 {
-    JsonFormat jsonFormat;
-
     const DataValue& position = dataValue["position"];
     if (position.isArray())
     {
-        transform.setPosition(jsonFormat.parseVector3(position));
+        transform.setPosition(position.asVector3());
     }
 }

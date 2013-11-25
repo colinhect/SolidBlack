@@ -13,10 +13,14 @@ public:
     ///
     /// Constructs a geometry component.
     Geometry();
-
+    
     ///
     /// \copydoc BaseComponent::onActivate()
     void onActivate(Entity& entity);
+
+    ///
+    /// \copydoc BaseComponent::onDeactivate()
+    void onDeactivate(Entity& entity);
 
     ///
     /// Adds a mesh to the geometry with a material.

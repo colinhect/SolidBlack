@@ -76,12 +76,39 @@ public:
     ///
     /// \param value The number value.
     DataValue(unsigned value);
-
+    
     ///
     /// Constructs a number data value.
     ///
     /// \param value The number value.
     DataValue(double value);
+    
+    ///
+    /// Constructs a data value from a 2-dimensional vector as an array of
+    /// numbers.
+    ///
+    /// \param value The value.
+    DataValue(const Vector2<>& value);
+    
+    ///
+    /// Constructs a data value from a 3-dimensional vector as an array of
+    /// numbers.
+    ///
+    /// \param value The value.
+    DataValue(const Vector3<>& value);
+    
+    ///
+    /// Constructs a data value from a 4-dimensional vector as an array of
+    /// numbers.
+    ///
+    /// \param value The value.
+    DataValue(const Vector4<>& value);
+
+    ///
+    /// Constructs a data value from a 4 by 4 matrix as an array of numbers.
+    ///
+    /// \param value The value.
+    DataValue(const Matrix4<>& value);
 
     ///
     /// Constructs a string data value.
@@ -163,6 +190,26 @@ public:
     ///
     /// Returns the value as a double (zero if the data value is not a number).
     double asDouble() const;
+
+    ///
+    /// Returns the value as a 2-dimensional vector (assumes the value is an
+    /// array of numbers).
+    Vector2<> asVector2() const;
+    
+    ///
+    /// Returns the value as a 3-dimensional vector (assumes the value is an
+    /// array of numbers).
+    Vector3<> asVector3() const;
+    
+    ///
+    /// Returns the value as a 4-dimensional vector (assumes the value is an
+    /// array of numbers).
+    Vector4<> asVector4() const;
+    
+    ///
+    /// Returns the value as a 4 by 4 matrix (assumes the value is an
+    /// array of numbers).
+    Matrix4<> asMatrix4() const;
 
     ///
     /// Returns the value as a string (empty string if the data value is not a

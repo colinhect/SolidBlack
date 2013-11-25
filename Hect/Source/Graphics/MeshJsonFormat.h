@@ -5,8 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading meshes from JSON.
-class MeshJsonFormat :
-    public JsonFormat
+class MeshJsonFormat
 {
 public:
 

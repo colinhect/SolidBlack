@@ -246,9 +246,6 @@
     <ClCompile Include="Source\IO\FileWriteStream.cpp">
       <Filter>Source\IO</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IO\JsonFormat.cpp">
-      <Filter>Source\IO</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IO\JsonParser.cpp">
       <Filter>Source\IO</Filter>
     </ClCompile>
@@ -477,9 +474,6 @@
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\IO\FileWriteStream.h">
-      <Filter>Source\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IO\JsonFormat.h">
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\IO\JsonParser.h">

@@ -5,8 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading shaders from JSON.
-class ShaderJsonFormat :
-    public JsonFormat
+class ShaderJsonFormat
 {
 public:
 

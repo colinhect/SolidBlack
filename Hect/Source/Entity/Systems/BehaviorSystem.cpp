@@ -9,7 +9,7 @@ BehaviorSystem::BehaviorSystem()
 
 void BehaviorSystem::update(double timeStep)
 {
-    // Pre update
+    // Pre-update
     for (Entity& entity : entities())
     {
         Behavior& behavior = entity.component<Behavior>();
@@ -23,7 +23,7 @@ void BehaviorSystem::update(double timeStep)
         behavior.update(timeStep);
     }
 
-    // Post update
+    // Post-update
     for (Entity& entity : entities())
     {
         Behavior& behavior = entity.component<Behavior>();

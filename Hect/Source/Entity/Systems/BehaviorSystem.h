@@ -14,7 +14,6 @@ public:
     /// Constructs the system.
     BehaviorSystem();
 
-
     ///
     /// Updates all of the behaviors in stages.
     ///

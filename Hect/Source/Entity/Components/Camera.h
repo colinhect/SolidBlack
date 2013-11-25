@@ -17,15 +17,6 @@ public:
     Camera();
 
     ///
-    /// Constructs a camera component.
-    ///
-    /// \param fieldOfView The horizontal field of view.
-    /// \param aspectRatio The ratio of the width/height.
-    /// \param nearClip The near clipping distance.
-    /// \param farClip The far clipping distance.
-    Camera(Angle<> fieldOfView, double aspectRatio, double nearClip, double farClip);
-
-    ///
     /// Transforms the camera to a transformation.
     ///
     /// \param transform The transformation to transform to.

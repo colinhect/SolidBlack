@@ -35,6 +35,47 @@ DataValue::DataValue(double value) :
 {
 }
 
+DataValue::DataValue(const Vector2<>& value) :
+    _type(DataValueType::Array)
+{
+    Array array;
+    array.push_back(value.x);
+    array.push_back(value.y);
+    _data = array;
+}
+
+DataValue::DataValue(const Vector3<>& value) :
+    _type(DataValueType::Array)
+{
+    Array array;
+    array.push_back(value.x);
+    array.push_back(value.y);
+    array.push_back(value.z);
+    _data = array;
+}
+
+DataValue::DataValue(const Vector4<>& value) :
+    _type(DataValueType::Array)
+{
+    Array array;
+    array.push_back(value.x);
+    array.push_back(value.y);
+    array.push_back(value.z);
+    array.push_back(value.w);
+    _data = array;
+}
+
+DataValue::DataValue(const Matrix4<>& value) :
+    _type(DataValueType::Array)
+{
+    Array array;
+    for (unsigned i = 0; i < 16; ++i)
+    {
+        _data.as<Array>().push_back(value[i]);
+    }
+    _data = array;
+}
+
 DataValue::DataValue(const char* value) :
     _type(DataValueType::String),
     _data(std::string(value))
@@ -159,6 +200,86 @@ double DataValue::asDouble() const
     {
         return 0.0;
     }
+}
+
+Vector2<> DataValue::asVector2() const
+{
+    Vector2<> result;
+
+    size_t i = 0;
+    for (const DataValue& component : *this)
+    {
+        if (i < 2)
+        {
+            result[i++] = component.asDouble();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return result;
+}
+
+Vector3<> DataValue::asVector3() const
+{
+    Vector3<> result;
+
+    size_t i = 0;
+    for (const DataValue& component : *this)
+    {
+        if (i < 3)
+        {
+            result[i++] = component.asDouble();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return result;
+}
+
+Vector4<> DataValue::asVector4() const
+{
+    Vector4<> result;
+
+    size_t i = 0;
+    for (const DataValue& component : *this)
+    {
+        if (i < 4)
+        {
+            result[i++] = component.asDouble();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return result;
+}
+    
+Matrix4<> DataValue::asMatrix4() const
+{
+    Matrix4<> result;
+
+    size_t i = 0;
+    for (const DataValue& component : *this)
+    {
+        if (i < 16)
+        {
+            result[i++] = component.asDouble();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return result;
 }
 
 const std::string& DataValue::asString() const
