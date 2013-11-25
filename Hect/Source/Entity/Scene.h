@@ -13,12 +13,7 @@ public:
 
     ///
     /// Constructs a scene.
-    ///
-    /// \remarks Entity components often need access to engine which is why the
-    /// scene is given the engine.
-    ///
-    /// \param engine The engine.
-    Scene(Engine& engine);
+    Scene(Input& input);
 
     ///
     /// Constructs a scene given an asset cache.
@@ -28,7 +23,7 @@ public:
     ///
     /// \param engine The engine.
     /// \param assetCache An asset cache.
-    Scene(Engine& engine, AssetCache& assetCache);
+    Scene(Input& input, AssetCache& assetCache);
 
     ///
     /// Removes all entities from all systems.
@@ -43,9 +38,7 @@ public:
     /// systems it was a member of.
     void refresh();
 
-    ///
-    /// Returns the engine.
-    Engine& engine();
+    Input& input();
 
     ///
     /// Adds a system to the scene.
@@ -118,7 +111,7 @@ private:
     void _registerComponents();
     void _growPool();
 
-    Engine* _engine;
+    Input* _input;
     AssetCache* _assetCache;
 
     // The next entity ID to use when creating an entity (if the queue is

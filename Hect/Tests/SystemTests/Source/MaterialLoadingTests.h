@@ -5,14 +5,14 @@ SUITE(MaterialLoading)
         AssetCache assetCache(engine->storage());
 
         Material* base = assetCache.getHandle<Material>("Base.material").get();
-        Shader* screen = assetCache.getHandle<Shader>("Screen.shader").get();
+        Shader* window = assetCache.getHandle<Shader>("Window.shader").get();
 
         CHECK_EQUAL(1, base->techniques().size());
         CHECK_EQUAL(1, base->techniques()[0].passes().size());
 
         const Pass& pass = base->techniques()[0].passes()[0];
 
-        CHECK_EQUAL(screen, pass.shader().get());
+        CHECK_EQUAL(window, pass.shader().get());
 
         const RenderMode& renderMode = pass.renderMode();
         CHECK(renderMode.isStateEnabled(RenderState::Blend));

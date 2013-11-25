@@ -2,6 +2,17 @@
 
 using namespace hect;
 
+Input::Input(const InputAxis::Array& axes) :
+    _axes(axes)
+{
+    for (InputAxis& axis : _axes)
+    {
+        _mappedAxes[axis.name()] = &axis;
+    }
+
+    _mouse.addListener(*this);
+}
+
 const InputAxis& Input::axisWithName(const std::string& name) const
 {
     auto it = _mappedAxes.find(name);
@@ -11,17 +22,6 @@ const InputAxis& Input::axisWithName(const std::string& name) const
     }
 
     return *(*it).second;
-}
-
-void Input::setAxes(const InputAxis::Array& axes)
-{
-    _mappedAxes.clear();
-    _axes = axes;
-
-    for (InputAxis& axis : _axes)
-    {
-        _mappedAxes[axis.name()] = &axis;
-    }
 }
 
 void Input::updateAxes(double timeStep)
@@ -107,11 +107,6 @@ void Input::receiveMouseEvent(const MouseEvent& event)
             }
         }
     }
-}
-
-Input::Input()
-{
-    _mouse.addListener(*this);
 }
 
 void Input::_enqueueEvent(const MouseEvent& event)

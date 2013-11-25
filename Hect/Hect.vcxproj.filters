@@ -75,9 +75,6 @@
     <ClCompile Include="Source\Core\DataValue.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Engine.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Error.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
@@ -181,9 +178,6 @@
       <Filter>Source\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\RenderTarget.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\Screen.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Shader.cpp">
@@ -303,6 +297,9 @@
     <ClCompile Include="Source\Core\Flow.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Window.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -321,9 +318,6 @@
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\DataValue.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Engine.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Error.h">
@@ -426,9 +420,6 @@
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\RenderTarget.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\Screen.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Shader.h">
@@ -571,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="Source\Core\Flow.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Window.h">
+      <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

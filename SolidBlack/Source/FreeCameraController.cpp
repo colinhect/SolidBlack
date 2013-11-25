@@ -16,7 +16,7 @@ void FreeCameraController::onActivate(Entity& entity)
 {
     _entity = entity;
 
-    Input& input = entity.scene().engine().input();
+    Input& input = entity.scene().input();
     _viewX = &input.axisWithName("ViewX");
     _viewY= &input.axisWithName("ViewY");
     _moveX= &input.axisWithName("MoveX");

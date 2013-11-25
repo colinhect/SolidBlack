@@ -21,7 +21,7 @@ private:
     std::unique_ptr<FrameBuffer> _frameBuffer;
 
     Shader::Ref _compositorShader;
-    Mesh::Ref _screenMesh;
+    Mesh::Ref _windowMesh;
 
     const Uniform* _oneOverGammaUniform;
     const Uniform* _exposureUniform;

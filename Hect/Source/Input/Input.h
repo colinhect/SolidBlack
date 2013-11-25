@@ -8,8 +8,9 @@ namespace hect
 class Input :
     public MouseListener
 {
-    friend class Engine;
+    friend class Window;
 public:
+    Input(const InputAxis::Array& axes);
 
     ///
     /// Returns the axis with the given name.
@@ -18,14 +19,6 @@ public:
     ///
     /// \throws Error If no axis with the name exists.
     const InputAxis& axisWithName(const std::string& name) const;
-
-    ///
-    /// Sets the input axes.
-    ///
-    /// \warning Invalidates any references to an existing axis.
-    ///
-    /// \param axes The new input axes.
-    void setAxes(const InputAxis::Array& axes);
 
     ///
     /// Updates all input axes.
@@ -44,8 +37,6 @@ public:
     void receiveMouseEvent(const MouseEvent& event);
 
 private:
-    Input();
-
     void _enqueueEvent(const MouseEvent& event);
     void _enqueueEvent(const KeyboardEvent& event);
     void _dispatchEvents();

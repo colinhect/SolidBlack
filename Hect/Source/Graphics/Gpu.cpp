@@ -162,6 +162,44 @@ GLenum _shaderModuleTypeLookUp[3] =
     GL_GEOMETRY_SHADER // Geometry
 };
 
+Gpu::Gpu() :
+    _boundTarget(nullptr),
+    _boundShader(nullptr),
+    _boundMesh(nullptr)
+{
+    glewExperimental = GL_TRUE;
+    GLenum error = glewInit();
+    if (error != GLEW_OK)
+    {
+        const char* errorString = reinterpret_cast<const char*>(glewGetErrorString(error));
+        throw Error(format("Failed to initialize OpenGL: %s", errorString));
+    }
+
+    LOG_INFO(format("OpenGL version %s", glGetString(GL_VERSION)));
+    LOG_INFO(format("GLSL version %s", glGetString(GL_SHADING_LANGUAGE_VERSION)));
+    LOG_INFO(format("%s", glGetString(GL_VENDOR)));
+    LOG_INFO(format("%s", glGetString(GL_RENDERER)));
+
+    GLint maxTextureUnits = 0;
+    glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits);
+    _capabilities.maxTextureUnits = (unsigned)maxTextureUnits;
+
+    LOG_INFO(format("Max texture units: %d", _capabilities.maxTextureUnits));
+
+    _boundTextures = std::vector<Texture*>(maxTextureUnits, nullptr);
+
+    glGetError(); // Clear errors
+
+    GL_ASSERT( glClearColor(0, 0, 0, 1); )
+
+    // Set up our point rendering profile
+    GL_ASSERT( glEnable(GL_PROGRAM_POINT_SIZE); )
+    GL_ASSERT( glEnable(GL_POINT_SPRITE); )
+    GL_ASSERT( glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT); )
+
+    clear();
+}
+
 void Gpu::beginFrame()
 {
 }
@@ -241,16 +279,16 @@ void Gpu::bindTarget(RenderTarget& renderTarget)
     renderTarget.bind(this);
 }
 
-void Gpu::bindScreen(Screen& screen)
+void Gpu::bindWindow(Window& window)
 {
     // Avoid binding an already bound target
-    if (&screen == _boundTarget)
+    if (&window == _boundTarget)
     {
         return;
     }
-    _boundTarget = &screen;
+    _boundTarget = &window;
 
-    GL_ASSERT( glViewport(0, 0, screen.width(), screen.height()); )
+    GL_ASSERT( glViewport(0, 0, window.width(), window.height()); )
     GL_ASSERT( glBindFramebuffer(GL_FRAMEBUFFER, 0); )
 }
 
@@ -802,48 +840,6 @@ void Gpu::clear()
 const Gpu::Capabilities& Gpu::capabilities() const
 {
     return _capabilities;
-}
-
-Gpu::Gpu() :
-    _boundTarget(nullptr),
-    _boundShader(nullptr),
-    _boundMesh(nullptr)
-{
-}
-
-void Gpu::initialize()
-{
-    glewExperimental = GL_TRUE;
-    GLenum error = glewInit();
-    if (error != GLEW_OK)
-    {
-        const char* errorString = reinterpret_cast<const char*>(glewGetErrorString(error));
-        throw Error(format("Failed to initialize OpenGL: %s", errorString));
-    }
-
-    LOG_INFO(format("OpenGL version %s", glGetString(GL_VERSION)));
-    LOG_INFO(format("GLSL version %s", glGetString(GL_SHADING_LANGUAGE_VERSION)));
-    LOG_INFO(format("%s", glGetString(GL_VENDOR)));
-    LOG_INFO(format("%s", glGetString(GL_RENDERER)));
-
-    GLint maxTextureUnits = 0;
-    glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits);
-    _capabilities.maxTextureUnits = (unsigned)maxTextureUnits;
-
-    LOG_INFO(format("Max texture units: %d", _capabilities.maxTextureUnits));
-
-    _boundTextures = std::vector<Texture*>(maxTextureUnits, nullptr);
-
-    glGetError(); // Clear errors
-
-    GL_ASSERT( glClearColor(0, 0, 0, 1); )
-
-    // Set up our point rendering profile
-    GL_ASSERT( glEnable(GL_PROGRAM_POINT_SIZE); )
-    GL_ASSERT( glEnable(GL_POINT_SPRITE); )
-    GL_ASSERT( glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT); )
-
-    clear();
 }
 
 // \endcond

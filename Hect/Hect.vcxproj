@@ -23,7 +23,6 @@
     <ClCompile Include="Source\Core\Any.cpp" />
     <ClCompile Include="Source\Core\DataValue.cpp" />
     <ClCompile Include="Source\Core\DataValueLoader.cpp" />
-    <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Error.cpp" />
     <ClCompile Include="Source\Core\Flow.cpp" />
     <ClCompile Include="Source\Core\Format.cpp" />
@@ -65,7 +64,7 @@
     <ClCompile Include="Source\Graphics\PassUniformValue.cpp" />
     <ClCompile Include="Source\Graphics\RenderMode.cpp" />
     <ClCompile Include="Source\Graphics\RenderTarget.cpp" />
-    <ClCompile Include="Source\Graphics\Screen.cpp" />
+    <ClCompile Include="Source\Graphics\Window.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\ShaderJsonFormat.cpp" />
     <ClCompile Include="Source\Graphics\ShaderLoader.cpp" />
@@ -106,7 +105,6 @@
     <ClInclude Include="Source\Asset\AssetLoader.h" />
     <ClInclude Include="Source\Core\Any.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
-    <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\Error.h" />
     <ClInclude Include="Source\Core\Flow.h" />
     <ClInclude Include="Source\Core\Format.h" />
@@ -148,7 +146,7 @@
     <ClInclude Include="Source\Graphics\PassUniformValue.h" />
     <ClInclude Include="Source\Graphics\RenderMode.h" />
     <ClInclude Include="Source\Graphics\RenderTarget.h" />
-    <ClInclude Include="Source\Graphics\Screen.h" />
+    <ClInclude Include="Source\Graphics\Window.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
     <ClInclude Include="Source\Graphics\ShaderJsonFormat.h" />
     <ClInclude Include="Source\Graphics\ShaderModule.h" />

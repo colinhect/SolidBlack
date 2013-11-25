@@ -13,8 +13,17 @@ int main()
 {
     try
     {
-        Engine engine("Solid Black Client", "Settings.json");
-        
+        Storage storage;
+        Path workingDirectory = storage.workingDirectory();
+        storage.addDataSource(workingDirectory);
+
+        DataValue settings = JsonParser().parse(storage.openFileForRead("Settings.json"));
+
+        for (const DataValue& dataSource : settings["dataSources"])
+        {
+            storage.addDataSource(dataSource.asString());
+        }
+
         // Create the input axes
         InputAxis viewX("ViewX", InputAxisSource::MouseMoveX);
         viewX.setAcceleration(0.0025);
@@ -54,16 +63,19 @@ int main()
         axes.push_back(roll);
         axes.push_back(adjustSpeed);
 
-        engine.input().setAxes(axes);
+        Input input(axes);
+        
+        Window window("Solid Black Client", input, settings);
+        Gpu gpu;
 
         Flow flow;
-        flow.push(new TestState(engine));
+        flow.push(new TestState(storage, input, window, gpu, settings));
 
-        while (engine.pollEvents() && flow.tick()) { }
+        while (window.pollEvents() && flow.tick()) { }
     }
     catch (std::exception& e)
     {
-        Engine::fatalError(e.what());
+        LOG_ERROR(format("Fatal error: %s", e.what()));
     }
 
     return 0;

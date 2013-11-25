@@ -17,10 +17,10 @@ DeferredRenderingSystem::DeferredRenderingSystem(AssetCache& assetCache, const D
     LOG_INFO("Using compositor shader uniform: 'exposure'");
     _exposureUniform = &_compositorShader->uniformWithName("exposure");
     
-    // Load screen mesh
-    std::string screenMeshPath = settings["graphics"]["screenMesh"].asString();
-    LOG_INFO(format("Using screen mesh: '%s'", screenMeshPath.c_str()));
-    _screenMesh = assetCache.get<Mesh>(screenMeshPath);
+    // Load window mesh
+    std::string windowMeshPath = settings["graphics"]["windowMesh"].asString();
+    LOG_INFO(format("Using window mesh: '%s'", windowMeshPath.c_str()));
+    _windowMesh = assetCache.get<Mesh>(windowMeshPath);
 
     LOG_INFO("Done");
 }
@@ -50,7 +50,7 @@ void DeferredRenderingSystem::renderAll(Camera& camera, Gpu& gpu, RenderTarget& 
     gpu.setUniform(*_oneOverGammaUniform, 1.0f / (float)_gamma);
     gpu.setUniform(*_exposureUniform, (float)_exposure);
     gpu.bindTexture(_frameBuffer->targets()[0], 0);
-    gpu.bindMesh(*_screenMesh);
+    gpu.bindMesh(*_windowMesh);
     gpu.draw();
 
     gpu.endFrame();

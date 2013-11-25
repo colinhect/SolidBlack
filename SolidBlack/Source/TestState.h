@@ -11,7 +11,7 @@ class TestState :
     public Uncopyable
 {
 public:
-    TestState(Engine& engine);
+    TestState(Storage& storage, Input& input, Window& window, Gpu& gpu, const DataValue& settings);
 
     void begin(Flow& flow);
     void end(Flow& flow);
@@ -22,7 +22,10 @@ public:
     void receiveKeyboardEvent(const KeyboardEvent& event);
 
 private:
-    Engine* _engine;
+    Storage* _storage;
+    Input* _input;
+    Window* _window;
+    Gpu* _gpu;
 
     AssetCache _assetCache;
 

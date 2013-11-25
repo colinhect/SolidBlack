@@ -21,6 +21,8 @@ public:
         unsigned maxTextureUnits;
     };
 
+    Gpu();
+
     ///
     /// Begin a new frame.
     void beginFrame();
@@ -45,10 +47,10 @@ public:
     void bindTarget(RenderTarget& renderTarget);
 
     ///
-    /// Selects a screen as the active render target.
+    /// Selects a window as the active render target.
     ///
-    /// \param screen The screen to bind.
-    void bindScreen(Screen& screen);
+    /// \param window The window to bind.
+    void bindWindow(Window& window);
 
     ///
     /// Selects a frame buffer as the active render target.
@@ -168,7 +170,6 @@ public:
     const Capabilities& capabilities() const;
 
 private:
-    Gpu();
     void initialize();
 
     Capabilities _capabilities;

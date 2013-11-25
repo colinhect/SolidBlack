@@ -119,7 +119,7 @@ public:
     void removeListener(MouseListener& listener);
 
     ///
-    /// Sets whether the cursor is locked at the center of the screen.
+    /// Sets whether the cursor is locked at the center of the window.
     ///
     /// \param locked Whether the cursor is locked.
     void setCursorLocked(bool locked);
@@ -129,7 +129,7 @@ public:
     bool isCursorLocked() const;
 
     ///
-    /// Returns the position of the cursor in screen space.
+    /// Returns the position of the cursor in window space.
     const Vector2<int>& cursorPosition() const;
 
 private:

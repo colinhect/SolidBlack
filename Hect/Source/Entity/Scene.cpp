@@ -2,8 +2,8 @@
 
 using namespace hect;
 
-Scene::Scene(Engine& engine) :
-    _engine(&engine),
+Scene::Scene(Input& input) :
+    _input(&input),
     _assetCache(nullptr),
     _nextId(1),
     _deactivatedAttributes(InitialPoolSize),
@@ -13,8 +13,8 @@ Scene::Scene(Engine& engine) :
     _registerComponents();
 }
 
-Scene::Scene(Engine& engine, AssetCache& assetCache) :
-    _engine(&engine),
+Scene::Scene(Input& input, AssetCache& assetCache) :
+    _input(&input),
     _assetCache(&assetCache),
     _nextId(1),
     _deactivatedAttributes(InitialPoolSize),
@@ -104,9 +104,9 @@ void Scene::refresh()
     _destroyedEntities.clear();
 }
 
-Engine& Scene::engine()
+Input& Scene::input()
 {
-    return *_engine;
+    return *_input;
 }
 
 void Scene::addSystem(System& system)

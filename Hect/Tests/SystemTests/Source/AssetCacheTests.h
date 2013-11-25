@@ -4,7 +4,7 @@ SUITE(AssetCache)
     {
         AssetCache assetCache(engine->storage());
 
-        AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Screen.vert");
+        AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
 
         CHECK(a.get());
     }
@@ -32,8 +32,8 @@ SUITE(AssetCache)
     {
         AssetCache assetCache(engine->storage());
 
-        AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Screen.vert");
-        AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Screen.vert");
+        AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
+        AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Window.vert");
 
         CHECK_EQUAL(a.get(), b.get());
     }
@@ -42,8 +42,8 @@ SUITE(AssetCache)
     {
         AssetCache assetCache(engine->storage());
 
-        AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Screen.vert");
-        AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Screen.frag");
+        AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
+        AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Window.frag");
 
         CHECK(a.get() != b.get());
         CHECK(ShaderModuleType::Vertex == a.get()->type());

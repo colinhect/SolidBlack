@@ -4,7 +4,7 @@ SUITE(MeshLoading)
     {
         AssetCache assetCache(engine->storage());
 
-        Mesh* mesh = assetCache.getHandle<Mesh>("Screen.mesh").get();
+        Mesh* mesh = assetCache.getHandle<Mesh>("Window.mesh").get();
 
         CHECK_EQUAL(4, mesh->vertexCount());
         CHECK_EQUAL(6, mesh->indexCount());

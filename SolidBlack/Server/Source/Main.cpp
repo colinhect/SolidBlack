@@ -14,7 +14,7 @@ int main()
     }
     catch (std::exception& e)
     {
-        Engine::fatalError(e.what());
+        //Engine::fatalError(e.what());
     }
 
     return 0;

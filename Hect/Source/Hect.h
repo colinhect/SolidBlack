@@ -93,7 +93,7 @@ const double pi = 3.14159265358979323846;
 #include "Graphics/Mesh.h"
 #include "Graphics/MeshBuilder.h"
 #include "Graphics/MeshJsonFormat.h"
-#include "Graphics/Screen.h"
+#include "Graphics/Window.h"
 #include "Graphics/Gpu.h"
 
 #include "Input/Mouse.h"
@@ -102,8 +102,6 @@ const double pi = 3.14159265358979323846;
 #include "Input/Input.h"
 
 #include "Noise/Random.h"
-
-#include "Core/Engine.h"
 
 #include "Network/IpAddress.h"
 #include "Network/Packet.h"
