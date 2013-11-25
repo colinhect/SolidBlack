@@ -24,6 +24,47 @@ void Input::setAxes(const InputAxis::Array& axes)
     }
 }
 
+void Input::updateAxes(double timeStep)
+{
+    for (InputAxis& axis : _axes)
+    {
+        double value = axis.value();
+        double acceleration = axis.acceleration();
+        double gravity = axis.gravity();
+
+        // Gravitate towards zero
+        if (gravity != 0.0f)
+        {
+            axis.setValue(value - value * std::min(1.0, gravity * timeStep));
+        }
+
+        if (axis.source() == InputAxisSource::Key)
+        {
+            if (_keyboard.isKeyDown(axis.positiveKey()))
+            {
+                axis.setValue(value + acceleration * timeStep);
+            }
+
+            if (_keyboard.isKeyDown(axis.negativeKey()))
+            {
+                axis.setValue(value - acceleration * timeStep);
+            }
+        }
+        else if (axis.source() == InputAxisSource::MouseButton)
+        {
+            if (_mouse.isButtonDown(axis.positiveMouseButton()))
+            {
+                axis.setValue(value + acceleration * timeStep);
+            }
+
+            if (_mouse.isButtonDown(axis.negativeMouseButton()))
+            {
+                axis.setValue(value - acceleration * timeStep);
+            }
+        }
+    }
+}
+
 Mouse& Input::mouse()
 {
     return _mouse;
@@ -87,45 +128,4 @@ void Input::_dispatchEvents()
 {
     _mouse._dispatchEvents();
     _keyboard._dispatchEvents();
-}
-
-void Input::_update(double timeStep)
-{
-    for (InputAxis& axis : _axes)
-    {
-        double value = axis.value();
-        double acceleration = axis.acceleration();
-        double gravity = axis.gravity();
-
-        // Gravitate towards zero
-        if (gravity != 0.0f)
-        {
-            axis.setValue(value - value * std::min(1.0, gravity * timeStep));
-        }
-
-        if (axis.source() == InputAxisSource::Key)
-        {
-            if (_keyboard.isKeyDown(axis.positiveKey()))
-            {
-                axis.setValue(value + acceleration * timeStep);
-            }
-
-            if (_keyboard.isKeyDown(axis.negativeKey()))
-            {
-                axis.setValue(value - acceleration * timeStep);
-            }
-        }
-        else if (axis.source() == InputAxisSource::MouseButton)
-        {
-            if (_mouse.isButtonDown(axis.positiveMouseButton()))
-            {
-                axis.setValue(value + acceleration * timeStep);
-            }
-
-            if (_mouse.isButtonDown(axis.negativeMouseButton()))
-            {
-                axis.setValue(value - acceleration * timeStep);
-            }
-        }
-    }
 }

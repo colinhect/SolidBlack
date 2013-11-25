@@ -177,107 +177,7 @@ Engine::~Engine()
     _engine = nullptr;
 }
 
-void Engine::execute()
-{
-    if (_states.empty())
-    {
-        return;
-    }
-
-    TimeSpan timeStep, currentTime, accumulator, delta;
-    std::shared_ptr<State> currentState;
-
-    while (_pollEvents())
-    {
-        // A new state was push on the stack
-        if (currentState && !_states.empty() && currentState != _states.top())
-        {
-            currentState->end();
-            currentState = _states.top();
-            _states.pop();
-
-            currentState->begin();
-            timeStep = TimeSpan::fromSeconds(currentState->timeStep());
-            currentTime = elapsedTime();
-            accumulator = TimeSpan();
-            delta = TimeSpan();
-        }
-
-        // We have no current state or the current state is inactive
-        else if (!currentState || !currentState->isActive())
-        {
-            if (_states.empty())
-            {
-                break;
-            }
-
-            currentState = _states.top();
-            _states.pop();
-
-            currentState->begin();
-            timeStep = TimeSpan::fromSeconds(currentState->timeStep());
-            currentTime = elapsedTime();
-            accumulator = TimeSpan();
-            delta = TimeSpan();
-        }
-
-        TimeSpan newTime = elapsedTime();
-        TimeSpan deltaTime = newTime - currentTime;
-        currentTime = newTime;
-
-        accumulator += deltaTime;
-        delta += deltaTime;
-
-        while (accumulator.microseconds() >= timeStep.microseconds())
-        {
-            currentState->update(timeStep.seconds());
-            _input._update(timeStep.seconds());
-
-            delta = TimeSpan();
-            accumulator -= timeStep;
-        }
-
-        currentState->render(delta.seconds() / timeStep.seconds());
-    }
-}
-
-void Engine::swapBuffers()
-{
-    _window->display();
-}
-
-Storage& Engine::storage()
-{
-    return _storage;
-}
-
-Input& Engine::input()
-{
-    return _input;
-}
-
-Gpu& Engine::gpu()
-{
-    return _gpu;
-}
-
-Screen& Engine::screen()
-{
-    return _screen;
-}
-
-const DataValue& Engine::settings() const
-{
-    return _settings;
-}
-
-TimeSpan Engine::elapsedTime() const
-{
-    static sf::Clock clock;
-    return TimeSpan::fromMicroseconds(clock.getElapsedTime().asMicroseconds());
-}
-
-bool Engine::_pollEvents()
+bool Engine::pollEvents()
 {
     static bool cursorVisible = true;
 
@@ -290,7 +190,6 @@ bool Engine::_pollEvents()
     // Occurs the first time pollEvents() is called after the mouse is locked
     if (mouse.isCursorLocked() && cursorVisible)
     {
-
         // Hide the cursor
         _window->setMouseCursorVisible(false);
         cursorVisible = false;
@@ -303,7 +202,6 @@ bool Engine::_pollEvents()
     // Occurs the first time pollEvents() is called after the mouse is unlocked
     else if (!mouse.isCursorLocked() && !cursorVisible)
     {
-
         // Show the cursor
         _window->setMouseCursorVisible(true);
         cursorVisible = true;
@@ -352,6 +250,37 @@ bool Engine::_pollEvents()
 
     return _window->isOpen();
 }
+
+void Engine::swapBuffers()
+{
+    _window->display();
+}
+
+Storage& Engine::storage()
+{
+    return _storage;
+}
+
+Input& Engine::input()
+{
+    return _input;
+}
+
+Gpu& Engine::gpu()
+{
+    return _gpu;
+}
+
+Screen& Engine::screen()
+{
+    return _screen;
+}
+
+const DataValue& Engine::settings() const
+{
+    return _settings;
+}
+
 
 Vector2<int> Engine::_cursorPosition()
 {

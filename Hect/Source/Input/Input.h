@@ -28,6 +28,10 @@ public:
     void setAxes(const InputAxis::Array& axes);
 
     ///
+    /// Updates all input axes.
+    void updateAxes(double timeStep);
+
+    ///
     /// Returns the mouse connected to the system.
     Mouse& mouse();
 
@@ -45,9 +49,7 @@ private:
     void _enqueueEvent(const MouseEvent& event);
     void _enqueueEvent(const KeyboardEvent& event);
     void _dispatchEvents();
-
-    void _update(double timeStep);
-
+    
     Mouse _mouse;
     Keyboard _keyboard;
 

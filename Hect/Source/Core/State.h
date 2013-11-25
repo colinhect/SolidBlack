@@ -3,29 +3,32 @@
 namespace hect
 {
 
-class Engine;
+class Flow;
 
 ///
-/// A state of the engine (e.g. main menu, single player game, credits).
+/// A state in a flow (e.g. main menu, single player game, credits).
 class State
 {
 public:
 
     ///
-    /// Constructs a state given the engine and the time step.
+    /// Constructs a state given its the time step.
     ///
-    /// \param engine The engine.
     /// \param timeStep The duration of time between each update (in seconds).
-    State(Engine& engine, double timeStep);
+    State(double timeStep);
     virtual ~State() { }
 
     ///
     /// Called when the state begins.
-    virtual void begin();
+    ///
+    /// \param flow The flow.
+    virtual void begin(Flow& flow);
 
     ///
     /// Called when the state ends.
-    virtual void end();
+    ///
+    /// \param flow The flow.
+    virtual void end(Flow& flow);
 
     ///
     /// Called once every time step.
@@ -51,10 +54,6 @@ public:
 protected:
 
     ///
-    /// Returns the engine.
-    Engine& engine();
-
-    ///
     /// Sets whether the state is active.
     ///
     /// \remarks When the current state of the engine is no longer active
@@ -64,7 +63,6 @@ protected:
     void setActive(bool active);
 
 private:
-    Engine* _engine;
     double _timeStep;
     bool _active;
 };

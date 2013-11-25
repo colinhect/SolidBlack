@@ -25,11 +25,13 @@
     <ClCompile Include="Source\Core\DataValueLoader.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Error.cpp" />
+    <ClCompile Include="Source\Core\Flow.cpp" />
     <ClCompile Include="Source\Core\Format.cpp" />
     <ClCompile Include="Source\Core\Logging.cpp" />
     <ClCompile Include="Source\Core\Memory.cpp" />
     <ClCompile Include="Source\Core\State.cpp" />
     <ClCompile Include="Source\Core\TaskPool.cpp" />
+    <ClCompile Include="Source\Core\Timer.cpp" />
     <ClCompile Include="Source\Core\TimeSpan.cpp" />
     <ClCompile Include="Source\Entity\Components\Camera.cpp" />
     <ClCompile Include="Source\Entity\Components\Geometry.cpp" />
@@ -106,11 +108,13 @@
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\Error.h" />
+    <ClInclude Include="Source\Core\Flow.h" />
     <ClInclude Include="Source\Core\Format.h" />
     <ClInclude Include="Source\Core\Logging.h" />
     <ClInclude Include="Source\Core\Memory.h" />
     <ClInclude Include="Source\Core\State.h" />
     <ClInclude Include="Source\Core\TaskPool.h" />
+    <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\TimeSpan.h" />
     <ClInclude Include="Source\Core\Uncopyable.h" />
     <ClInclude Include="Source\Entity\Components\Behavior.h" />
@@ -191,7 +195,6 @@
     <None Include="Source\Asset\AssetEntry.inl" />
     <None Include="Source\Asset\AssetHandle.inl" />
     <None Include="Source\Core\Any.inl" />
-    <None Include="Source\Core\Engine.inl" />
     <None Include="Source\Entity\ComponentSerializer.inl" />
     <None Include="Source\Entity\Entity.inl" />
     <None Include="Source\Entity\Component.inl" />

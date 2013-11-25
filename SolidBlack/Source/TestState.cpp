@@ -4,7 +4,8 @@
 #include "FreeCameraController.h"
 
 TestState::TestState(Engine& engine) :
-    State(engine, 1.0 / 60.0),
+    State(1.0 / 60.0),
+    _engine(&engine),
     _assetCache(engine.storage()),
     _renderingSystem(_assetCache, engine.settings()),
     _scene(engine, _assetCache)
@@ -12,16 +13,16 @@ TestState::TestState(Engine& engine) :
     _scene.registerComponent<FreeCameraController, FreeCameraControllerSerializer>("FreeCameraController");
 }
 
-void TestState::begin()
+void TestState::begin(Flow& flow)
 {
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
     _scene.addSystem(_behaviorSystem);
 
-    Keyboard& keyboard = engine().input().keyboard();
+    Keyboard& keyboard = _engine->input().keyboard();
     keyboard.addListener(*this);
 
-    Mouse& mouse = engine().input().mouse();
+    Mouse& mouse = _engine->input().mouse();
     mouse.setCursorLocked(true);
 
     _scene.createEntity("Entities/FreeCamera.entity");
@@ -30,9 +31,9 @@ void TestState::begin()
     _scene.refresh();
 }
 
-void TestState::end()
+void TestState::end(Flow& flow)
 {
-    Keyboard& keyboard = engine().input().keyboard();
+    Keyboard& keyboard = _engine->input().keyboard();
     keyboard.removeListener(*this);
 
     _scene.addSystem(_behaviorSystem);
@@ -45,6 +46,8 @@ void TestState::update(double timeStep)
     _cameraSystem.update();
     _behaviorSystem.update(timeStep);
     _scene.refresh();
+
+    _engine->input().updateAxes(timeStep);
 }
 
 void TestState::render(double delta)
@@ -55,10 +58,10 @@ void TestState::render(double delta)
     }
 
     Camera& camera = _cameraSystem.camera();
-    camera.setAspectRatio(engine().screen().aspectRatio());
-    _renderingSystem.renderAll(camera, engine().gpu(), engine().screen());
+    camera.setAspectRatio(_engine->screen().aspectRatio());
+    _renderingSystem.renderAll(camera, _engine->gpu(), _engine->screen());
 
-    engine().swapBuffers();
+    _engine->swapBuffers();
 }
 
 void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
@@ -74,7 +77,7 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     }
     else if (event.key == Key::Tab)
     {
-        Mouse& mouse = engine().input().mouse();
+        Mouse& mouse = _engine->input().mouse();
         mouse.setCursorLocked(!mouse.isCursorLocked());
     }
     else if (event.key == Key::X)

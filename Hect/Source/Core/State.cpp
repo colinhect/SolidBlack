@@ -2,19 +2,20 @@
 
 using namespace hect;
 
-State::State(Engine& engine, double timeStep) :
-    _engine(&engine),
+State::State(double timeStep) :
     _timeStep(timeStep),
     _active(true)
 {
 }
 
-void State::begin()
+void State::begin(Flow& flow)
 {
+    flow;
 }
 
-void State::end()
+void State::end(Flow& flow)
 {
+    flow;
 }
 
 void State::update(double timeStep)
@@ -35,11 +36,6 @@ bool State::isActive() const
 double State::timeStep() const
 {
     return _timeStep;
-}
-
-Engine& State::engine()
-{
-    return *_engine;
 }
 
 void State::setActive(bool active)

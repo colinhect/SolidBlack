@@ -56,8 +56,10 @@ int main()
 
         engine.input().setAxes(axes);
 
-        engine.pushState<TestState>(engine);
-        engine.execute();
+        Flow flow;
+        flow.push(new TestState(engine));
+
+        while (engine.pollEvents() && flow.tick()) { }
     }
     catch (std::exception& e)
     {

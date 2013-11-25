@@ -37,46 +37,7 @@ public:
     /// Closes the engine.
     ~Engine();
 
-    ///
-    /// Pushes a new state onto the state stack.
-    ///
-    /// \returns The state that was just pushed.
-    template <typename T>
-    State& pushState();
-
-    ///
-    /// Pushes a new state onto the state stack.
-    ///
-    /// \param a0 The first argument in the constructor of the state.
-    ///
-    /// \returns The state that was just pushed.
-    template <typename T, typename A0>
-    State& pushState(A0&& a0);
-
-    ///
-    /// Pushes a new state onto the state stack.
-    ///
-    /// \param a0 The first argument in the constructor of the state.
-    /// \param a1 The second argument in the constructor of the state.
-    ///
-    /// \returns The state that was just pushed.
-    template <typename T, typename A0, typename A1>
-    State& pushState(A0&& a0, A1&& a1);
-
-    ///
-    /// Pushes a new state onto the state stack.
-    ///
-    /// \param a0 The first argument in the constructor of the state.
-    /// \param a1 The second argument in the constructor of the state.
-    /// \param a2 The third argument in the constructor of the state.
-    ///
-    /// \returns The state that was just pushed.
-    template <typename T, typename A0, typename A1, typename A2>
-    State& pushState(A0&& a0, A1&& a1, A2&& a2);
-
-    ///
-    /// Executes until there are no more states.
-    void execute();
+    bool pollEvents();
 
     ///
     /// Swaps the back buffers making the most recently drawn buffer visible
@@ -104,20 +65,13 @@ public:
     const DataValue& settings() const;
 
     ///
-    /// Returns the elapsed time since the engine started.
-    TimeSpan elapsedTime() const;
-
-    ///
     /// Displays a fatal error message to the user.
     ///
     /// \param message The error message to display.
     static void fatalError(const std::string& message);
 
 private:
-    bool _pollEvents();
     Vector2<int> _cursorPosition();
-
-    std::stack<std::shared_ptr<State>> _states;
 
     Storage _storage;
     Input _input;
@@ -129,5 +83,3 @@ private:
 };
 
 }
-
-#include "Engine.inl"

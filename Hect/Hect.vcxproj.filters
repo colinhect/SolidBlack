@@ -297,6 +297,12 @@
     <ClCompile Include="Source\Entity\Components\Behavior.cpp">
       <Filter>Source\Entity\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Timer.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Flow.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -560,6 +566,12 @@
     <ClInclude Include="Source\Entity\Systems\BehaviorSystem.h">
       <Filter>Source\Entity\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Timer.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Flow.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -572,9 +584,6 @@
       <Filter>Source\Asset</Filter>
     </None>
     <None Include="Source\Core\Any.inl">
-      <Filter>Source\Core</Filter>
-    </None>
-    <None Include="Source\Core\Engine.inl">
       <Filter>Source\Core</Filter>
     </None>
     <None Include="Source\Entity\Entity.inl">

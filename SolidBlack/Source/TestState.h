@@ -13,8 +13,8 @@ class TestState :
 public:
     TestState(Engine& engine);
 
-    void begin();
-    void end();
+    void begin(Flow& flow);
+    void end(Flow& flow);
 
     void update(double timeStep);
     void render(double delta);
@@ -22,6 +22,8 @@ public:
     void receiveKeyboardEvent(const KeyboardEvent& event);
 
 private:
+    Engine* _engine;
+
     AssetCache _assetCache;
 
     CameraSystem _cameraSystem;

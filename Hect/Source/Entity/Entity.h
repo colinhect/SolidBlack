@@ -78,76 +78,6 @@ public:
     T& addComponent();
 
     ///
-    /// Adds a new component of a certain type to the entity.
-    ///
-    /// \param a0 The first argument in the constructor of the component.
-    ///
-    /// \returns The new component.
-    ///
-    /// \throws Error If the entity is activated or already has a component of
-    /// the type (debug builds only).
-    template <typename T, typename A0>
-    T& addComponent(A0&& a0);
-
-    ///
-    /// Adds a new component of a certain type to the entity.
-    ///
-    /// \param a0 The first argument in the constructor of the component.
-    /// \param a1 The second argument in the constructor of the component.
-    ///
-    /// \returns The new component.
-    ///
-    /// \throws Error If the entity is activated or already has a component of
-    /// the type (debug builds only).
-    template <typename T, typename A0, typename A1>
-    T& addComponent(A0&& a0, A1&& a1);
-
-    ///
-    /// Adds a new component of a certain type to the entity.
-    ///
-    /// \param a0 The first argument in the constructor of the component.
-    /// \param a1 The second argument in the constructor of the component.
-    /// \param a2 The third argument in the constructor of the component.
-    ///
-    /// \returns The new component.
-    ///
-    /// \throws Error If the entity is activated or already has a component of
-    /// the type (debug builds only).
-    template <typename T, typename A0, typename A1, typename A2>
-    T& addComponent(A0&& a0, A1&& a1, A2&& a2);
-
-    ///
-    /// Adds a new component of a certain type to the entity.
-    ///
-    /// \param a0 The first argument in the constructor of the component.
-    /// \param a1 The second argument in the constructor of the component.
-    /// \param a2 The third argument in the constructor of the component.
-    /// \param a3 The fourth argument in the constructor of the component.
-    ///
-    /// \returns The new component.
-    ///
-    /// \throws Error If the entity is activated or already has a component of
-    /// the type (debug builds only).
-    template <typename T, typename A0, typename A1, typename A2, typename A3>
-    T& addComponent(A0&& a0, A1&& a1, A2&& a2, A3&& a3);
-
-    ///
-    /// Adds a new component of a certain type to the entity.
-    ///
-    /// \param a0 The first argument in the constructor of the component.
-    /// \param a1 The second argument in the constructor of the component.
-    /// \param a2 The third argument in the constructor of the component.
-    /// \param a3 The fourth argument in the constructor of the component.
-    /// \param a4 The fifth argument in the constructor of the component.
-    ///
-    /// \returns The new component.
-    ///
-    /// \throws Error If the entity is activated or already has a component of
-    /// the type (debug builds only).
-    template <typename T, typename A0, typename A1, typename A2, typename A3, typename A4>
-    T& addComponent(A0&& a0, A1&& a1, A2&& a2, A3&& a3, A4&& a4);
-
-    ///
     /// Removes a component of a certain type from the entity.
     ///
     /// \throws Error If the entity is activated or already does not have a
@@ -157,6 +87,9 @@ public:
 
     ///
     /// Returns the component of a certain type from an entity.
+    ///
+    /// \warning Always call hasComponent() before this.  It is very fast to
+    /// check if an entity has a component.
     ///
     /// \throws Error If the entity does not have a component of the type
     /// (debug builds only).
