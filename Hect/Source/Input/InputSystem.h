@@ -5,12 +5,13 @@ namespace hect
 
 ///
 /// Provides access to input peripherals connected to the system.
-class Input :
+class InputSystem :
     public MouseListener
 {
     friend class Window;
 public:
-    Input(const InputAxis::Array& axes);
+    InputSystem();
+    InputSystem(const InputAxis::Array& axes);
 
     ///
     /// Returns the axis with the given name.

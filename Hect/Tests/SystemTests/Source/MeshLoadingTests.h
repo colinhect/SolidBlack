@@ -2,7 +2,10 @@ SUITE(MeshLoading)
 {
     TEST(VertexAndIndexCounts)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         Mesh* mesh = assetCache.getHandle<Mesh>("Window.mesh").get();
 
@@ -15,7 +18,10 @@ SUITE(MeshLoading)
 
     TEST(IndexType)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         Mesh* mesh = assetCache.getHandle<Mesh>("IndexType.mesh").get();
 
@@ -24,7 +30,10 @@ SUITE(MeshLoading)
 
     TEST(PrimitiveType)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         Mesh* mesh = assetCache.getHandle<Mesh>("PrimitiveType.mesh").get();
 

@@ -16,7 +16,7 @@ Shader::~Shader()
 {
     if (isUploaded())
     {
-        gpu()->destroyShader(*this);
+        renderer()->destroyShader(*this);
     }
 }
 

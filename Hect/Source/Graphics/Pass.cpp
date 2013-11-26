@@ -12,10 +12,10 @@ Pass::Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shad
     _resolvePassUniformValues();
 }
 
-void Pass::prepare(Gpu& gpu) const
+void Pass::prepare(Renderer& renderer) const
 {
     // Bind the render mode
-    gpu.bindMode(_renderMode);
+    renderer.bindMode(_renderMode);
 
     // Bind the textures in the pass
     unsigned textureIndex = 0;
@@ -23,20 +23,20 @@ void Pass::prepare(Gpu& gpu) const
     {
         if (texture)
         {
-            gpu.bindTexture(*texture, textureIndex);
+            renderer.bindTexture(*texture, textureIndex);
         }
         ++textureIndex;
     }
 
     // Bind the shader
-    gpu.bindShader(*_shader);
+    renderer.bindShader(*_shader);
 
     // Set the uniform values
     for (auto& pair : _resolvedUniformValues)
     {
         const Uniform& uniform = *pair.first;
         const UniformValue& value = pair.second;
-        gpu.setUniform(uniform, value);
+        renderer.setUniform(uniform, value);
     }
 }
 

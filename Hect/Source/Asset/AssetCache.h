@@ -4,17 +4,17 @@ namespace hect
 {
 
 ///
-/// Provides cached access to assets loaded from persistant storage.
+/// Provides cached access to assets loaded from the file system.
 class AssetCache :
     public Uncopyable
 {
 public:
 
     ///
-    /// Constructs an asset cache given access to persistent storage.
+    /// Constructs an asset cache given a file system.
     ///
-    /// \param storage The access to persistent storage.
-    AssetCache(Storage& storage);
+    /// \param fileSystem The file system.
+    AssetCache(FileSystem& fileSystem);
 
     ///
     /// Returns a shared reference to the asset at the given path.
@@ -39,11 +39,11 @@ public:
     AssetHandle<T> getHandle(const Path& path);
 
     ///
-    /// Returns access to persistent storage.
-    Storage& storage();
+    /// Returns the file system.
+    FileSystem& fileSystem();
 
 private:
-    Storage& _storage;
+    FileSystem& _fileSystem;
 
     std::map<Path, std::shared_ptr<AssetEntryBase>> _entries;
 };

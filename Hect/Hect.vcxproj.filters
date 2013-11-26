@@ -132,12 +132,6 @@
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Gpu.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\GpuObject.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Image.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
@@ -219,9 +213,6 @@
     <ClCompile Include="Source\Graphics\VertexLayout.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input\Input.cpp">
-      <Filter>Source\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Input\InputAxis.cpp">
       <Filter>Source\Input</Filter>
     </ClCompile>
@@ -253,9 +244,6 @@
       <Filter>Source\IO</Filter>
     </ClCompile>
     <ClCompile Include="Source\IO\ReadStream.cpp">
-      <Filter>Source\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\IO\Storage.cpp">
       <Filter>Source\IO</Filter>
     </ClCompile>
     <ClCompile Include="Source\IO\WriteStream.cpp">
@@ -299,6 +287,18 @@
     </ClCompile>
     <ClCompile Include="Source\Graphics\Window.cpp">
       <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Renderer.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\RendererObject.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\FileSystem.cpp">
+      <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\InputSystem.cpp">
+      <Filter>Source\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -383,12 +383,6 @@
     <ClInclude Include="Source\Graphics\FrameBuffer.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Gpu.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GpuObject.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\Image.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
@@ -452,9 +446,6 @@
     <ClInclude Include="Source\Graphics\VertexLayout.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Input\Input.h">
-      <Filter>Source\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Input\InputAxis.h">
       <Filter>Source\Input</Filter>
     </ClInclude>
@@ -486,9 +477,6 @@
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\IO\ReadStream.h">
-      <Filter>Source\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IO\Storage.h">
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\IO\WriteStream.h">
@@ -565,6 +553,18 @@
     </ClInclude>
     <ClInclude Include="Source\Graphics\Window.h">
       <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Renderer.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\RendererObject.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IO\FileSystem.h">
+      <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\InputSystem.h">
+      <Filter>Source\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

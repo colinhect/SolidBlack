@@ -2,12 +2,12 @@
 
 using namespace hect;
 
-AssetCache::AssetCache(Storage& storage) :
-    _storage(storage)
+AssetCache::AssetCache(FileSystem& fileSystem) :
+    _fileSystem(fileSystem)
 {
 }
 
-Storage& AssetCache::storage()
+FileSystem& AssetCache::fileSystem()
 {
-    return _storage;
+    return _fileSystem;
 }

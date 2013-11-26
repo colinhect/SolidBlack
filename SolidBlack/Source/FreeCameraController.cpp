@@ -16,13 +16,13 @@ void FreeCameraController::onActivate(Entity& entity)
 {
     _entity = entity;
 
-    Input& input = entity.scene().input();
-    _viewX = &input.axisWithName("ViewX");
-    _viewY= &input.axisWithName("ViewY");
-    _moveX= &input.axisWithName("MoveX");
-    _moveY= &input.axisWithName("MoveY");
-    _roll= &input.axisWithName("Roll");
-    _adjustSpeed= &input.axisWithName("AdjustSpeed");
+    InputSystem& inputSystem = entity.scene().inputSystem();
+    _viewX = &inputSystem.axisWithName("ViewX");
+    _viewY= &inputSystem.axisWithName("ViewY");
+    _moveX= &inputSystem.axisWithName("MoveX");
+    _moveY= &inputSystem.axisWithName("MoveY");
+    _roll= &inputSystem.axisWithName("Roll");
+    _adjustSpeed= &inputSystem.axisWithName("AdjustSpeed");
 }
 
 void FreeCameraController::update(double timeStep)

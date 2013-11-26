@@ -1,94 +1,112 @@
 void testWriteAndReadFile(std::function<void(WriteStream*)> writer, std::function<void(ReadStream*)> reader)
 {
-    Storage& storage = engine->storage();
+    FileSystem fileSystem;
+    Path workingDirectory = fileSystem.workingDirectory();
+    fileSystem.addDataSource(workingDirectory);
+    fileSystem.setWriteDirectory(workingDirectory);
 
     Path path("File.txt");
 
-    CHECK(!storage.exists(path));
+    CHECK(!fileSystem.exists(path));
     {
-        FileWriteStream stream = storage.openFileForWrite(path);
+        FileWriteStream stream = fileSystem.openFileForWrite(path);
         writer(&stream);
     }
-    CHECK(storage.exists(path));
+    CHECK(fileSystem.exists(path));
     {
-        FileReadStream stream = storage.openFileForRead(path);
+        FileReadStream stream = fileSystem.openFileForRead(path);
         reader(&stream);
     }
-    storage.remove(path);
-    CHECK(!storage.exists(path));
+    fileSystem.remove(path);
+    CHECK(!fileSystem.exists(path));
 }
 
-SUITE(Storage)
+SUITE(FileSystem)
 {
     TEST(CreateAndRemoveDirectories)
     {
-        Storage& storage = engine->storage();
+        FileSystem fileSystem;
+        Path workingDirectory = fileSystem.workingDirectory();
+        fileSystem.addDataSource(workingDirectory);
+        fileSystem.setWriteDirectory(workingDirectory);
 
         Path path("Directory");
 
-        CHECK(!storage.exists(path));
-        storage.createDirectory(path);
-        CHECK(storage.exists(path));
-        storage.remove(path);
-        CHECK(!storage.exists(path));
+        CHECK(!fileSystem.exists(path));
+        fileSystem.createDirectory(path);
+        CHECK(fileSystem.exists(path));
+        fileSystem.remove(path);
+        CHECK(!fileSystem.exists(path));
     }
 
     TEST(OpenNonExistingFileForWrite)
     {
-        Storage& storage = engine->storage();
+        FileSystem fileSystem;
+        Path workingDirectory = fileSystem.workingDirectory();
+        fileSystem.addDataSource(workingDirectory);
+        fileSystem.setWriteDirectory(workingDirectory);
 
         Path path("File.txt");
 
-        CHECK(!storage.exists(path));
+        CHECK(!fileSystem.exists(path));
         {
-            FileWriteStream stream = storage.openFileForWrite(path);
+            FileWriteStream stream = fileSystem.openFileForWrite(path);
         }
-        CHECK(storage.exists(path));
-        storage.remove(path);
-        CHECK(!storage.exists(path));
+        CHECK(fileSystem.exists(path));
+        fileSystem.remove(path);
+        CHECK(!fileSystem.exists(path));
     }
 
     TEST(OpenExistingFileForWrite)
     {
-        Storage& storage = engine->storage();
+        FileSystem fileSystem;
+        Path workingDirectory = fileSystem.workingDirectory();
+        fileSystem.addDataSource(workingDirectory);
+        fileSystem.setWriteDirectory(workingDirectory);
 
         Path path("File.txt");
 
-        CHECK(!storage.exists(path));
+        CHECK(!fileSystem.exists(path));
         {
-            FileWriteStream stream = storage.openFileForWrite(path);
+            FileWriteStream stream = fileSystem.openFileForWrite(path);
         }
-        CHECK(storage.exists(path));
+        CHECK(fileSystem.exists(path));
         {
-            FileWriteStream stream = storage.openFileForWrite(path);
+            FileWriteStream stream = fileSystem.openFileForWrite(path);
         }
-        CHECK(storage.exists(path));
-        storage.remove(path);
-        CHECK(!storage.exists(path));
+        CHECK(fileSystem.exists(path));
+        fileSystem.remove(path);
+        CHECK(!fileSystem.exists(path));
     }
 
     TEST(OpenExistingFileForRead)
     {
-        Storage& storage = engine->storage();
+        FileSystem fileSystem;
+        Path workingDirectory = fileSystem.workingDirectory();
+        fileSystem.addDataSource(workingDirectory);
+        fileSystem.setWriteDirectory(workingDirectory);
 
         Path path("File.txt");
 
-        CHECK(!storage.exists(path));
+        CHECK(!fileSystem.exists(path));
         {
-            FileWriteStream stream = storage.openFileForWrite(path);
+            FileWriteStream stream = fileSystem.openFileForWrite(path);
         }
-        CHECK(storage.exists(path));
+        CHECK(fileSystem.exists(path));
         {
-            FileReadStream stream = storage.openFileForRead(path);
+            FileReadStream stream = fileSystem.openFileForRead(path);
         }
 
-        storage.remove(path);
-        CHECK(!storage.exists(path));
+        fileSystem.remove(path);
+        CHECK(!fileSystem.exists(path));
     }
 
     TEST(OpenNonExistingFileForRead)
     {
-        Storage& storage = engine->storage();
+        FileSystem fileSystem;
+        Path workingDirectory = fileSystem.workingDirectory();
+        fileSystem.addDataSource(workingDirectory);
+        fileSystem.setWriteDirectory(workingDirectory);
 
         Path path("DoesNotExist.txt");
 
@@ -96,7 +114,7 @@ SUITE(Storage)
 
         try
         {
-            FileReadStream stream = storage.openFileForRead(path);
+            FileReadStream stream = fileSystem.openFileForRead(path);
         }
         catch (Error&)
         {

@@ -25,7 +25,7 @@ DeferredRenderingSystem::DeferredRenderingSystem(AssetCache& assetCache, const D
     LOG_INFO("Done");
 }
 
-void DeferredRenderingSystem::renderAll(Camera& camera, Gpu& gpu, RenderTarget& target)
+void DeferredRenderingSystem::renderAll(Camera& camera, Renderer& renderer, RenderTarget& target)
 {
     if (!_frameBuffer || _frameBuffer->width() != target.width() || _frameBuffer->height() != target.height())
     {
@@ -35,25 +35,25 @@ void DeferredRenderingSystem::renderAll(Camera& camera, Gpu& gpu, RenderTarget& 
     }
 
     // Render scene to floating point frame buffer
-    gpu.beginFrame();
-    gpu.bindTarget(*_frameBuffer);
-    gpu.clear();
-    RenderingSystem::renderAll(camera, gpu, *_frameBuffer);
-    gpu.endFrame();
+    renderer.beginFrame();
+    renderer.bindTarget(*_frameBuffer);
+    renderer.clear();
+    RenderingSystem::renderAll(camera, renderer, *_frameBuffer);
+    renderer.endFrame();
 
     // Render the tonemapped frame buffer
-    gpu.beginFrame();
-    gpu.bindTarget(target);
-    gpu.clear();
+    renderer.beginFrame();
+    renderer.bindTarget(target);
+    renderer.clear();
 
-    gpu.bindShader(*_compositorShader);
-    gpu.setUniform(*_oneOverGammaUniform, 1.0f / (float)_gamma);
-    gpu.setUniform(*_exposureUniform, (float)_exposure);
-    gpu.bindTexture(_frameBuffer->targets()[0], 0);
-    gpu.bindMesh(*_windowMesh);
-    gpu.draw();
+    renderer.bindShader(*_compositorShader);
+    renderer.setUniform(*_oneOverGammaUniform, 1.0f / (float)_gamma);
+    renderer.setUniform(*_exposureUniform, (float)_exposure);
+    renderer.bindTexture(_frameBuffer->targets()[0], 0);
+    renderer.bindMesh(*_windowMesh);
+    renderer.draw();
 
-    gpu.endFrame();
+    renderer.endFrame();
 }
 
 double DeferredRenderingSystem::gamma() const

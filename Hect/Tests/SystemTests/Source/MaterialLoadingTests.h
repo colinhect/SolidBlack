@@ -2,7 +2,10 @@ SUITE(MaterialLoading)
 {
     TEST(NoBase)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         Material* base = assetCache.getHandle<Material>("Base.material").get();
         Shader* window = assetCache.getHandle<Shader>("Window.shader").get();
@@ -24,7 +27,10 @@ SUITE(MaterialLoading)
 
     TEST(WithBase)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         Material* test = assetCache.getHandle<Material>("Test.material").get();
         Material* base = assetCache.getHandle<Material>("Base.material").get();

@@ -3,7 +3,7 @@
 namespace hect
 {
 
-class Input;
+class InputSystem;
 
 ///
 /// The window that the engine is rendering to.
@@ -14,21 +14,22 @@ class Window :
     public Uncopyable
 {
 public:
-    Window(const std::string& title, Input& input, const DataValue& settings);
+    Window(const std::string& title, const DataValue& settings);
     ~Window();
 
-    bool pollEvents();
+    bool pollEvents(InputSystem& inputSystem);
 
     void swapBuffers();
 
     ///
     /// \copydoc RenderTarget::bind()
-    void bind(Gpu* gpu);
+    void bind(Renderer* renderer);
+
+    static void showFatalError(const std::string& message);
 
 private:
     Vector2<int> _cursorPosition();
 
-    Input* _input;
     void* _sfmlWindow;
 
     Vector2<int> _lastCursorPosition;

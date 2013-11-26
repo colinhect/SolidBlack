@@ -2,7 +2,12 @@
 
 using namespace hect;
 
-Input::Input(const InputAxis::Array& axes) :
+InputSystem::InputSystem()
+{
+    _mouse.addListener(*this);
+}
+
+InputSystem::InputSystem(const InputAxis::Array& axes) :
     _axes(axes)
 {
     for (InputAxis& axis : _axes)
@@ -13,7 +18,7 @@ Input::Input(const InputAxis::Array& axes) :
     _mouse.addListener(*this);
 }
 
-const InputAxis& Input::axisWithName(const std::string& name) const
+const InputAxis& InputSystem::axisWithName(const std::string& name) const
 {
     auto it = _mappedAxes.find(name);
     if (it == _mappedAxes.end())
@@ -24,7 +29,7 @@ const InputAxis& Input::axisWithName(const std::string& name) const
     return *(*it).second;
 }
 
-void Input::updateAxes(double timeStep)
+void InputSystem::updateAxes(double timeStep)
 {
     for (InputAxis& axis : _axes)
     {
@@ -65,17 +70,17 @@ void Input::updateAxes(double timeStep)
     }
 }
 
-Mouse& Input::mouse()
+Mouse& InputSystem::mouse()
 {
     return _mouse;
 }
 
-Keyboard& Input::keyboard()
+Keyboard& InputSystem::keyboard()
 {
     return _keyboard;
 }
 
-void Input::receiveMouseEvent(const MouseEvent& event)
+void InputSystem::receiveMouseEvent(const MouseEvent& event)
 {
     if (event.type == MouseEventType::Movement)
     {
@@ -109,17 +114,17 @@ void Input::receiveMouseEvent(const MouseEvent& event)
     }
 }
 
-void Input::_enqueueEvent(const MouseEvent& event)
+void InputSystem::_enqueueEvent(const MouseEvent& event)
 {
     _mouse._enqueueEvent(event);
 }
 
-void Input::_enqueueEvent(const KeyboardEvent& event)
+void InputSystem::_enqueueEvent(const KeyboardEvent& event)
 {
     _keyboard._enqueueEvent(event);
 }
 
-void Input::_dispatchEvents()
+void InputSystem::_dispatchEvents()
 {
     _mouse._dispatchEvents();
     _keyboard._dispatchEvents();

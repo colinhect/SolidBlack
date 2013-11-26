@@ -26,10 +26,10 @@ public:
     Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const PassUniformValue::Array& uniformValues);
 
     ///
-    /// Prepares a GPU to begin using this pass.
+    /// Prepares a renderer to begin using this pass.
     ///
-    /// \param gpu The GPU to prepare.
-    void prepare(Gpu& gpu) const;
+    /// \param renderer The renderer to prepare.
+    void prepare(Renderer& renderer) const;
 
     ///
     /// Returns the render mode.

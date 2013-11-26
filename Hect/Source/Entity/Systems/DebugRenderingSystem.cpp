@@ -19,7 +19,7 @@ void DebugRenderingSystem::renderWireframeBox(const Vector3<>& position, const V
     _boxTasks.push_back(task);
 }
 
-void DebugRenderingSystem::renderAll(Camera& camera, Gpu& gpu)
+void DebugRenderingSystem::renderAll(Camera& camera, Renderer& renderer)
 {
     _boxTasks.clear();
 
@@ -33,14 +33,14 @@ void DebugRenderingSystem::renderAll(Camera& camera, Gpu& gpu)
     // Render box tasks
     for (const BoxTask& task : _boxTasks)
     {
-        _renderBoxTask(task, camera, gpu);
+        _renderBoxTask(task, camera, renderer);
     }
 }
 
-void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, Gpu& gpu)
+void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, Renderer& renderer)
 {
     // Bind the shader
-    gpu.bindShader(*_boxShader);
+    renderer.bindShader(*_boxShader);
 
     // Build the transform
     Transform transform;
@@ -53,19 +53,19 @@ void DebugRenderingSystem::_renderBoxTask(const BoxTask& task, Camera& camera, G
 
     // Set the model-view-projection uniform
     Matrix4<float> modelViewProjection = camera.projectionMatrix() * (camera.viewMatrix() * model);
-    gpu.setUniform(_boxShader->uniforms()[0], modelViewProjection);
-    gpu.setUniform(_boxShader->uniforms()[1], (Vector4<float>)task.color);
+    renderer.setUniform(_boxShader->uniforms()[0], modelViewProjection);
+    renderer.setUniform(_boxShader->uniforms()[1], (Vector4<float>)task.color);
 
     // Bind the render mode
     RenderMode mode;
     mode.enableState(RenderState::Blend);
     mode.disableState(RenderState::DepthTest);
     mode.setBlendFactors(BlendFactor::SourceAlpha, BlendFactor::OneMinusSourceAlpha);
-    gpu.bindMode(mode);
+    renderer.bindMode(mode);
 
     // Bind and draw the mesh
-    gpu.bindMesh(*_boxMesh);
-    gpu.draw();
+    renderer.bindMesh(*_boxMesh);
+    renderer.draw();
 }
 
 void DebugRenderingSystem::_buildBoxMesh()

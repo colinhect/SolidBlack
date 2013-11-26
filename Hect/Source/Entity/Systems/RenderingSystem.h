@@ -26,9 +26,9 @@ public:
     /// Draws all visible renderables.
     ///
     /// \param camera The camera to render from.
-    /// \param gpu The GPU.
+    /// \param renderer The renderer.
     /// \param target The render target.
-    virtual void renderAll(Camera& camera, Gpu& gpu, RenderTarget& target);
+    virtual void renderAll(Camera& camera, Renderer& renderer, RenderTarget& target);
 
 private:
     struct MeshTask
@@ -37,7 +37,7 @@ private:
         const Pass* pass;
         const Transform* transform;
     };
-    void _renderMeshTask(const MeshTask& task, Camera& camera, Gpu& gpu, const RenderTarget& target);
+    void _renderMeshTask(const MeshTask& task, Camera& camera, Renderer& renderer, const RenderTarget& target);
 
     std::vector<MeshTask> _meshTasks;
 };

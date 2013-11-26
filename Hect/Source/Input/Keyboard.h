@@ -116,7 +116,7 @@ public:
 /// Provides access to the system keyboard.
 class Keyboard
 {
-    friend class Input;
+    friend class InputSystem;
 public:
 
     ///

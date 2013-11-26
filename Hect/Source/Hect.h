@@ -62,7 +62,7 @@ const double pi = 3.14159265358979323846;
 #include "IO/FileWriteStream.h"
 #include "IO/MemoryReadStream.h"
 #include "IO/MemoryWriteStream.h"
-#include "IO/Storage.h"
+#include "IO/FileSystem.h"
 #include "IO/JsonParser.h"
 
 #include "Asset/AssetLoader.h"
@@ -72,7 +72,7 @@ const double pi = 3.14159265358979323846;
 
 #include "Graphics/VertexAttribute.h"
 #include "Graphics/VertexLayout.h"
-#include "Graphics/GpuObject.h"
+#include "Graphics/RendererObject.h"
 #include "Graphics/RenderMode.h"
 #include "Graphics/Image.h"
 #include "Graphics/ImagePngFormat.h"
@@ -94,12 +94,12 @@ const double pi = 3.14159265358979323846;
 #include "Graphics/MeshBuilder.h"
 #include "Graphics/MeshJsonFormat.h"
 #include "Graphics/Window.h"
-#include "Graphics/Gpu.h"
+#include "Graphics/Renderer.h"
 
 #include "Input/Mouse.h"
 #include "Input/Keyboard.h"
 #include "Input/InputAxis.h"
-#include "Input/Input.h"
+#include "Input/InputSystem.h"
 
 #include "Noise/Random.h"
 

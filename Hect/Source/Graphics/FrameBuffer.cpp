@@ -23,13 +23,13 @@ FrameBuffer::~FrameBuffer()
 {
     if (isUploaded())
     {
-        gpu()->destroyFrameBuffer(*this);
+        renderer()->destroyFrameBuffer(*this);
     }
 }
 
-void FrameBuffer::bind(Gpu* gpu)
+void FrameBuffer::bind(Renderer* renderer)
 {
-    gpu->bindFrameBuffer(*this);
+    renderer->bindFrameBuffer(*this);
 }
 
 Texture::Array& FrameBuffer::targets()

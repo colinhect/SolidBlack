@@ -71,7 +71,7 @@ enum class BlendFactor
 };
 
 ///
-/// Describes a mode that the GPU is in which affects the resulting
+/// Describes a mode that the renderer is in which affects the resulting
 /// rendered pixels.
 class RenderMode
 {

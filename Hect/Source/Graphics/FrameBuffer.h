@@ -7,7 +7,7 @@ namespace hect
 /// A buffer on the GPU that can be rendered to.
 class FrameBuffer :
     public RenderTarget,
-    public GpuObject
+    public RendererObject
 {
 public:
 
@@ -32,7 +32,7 @@ public:
 
     ///
     /// \copydoc RenderTarget::bind()
-    void bind(Gpu* gpu);
+    void bind(Renderer* renderer);
 
     ///
     /// Returns the targets.

@@ -13,7 +13,7 @@ public:
 
     ///
     /// Constructs a scene.
-    Scene(Input& input);
+    Scene(InputSystem& inputSystem);
 
     ///
     /// Constructs a scene given an asset cache.
@@ -23,7 +23,7 @@ public:
     ///
     /// \param engine The engine.
     /// \param assetCache An asset cache.
-    Scene(Input& input, AssetCache& assetCache);
+    Scene(InputSystem& inputSystem, AssetCache& assetCache);
 
     ///
     /// Removes all entities from all systems.
@@ -38,7 +38,7 @@ public:
     /// systems it was a member of.
     void refresh();
 
-    Input& input();
+    InputSystem& inputSystem();
 
     ///
     /// Adds a system to the scene.
@@ -111,7 +111,7 @@ private:
     void _registerComponents();
     void _growPool();
 
-    Input* _input;
+    InputSystem* _input;
     AssetCache* _assetCache;
 
     // The next entity ID to use when creating an entity (if the queue is

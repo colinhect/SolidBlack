@@ -3,7 +3,7 @@
 namespace hect
 {
 
-class Gpu;
+class Renderer;
 
 ///
 /// A target that can be rendered to.
@@ -25,10 +25,10 @@ public:
     virtual ~RenderTarget() { }
 
     ///
-    /// Binds this target as the active target to the given GPU.
+    /// Binds this target as the active target to the given renderer.
     ///
-    /// \param gpu The GPU to bind the target for.
-    virtual void bind(Gpu* gpu) = 0;
+    /// \param renderer The renderer to bind the target for.
+    virtual void bind(Renderer* renderer) = 0;
 
     ///
     /// Returns the width.

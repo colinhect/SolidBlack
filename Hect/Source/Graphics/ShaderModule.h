@@ -24,7 +24,7 @@ enum class ShaderModuleType
 ///
 /// A shader module.
 class ShaderModule :
-    public GpuObject
+    public RendererObject
 {
 public:
 

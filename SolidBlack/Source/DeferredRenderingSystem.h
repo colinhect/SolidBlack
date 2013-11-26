@@ -9,7 +9,7 @@ class DeferredRenderingSystem :
 public:
     DeferredRenderingSystem(AssetCache& assetCache, const DataValue& settings);
 
-    void renderAll(Camera& camera, Gpu& gpu, RenderTarget& target);
+    void renderAll(Camera& camera, Renderer& renderer, RenderTarget& target);
 
     double gamma() const;
     void setGamma(double gamma);

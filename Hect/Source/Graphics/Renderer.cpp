@@ -13,28 +13,28 @@ using namespace hect;
 #endif
 
 class ShaderModuleData :
-    public GpuObjectData
+    public RendererObjectData
 {
 public:
     GLuint id;
 };
 
 class ShaderData :
-    public GpuObjectData
+    public RendererObjectData
 {
 public:
     GLuint id;
 };
 
 class TextureData :
-    public GpuObjectData
+    public RendererObjectData
 {
 public:
     GLuint id;
 };
 
 class FrameBufferData :
-    public GpuObjectData
+    public RendererObjectData
 {
 public:
     GLuint frameBufferId;
@@ -42,7 +42,7 @@ public:
 };
 
 class MeshData :
-    public GpuObjectData
+    public RendererObjectData
 {
 public:
     GLuint vertexArrayId;
@@ -162,7 +162,7 @@ GLenum _shaderModuleTypeLookUp[3] =
     GL_GEOMETRY_SHADER // Geometry
 };
 
-Gpu::Gpu() :
+Renderer::Renderer() :
     _boundTarget(nullptr),
     _boundShader(nullptr),
     _boundMesh(nullptr)
@@ -200,11 +200,11 @@ Gpu::Gpu() :
     clear();
 }
 
-void Gpu::beginFrame()
+void Renderer::beginFrame()
 {
 }
 
-void Gpu::endFrame()
+void Renderer::endFrame()
 {
 
     // Clear the bound target
@@ -239,7 +239,7 @@ void Gpu::endFrame()
     }
 }
 
-void Gpu::bindMode(const RenderMode& mode)
+void Renderer::bindMode(const RenderMode& mode)
 {
     if (mode.isStateEnabled(RenderState::DepthTest))
     {
@@ -274,12 +274,12 @@ void Gpu::bindMode(const RenderMode& mode)
     }
 }
 
-void Gpu::bindTarget(RenderTarget& renderTarget)
+void Renderer::bindTarget(RenderTarget& renderTarget)
 {
     renderTarget.bind(this);
 }
 
-void Gpu::bindWindow(Window& window)
+void Renderer::bindWindow(Window& window)
 {
     // Avoid binding an already bound target
     if (&window == _boundTarget)
@@ -292,7 +292,7 @@ void Gpu::bindWindow(Window& window)
     GL_ASSERT( glBindFramebuffer(GL_FRAMEBUFFER, 0); )
 }
 
-void Gpu::bindFrameBuffer(FrameBuffer& frameBuffer)
+void Renderer::bindFrameBuffer(FrameBuffer& frameBuffer)
 {
     // Avoid binding an already bound target
     if (&frameBuffer == _boundTarget)
@@ -312,7 +312,7 @@ void Gpu::bindFrameBuffer(FrameBuffer& frameBuffer)
     GL_ASSERT( glBindFramebuffer(GL_FRAMEBUFFER, data->frameBufferId); )
 }
 
-void Gpu::uploadFrameBuffer(FrameBuffer& frameBuffer)
+void Renderer::uploadFrameBuffer(FrameBuffer& frameBuffer)
 {
     if (frameBuffer.isUploaded())
     {
@@ -353,12 +353,12 @@ void Gpu::uploadFrameBuffer(FrameBuffer& frameBuffer)
 
     frameBuffer._uploaded = true;
     frameBuffer._data = data;
-    frameBuffer._gpu = this;
+    frameBuffer._renderer = this;
 
     GL_ASSERT( glBindFramebuffer(GL_FRAMEBUFFER, 0); )
 }
 
-void Gpu::destroyFrameBuffer(FrameBuffer& frameBuffer)
+void Renderer::destroyFrameBuffer(FrameBuffer& frameBuffer)
 {
     if (!frameBuffer.isUploaded())
     {
@@ -374,7 +374,7 @@ void Gpu::destroyFrameBuffer(FrameBuffer& frameBuffer)
     frameBuffer._data = nullptr;
 }
 
-void Gpu::bindShader(Shader& shader)
+void Renderer::bindShader(Shader& shader)
 {
     // Avoid binding an already bound shader
     if (&shader == _boundShader)
@@ -402,7 +402,7 @@ void Gpu::bindShader(Shader& shader)
     }
 }
 
-void Gpu::uploadShader(Shader& shader)
+void Renderer::uploadShader(Shader& shader)
 {
     if (shader.isUploaded())
     {
@@ -413,8 +413,8 @@ void Gpu::uploadShader(Shader& shader)
     auto data = new ShaderData();
     data->id = GL_ASSERT( glCreateProgram(); )
 
-               // Attach each shader to the program
-               for (const ShaderModule::Ref& module : shader.modules())
+    // Attach each shader to the program
+    for (const ShaderModule::Ref& module : shader.modules())
     {
         if (!module->isUploaded())
         {
@@ -460,10 +460,10 @@ void Gpu::uploadShader(Shader& shader)
 
     shader._uploaded = true;
     shader._data = data;
-    shader._gpu = this;
+    shader._renderer = this;
 }
 
-void Gpu::destroyShader(Shader& shader)
+void Renderer::destroyShader(Shader& shader)
 {
     if (!shader.isUploaded())
     {
@@ -485,7 +485,7 @@ void Gpu::destroyShader(Shader& shader)
     shader._data = nullptr;
 }
 
-void Gpu::setUniform(const Uniform& uniform, const UniformValue& value)
+void Renderer::setUniform(const Uniform& uniform, const UniformValue& value)
 {
     if (!_boundShader)
     {
@@ -529,7 +529,7 @@ void Gpu::setUniform(const Uniform& uniform, const UniformValue& value)
     }
 }
 
-void Gpu::uploadShaderModule(ShaderModule& module)
+void Renderer::uploadShaderModule(ShaderModule& module)
 {
     if (module.isUploaded())
     {
@@ -562,10 +562,10 @@ void Gpu::uploadShaderModule(ShaderModule& module)
 
     module._uploaded = true;
     module._data = data;
-    module._gpu = this;
+    module._renderer = this;
 }
 
-void Gpu::destroyShaderModule(ShaderModule& module)
+void Renderer::destroyShaderModule(ShaderModule& module)
 {
     if (!module.isUploaded())
     {
@@ -579,7 +579,7 @@ void Gpu::destroyShaderModule(ShaderModule& module)
     module._data = nullptr;
 }
 
-void Gpu::bindTexture(Texture& texture, unsigned index)
+void Renderer::bindTexture(Texture& texture, unsigned index)
 {
     if (index >= _capabilities.maxTextureUnits)
     {
@@ -602,7 +602,7 @@ void Gpu::bindTexture(Texture& texture, unsigned index)
     GL_ASSERT( glBindTexture(GL_TEXTURE_2D, data->id); )
 }
 
-void Gpu::uploadTexture(Texture& texture)
+void Renderer::uploadTexture(Texture& texture)
 {
     if (texture.isUploaded())
     {
@@ -669,10 +669,10 @@ void Gpu::uploadTexture(Texture& texture)
 
     texture._uploaded = true;
     texture._data = data;
-    texture._gpu = this;
+    texture._renderer = this;
 }
 
-void Gpu::destroyTexture(Texture& texture)
+void Renderer::destroyTexture(Texture& texture)
 {
     if (!texture.isUploaded())
     {
@@ -686,7 +686,7 @@ void Gpu::destroyTexture(Texture& texture)
     texture._data = nullptr;
 }
 
-Image Gpu::downloadTextureImage(const Texture& texture)
+Image Renderer::downloadTextureImage(const Texture& texture)
 {
     if (!texture.isUploaded())
     {
@@ -714,7 +714,7 @@ Image Gpu::downloadTextureImage(const Texture& texture)
     return image;
 }
 
-void Gpu::bindMesh(Mesh& mesh)
+void Renderer::bindMesh(Mesh& mesh)
 {
     if (&mesh == _boundMesh)
     {
@@ -731,7 +731,7 @@ void Gpu::bindMesh(Mesh& mesh)
     GL_ASSERT( glBindVertexArray(data->vertexArrayId); )
 }
 
-void Gpu::uploadMesh(Mesh& mesh)
+void Renderer::uploadMesh(Mesh& mesh)
 {
     if (mesh.isUploaded())
     {
@@ -793,10 +793,10 @@ void Gpu::uploadMesh(Mesh& mesh)
 
     mesh._uploaded = true;
     mesh._data = data;
-    mesh._gpu = this;
+    mesh._renderer = this;
 }
 
-void Gpu::destroyMesh(Mesh& mesh)
+void Renderer::destroyMesh(Mesh& mesh)
 {
     if (!mesh.isUploaded())
     {
@@ -815,7 +815,7 @@ void Gpu::destroyMesh(Mesh& mesh)
     mesh._data = nullptr;
 }
 
-void Gpu::draw()
+void Renderer::draw()
 {
     if (!_boundMesh)
     {
@@ -832,12 +832,12 @@ void Gpu::draw()
     )
 }
 
-void Gpu::clear()
+void Renderer::clear()
 {
     GL_ASSERT( glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); )
 }
 
-const Gpu::Capabilities& Gpu::capabilities() const
+const Renderer::Capabilities& Renderer::capabilities() const
 {
     return _capabilities;
 }

@@ -56,7 +56,7 @@ Texture::Texture(const Texture& texture) :
     {
         // Download the image for the source texture and copy to the heap as
         // the source image for this texture
-        _image = Image::Ref(new Image(texture.gpu()->downloadTextureImage(texture)));
+        _image = Image::Ref(new Image(texture.renderer()->downloadTextureImage(texture)));
     }
 }
 
@@ -64,7 +64,7 @@ Texture::~Texture()
 {
     if (isUploaded())
     {
-        gpu()->destroyTexture(*this);
+        renderer()->destroyTexture(*this);
     }
 }
 

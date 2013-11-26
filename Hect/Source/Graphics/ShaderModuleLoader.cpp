@@ -4,7 +4,7 @@ using namespace hect;
 
 void AssetLoader<ShaderModule>::load(ShaderModule& shaderModule, const Path& assetPath, AssetCache& assetCache)
 {
-    FileReadStream stream = assetCache.storage().openFileForRead(assetPath);
+    FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
 
     ShaderModuleType type;
     std::string extension = assetPath.extension();

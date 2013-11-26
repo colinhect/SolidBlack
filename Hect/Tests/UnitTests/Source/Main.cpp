@@ -37,7 +37,7 @@ int main()
     int failed = UnitTest::RunAllTests();
     if (failed)
     {
-        Engine::fatalError(format("%d failures.", failed));
+        Window::showFatalError(format("%d failures.", failed));
     }
 
     return failed;

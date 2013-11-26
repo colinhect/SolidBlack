@@ -26,7 +26,7 @@ enum class IndexType
 ///
 /// A mesh of vertices and indices.
 class Mesh :
-    public GpuObject
+    public RendererObject
 {
     friend class MeshBuilder;
 public:

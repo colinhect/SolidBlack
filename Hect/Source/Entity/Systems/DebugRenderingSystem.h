@@ -26,8 +26,8 @@ public:
     /// Draws debug information for all visible renderables.
     ///
     /// \param camera The camera to render from.
-    /// \param gpu The GPU.
-    void renderAll(Camera& camera, Gpu& gpu);
+    /// \param renderer The renderer.
+    void renderAll(Camera& camera, Renderer& renderer);
 
 private:
     struct BoxTask
@@ -36,7 +36,7 @@ private:
         Vector3<> scale;
         Vector4<> color;
     };
-    void _renderBoxTask(const BoxTask& task, Camera& camera, Gpu& gpu);
+    void _renderBoxTask(const BoxTask& task, Camera& camera, Renderer& renderer);
 
     void _buildBoxMesh();
     void _buildBoxShader();

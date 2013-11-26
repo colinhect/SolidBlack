@@ -2,7 +2,7 @@
     "techniques" : [
         [
             {
-                "shader" : "Screen.shader",
+                "shader" : "Window.shader",
                 "renderMode" : {
                     "enabledStates" : [ "Blend" ],
                     "disabledStates" : [ "DepthTest", "CullFace" ],

@@ -3,15 +3,15 @@
 #include "PacketType.h"
 #include "FreeCameraController.h"
 
-TestState::TestState(Storage& storage, Input& input, Window& window, Gpu& gpu, const DataValue& settings) :
+TestState::TestState(FileSystem& fileSystem, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings) :
     State(1.0 / 60.0),
-    _storage(&storage),
-    _input(&input),
+    _fileSystem(&fileSystem),
+    _input(&inputSystem),
     _window(&window),
-    _gpu(&gpu),
-    _assetCache(storage),
+    _renderer(&renderer),
+    _assetCache(fileSystem),
     _renderingSystem(_assetCache, settings),
-    _scene(input, _assetCache)
+    _scene(inputSystem, _assetCache)
 {
     _scene.registerComponent<FreeCameraController, FreeCameraControllerSerializer>("FreeCameraController");
 }
@@ -62,7 +62,7 @@ void TestState::render(double delta)
 
     Camera& camera = _cameraSystem.camera();
     camera.setAspectRatio(_window->aspectRatio());
-    _renderingSystem.renderAll(camera, *_gpu, *_window);
+    _renderingSystem.renderAll(camera, *_renderer, *_window);
 
     _window->swapBuffers();
 }

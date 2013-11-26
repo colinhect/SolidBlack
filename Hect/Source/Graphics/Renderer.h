@@ -6,7 +6,7 @@ namespace hect
 ///
 /// A higher-level abstraction over a hardware-accelerated graphics API such as
 /// OpenGL or DirectX.
-class Gpu :
+class Renderer :
     public Uncopyable
 {
     friend class Engine;
@@ -21,7 +21,7 @@ public:
         unsigned maxTextureUnits;
     };
 
-    Gpu();
+    Renderer();
 
     ///
     /// Begin a new frame.

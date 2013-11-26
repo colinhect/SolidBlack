@@ -10,7 +10,6 @@
 
 using namespace hect;
 
-Engine* engine;
 const double epsilon = 0.0001;
 
 #include "AssetCacheTests.h"
@@ -19,23 +18,14 @@ const double epsilon = 0.0001;
 #include "MeshLoadingTests.h"
 #include "NetworkTests.h"
 #include "TaskPoolTests.h"
-#include "StorageTests.h"
+#include "FileSystemTests.h"
 
 int main()
 {
-    Engine engine("System Tests", "Settings.json");
-    ::engine = &engine;
-
-    Storage& storage = engine.storage();
-
-    Path workingDirectory = storage.workingDirectory();
-    storage.addDataSource(workingDirectory);
-    storage.setWriteDirectory(workingDirectory);
-
     int failed = UnitTest::RunAllTests();
     if (failed)
     {
-        Engine::fatalError(format("%d failures.", failed));
+        Window::showFatalError(format("%d failures.", failed));
     }
 
     return failed;

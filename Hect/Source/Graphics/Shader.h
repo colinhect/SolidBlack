@@ -6,7 +6,7 @@ namespace hect
 ///
 /// A GPU shader program.
 class Shader :
-    public GpuObject
+    public RendererObject
 {
 public:
 

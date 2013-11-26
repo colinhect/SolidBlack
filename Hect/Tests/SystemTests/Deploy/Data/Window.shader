@@ -1,7 +1,7 @@
 {
     "modules" : [
-        "Screen.frag",
-        "Screen.vert"
+        "Window.frag",
+        "Window.vert"
     ],
     "uniforms" : {
         "sourceTexture" : {

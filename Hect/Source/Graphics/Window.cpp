@@ -81,8 +81,7 @@ KeyboardEvent _translateKeyboardEvent(const sf::Event& event)
     return keyboardEvent;
 }
 
-Window::Window(const std::string& title, Input& input, const DataValue& settings) :
-    _input(&input),
+Window::Window(const std::string& title, const DataValue& settings) :
     _sfmlWindow(nullptr)
 {
     // Create the default video mode
@@ -120,17 +119,17 @@ Window::~Window()
     }
 }
 
-void Window::bind(Gpu* gpu)
+void Window::bind(Renderer* renderer)
 {
-    gpu->bindWindow(*this);
+    renderer->bindWindow(*this);
 }
 
-bool Window::pollEvents()
+bool Window::pollEvents(InputSystem& inputSystem)
 {
     static bool cursorVisible = true;
 
-    Mouse& mouse = _input->mouse();
-    Keyboard& keyboard = _input->keyboard();
+    Mouse& mouse = inputSystem.mouse();
+    Keyboard& keyboard = inputSystem.keyboard();
 
     sf::Vector2u windowSize = ((sf::Window*)_sfmlWindow)->getSize();
     sf::Vector2i windowCenter(windowSize.x / 2, windowSize.y / 2);
@@ -172,16 +171,16 @@ bool Window::pollEvents()
         case sf::Event::MouseButtonPressed:
         case sf::Event::MouseButtonReleased:
         case sf::Event::MouseWheelMoved:
-            _input->_enqueueEvent(_translateMouseEvent(event, _cursorPosition(), _lastCursorPosition));
+            inputSystem._enqueueEvent(_translateMouseEvent(event, _cursorPosition(), _lastCursorPosition));
             break;
         case sf::Event::KeyPressed:
         case sf::Event::KeyReleased:
-            _input->_enqueueEvent(_translateKeyboardEvent(event));
+            inputSystem._enqueueEvent(_translateKeyboardEvent(event));
             break;
         }
     }
 
-    _input->_dispatchEvents();
+    inputSystem._dispatchEvents();
 
     // If the cursor is locked then move it back to the center of the window
     if (mouse.isCursorLocked())
@@ -208,4 +207,11 @@ Vector2<int> Window::_cursorPosition()
 {
     sf::Vector2i position = sf::Mouse::getPosition(*((sf::Window*)_sfmlWindow));
     return Vector2<int>(position.x, ((sf::Window*)_sfmlWindow)->getSize().y - position.y);
+}
+
+void Window::showFatalError(const std::string& message)
+{
+#ifdef HECT_WINDOWS
+    MessageBoxA(NULL, message.c_str(), "Fatal Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+#endif
 }

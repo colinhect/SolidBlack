@@ -18,9 +18,9 @@ enum class TextureFilter
 ///
 /// A 2-dimensional texture.
 class Texture :
-    public GpuObject
+    public RendererObject
 {
-    friend class Gpu;
+    friend class Renderer;
 public:
 
     ///

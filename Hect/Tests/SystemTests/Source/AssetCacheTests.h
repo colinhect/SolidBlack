@@ -2,7 +2,10 @@ SUITE(AssetCache)
 {
     TEST(GetAsset)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
 
@@ -11,7 +14,10 @@ SUITE(AssetCache)
 
     TEST(GetNonExistingAsset)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("DoesNotExist");
 
@@ -30,7 +36,10 @@ SUITE(AssetCache)
 
     TEST(HandlesShareAssetEntry)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
         AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Window.vert");
@@ -40,7 +49,10 @@ SUITE(AssetCache)
 
     TEST(GetSeparateAssets)
     {
-        AssetCache assetCache(engine->storage());
+        FileSystem fileSystem;
+        fileSystem.addDataSource("Data");
+        
+        AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
         AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Window.frag");
