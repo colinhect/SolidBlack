@@ -14,20 +14,22 @@ int main()
     try
     {
         FileSystem fileSystem;
+
+        // Add the working directory as a data source
         Path workingDirectory = fileSystem.workingDirectory();
         fileSystem.addDataSource(workingDirectory);
 
+        // Load the settings
         DataValue settings = JsonParser().parse(fileSystem.openFileForRead("Settings.json"));
-
+        
+        // Add the data sources listed in the settings
         for (const DataValue& dataSource : settings["dataSources"])
         {
             fileSystem.addDataSource(dataSource.asString());
         }
 
-        
         Window window("Solid Black Client", settings);
-        Renderer renderer;
-
+        Renderer renderer(window);
         
         // Create the input axes
         InputAxis viewX("ViewX", InputAxisSource::MouseMoveX);
@@ -70,10 +72,18 @@ int main()
 
         InputSystem inputSystem(axes);
 
-        Flow flow;
-        flow.push(new TestState(fileSystem, inputSystem, window, renderer, settings));
+        AssetCache assetCache(fileSystem);
 
-        while (window.pollEvents(inputSystem) && flow.tick()) { }
+        Flow flow;
+        flow.push(new TestState(assetCache, inputSystem, window, renderer, settings));
+
+        while (window.pollEvents(inputSystem))
+        {
+            if (!flow.tick())
+            {
+                break;
+            }
+        }
     }
     catch (std::exception& e)
     {

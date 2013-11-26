@@ -273,12 +273,6 @@
     <ClCompile Include="Source\Entity\System.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity\Systems\BehaviorSystem.cpp">
-      <Filter>Source\Entity\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Entity\Components\Behavior.cpp">
-      <Filter>Source\Entity\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Timer.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
@@ -538,12 +532,6 @@
     </ClInclude>
     <ClInclude Include="Source\Entity\System.h">
       <Filter>Source\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity\Components\Behavior.h">
-      <Filter>Source\Entity\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity\Systems\BehaviorSystem.h">
-      <Filter>Source\Entity\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Timer.h">
       <Filter>Source\Core</Filter>

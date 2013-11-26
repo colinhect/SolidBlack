@@ -162,7 +162,7 @@ GLenum _shaderModuleTypeLookUp[3] =
     GL_GEOMETRY_SHADER // Geometry
 };
 
-Renderer::Renderer() :
+Renderer::Renderer(Window& window) :
     _boundTarget(nullptr),
     _boundShader(nullptr),
     _boundMesh(nullptr)

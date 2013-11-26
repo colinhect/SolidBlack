@@ -21,7 +21,11 @@ public:
         unsigned maxTextureUnits;
     };
 
-    Renderer();
+    ///
+    /// Constructs a renderer given the window its context belongs to.
+    ///
+    /// \param window The window which has the context.
+    Renderer(Window& window);
 
     ///
     /// Begin a new frame.

@@ -23,7 +23,7 @@
     <ClCompile Include="Source\TestState.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\FreeCameraController.cpp">
+    <ClCompile Include="Source\DebugCameraSystem.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,9 +32,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\DeferredRenderingSystem.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FreeCameraController.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\PacketType.h">
@@ -47,6 +44,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\TestState.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DebugCamera.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DebugCameraSystem.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

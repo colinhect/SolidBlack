@@ -81,6 +81,13 @@ KeyboardEvent _translateKeyboardEvent(const sf::Event& event)
     return keyboardEvent;
 }
 
+void Window::showFatalError(const std::string& message)
+{
+#ifdef HECT_WINDOWS
+    MessageBoxA(NULL, message.c_str(), "Fatal Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+#endif
+}
+
 Window::Window(const std::string& title, const DataValue& settings) :
     _sfmlWindow(nullptr)
 {
@@ -207,11 +214,4 @@ Vector2<int> Window::_cursorPosition()
 {
     sf::Vector2i position = sf::Mouse::getPosition(*((sf::Window*)_sfmlWindow));
     return Vector2<int>(position.x, ((sf::Window*)_sfmlWindow)->getSize().y - position.y);
-}
-
-void Window::showFatalError(const std::string& message)
-{
-#ifdef HECT_WINDOWS
-    MessageBoxA(NULL, message.c_str(), "Fatal Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#endif
 }

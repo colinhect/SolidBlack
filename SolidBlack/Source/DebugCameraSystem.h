@@ -3,13 +3,11 @@
 #include "Hect.h"
 using namespace hect;
 
-class FreeCameraController :
-    public Behavior
+class DebugCameraSystem :
+    public System
 {
 public:
-    FreeCameraController();
-
-    void onActivate(Entity& entity);
+    DebugCameraSystem(InputSystem& inputSystem);
 
     void update(double timeStep);
 
@@ -26,11 +24,4 @@ private:
     const InputAxis* _adjustSpeed;
 
     double _speed;
-
-    Entity _entity;
-};
-
-class FreeCameraControllerSerializer :
-    public ComponentSerializer<FreeCameraController>
-{
 };

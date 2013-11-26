@@ -10,7 +10,17 @@ class InputSystem :
 {
     friend class Window;
 public:
+
+    ///
+    /// Constructs an input system without any axes.
     InputSystem();
+
+    ///
+    /// Constructs an input system given axes.
+    ///
+    /// \param axes The input axes to include in the system.
+    ///
+    /// \throws Error If there are multiple axes with the same name.
     InputSystem(const InputAxis::Array& axes);
 
     ///
@@ -22,7 +32,9 @@ public:
     const InputAxis& axisWithName(const std::string& name) const;
 
     ///
-    /// Updates all input axes.
+    /// Updates all input axes in the system.
+    ///
+    /// \param timeStep The duration of time between each update (in seconds).
     void updateAxes(double timeStep);
 
     ///

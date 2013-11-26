@@ -9,5 +9,5 @@
         "nearClip" : 0.01,
         "farClip" : 250000
     },
-    "FreeCameraController" : { }
+    "DebugCamera" : { }
 }

@@ -4,6 +4,7 @@
 using namespace hect;
 
 #include "DeferredRenderingSystem.h"
+#include "DebugCameraSystem.h"
 
 class TestState :
     public State,
@@ -11,7 +12,7 @@ class TestState :
     public Uncopyable
 {
 public:
-    TestState(FileSystem& fileSystem, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings);
+    TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings);
 
     void begin(Flow& flow);
     void end(Flow& flow);
@@ -22,16 +23,14 @@ public:
     void receiveKeyboardEvent(const KeyboardEvent& event);
 
 private:
-    FileSystem* _fileSystem;
+    AssetCache* _assetCache;
     InputSystem* _input;
     Window* _window;
     Renderer* _renderer;
 
-    AssetCache _assetCache;
-
     CameraSystem _cameraSystem;
     DeferredRenderingSystem _renderingSystem;
-    BehaviorSystem _behaviorSystem;
+    DebugCameraSystem _debugCameraSystem;
 
     Scene _scene;
 };

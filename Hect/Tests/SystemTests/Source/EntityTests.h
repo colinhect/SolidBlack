@@ -102,8 +102,7 @@ SUITE(Entity)
 {
     TEST(CreateAndDestroy)
     {
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         Entity a = scene.createEntity();
         CHECK(!a.isNull());
@@ -116,8 +115,7 @@ SUITE(Entity)
 
     TEST(Components)
     {
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         Entity a = scene.createEntity();
 
@@ -130,8 +128,7 @@ SUITE(Entity)
 
     TEST(PolymorphicComponents)
     {
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         Entity a = scene.createEntity();
         a.addComponent<Dog>();
@@ -148,8 +145,7 @@ SUITE(Entity)
 
     TEST(ActivationAndDestruction)
     {
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         Entity a = scene.createEntity();
         CHECK(!a.isActivated());
@@ -168,8 +164,7 @@ SUITE(Entity)
 
     TEST(PoolResize)
     {
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         std::vector<Entity> entities;
         for (int i = 0 ; i < 129; ++i)
@@ -192,8 +187,7 @@ SUITE(Entity)
         MovementSystem movementSystem;
         NamingSystem namingSystem;
         
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         scene.addSystem(movementSystem);
         scene.addSystem(namingSystem);
@@ -252,8 +246,7 @@ SUITE(Entity)
         MovementSystem movementSystem;
         NamingSystem namingSystem;
         
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         scene.addSystem(movementSystem);
         scene.addSystem(namingSystem);
@@ -284,8 +277,7 @@ SUITE(Entity)
         MovementSystem movementSystem;
         NamingSystem namingSystem;
         
-        InputSystem inputSystem;
-        Scene scene(inputSystem);
+        Scene scene;
 
         scene.addSystem(movementSystem);
         scene.addSystem(namingSystem);

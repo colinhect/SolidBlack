@@ -12,6 +12,12 @@ InputSystem::InputSystem(const InputAxis::Array& axes) :
 {
     for (InputAxis& axis : _axes)
     {
+        // Make sure an axis with the name does not already exist
+        if (_mappedAxes.find(axis.name()) != _mappedAxes.end())
+        {
+            throw Error(format("Multiple input axes with name '%s'", axis.name().c_str()));
+        }
+
         _mappedAxes[axis.name()] = &axis;
     }
 
@@ -23,7 +29,7 @@ const InputAxis& InputSystem::axisWithName(const std::string& name) const
     auto it = _mappedAxes.find(name);
     if (it == _mappedAxes.end())
     {
-        throw Error(format("No input axis '%s'", name.c_str()));
+        throw Error(format("No input axis with name '%s'", name.c_str()));
     }
 
     return *(*it).second;
@@ -38,7 +44,7 @@ void InputSystem::updateAxes(double timeStep)
         double gravity = axis.gravity();
 
         // Gravitate towards zero
-        if (gravity != 0.0f)
+        if (gravity != 0)
         {
             axis.setValue(value - value * std::min(1.0, gravity * timeStep));
         }
@@ -89,7 +95,6 @@ void InputSystem::receiveMouseEvent(const MouseEvent& event)
 
         for (InputAxis& axis : _axes)
         {
-
             if (axis.source() == InputAxisSource::MouseMoveX)
             {
                 axis.setValue(axis.value() + movementX * axis.acceleration());
@@ -102,7 +107,7 @@ void InputSystem::receiveMouseEvent(const MouseEvent& event)
     }
     else if (event.type == MouseEventType::ScrollUp || event.type == MouseEventType::ScrollDown)
     {
-        double movement = event.type == MouseEventType::ScrollUp ? 1.0 : -1.0;
+        double movement = event.type == MouseEventType::ScrollUp ? 1 : -1;
 
         for (InputAxis& axis : _axes)
         {

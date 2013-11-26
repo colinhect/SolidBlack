@@ -1,26 +1,26 @@
 #include "TestState.h"
 
 #include "PacketType.h"
-#include "FreeCameraController.h"
+#include "DebugCamera.h"
 
-TestState::TestState(FileSystem& fileSystem, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings) :
+TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings) :
     State(1.0 / 60.0),
-    _fileSystem(&fileSystem),
+    _assetCache(&assetCache),
     _input(&inputSystem),
     _window(&window),
     _renderer(&renderer),
-    _assetCache(fileSystem),
-    _renderingSystem(_assetCache, settings),
-    _scene(inputSystem, _assetCache)
+    _renderingSystem(assetCache, settings),
+    _debugCameraSystem(inputSystem),
+    _scene(assetCache)
 {
-    _scene.registerComponent<FreeCameraController, FreeCameraControllerSerializer>("FreeCameraController");
+    _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
 }
 
 void TestState::begin(Flow& flow)
 {
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
-    _scene.addSystem(_behaviorSystem);
+    _scene.addSystem(_debugCameraSystem);
 
     Keyboard& keyboard = _input->keyboard();
     keyboard.addListener(*this);
@@ -39,7 +39,7 @@ void TestState::end(Flow& flow)
     Keyboard& keyboard = _input->keyboard();
     keyboard.removeListener(*this);
 
-    _scene.addSystem(_behaviorSystem);
+    _scene.addSystem(_debugCameraSystem);
     _scene.addSystem(_renderingSystem);
     _scene.addSystem(_cameraSystem);
 }
@@ -47,7 +47,7 @@ void TestState::end(Flow& flow)
 void TestState::update(double timeStep)
 {
     _cameraSystem.update();
-    _behaviorSystem.update(timeStep);
+    _debugCameraSystem.update(timeStep);
     _scene.refresh();
 
     _input->updateAxes(timeStep);
@@ -62,6 +62,7 @@ void TestState::render(double delta)
 
     Camera& camera = _cameraSystem.camera();
     camera.setAspectRatio(_window->aspectRatio());
+
     _renderingSystem.renderAll(camera, *_renderer, *_window);
 
     _window->swapBuffers();

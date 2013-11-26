@@ -6,7 +6,7 @@ void emptyTask() { }
 void shortTask()
 {
     volatile float total = 0.0f;
-    for (int i = 0; i < 2048; ++i)
+    for (int i = 0; i < 1024; ++i)
     {
         total += i;
         total *= 1.0f / (float)i;
@@ -16,7 +16,7 @@ void shortTask()
 void longTask()
 {
     volatile float total = 0.0f;
-    for (int i = 0; i < 8192 * 4; ++i)
+    for (int i = 0; i < 4096 * 4; ++i)
     {
         total += i;
         total *= 1.0f / (float)i;

@@ -18,7 +18,7 @@ public:
     ///
     /// Updates all physical bodies.
     ///
-    /// \param timeStep The time between last frame and this one.
+    /// \param timeStep The duration of time between each update (in seconds).
     /// \param maxSubStepCount The maximum number of sub-steps.
     void update(double timeStep, unsigned maxSubStepCount);
 
