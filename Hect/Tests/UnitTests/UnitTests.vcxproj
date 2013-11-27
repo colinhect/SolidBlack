@@ -158,16 +158,23 @@
   <ItemGroup>
     <ClInclude Include="Source\AngleTests.h" />
     <ClInclude Include="Source\AnyTests.h" />
+    <ClInclude Include="Source\AssetCacheTests.h" />
+    <ClInclude Include="Source\EntityTests.h" />
+    <ClInclude Include="Source\FileSystemTests.h" />
+    <ClInclude Include="Source\MaterialDataFormatTests.h" />
     <ClInclude Include="Source\MemoryStreamTests.h" />
     <ClInclude Include="Source\DataValueTests.h" />
     <ClInclude Include="Source\FrustumTests.h" />
     <ClInclude Include="Source\DataJsonFormatTests.h" />
     <ClInclude Include="Source\Matrix4Tests.h" />
     <ClInclude Include="Source\MeshBuilderTests.h" />
+    <ClInclude Include="Source\MeshDataFormatTests.h" />
     <ClInclude Include="Source\MeshTests.h" />
+    <ClInclude Include="Source\NetworkTests.h" />
     <ClInclude Include="Source\PathTests.h" />
     <ClInclude Include="Source\PlaneTests.h" />
     <ClInclude Include="Source\QuaternionTests.h" />
+    <ClInclude Include="Source\TaskPoolTests.h" />
     <ClInclude Include="Source\TimeSpanTests.h" />
     <ClInclude Include="Source\FormatTests.h" />
     <ClInclude Include="Source\Vector2Tests.h" />

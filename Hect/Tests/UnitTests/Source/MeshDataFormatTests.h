@@ -1,4 +1,4 @@
-SUITE(MeshLoading)
+SUITE(MeshDataFormat)
 {
     TEST(VertexAndIndexCounts)
     {

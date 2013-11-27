@@ -1,4 +1,4 @@
-SUITE(MaterialLoading)
+SUITE(MaterialDataFormat)
 {
     TEST(NoBase)
     {

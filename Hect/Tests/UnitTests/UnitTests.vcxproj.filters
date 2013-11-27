@@ -58,6 +58,27 @@
     <ClInclude Include="Source\DataJsonFormatTests.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\AssetCacheTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileSystemTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NetworkTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TaskPoolTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshDataFormatTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MaterialDataFormatTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
