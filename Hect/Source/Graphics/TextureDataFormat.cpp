@@ -2,13 +2,7 @@
 
 using namespace hect;
 
-TextureJsonFormat::TextureJsonFormat()
-{
-    _textureFilters["Nearest"] = TextureFilter::Nearest;
-    _textureFilters["Linear"] = TextureFilter::Linear;
-}
-
-void TextureJsonFormat::load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache)
+void TextureDataFormat::load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache)
 {
     // Image
     if (dataValue["image"].isString())
@@ -42,10 +36,18 @@ void TextureJsonFormat::load(Texture& texture, const DataValue& dataValue, Asset
     }
 }
 
-TextureFilter TextureJsonFormat::_parseTextureFilter(const DataValue& dataValue)
+TextureFilter TextureDataFormat::_parseTextureFilter(const DataValue& dataValue)
 {
-    auto it = _textureFilters.find(dataValue.asString());
-    if (it == _textureFilters.end())
+    static std::map<std::string, TextureFilter> textureFilters;
+
+    if (textureFilters.empty())
+    {
+        textureFilters["Nearest"] = TextureFilter::Nearest;
+        textureFilters["Linear"] = TextureFilter::Linear;
+    }
+
+    auto it = textureFilters.find(dataValue.asString());
+    if (it == textureFilters.end())
     {
         throw Error(format("Invalid texture filter '%s'", dataValue.asString().c_str()));
     }

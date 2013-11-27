@@ -16,9 +16,6 @@
     <ClInclude Include="Source\FrustumTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\JsonParserTests.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Matrix4Tests.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -56,6 +53,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\VertexLayoutTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DataJsonFormatTests.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

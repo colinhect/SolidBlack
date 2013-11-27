@@ -6,7 +6,7 @@ using namespace hect;
 
 DataValue toDataValue(Json::Value& jsonValue);
 
-DataValue JsonParser::parse(const std::string& json)
+DataValue DataJsonFormat::load(const std::string& json)
 {
     Json::Value root;
     Json::Reader reader;
@@ -17,7 +17,7 @@ DataValue JsonParser::parse(const std::string& json)
     return toDataValue(root);
 }
 
-DataValue JsonParser::parse(ReadStream& stream)
+DataValue DataJsonFormat::load(ReadStream& stream)
 {
     std::string json = stream.readAllToString();
 

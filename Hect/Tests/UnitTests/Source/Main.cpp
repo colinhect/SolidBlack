@@ -14,10 +14,10 @@ const double epsilon = 0.0001;
 
 #include "AngleTests.h"
 #include "AnyTests.h"
+#include "DataJsonFormatTests.h"
 #include "DataValueTests.h"
 #include "FormatTests.h"
 #include "FrustumTests.h"
-#include "JsonParserTests.h"
 #include "Matrix4Tests.h"
 #include "MemoryStreamTests.h"
 #include "MeshBuilderTests.h"

@@ -2,29 +2,8 @@
 
 using namespace hect;
 
-MaterialJsonFormat::MaterialJsonFormat()
+void MaterialDataFormat::load(Material& material, const DataValue& dataValue, AssetCache& assetCache)
 {
-    _states["Blend"] = RenderState::Blend;
-    _states["DepthTest"] = RenderState::DepthTest;
-    _states["DepthWrite"] = RenderState::DepthWrite;
-    _states["CullFace"] = RenderState::CullFace;
-
-    _blendFactors["Zero"] = BlendFactor::Zero;
-    _blendFactors["One"] = BlendFactor::One;
-    _blendFactors["SourceColor"] = BlendFactor::SourceColor;
-    _blendFactors["OneMinusSourceColor"] = BlendFactor::OneMinusSourceColor;
-    _blendFactors["DestColor"] = BlendFactor::DestColor;
-    _blendFactors["OneMinusDestColor"] = BlendFactor::OneMinusDestColor;
-    _blendFactors["SourceAlpha"] = BlendFactor::SourceAlpha;
-    _blendFactors["OneMinusSourceAlpha"] = BlendFactor::OneMinusSourceAlpha;
-    _blendFactors["DestAlpha"] = BlendFactor::DestAlpha;
-    _blendFactors["OneMinusDestAlpha"] = BlendFactor::OneMinusDestAlpha;
-}
-
-void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, AssetCache& assetCache)
-{
-    ShaderJsonFormat shaderJsonFormat;
-
     Technique::Array techniques;
 
     // Base material
@@ -79,7 +58,7 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
                 }
 
                 const Uniform& uniform = shader->uniformWithName(name);
-                UniformValue value = shaderJsonFormat.parseValue(uniform.type(), uniformValue[name]);
+                UniformValue value = ShaderDataFormat::parseValue(uniform.type(), uniformValue[name]);
 
                 bool foundUniformValue = false;
                 for (PassUniformValue& uniformValue : uniformValues)
@@ -181,10 +160,20 @@ void MaterialJsonFormat::load(Material& material, const DataValue& dataValue, As
     material = Material(techniques);
 }
 
-RenderState MaterialJsonFormat::_parseState(const DataValue& dataValue)
+RenderState MaterialDataFormat::_parseState(const DataValue& dataValue)
 {
-    auto it = _states.find(dataValue.asString());
-    if (it == _states.end())
+    static std::map<std::string, RenderState> states;
+
+    if (states.empty())
+    {
+        states["Blend"] = RenderState::Blend;
+        states["DepthTest"] = RenderState::DepthTest;
+        states["DepthWrite"] = RenderState::DepthWrite;
+        states["CullFace"] = RenderState::CullFace;
+    }
+
+    auto it = states.find(dataValue.asString());
+    if (it == states.end())
     {
         throw Error(format("Invalid render state '%s'", dataValue.asString().c_str()));
     }
@@ -192,10 +181,26 @@ RenderState MaterialJsonFormat::_parseState(const DataValue& dataValue)
     return (*it).second;
 }
 
-BlendFactor MaterialJsonFormat::_parseBlendFactor(const DataValue& dataValue)
+BlendFactor MaterialDataFormat::_parseBlendFactor(const DataValue& dataValue)
 {
-    auto it = _blendFactors.find(dataValue.asString());
-    if (it == _blendFactors.end())
+    static std::map<std::string, BlendFactor> blendFactors;
+
+    if (blendFactors.empty())
+    {
+        blendFactors["Zero"] = BlendFactor::Zero;
+        blendFactors["One"] = BlendFactor::One;
+        blendFactors["SourceColor"] = BlendFactor::SourceColor;
+        blendFactors["OneMinusSourceColor"] = BlendFactor::OneMinusSourceColor;
+        blendFactors["DestColor"] = BlendFactor::DestColor;
+        blendFactors["OneMinusDestColor"] = BlendFactor::OneMinusDestColor;
+        blendFactors["SourceAlpha"] = BlendFactor::SourceAlpha;
+        blendFactors["OneMinusSourceAlpha"] = BlendFactor::OneMinusSourceAlpha;
+        blendFactors["DestAlpha"] = BlendFactor::DestAlpha;
+        blendFactors["OneMinusDestAlpha"] = BlendFactor::OneMinusDestAlpha;
+    }
+
+    auto it = blendFactors.find(dataValue.asString());
+    if (it == blendFactors.end())
     {
         throw Error(format("Invalid blend factor '%s'", dataValue.asString().c_str()));
     }

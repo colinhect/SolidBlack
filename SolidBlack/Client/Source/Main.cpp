@@ -21,7 +21,7 @@ int main()
         fileSystem.addDataSource(workingDirectory);
 
         // Load the settings
-        DataValue settings = JsonParser().parse(fileSystem.openFileForRead("Settings.json"));
+        DataValue settings = DataJsonFormat::load(fileSystem.openFileForRead("Settings.json"));
         
         // Add the data sources listed in the settings
         for (const DataValue& dataSource : settings["dataSources"])

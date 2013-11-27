@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides the functionality for parsing JSON into a data value.
-class JsonParser
+class DataJsonFormat
 {
 public:
 
@@ -15,7 +15,7 @@ public:
     /// \param json The JSON string.
     ///
     /// \returns The resulting data value.
-    DataValue parse(const std::string& json);
+    static DataValue load(const std::string& json);
 
     ///
     /// Parses a stream containing JSON text into a data value.
@@ -23,7 +23,7 @@ public:
     /// \param stream The stream containing JSON text.
     ///
     /// \returns The resulting data value.
-    DataValue parse(ReadStream& stream);
+    static DataValue load(ReadStream& stream);
 };
 
 }

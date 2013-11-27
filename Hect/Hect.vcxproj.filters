@@ -144,9 +144,6 @@
     <ClCompile Include="Source\Graphics\Material.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\MaterialJsonFormat.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\MaterialLoader.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
@@ -154,9 +151,6 @@
       <Filter>Source\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\MeshBuilder.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\MeshJsonFormat.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\MeshLoader.cpp">
@@ -177,9 +171,6 @@
     <ClCompile Include="Source\Graphics\Shader.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\ShaderJsonFormat.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\ShaderLoader.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
@@ -193,9 +184,6 @@
       <Filter>Source\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Texture.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\TextureJsonFormat.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\TextureLoader.cpp">
@@ -229,9 +217,6 @@
       <Filter>Source\IO</Filter>
     </ClCompile>
     <ClCompile Include="Source\IO\FileWriteStream.cpp">
-      <Filter>Source\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\IO\JsonParser.cpp">
       <Filter>Source\IO</Filter>
     </ClCompile>
     <ClCompile Include="Source\IO\MemoryReadStream.cpp">
@@ -296,6 +281,21 @@
     </ClCompile>
     <ClCompile Include="Source\Input\InputAxisDataFormat.cpp">
       <Filter>Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\MaterialDataFormat.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\MeshDataFormat.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\ShaderDataFormat.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\TextureDataFormat.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IO\DataJsonFormat.cpp">
+      <Filter>Source\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,16 +389,10 @@
     <ClInclude Include="Source\Graphics\Material.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\MaterialJsonFormat.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\Mesh.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\MeshBuilder.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\MeshJsonFormat.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Pass.h">
@@ -416,9 +410,6 @@
     <ClInclude Include="Source\Graphics\Shader.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\ShaderJsonFormat.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\ShaderModule.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
@@ -426,9 +417,6 @@
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Texture.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\TextureJsonFormat.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Uniform.h">
@@ -459,9 +447,6 @@
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\IO\FileWriteStream.h">
-      <Filter>Source\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IO\JsonParser.h">
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\IO\MemoryReadStream.h">
@@ -559,6 +544,21 @@
     </ClInclude>
     <ClInclude Include="Source\Input\InputAxisDataFormat.h">
       <Filter>Source\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\MaterialDataFormat.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\MeshDataFormat.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\ShaderDataFormat.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\TextureDataFormat.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IO\DataJsonFormat.h">
+      <Filter>Source\IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

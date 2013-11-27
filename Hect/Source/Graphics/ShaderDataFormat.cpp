@@ -2,29 +2,7 @@
 
 using namespace hect;
 
-ShaderJsonFormat::ShaderJsonFormat()
-{
-    _uniformBindings["None"] = UniformBinding::None;
-    _uniformBindings["RenderTargetSize"] = UniformBinding::RenderTargetSize;
-    _uniformBindings["CameraPosition"] = UniformBinding::CameraPosition;
-    _uniformBindings["CameraUp"] = UniformBinding::CameraUp;
-    _uniformBindings["ViewMatrix"] = UniformBinding::ViewMatrix;
-    _uniformBindings["ProjectionMatrix"] = UniformBinding::ProjectionMatrix;
-    _uniformBindings["ViewProjectionMatrix"] = UniformBinding::ViewProjectionMatrix;
-    _uniformBindings["ModelMatrix"] = UniformBinding::ModelMatrix;
-    _uniformBindings["ModelViewMatrix"] = UniformBinding::ModelViewMatrix;
-    _uniformBindings["ModelViewProjectionMatrix"] = UniformBinding::ModelViewProjectionMatrix;
-
-    _valueTypes["Int"] = UniformType::Int;
-    _valueTypes["Float"] = UniformType::Float;
-    _valueTypes["Vector2"] = UniformType::Vector2;
-    _valueTypes["Vector3"] = UniformType::Vector3;
-    _valueTypes["Vector4"] = UniformType::Vector4;
-    _valueTypes["Matrix4"] = UniformType::Matrix4;
-    _valueTypes["Texture"] = UniformType::Texture;
-}
-
-void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache)
+void ShaderDataFormat::load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache)
 {
     ShaderModule::RefArray modules;
 
@@ -46,7 +24,7 @@ void ShaderJsonFormat::load(Shader& shader, const DataValue& dataValue, AssetCac
     shader = Shader(modules, uniforms);
 }
 
-UniformValue ShaderJsonFormat::parseValue(UniformType type, const DataValue& dataValue) const
+UniformValue ShaderDataFormat::parseValue(UniformType type, const DataValue& dataValue)
 {
     switch (type)
     {
@@ -68,7 +46,7 @@ UniformValue ShaderJsonFormat::parseValue(UniformType type, const DataValue& dat
     }
 }
 
-Uniform ShaderJsonFormat::_parseUniform(const std::string& name, const DataValue& dataValue)
+Uniform ShaderDataFormat::_parseUniform(const std::string& name, const DataValue& dataValue)
 {
     if (!dataValue["type"].isNull())
     {
@@ -95,10 +73,26 @@ Uniform ShaderJsonFormat::_parseUniform(const std::string& name, const DataValue
     }
 }
 
-UniformBinding ShaderJsonFormat::_parseUniformBinding(const DataValue& dataValue)
+UniformBinding ShaderDataFormat::_parseUniformBinding(const DataValue& dataValue)
 {
-    auto it = _uniformBindings.find(dataValue.asString());
-    if (it == _uniformBindings.end())
+    static std::map<std::string, UniformBinding> uniformBindings;
+
+    if (uniformBindings.empty())
+    {
+        uniformBindings["None"] = UniformBinding::None;
+        uniformBindings["RenderTargetSize"] = UniformBinding::RenderTargetSize;
+        uniformBindings["CameraPosition"] = UniformBinding::CameraPosition;
+        uniformBindings["CameraUp"] = UniformBinding::CameraUp;
+        uniformBindings["ViewMatrix"] = UniformBinding::ViewMatrix;
+        uniformBindings["ProjectionMatrix"] = UniformBinding::ProjectionMatrix;
+        uniformBindings["ViewProjectionMatrix"] = UniformBinding::ViewProjectionMatrix;
+        uniformBindings["ModelMatrix"] = UniformBinding::ModelMatrix;
+        uniformBindings["ModelViewMatrix"] = UniformBinding::ModelViewMatrix;
+        uniformBindings["ModelViewProjectionMatrix"] = UniformBinding::ModelViewProjectionMatrix;
+    }
+
+    auto it = uniformBindings.find(dataValue.asString());
+    if (it == uniformBindings.end())
     {
         throw Error(format("Invalid uniform binding '%s'", dataValue.asString().c_str()));
     }
@@ -106,10 +100,23 @@ UniformBinding ShaderJsonFormat::_parseUniformBinding(const DataValue& dataValue
     return (*it).second;
 }
 
-UniformType ShaderJsonFormat::_parseType(const DataValue& dataValue)
+UniformType ShaderDataFormat::_parseType(const DataValue& dataValue)
 {
-    auto it = _valueTypes.find(dataValue.asString());
-    if (it == _valueTypes.end())
+    static std::map<std::string, UniformType> valueTypes;
+
+    if (valueTypes.empty())
+    {
+        valueTypes["Int"] = UniformType::Int;
+        valueTypes["Float"] = UniformType::Float;
+        valueTypes["Vector2"] = UniformType::Vector2;
+        valueTypes["Vector3"] = UniformType::Vector3;
+        valueTypes["Vector4"] = UniformType::Vector4;
+        valueTypes["Matrix4"] = UniformType::Matrix4;
+        valueTypes["Texture"] = UniformType::Texture;
+    }
+
+    auto it = valueTypes.find(dataValue.asString());
+    if (it == valueTypes.end())
     {
         throw Error(format("Invalid uniform type '%s'", dataValue.asString().c_str()));
     }
