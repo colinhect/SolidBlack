@@ -18,7 +18,7 @@ public:
     /// \returns The input axis.
     ///
     /// \throws Error If an error occurred while loading the axis.
-    InputAxis load(const std::string& name, const DataValue& dataValue);
+    static InputAxis load(const std::string& name, const DataValue& dataValue);
 
 private:
     static InputAxisSource _parseSource(const DataValue& dataValue);

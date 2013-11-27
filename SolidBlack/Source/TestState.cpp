@@ -4,7 +4,6 @@
 #include "DebugCamera.h"
 
 TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings) :
-    State(1.0 / 60.0),
     _assetCache(&assetCache),
     _input(&inputSystem),
     _window(&window),
@@ -14,10 +13,7 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _scene(assetCache)
 {
     _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
-}
 
-void TestState::begin(Flow& flow)
-{
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
     _scene.addSystem(_debugCameraSystem);
@@ -34,14 +30,10 @@ void TestState::begin(Flow& flow)
     _scene.refresh();
 }
 
-void TestState::end(Flow& flow)
+TestState::~TestState()
 {
     Keyboard& keyboard = _input->keyboard();
     keyboard.removeListener(*this);
-
-    _scene.addSystem(_debugCameraSystem);
-    _scene.addSystem(_renderingSystem);
-    _scene.addSystem(_cameraSystem);
 }
 
 void TestState::update(double timeStep)

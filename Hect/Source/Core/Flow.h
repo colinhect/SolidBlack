@@ -4,11 +4,14 @@ namespace hect
 {
 
 ///
-/// A flow of states.
+/// Manages the flow of states
 class Flow :
     public Uncopyable
 {
 public:
+
+    /// Constructs a flow.
+    Flow();
 
     ///
     /// Pushes a new state onto the stack.
@@ -17,21 +20,23 @@ public:
     void push(State* state);
     
     ///
-    /// Updates the current state and potentially moves to the next state as
-    /// needed.
-    //
+    /// Progresses the flow.
+    ///
+    /// \param timeStep The duration of time between each update (in seconds).
+    ///
     /// \returns True if there are still states to execute, false if there are
     /// no other states in the flow.
-    bool tick();
+    bool update(TimeSpan timeStep);
 
 private:
+    void _updateToTopState();
+
     Timer _timer;
-    TimeSpan _timeStep;
     TimeSpan _accumulator;
     TimeSpan _delta;
 
-    std::shared_ptr<State> _currentState;
-    std::stack<std::shared_ptr<State>> _states;
+    int _stateIndex;
+    std::vector<std::shared_ptr<State>> _states;
 };
 
 }

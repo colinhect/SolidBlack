@@ -2,20 +2,18 @@
 
 using namespace hect;
 
-State::State(double timeStep) :
-    _timeStep(timeStep),
-    _active(true)
+State::State() :
+    _active(true),
+    _suspended(false)
 {
 }
 
-void State::begin(Flow& flow)
+void State::suspend()
 {
-    flow;
 }
 
-void State::end(Flow& flow)
+void State::resume()
 {
-    flow;
 }
 
 void State::update(double timeStep)
@@ -33,9 +31,9 @@ bool State::isActive() const
     return _active;
 }
 
-double State::timeStep() const
+bool State::isSuspended() const
 {
-    return _timeStep;
+    return _suspended;
 }
 
 void State::setActive(bool active)

@@ -98,6 +98,37 @@ Key InputAxisDataFormat::_parseKey(const DataValue& dataValue)
         keys["X"] = Key::X;
         keys["Y"] = Key::Y;
         keys["Z"] = Key::Z;
+        keys["0"] = Key::Num0;
+        keys["1"] = Key::Num1;
+        keys["2"] = Key::Num2;
+        keys["3"] = Key::Num3;
+        keys["4"] = Key::Num4;
+        keys["5"] = Key::Num5;
+        keys["6"] = Key::Num6;
+        keys["7"] = Key::Num7;
+        keys["8"] = Key::Num8;
+        keys["9"] = Key::Num9;
+        keys["Esc"] = Key::Esc;
+        keys["Ctrl"] = Key::Ctrl;
+        keys["Shift"] = Key::Shift;
+        keys["Alt"] = Key::Alt;
+        keys["Space"] = Key::Space;
+        keys["Enter"] = Key::Enter;
+        keys["Backspace"] = Key::Backspace;
+        keys["Tab"] = Key::Tab;
+        keys["Tick"] = Key::Tick;
+        keys["F1"] = Key::F1;
+        keys["F2"] = Key::F2;
+        keys["F3"] = Key::F3;
+        keys["F4"] = Key::F4;
+        keys["F5"] = Key::F5;
+        keys["F6"] = Key::F6;
+        keys["F7"] = Key::F7;
+        keys["F8"] = Key::F8;
+        keys["F9"] = Key::F9;
+        keys["F10"] = Key::F10;
+        keys["F11"] = Key::F11;
+        keys["F12"] = Key::F12;
     }
 
     auto it = keys.find(dataValue.asString());

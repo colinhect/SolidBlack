@@ -9,26 +9,16 @@ class Flow;
 /// A state in a flow (e.g. main menu, single player game, credits).
 class State
 {
+    friend class Flow;
 public:
 
     ///
-    /// Constructs a state given its the time step.
-    ///
-    /// \param timeStep The duration of time between each update (in seconds).
-    State(double timeStep);
+    /// Constructs a state.
+    State();
     virtual ~State() { }
-
-    ///
-    /// Called when the state begins.
-    ///
-    /// \param flow The flow.
-    virtual void begin(Flow& flow);
-
-    ///
-    /// Called when the state ends.
-    ///
-    /// \param flow The flow.
-    virtual void end(Flow& flow);
+    
+    virtual void suspend();
+    virtual void resume();
 
     ///
     /// Called once every time step.
@@ -47,9 +37,7 @@ public:
     /// Returns whether the state is active.
     bool isActive() const;
 
-    ///
-    /// Returns the time between each frame.
-    double timeStep() const;
+    bool isSuspended() const;
 
 protected:
 
@@ -63,8 +51,8 @@ protected:
     void setActive(bool active);
 
 private:
-    double _timeStep;
     bool _active;
+    bool _suspended;
 };
 
 }

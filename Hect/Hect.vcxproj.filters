@@ -261,9 +261,6 @@
     <ClCompile Include="Source\Core\Timer.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Flow.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Window.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
@@ -296,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="Source\IO\DataJsonFormat.cpp">
       <Filter>Source\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Flow.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -524,9 +524,6 @@
     <ClInclude Include="Source\Core\Timer.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Flow.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\Window.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
@@ -559,6 +556,9 @@
     </ClInclude>
     <ClInclude Include="Source\IO\DataJsonFormat.h">
       <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Flow.h">
+      <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

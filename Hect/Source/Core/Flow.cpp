@@ -2,45 +2,42 @@
 
 using namespace hect;
 
-void Flow::push(State* state)
+Flow::Flow() :
+    _stateIndex(0)
 {
-    _states.push(std::shared_ptr<State>(state));
 }
 
-bool Flow::tick()
+void Flow::push(State* state)
 {
-    // A new state was push on the stack
-    if (_currentState && !_states.empty() && _currentState != _states.top())
-    {
-        _currentState->end(*this);
-        _currentState = _states.top();
-        _states.pop();
+    _states.push_back(std::shared_ptr<State>(state));
+}
 
-        _currentState->begin(*this);
-        _timeStep = TimeSpan::fromSeconds(_currentState->timeStep());
-            
-        _timer.reset();
-        _accumulator = TimeSpan();
-        _delta = TimeSpan();
-    }
-
-    // We have no current state or the current state is inactive
-    else if (!_currentState || !_currentState->isActive())
+bool Flow::update(TimeSpan timeStep)
+{
+    _updateToTopState();
+    
+    State* state = _states[_stateIndex].get();
+    while (!state->isActive())
     {
+        _states.pop_back();
+        --_stateIndex;
+
         if (_states.empty())
         {
             return false;
         }
+        else
+        {
+            state = _states[_stateIndex].get();
+            if (state->isSuspended())
+            {
+                state->resume();
+                state->_suspended = false;
 
-        _currentState = _states.top();
-        _states.pop();
-
-        _currentState->begin(*this);
-        _timeStep = TimeSpan::fromSeconds(_currentState->timeStep());
-            
-        _timer.reset();
-        _accumulator = TimeSpan();
-        _delta = TimeSpan();
+                _updateToTopState();
+                state = _states[_stateIndex].get();
+            }
+        }
     }
 
     TimeSpan deltaTime = _timer.elapsed();
@@ -49,15 +46,38 @@ bool Flow::tick()
     _accumulator += deltaTime;
     _delta += deltaTime;
 
-    while (_accumulator.microseconds() >= _timeStep.microseconds())
+    while (_accumulator.microseconds() >= timeStep.microseconds())
     {
-        _currentState->update(_timeStep.seconds());
+        state->update(timeStep.seconds());
 
         _delta = TimeSpan();
-        _accumulator -= _timeStep;
+        _accumulator -= timeStep;
     }
 
-    _currentState->render(_delta.seconds() / _timeStep.seconds());
+    state->render(_delta.seconds() / timeStep.seconds());
 
     return true;
+}
+
+void Flow::_updateToTopState()
+{
+    if (_stateIndex < _states.size() - 1)
+    {
+        if (_stateIndex < 0)
+        {
+            _stateIndex = 0;
+        }
+
+        for (; _stateIndex < _states.size() - 1; ++_stateIndex)
+        {
+            State* state = _states[_stateIndex].get();
+            if (!state->isSuspended())
+            {
+                state->suspend();
+                state->_suspended = true;
+            }
+        }
+
+        ++_stateIndex;
+    }
 }

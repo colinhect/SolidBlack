@@ -37,7 +37,7 @@ int main()
         InputAxis::Array axes;
         for (const std::string& axisName : settings["inputAxes"].memberNames())
         {
-            InputAxis axis = InputAxisDataFormat().load(axisName, settings["inputAxes"][axisName]);
+            InputAxis axis = InputAxisDataFormat::load(axisName, settings["inputAxes"][axisName]);
             axes.push_back(axis);
         }
         
@@ -48,13 +48,15 @@ int main()
         AssetCache assetCache(fileSystem);
 
         // Create flow
-        Flow flow;
-        flow.push(new TestState(assetCache, inputSystem, window, renderer, settings));
+        Flow stateStack;
+        stateStack.push(new TestState(assetCache, inputSystem, window, renderer, settings));
+
+        TimeSpan timeStep = TimeSpan::fromSeconds(1.0 / 60.0);
 
         // Execute flow until the window closes or the flow has no more states
         while (window.pollEvents(inputSystem))
         {
-            if (!flow.tick())
+            if (!stateStack.update(timeStep))
             {
                 break;
             }

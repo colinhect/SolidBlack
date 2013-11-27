@@ -13,9 +13,7 @@ class TestState :
 {
 public:
     TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings);
-
-    void begin(Flow& flow);
-    void end(Flow& flow);
+    ~TestState();
 
     void update(double timeStep);
     void render(double delta);
