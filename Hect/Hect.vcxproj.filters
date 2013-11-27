@@ -294,6 +294,9 @@
     <ClCompile Include="Source\Input\InputSystem.cpp">
       <Filter>Source\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Input\InputAxisDataFormat.cpp">
+      <Filter>Source\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -552,6 +555,9 @@
       <Filter>Source\IO</Filter>
     </ClInclude>
     <ClInclude Include="Source\Input\InputSystem.h">
+      <Filter>Source\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\InputAxisDataFormat.h">
       <Filter>Source\Input</Filter>
     </ClInclude>
   </ItemGroup>

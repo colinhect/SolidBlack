@@ -99,6 +99,7 @@ const double pi = 3.14159265358979323846;
 #include "Input/Mouse.h"
 #include "Input/Keyboard.h"
 #include "Input/InputAxis.h"
+#include "Input/InputAxisDataFormat.h"
 #include "Input/InputSystem.h"
 
 #include "Noise/Random.h"

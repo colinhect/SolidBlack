@@ -4,12 +4,12 @@
 
 DebugCameraSystem::DebugCameraSystem(InputSystem& inputSystem) :
     _mouse(&inputSystem.mouse()),
-    _viewX(&inputSystem.axisWithName("ViewX")),
-    _viewY(&inputSystem.axisWithName("ViewY")),
-    _moveX(&inputSystem.axisWithName("MoveX")),
-    _moveY(&inputSystem.axisWithName("MoveY")),
-    _roll(&inputSystem.axisWithName("Roll")),
-    _adjustSpeed(&inputSystem.axisWithName("AdjustSpeed")),
+    _viewX(&inputSystem.axisWithName("viewX")),
+    _viewY(&inputSystem.axisWithName("viewY")),
+    _moveX(&inputSystem.axisWithName("moveX")),
+    _moveY(&inputSystem.axisWithName("moveY")),
+    _roll(&inputSystem.axisWithName("roll")),
+    _adjustSpeed(&inputSystem.axisWithName("adjustSpeed")),
     _speed(1)
 {
     requireComponent<Transform>();

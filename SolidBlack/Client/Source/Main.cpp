@@ -13,6 +13,7 @@ int main()
 {
     try
     {
+        // Create file system
         FileSystem fileSystem;
 
         // Add the working directory as a data source
@@ -28,55 +29,29 @@ int main()
             fileSystem.addDataSource(dataSource.asString());
         }
 
+        // Create window/renderer
         Window window("Solid Black Client", settings);
         Renderer renderer(window);
-        
-        // Create the input axes
-        InputAxis viewX("ViewX", InputAxisSource::MouseMoveX);
-        viewX.setAcceleration(0.0025);
-        viewX.setGravity(10);
 
-        InputAxis viewY("ViewY", InputAxisSource::MouseMoveY);
-        viewY.setAcceleration(0.0025);
-        viewY.setGravity(10);
-
-        InputAxis moveX("MoveX", InputAxisSource::Key);
-        moveX.setPositiveKey(Key::D);
-        moveX.setNegativeKey(Key::A);
-        moveX.setAcceleration(4);
-        moveX.setGravity(10);
-
-        InputAxis moveY("MoveY", InputAxisSource::Key);
-        moveY.setPositiveKey(Key::W);
-        moveY.setNegativeKey(Key::S);
-        moveY.setAcceleration(4);
-        moveY.setGravity(10);
-
-        InputAxis roll("Roll", InputAxisSource::Key);
-        roll.setPositiveKey(Key::E);
-        roll.setNegativeKey(Key::Q);
-        roll.setAcceleration(4);
-        roll.setGravity(10);
-
-        InputAxis adjustSpeed("AdjustSpeed", InputAxisSource::MouseScroll);
-        adjustSpeed.setAcceleration(4);
-        adjustSpeed.setGravity(1000);
-
+        // Load the input axes from the settings
         InputAxis::Array axes;
-        axes.push_back(viewX);
-        axes.push_back(viewY);
-        axes.push_back(moveX);
-        axes.push_back(moveY);
-        axes.push_back(roll);
-        axes.push_back(adjustSpeed);
-
+        for (const std::string& axisName : settings["inputAxes"].memberNames())
+        {
+            InputAxis axis = InputAxisDataFormat().load(axisName, settings["inputAxes"][axisName]);
+            axes.push_back(axis);
+        }
+        
+        // Create input system
         InputSystem inputSystem(axes);
 
+        // Create asset cache
         AssetCache assetCache(fileSystem);
 
+        // Create flow
         Flow flow;
         flow.push(new TestState(assetCache, inputSystem, window, renderer, settings));
 
+        // Execute flow until the window closes or the flow has no more states
         while (window.pollEvents(inputSystem))
         {
             if (!flow.tick())
