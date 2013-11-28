@@ -7,11 +7,11 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _assetCache(&assetCache),
     _input(&inputSystem),
     _window(&window),
-    _renderer(&renderer),
-    _renderingSystem(assetCache, settings),
+    _renderingSystem(renderer, assetCache, settings),
     _debugCameraSystem(inputSystem)
 {
     _entitySerializer.registerComponent<Camera, CameraSerializer>("Camera");
+    _entitySerializer.registerComponent<DirectionalLight, DirectionalLightSerializer>("DirectionalLight");
     _entitySerializer.registerComponent<Geometry, GeometrySerializer>("Geometry");
     _entitySerializer.registerComponent<Transform, TransformSerializer>("Transform");
     _entitySerializer.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
@@ -28,9 +28,12 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     
     Entity freeCamera = _scene.createEntity();
     _entitySerializer.deserialize(freeCamera, assetCache, "Entities/FreeCamera.entity");
-
+    
     Entity testCube = _scene.createEntity();
     _entitySerializer.deserialize(testCube, assetCache, "Entities/TestCube.entity");
+
+    Entity sun = _scene.createEntity();
+    _entitySerializer.deserialize(sun, assetCache, "Entities/Sun.entity");
 
     _scene.refresh();
 }
@@ -65,7 +68,7 @@ void TestState::render(double delta)
     Camera& camera = _cameraSystem.camera();
     camera.setAspectRatio(_window->aspectRatio());
 
-    _renderingSystem.renderAll(camera, *_renderer, *_window);
+    _renderingSystem.renderAll(camera, *_window);
 
     _window->swapBuffers();
 }

@@ -24,7 +24,6 @@ private:
     AssetCache* _assetCache;
     InputSystem* _input;
     Window* _window;
-    Renderer* _renderer;
 
     CameraSystem _cameraSystem;
     DeferredRenderingSystem _renderingSystem;

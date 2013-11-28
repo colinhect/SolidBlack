@@ -25,7 +25,7 @@ void Geometry::render(const Camera& camera, RenderingSystem& renderingSystem)
 
         if (mesh.indexCount() > 0)
         {
-            renderingSystem.renderMesh(mesh, material, transform);
+            renderingSystem.addMesh(mesh, material, transform);
         }
 
         ++i;

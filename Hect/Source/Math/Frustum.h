@@ -61,6 +61,13 @@ public:
     /// \returns The test result.
     FrustumTestResult testAxisAlignedBox(const AxisAlignedBox<T>& box) const;
 
+    ///
+    /// Returns whether a sphere at a certain positin is within the frustum.
+    ///
+    /// \param sphere The sphere.
+    /// \param position The position of the sphere.
+    bool containsSphere(const Sphere<T>& sphere, const Vector3<T>& position) const;
+
 private:
     Plane<T> _planes[6];
     Vector3<T> _position;

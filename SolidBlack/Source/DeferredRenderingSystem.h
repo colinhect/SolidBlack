@@ -7,9 +7,10 @@ class DeferredRenderingSystem :
     public RenderingSystem
 {
 public:
-    DeferredRenderingSystem(AssetCache& assetCache, const DataValue& settings);
+    DeferredRenderingSystem(Renderer& renderer, AssetCache& assetCache, const DataValue& settings);
 
-    void renderAll(Camera& camera, Renderer& renderer, RenderTarget& target);
+    void addMesh(Mesh& mesh, const Material& material, const Transform& transform);
+    void renderAll(Camera& camera, RenderTarget& target);
 
     double gamma() const;
     void setGamma(double gamma);
@@ -18,6 +19,16 @@ public:
     void setExposure(double exposure);
 
 private:
+    struct MeshTask
+    {
+        Mesh* mesh;
+        const Pass* pass;
+        const Transform* transform;
+    };
+    void _renderMeshTask(const MeshTask& task, Camera& camera, const RenderTarget& target);
+
+    std::vector<MeshTask> _meshTasks;
+
     std::unique_ptr<FrameBuffer> _frameBuffer;
 
     Shader::Ref _compositorShader;

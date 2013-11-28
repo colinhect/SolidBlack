@@ -2,53 +2,16 @@
 
 using namespace hect;
 
-RenderingSystem::RenderingSystem()
+RenderingSystem::RenderingSystem(Renderer& renderer) :
+    _renderer(&renderer)
 {
     requireComponent<Renderable>();
 }
 
-void RenderingSystem::renderMesh(Mesh& mesh, const Material& material, const Transform& transform)
+void RenderingSystem::renderMesh(Mesh& mesh, const Pass& pass, const Transform& transform, Camera& camera, const RenderTarget& target)
 {
-    if (!material.techniques().empty())
-    {
-        const Technique& technique = material.techniques()[0];
-        for (const Pass& pass : technique.passes())
-        {
-            MeshTask task;
-            task.mesh = &mesh;
-            task.pass = &pass;
-            task.transform = &transform;
-            _meshTasks.push_back(task);
-        }
-    }
-}
-
-void RenderingSystem::renderAll(Camera& camera, Renderer& renderer, RenderTarget& target)
-{
-    _meshTasks.clear();
-
-    // Enqueue tasks from all visible renderables
-    for (Entity& entity : entities())
-    {
-        Renderable& renderable = entity.component<Renderable>();
-        renderable.render(camera, *this);
-    }
-
-    // Render mesh tasks
-    for (const MeshTask& task : _meshTasks)
-    {
-        _renderMeshTask(task, camera, renderer, target);
-    }
-}
-
-void RenderingSystem::_renderMeshTask(const MeshTask& task, Camera& camera, Renderer& renderer, const RenderTarget& target)
-{
-    Mesh& mesh = *task.mesh;
-    const Pass& pass = *task.pass;
-    const Transform& transform = *task.transform;
-
     // Prepare the pass
-    pass.prepare(renderer);
+    pass.prepare(*_renderer);
 
     // Buid the model matrix
     Matrix4<> model;
@@ -65,37 +28,42 @@ void RenderingSystem::_renderMeshTask(const MeshTask& task, Camera& camera, Rend
             switch (binding)
             {
             case UniformBinding::RenderTargetSize:
-                renderer.setUniform(uniform, Vector2<float>((float)target.width(), (float)target.height()));
+                _renderer->setUniform(uniform, Vector2<float>((float)target.width(), (float)target.height()));
                 break;
             case UniformBinding::CameraPosition:
-                renderer.setUniform(uniform, (Vector3<float>)camera.position());
+                _renderer->setUniform(uniform, (Vector3<float>)camera.position());
                 break;
             case UniformBinding::CameraUp:
-                renderer.setUniform(uniform, (Vector3<float>)camera.up());
+                _renderer->setUniform(uniform, (Vector3<float>)camera.up());
                 break;
             case UniformBinding::ViewMatrix:
-                renderer.setUniform(uniform, (Matrix4<float>)camera.viewMatrix());
+                _renderer->setUniform(uniform, (Matrix4<float>)camera.viewMatrix());
                 break;
             case UniformBinding::ProjectionMatrix:
-                renderer.setUniform(uniform, (Matrix4<float>)camera.projectionMatrix());
+                _renderer->setUniform(uniform, (Matrix4<float>)camera.projectionMatrix());
                 break;
             case UniformBinding::ViewProjectionMatrix:
-                renderer.setUniform(uniform, (Matrix4<float>)(camera.projectionMatrix() * camera.viewMatrix()));
+                _renderer->setUniform(uniform, (Matrix4<float>)(camera.projectionMatrix() * camera.viewMatrix()));
                 break;
             case UniformBinding::ModelMatrix:
-                renderer.setUniform(uniform, (Matrix4<float>)model);
+                _renderer->setUniform(uniform, (Matrix4<float>)model);
                 break;
             case UniformBinding::ModelViewMatrix:
-                renderer.setUniform(uniform, (Matrix4<float>)(camera.viewMatrix() * model));
+                _renderer->setUniform(uniform, (Matrix4<float>)(camera.viewMatrix() * model));
                 break;
             case UniformBinding::ModelViewProjectionMatrix:
-                renderer.setUniform(uniform, (Matrix4<float>)(camera.projectionMatrix() * (camera.viewMatrix() * model)));
+                _renderer->setUniform(uniform, (Matrix4<float>)(camera.projectionMatrix() * (camera.viewMatrix() * model)));
                 break;
             }
         }
     }
 
     // Bind and draw the mesh
-    renderer.bindMesh(mesh);
-    renderer.draw();
+    _renderer->bindMesh(mesh);
+    _renderer->draw();
+}
+
+Renderer& RenderingSystem::renderer()
+{
+    return *_renderer;
 }

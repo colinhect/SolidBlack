@@ -1,0 +1,7 @@
+{
+    "DirectionalLight" :
+    {
+        "color" : [ 10, 10, 10 ],
+        "direction" : [ 1, 0, 0 ]
+    }
+}

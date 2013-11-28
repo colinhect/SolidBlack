@@ -33,6 +33,7 @@
     <ClCompile Include="Source\Core\Timer.cpp" />
     <ClCompile Include="Source\Core\TimeSpan.cpp" />
     <ClCompile Include="Source\Entity\Components\Camera.cpp" />
+    <ClCompile Include="Source\Entity\Components\DirectionalLight.cpp" />
     <ClCompile Include="Source\Entity\Components\Geometry.cpp" />
     <ClCompile Include="Source\Entity\Components\RigidBody.cpp" />
     <ClCompile Include="Source\Entity\Components\Transform.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Source\Core\TimeSpan.h" />
     <ClInclude Include="Source\Core\Uncopyable.h" />
     <ClInclude Include="Source\Entity\Components\Camera.h" />
+    <ClInclude Include="Source\Entity\Components\DirectionalLight.h" />
     <ClInclude Include="Source\Entity\Components\Geometry.h" />
     <ClInclude Include="Source\Entity\Components\Renderable.h" />
     <ClInclude Include="Source\Entity\Components\RigidBody.h" />
@@ -177,6 +179,7 @@
     <ClInclude Include="Source\Math\Matrix4.h" />
     <ClInclude Include="Source\Math\Plane.h" />
     <ClInclude Include="Source\Math\Quaternion.h" />
+    <ClInclude Include="Source\Math\Sphere.h" />
     <ClInclude Include="Source\Math\Vector2.h" />
     <ClInclude Include="Source\Math\Vector3.h" />
     <ClInclude Include="Source\Math\Vector4.h" />
@@ -205,6 +208,7 @@
     <None Include="Source\Math\Matrix4.inl" />
     <None Include="Source\Math\Plane.inl" />
     <None Include="Source\Math\Quaternion.inl" />
+    <None Include="Source\Math\Sphere.inl" />
     <None Include="Source\Math\Vector2.inl" />
     <None Include="Source\Math\Vector3.inl" />
     <None Include="Source\Math\Vector4.inl" />

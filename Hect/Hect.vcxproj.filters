@@ -297,6 +297,9 @@
     <ClCompile Include="Source\Entity\EntitySerializer.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity\Components\DirectionalLight.cpp">
+      <Filter>Source\Entity\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -560,6 +563,12 @@
     <ClInclude Include="Source\Entity\EntitySerializer.h">
       <Filter>Source\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Entity\Components\DirectionalLight.h">
+      <Filter>Source\Entity\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Sphere.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -624,6 +633,9 @@
     </None>
     <None Include="Source\Entity\EntitySerializer.inl">
       <Filter>Source\Entity</Filter>
+    </None>
+    <None Include="Source\Math\Sphere.inl">
+      <Filter>Source\Math</Filter>
     </None>
   </ItemGroup>
 </Project>

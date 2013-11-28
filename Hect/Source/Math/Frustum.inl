@@ -112,4 +112,20 @@ FrustumTestResult Frustum<T>::testAxisAlignedBox(const AxisAlignedBox<T>& box) c
     return result;
 }
 
+template <typename T>
+bool Frustum<T>::containsSphere(const Sphere<T>& sphere, const Vector3<T>& position) const
+{
+    T radius = sphere.radius();
+
+    for (int i = 0; i < 6; ++i) {
+        T distance = _planes[i].distance() + _planes[i].normal().dot(position);
+
+        if (distance < -radius) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 }
