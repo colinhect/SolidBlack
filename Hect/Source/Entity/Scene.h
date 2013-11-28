@@ -44,13 +44,30 @@ public:
     ///
     /// \param system The system.
     void removeSystem(System& system);
-
+    
     ///
     /// Creates a new entity.
     ///
     /// \returns The new entity.
     Entity createEntity();
 
+    ///
+    /// Creates a new entity copied from another.
+    ///
+    /// \param entity The entity to copy from.
+    ///
+    /// \returns The new entity.
+    Entity copyEntity(Entity entity);
+
+    ///
+    /// Returns the entity with the given ID.
+    Entity entityWithId(Entity::Id id);
+
+    ///
+    /// Returns the first entity with a specific component type.
+    ///
+    /// \returns The found entity; null if no entity with the component type
+    /// was found.
     template <typename T>
     Entity entityWithComponent();
 
@@ -82,7 +99,7 @@ private:
     template <typename T>
     T& _component(const Entity& entity);
 
-    void _growPool();
+    size_t _entityCount;
 
     // The next entity ID to use when creating an entity (if the queue is
     // empty)

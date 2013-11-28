@@ -85,7 +85,7 @@ public:
     /// \throws Error If the entity is activated or already has a component of
     /// the type (debug builds only).
     void addComponent(const BaseComponent::Ref& component);
-
+    
     ///
     /// Removes a component of a certain type from the entity.
     ///

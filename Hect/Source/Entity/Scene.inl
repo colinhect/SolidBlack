@@ -4,13 +4,21 @@ namespace hect
 template <typename T>
 Entity Scene::entityWithComponent()
 {
-    for (Entity::Id id = 1; id < _attributes.size(); ++id)
+    size_t foundEntities = 0;
+    Entity::Id id = 0;
+    while (foundEntities < _entityCount)
     {
         Entity entity(*this, id);
-        if (entity && entity.hasComponent<T>())
+        if (entity)
         {
-            return entity; // Found an entity with the component
+            ++foundEntities;
+            if (entity.hasComponent<T>())
+            {
+                return entity; // Found an entity with the component
+            }
         }
+
+        ++id;
     }
 
     return Entity(); // Not found

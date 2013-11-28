@@ -3,7 +3,8 @@
 using namespace hect;
 
 Scene::Scene() :
-    _nextId(1),
+    _entityCount(0),
+    _nextId(0),
     _deactivatedAttributes(InitialPoolSize),
     _attributes(InitialPoolSize),
     _components(InitialPoolSize)
@@ -86,6 +87,8 @@ void Scene::refresh()
 
         // Re-use this ID
         _nextIds.push(id);
+
+        --_entityCount;
     }
     _destroyedEntities.clear();
 }
@@ -95,14 +98,21 @@ void Scene::addSystem(System& system)
     _systems.push_back(&system);
 
     // Add any entities the systems is filtered for
-    size_t entityCount = _attributes.size();
-    for (Entity::Id id = 1; id < entityCount; ++id)
+    size_t addedEntities = 0;
+    Entity::Id id = 0;
+    while (addedEntities < _entityCount)
     {
         EntityAttributes& attributes = _attributes[id];
-        if (attributes.hasAttribute(EntityAttribute::Exists) && attributes.contains(system.requiredAttributes()))
+        if (attributes.hasAttribute(EntityAttribute::Exists))
         {
-            system.addEntity(Entity(*this, id));
+            ++addedEntities;
+            if (attributes.contains(system.requiredAttributes()))
+            {
+                system.addEntity(Entity(*this, id));
+            }
         }
+
+        ++id;
     }
 }
 
@@ -129,13 +139,31 @@ Entity Scene::createEntity()
         // Resize the pool if needed
         if (id >= _components.size())
         {
-            _growPool();
+            size_t size = _components.size() * 2;
+            _deactivatedAttributes.resize(size);
+            _attributes.resize(size);
+            _components.resize(size);
         }
     }
 
-    Entity entity(*this, id);
     _attributes[id].setAttribute(EntityAttribute::Exists, true);
-    return entity;
+    ++_entityCount;
+    return Entity(*this, id);
+}
+
+Entity Scene::copyEntity(Entity entity)
+{
+    throw Error("Not implemented");
+}
+
+Entity Scene::entityWithId(Entity::Id id)
+{
+    if (id < _attributes.size())
+    {
+        return Entity(*this, id); // Inside of range, still might be null
+    }
+
+    return Entity(); // Outside of range
 }
 
 void Scene::_destroyEntity(Entity& entity)
@@ -251,12 +279,4 @@ void Scene::_addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref&
 
     // Add the component to the entity's components
     _components[entity._id][type] = component;
-}
-
-void Scene::_growPool()
-{
-    size_t size = _components.size() * 2;
-    _deactivatedAttributes.resize(size);
-    _attributes.resize(size);
-    _components.resize(size);
 }
