@@ -14,10 +14,6 @@ BaseComponent::BaseComponent() :
 {
 }
 
-BaseComponent::~BaseComponent()
-{
-}
-
 bool BaseComponent::hasEntity() const
 {
     return _scene != nullptr;

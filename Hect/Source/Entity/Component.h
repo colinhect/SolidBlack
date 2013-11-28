@@ -23,7 +23,7 @@ public:
     static ComponentTypeId nextTypeId();
 
     BaseComponent();
-    virtual ~BaseComponent();
+    virtual ~BaseComponent() { }
 
     ///
     /// Returns whether the component is attached to an activated entity.

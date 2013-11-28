@@ -22,8 +22,6 @@ public:
     /// \param height The height.
     RenderTarget(unsigned width, unsigned height);
 
-    ///
-    /// Virtual destructor.
     virtual ~RenderTarget() { }
 
     ///
