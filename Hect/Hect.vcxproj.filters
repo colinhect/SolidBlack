@@ -294,8 +294,11 @@
     <ClCompile Include="Source\IO\DataJsonFormat.cpp">
       <Filter>Source\IO</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Flow.cpp">
+    <ClCompile Include="Source\Core\StateFlow.cpp">
       <Filter>Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity\EntitySerializer.cpp">
+      <Filter>Source\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -557,8 +560,11 @@
     <ClInclude Include="Source\IO\DataJsonFormat.h">
       <Filter>Source\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Flow.h">
+    <ClInclude Include="Source\Core\StateFlow.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\EntitySerializer.h">
+      <Filter>Source\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -620,6 +626,9 @@
       <Filter>Source\Entity</Filter>
     </None>
     <None Include="Source\Entity\ComponentSerializer.inl">
+      <Filter>Source\Entity</Filter>
+    </None>
+    <None Include="Source\Entity\EntitySerializer.inl">
       <Filter>Source\Entity</Filter>
     </None>
   </ItemGroup>

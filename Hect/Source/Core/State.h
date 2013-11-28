@@ -3,56 +3,62 @@
 namespace hect
 {
 
-class Flow;
-
 ///
-/// A state in a flow (e.g. main menu, single player game, credits).
+/// A game state (e.g. main menu, single player game, credits).
 class State
 {
-    friend class Flow;
+    friend class StateFlow;
 public:
+
+    ///
+    /// A shared reference to a state.
+    typedef std::shared_ptr<State> Ref;
 
     ///
     /// Constructs a state.
     State();
     virtual ~State() { }
     
-    virtual void suspend();
-    virtual void resume();
+    ///
+    /// Returns whether the state is active.
+    bool isActivated() const;
 
     ///
-    /// Called once every time step.
+    /// Returns whether the state is done.
+    bool isDone() const;
+
+    ///
+    /// Sets whether the state is done.
+    ///
+    /// \param active True if the state is done; false otherwise.
+    void setDone(bool done);
+
+protected:
+
+    ///
+    /// Called once every time step even if the state is not activated.
     ///
     /// \param timeStep The duration of time between each update (in seconds).
     virtual void update(double timeStep);
 
     ///
-    /// Called when the a frame is rendered.
+    /// Called when the a frame is rendered even if the state is not activated.
     ///
     /// \param delta The delta between the last call to update() and the next
     /// call to update() (useful for interpolation).
     virtual void render(double delta);
 
     ///
-    /// Returns whether the state is active.
-    bool isActive() const;
-
-    bool isSuspended() const;
-
-protected:
+    /// Called when the state is made active.
+    virtual void activate();
 
     ///
-    /// Sets whether the state is active.
-    ///
-    /// \remarks When the current state of the engine is no longer active
-    /// it will end and the next state on the stack will begin.
-    ///
-    /// \param active True if the state is active; false otherwise.
-    void setActive(bool active);
+    /// Called when another state is made active.
+    virtual void deactivate();
 
 private:
-    bool _active;
-    bool _suspended;
+    bool _activated;
+    bool _done;
 };
 
 }

@@ -7,8 +7,13 @@ namespace hect
 
 class BaseComponentSerializer
 {
-    friend class Scene;
+    friend class EntitySerializer;
 public:
+
+    ///
+    /// A shared reference to a base component serializer.
+    typedef std::shared_ptr<BaseComponentSerializer> Ref;
+
     virtual ~BaseComponentSerializer() { }
 
 protected:

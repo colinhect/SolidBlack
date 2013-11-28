@@ -1,17 +1,19 @@
 namespace hect
 {
 
-template <typename T, typename S>
-void Scene::registerComponent(const std::string& componentTypeName)
+template <typename T>
+Entity Scene::entityWithComponent()
 {
-    if (_componentTypes.find(componentTypeName) != _componentTypes.end())
+    for (Entity::Id id = 1; id < _attributes.size(); ++id)
     {
-        throw Error(format("Component type '%s' is already registered", componentTypeName.c_str()));
+        Entity entity(*this, id);
+        if (entity && entity.hasComponent<T>())
+        {
+            return entity; // Found an entity with the component
+        }
     }
 
-    _componentTypes[componentTypeName] = T::typeId();
-    _componentSerializers[T::typeId()] = std::shared_ptr<BaseComponentSerializer>(new S());
-    _componentConstructors[T::typeId()] = [] { return std::make_shared<T>(); };
+    return Entity(); // Not found
 }
 
 template <typename T>
@@ -22,7 +24,7 @@ bool Scene::_hasComponent(const Entity& entity) const
 }
 
 template <typename T>
-T& Scene::_addComponent(Entity& entity, const std::shared_ptr<BaseComponent>& component)
+T& Scene::_addComponent(Entity& entity, const BaseComponent::Ref& component)
 {
     EntityAttributes& attributes = _attributes[entity._id];
 

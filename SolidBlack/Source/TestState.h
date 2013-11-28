@@ -31,4 +31,5 @@ private:
     DebugCameraSystem _debugCameraSystem;
 
     Scene _scene;
+    EntitySerializer _entitySerializer;
 };

@@ -3,17 +3,24 @@
 using namespace hect;
 
 State::State() :
-    _active(true),
-    _suspended(false)
+    _activated(false),
+    _done(false)
 {
 }
 
-void State::suspend()
+bool State::isActivated() const
 {
+    return _activated;
 }
 
-void State::resume()
+bool State::isDone() const
 {
+    return _done;
+}
+
+void State::setDone(bool done)
+{
+    _done = done;
 }
 
 void State::update(double timeStep)
@@ -26,17 +33,10 @@ void State::render(double delta)
     delta;
 }
 
-bool State::isActive() const
+void State::activate()
 {
-    return _active;
 }
 
-bool State::isSuspended() const
+void State::deactivate()
 {
-    return _suspended;
-}
-
-void State::setActive(bool active)
-{
-    _active = active;
 }

@@ -16,12 +16,6 @@ public:
     Scene();
 
     ///
-    /// Constructs a scene given an asset cache.
-    ///
-    /// \param assetCache An asset cache.
-    Scene(AssetCache& assetCache);
-
-    ///
     /// Removes all entities from all systems.
     ~Scene();
 
@@ -57,22 +51,8 @@ public:
     /// \returns The new entity.
     Entity createEntity();
 
-    ///
-    /// Creates a new entity from an asset.
-    ///
-    /// \param path The path to the entity asset.
-    ///
-    /// \throws Error If the scene does not have access to an asset cache.
-    Entity createEntity(const Path& path);
-
-    ///
-    /// Registers a component with a serializer.
-    ///
-    /// \param componentTypeName The type name of the component.
-    ///
-    /// \throws Error If the component type is already registered.
-    template <typename T, typename S>
-    void registerComponent(const std::string& componentTypeName);
+    template <typename T>
+    Entity entityWithComponent();
 
 private:
     enum
@@ -92,20 +72,17 @@ private:
     bool _hasComponent(const Entity& entity) const;
     
     template <typename T>
-    T& _addComponent(Entity& entity, const std::shared_ptr<BaseComponent>& component);
+    T& _addComponent(Entity& entity, const BaseComponent::Ref& component);
+
+    void _addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref& component);
 
     template <typename T>
     void _removeComponent(Entity& entity);
 
-    void _addComponentManually(Entity& entity, const std::shared_ptr<BaseComponent>& component);
-
     template <typename T>
     T& _component(const Entity& entity);
 
-    void _registerComponents();
     void _growPool();
-
-    AssetCache* _assetCache;
 
     // The next entity ID to use when creating an entity (if the queue is
     // empty)
@@ -121,7 +98,7 @@ private:
     std::vector<EntityAttributes> _attributes;
 
     // For each entity, its components mapped by type
-    std::vector<std::map<ComponentTypeId, std::shared_ptr<BaseComponent>>> _components;
+    std::vector<std::map<ComponentTypeId, BaseComponent::Ref>> _components;
     
     // Entities deactivated since the last call to refresh()
     std::vector<Entity> _deactivatedEntities;
@@ -134,15 +111,6 @@ private:
 
     // Systems involved in the scene
     std::vector<System*> _systems;
-
-    // Component type names mapped to component types
-    std::map<std::string, ComponentTypeId> _componentTypes;
-
-    // Component types mapped to registered component serializers
-    std::map<ComponentTypeId, std::shared_ptr<BaseComponentSerializer>> _componentSerializers;
-
-    // Component types mapped to component constructors
-    std::map<ComponentTypeId, std::function<std::shared_ptr<BaseComponent>()>> _componentConstructors;
 };
 
 }

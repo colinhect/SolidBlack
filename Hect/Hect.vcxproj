@@ -24,7 +24,7 @@
     <ClCompile Include="Source\Core\DataValue.cpp" />
     <ClCompile Include="Source\Core\DataValueLoader.cpp" />
     <ClCompile Include="Source\Core\Error.cpp" />
-    <ClCompile Include="Source\Core\Flow.cpp" />
+    <ClCompile Include="Source\Core\StateFlow.cpp" />
     <ClCompile Include="Source\Core\Format.cpp" />
     <ClCompile Include="Source\Core\Logging.cpp" />
     <ClCompile Include="Source\Core\Memory.cpp" />
@@ -39,6 +39,7 @@
     <ClCompile Include="Source\Entity\Entity.cpp" />
     <ClCompile Include="Source\Entity\EntityAttributes.cpp" />
     <ClCompile Include="Source\Entity\Component.cpp" />
+    <ClCompile Include="Source\Entity\EntitySerializer.cpp" />
     <ClCompile Include="Source\Entity\System.cpp" />
     <ClCompile Include="Source\Entity\Scene.cpp" />
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
@@ -105,7 +106,7 @@
     <ClInclude Include="Source\Core\Any.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Error.h" />
-    <ClInclude Include="Source\Core\Flow.h" />
+    <ClInclude Include="Source\Core\StateFlow.h" />
     <ClInclude Include="Source\Core\Format.h" />
     <ClInclude Include="Source\Core\Logging.h" />
     <ClInclude Include="Source\Core\Memory.h" />
@@ -123,6 +124,7 @@
     <ClInclude Include="Source\Entity\EntityAttributes.h" />
     <ClInclude Include="Source\Entity\Component.h" />
     <ClInclude Include="Source\Entity\ComponentSerializer.h" />
+    <ClInclude Include="Source\Entity\EntitySerializer.h" />
     <ClInclude Include="Source\Entity\System.h" />
     <ClInclude Include="Source\Entity\Scene.h" />
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
@@ -194,6 +196,7 @@
     <None Include="Source\Entity\ComponentSerializer.inl" />
     <None Include="Source\Entity\Entity.inl" />
     <None Include="Source\Entity\Component.inl" />
+    <None Include="Source\Entity\EntitySerializer.inl" />
     <None Include="Source\Entity\System.inl" />
     <None Include="Source\Entity\Scene.inl" />
     <None Include="Source\Graphics\MeshBuilder.inl" />

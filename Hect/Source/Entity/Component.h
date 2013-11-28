@@ -14,6 +14,11 @@ typedef uint32_t ComponentTypeId;
 class BaseComponent
 {
 public:
+
+    ///
+    /// A shared reference to a base component.
+    typedef std::shared_ptr<BaseComponent> Ref;
+
     virtual ~BaseComponent() { }
 
     ///

@@ -4,7 +4,7 @@ namespace hect
 {
 
 ///
-/// A game object in the scene.
+/// A game object in a scene.
 ///
 /// \remarks An entity is in one of two states; activated or deactivated.  On
 /// creation an entity is deactivated.  Components can only be added/removed 
@@ -76,6 +76,15 @@ public:
     /// the type (debug builds only).
     template <typename T>
     T& addComponent();
+    
+    ///
+    /// Adds a new component to the entity.
+    ///
+    /// \param component The new component.
+    ///
+    /// \throws Error If the entity is activated or already has a component of
+    /// the type (debug builds only).
+    void addComponent(const BaseComponent::Ref& component);
 
     ///
     /// Removes a component of a certain type from the entity.
@@ -99,6 +108,10 @@ public:
     ///
     /// Returns whether the entity is the same as another.
     bool operator==(const Entity& entity) const;
+
+    ///
+    /// Returns true if the entity is not null; false otherwise.
+    operator bool() const;
 
 private:
     Entity(Scene& scene, Id id);

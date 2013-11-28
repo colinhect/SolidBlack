@@ -9,10 +9,12 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _window(&window),
     _renderer(&renderer),
     _renderingSystem(assetCache, settings),
-    _debugCameraSystem(inputSystem),
-    _scene(assetCache)
+    _debugCameraSystem(inputSystem)
 {
-    _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
+    _entitySerializer.registerComponent<Camera, CameraSerializer>("Camera");
+    _entitySerializer.registerComponent<Geometry, GeometrySerializer>("Geometry");
+    _entitySerializer.registerComponent<Transform, TransformSerializer>("Transform");
+    _entitySerializer.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
 
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
@@ -23,9 +25,12 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
 
     Mouse& mouse = _input->mouse();
     mouse.setCursorLocked(true);
+    
+    Entity freeCamera = _scene.createEntity();
+    _entitySerializer.deserialize(freeCamera, assetCache, "Entities/FreeCamera.entity");
 
-    _scene.createEntity("Entities/FreeCamera.entity");
-    _scene.createEntity("Entities/TestCube.entity");
+    Entity testCube = _scene.createEntity();
+    _entitySerializer.deserialize(testCube, assetCache, "Entities/TestCube.entity");
 
     _scene.refresh();
 }
@@ -38,6 +43,11 @@ TestState::~TestState()
 
 void TestState::update(double timeStep)
 {
+    if (!isActivated())
+    {
+        return;
+    }
+
     _cameraSystem.update();
     _debugCameraSystem.update(timeStep);
     _scene.refresh();
@@ -47,7 +57,7 @@ void TestState::update(double timeStep)
 
 void TestState::render(double delta)
 {
-    if (!_cameraSystem.hasCamera())
+    if (!isActivated() || !_cameraSystem.hasCamera())
     {
         return;
     }
@@ -69,7 +79,18 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
 
     if (event.key == Key::Esc)
     {
-        setActive(false);
+        setDone(true);
+    }
+    else if (event.key == Key::T)
+    {
+        Entity testCube = _scene.createEntity();
+        _entitySerializer.deserialize(testCube, *_assetCache, "Entities/TestCube.entity");
+
+        Entity debugCamera = _scene.entityWithComponent<DebugCamera>();
+        if (debugCamera && debugCamera.hasComponent<Transform>())
+        {
+            testCube.component<Transform>() = debugCamera.component<Transform>();
+        }
     }
     else if (event.key == Key::Tab)
     {

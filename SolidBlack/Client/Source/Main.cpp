@@ -47,24 +47,21 @@ int main()
         // Create asset cache
         AssetCache assetCache(fileSystem);
 
-        // Create flow
-        Flow stateStack;
-        stateStack.push(new TestState(assetCache, inputSystem, window, renderer, settings));
+        StateFlow stateFlow;
+        
+        State::Ref testState(new TestState(assetCache, inputSystem, window, renderer, settings));
+        stateFlow.push(testState);
 
         TimeSpan timeStep = TimeSpan::fromSeconds(1.0 / 60.0);
 
-        // Execute flow until the window closes or the flow has no more states
-        while (window.pollEvents(inputSystem))
+        while (window.pollEvents(inputSystem) && stateFlow.transition())
         {
-            if (!stateStack.update(timeStep))
-            {
-                break;
-            }
+            stateFlow.update(timeStep);
         }
     }
-    catch (std::exception& e)
+    catch (Error& error)
     {
-        Window::showFatalError(e.what());
+        Window::showFatalError(error.what());
     }
 
     return 0;

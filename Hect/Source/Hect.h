@@ -114,6 +114,7 @@ const double pi = 3.14159265358979323846;
 #include "Entity/Entity.h"
 #include "Entity/System.h"
 #include "Entity/ComponentSerializer.h"
+#include "Entity/EntitySerializer.h"
 #include "Entity/Scene.h"
 
 #include "Entity/Components/Camera.h"
@@ -128,4 +129,4 @@ const double pi = 3.14159265358979323846;
 #include "Entity/Systems/PhysicsSystem.h"
 
 #include "Core/State.h"
-#include "Core/Flow.h"
+#include "Core/StateFlow.h"

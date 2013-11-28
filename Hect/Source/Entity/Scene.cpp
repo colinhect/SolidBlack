@@ -3,23 +3,11 @@
 using namespace hect;
 
 Scene::Scene() :
-    _assetCache(nullptr),
     _nextId(1),
     _deactivatedAttributes(InitialPoolSize),
     _attributes(InitialPoolSize),
     _components(InitialPoolSize)
 {
-    _registerComponents();
-}
-
-Scene::Scene(AssetCache& assetCache) :
-    _assetCache(&assetCache),
-    _nextId(1),
-    _deactivatedAttributes(InitialPoolSize),
-    _attributes(InitialPoolSize),
-    _components(InitialPoolSize)
-{
-    _registerComponents();
 }
 
 Scene::~Scene()
@@ -150,34 +138,6 @@ Entity Scene::createEntity()
     return entity;
 }
 
-Entity Scene::createEntity(const Path& path)
-{
-    if (!_assetCache)
-    {
-        throw Error("Cannot create an entity from a file without an asset cache");
-    }
-
-    Entity entity = createEntity();
-
-    const DataValue& dataValue = *_assetCache->get<DataValue>(path);
-    for (const std::string& componentTypeName : dataValue.memberNames())
-    {
-        if (_componentTypes.find(componentTypeName) == _componentTypes.end())
-        {
-            throw Error(format("No serializer registered for component type '%s'", componentTypeName.c_str()));
-        }
-
-        ComponentTypeId type = _componentTypes[componentTypeName];
-
-        std::shared_ptr<BaseComponent> component = _componentConstructors[type]();
-        _componentSerializers[type]->_deserialize(component.get(), dataValue[componentTypeName], *_assetCache);
-        _addComponentManually(entity, component);
-    }
-
-    entity.activate();
-    return entity;
-}
-
 void Scene::_destroyEntity(Entity& entity)
 {
     EntityAttributes& attributes = _attributes[entity._id];
@@ -269,7 +229,7 @@ bool Scene::_isNull(const Entity& entity) const
     return !_attributes[entity._id].hasAttribute(EntityAttribute::Exists);
 }
 
-void Scene::_addComponentManually(Entity& entity, const std::shared_ptr<BaseComponent>& component)
+void Scene::_addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref& component)
 {
     ComponentTypeId type = component->componentTypeId();
 
@@ -291,13 +251,6 @@ void Scene::_addComponentManually(Entity& entity, const std::shared_ptr<BaseComp
 
     // Add the component to the entity's components
     _components[entity._id][type] = component;
-}
-
-void Scene::_registerComponents()
-{
-    registerComponent<Camera, CameraSerializer>("Camera");
-    registerComponent<Geometry, GeometrySerializer>("Geometry");
-    registerComponent<Transform, TransformSerializer>("Transform");
 }
 
 void Scene::_growPool()
