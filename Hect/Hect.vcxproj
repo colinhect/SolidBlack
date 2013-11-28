@@ -43,7 +43,6 @@
     <ClCompile Include="Source\Entity\System.cpp" />
     <ClCompile Include="Source\Entity\Scene.cpp" />
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
-    <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
@@ -128,7 +127,6 @@
     <ClInclude Include="Source\Entity\System.h" />
     <ClInclude Include="Source\Entity\Scene.h" />
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
-    <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h" />
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />
     <ClInclude Include="Source\Entity\Systems\RenderingSystem.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />

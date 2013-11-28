@@ -44,7 +44,7 @@ public:
     ///
     /// \param system The system.
     void removeSystem(System& system);
-    
+
     ///
     /// Creates a new entity.
     ///
@@ -87,7 +87,7 @@ private:
 
     template <typename T>
     bool _hasComponent(const Entity& entity) const;
-    
+
     template <typename T>
     T& _addComponent(Entity& entity, const BaseComponent::Ref& component);
 
@@ -110,13 +110,13 @@ private:
 
     // For each entity, the attributes it possesses
     std::vector<EntityAttributes> _deactivatedAttributes;
-    
+
     // For each entity, the attributes it possesses
     std::vector<EntityAttributes> _attributes;
 
     // For each entity, its components mapped by type
     std::vector<std::map<ComponentTypeId, BaseComponent::Ref>> _components;
-    
+
     // Entities deactivated since the last call to refresh()
     std::vector<Entity> _deactivatedEntities;
 

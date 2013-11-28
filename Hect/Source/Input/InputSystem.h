@@ -53,7 +53,7 @@ private:
     void _enqueueEvent(const MouseEvent& event);
     void _enqueueEvent(const KeyboardEvent& event);
     void _dispatchEvents();
-    
+
     Mouse _mouse;
     Keyboard _keyboard;
 

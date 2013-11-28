@@ -18,7 +18,7 @@ public:
     /// Constructs a state.
     State();
     virtual ~State() { }
-    
+
     ///
     /// Returns whether the state is active.
     bool isActivated() const;
@@ -30,7 +30,7 @@ public:
     ///
     /// Sets whether the state is done.
     ///
-    /// \param active True if the state is done; false otherwise.
+    /// \param done True if the state is done; false otherwise.
     void setDone(bool done);
 
 protected:

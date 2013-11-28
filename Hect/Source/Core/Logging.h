@@ -3,11 +3,7 @@
 namespace hect
 {
 
-// \cond INTERNAL
-
 void log(const std::string& category, const std::string& message);
-
-// \endcond
 
 #ifdef HECT_DEBUG
 #ifndef HECT_NO_LOGGING

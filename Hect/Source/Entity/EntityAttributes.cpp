@@ -2,12 +2,12 @@
 
 using namespace hect;
 
-bool EntityAttributes::hasAttribute(EntityAttribute attribute) const
+bool EntityAttributes::hasAttribute(EntityAttributeBit attribute) const
 {
     return _bitset.test((size_t)attribute);
 }
 
-void EntityAttributes::setAttribute(EntityAttribute attribute, bool value)
+void EntityAttributes::setAttribute(EntityAttributeBit attribute, bool value)
 {
     _bitset.set((size_t)attribute, value);
 }

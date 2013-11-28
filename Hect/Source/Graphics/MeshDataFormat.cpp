@@ -90,7 +90,7 @@ IndexType MeshDataFormat::_parseIndexType(const DataValue& dataValue)
 PrimitiveType MeshDataFormat::_parsePrimitiveType(const DataValue& dataValue)
 {
     static std::map<std::string, PrimitiveType> primitiveTypes;
-    
+
     if (primitiveTypes.empty())
     {
         primitiveTypes["Triangles"] = PrimitiveType::Triangles;

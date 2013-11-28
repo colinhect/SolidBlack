@@ -261,7 +261,7 @@ Vector4<> DataValue::asVector4() const
 
     return result;
 }
-    
+
 Matrix4<> DataValue::asMatrix4() const
 {
     Matrix4<> result;

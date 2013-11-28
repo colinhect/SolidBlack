@@ -35,7 +35,7 @@ InputAxis InputAxisDataFormat::load(const std::string& name, const DataValue& da
     {
         axis.setAcceleration(dataValue["acceleration"].asDouble());
     }
-    
+
     if (dataValue["gravity"].isNumber())
     {
         axis.setGravity(dataValue["gravity"].asDouble());

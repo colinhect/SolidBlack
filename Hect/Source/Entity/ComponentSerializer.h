@@ -3,15 +3,10 @@
 namespace hect
 {
 
-/// \cond INTERNAL
-
 class BaseComponentSerializer
 {
     friend class EntitySerializer;
 public:
-
-    ///
-    /// A shared reference to a base component serializer.
     typedef std::shared_ptr<BaseComponentSerializer> Ref;
 
     virtual ~BaseComponentSerializer() { }
@@ -20,8 +15,6 @@ protected:
     virtual void _serialize(const BaseComponent* component, DataValue& dataValue) const = 0;
     virtual void _deserialize(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const = 0;
 };
-
-/// \endcond
 
 ///
 /// Provides functionality for serializing/deserializing entity components.

@@ -13,33 +13,36 @@ typedef uint32_t ComponentTypeId;
 /// Base entity component.
 class BaseComponent
 {
+    friend class Scene;
 public:
 
     ///
     /// A shared reference to a base component.
     typedef std::shared_ptr<BaseComponent> Ref;
 
-    virtual ~BaseComponent() { }
-
-    ///
-    /// Called when the entity of the component is activated.
-    ///
-    /// \param entity The entity of the component.
-    virtual void onActivate(Entity& entity) { }
-
-    ///
-    /// Called when the entity of the component is deactivated.
-    ///
-    /// \param entity The entity of the component.
-    virtual void onDeactivate(Entity& entity) { }
-
-    ///
-    /// Returns the component type of the component.
-    virtual ComponentTypeId componentTypeId() const = 0;
-
-    ///
-    /// Returns the next valid component type.
     static ComponentTypeId nextTypeId();
+
+    BaseComponent();
+    virtual ~BaseComponent();
+
+    ///
+    /// Returns whether the component is attached to an activated entity.
+    bool hasEntity() const;
+
+    ///
+    /// Returns the entity that the component belongs to.
+    Entity entity() const;
+
+protected:
+
+    virtual ComponentTypeId _componentTypeId() const = 0;
+
+private:
+    void _activate(Entity& entity);
+    void _deactivate(Entity& entity);
+
+    Scene* _scene;
+    uint32_t _entityId;
 };
 
 ///
@@ -51,12 +54,12 @@ class Component :
 public:
 
     ///
-    /// \copydoc BaseComponent::componentTypeId()
-    ComponentTypeId componentTypeId() const;
-
-    ///
     /// Returns the component type ID for this type of component.
     static ComponentTypeId typeId();
+
+private:
+
+    ComponentTypeId _componentTypeId() const;
 };
 
 }

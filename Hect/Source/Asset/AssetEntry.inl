@@ -1,8 +1,6 @@
 namespace hect
 {
 
-// \cond INTERNAL
-
 template <typename T>
 std::shared_ptr<T> AssetEntry<T>::get()
 {
@@ -41,7 +39,5 @@ void AssetEntry<T>::_load()
         _errorMessage = error.what();
     }
 }
-
-// \endcond
 
 }

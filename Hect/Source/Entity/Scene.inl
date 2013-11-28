@@ -42,14 +42,14 @@ T& Scene::_addComponent(Entity& entity, const BaseComponent::Ref& component)
         throw Error("Attempt to add a component an entity already has");
     }
 
-    if ((_isActivated(entity) && !attributes.hasAttribute(EntityAttribute::MarkedForDeactivation)) ||
-        attributes.hasAttribute(EntityAttribute::MarkedForActivation))
+    if ((_isActivated(entity) && !attributes.hasAttribute(EntityAttributeBit::MarkedForDeactivation)) ||
+            attributes.hasAttribute(EntityAttributeBit::MarkedForActivation))
     {
         throw Error("Attempt to remove a component from an activated entity");
     }
 #endif
 
-    ComponentTypeId typeId = component->componentTypeId();
+    ComponentTypeId typeId = component->_componentTypeId();
 
     // Add the existence of a component of this type to the entity's attributes
     attributes.setHasComponent(typeId, true);
@@ -72,8 +72,8 @@ void Scene::_removeComponent(Entity& entity)
         throw Error("Attempt to remove a component an entity does not have");
     }
 
-    if ((_isActivated(entity) && !attributes.hasAttribute(EntityAttribute::MarkedForDeactivation)) ||
-        attributes.hasAttribute(EntityAttribute::MarkedForActivation))
+    if ((_isActivated(entity) && !attributes.hasAttribute(EntityAttributeBit::MarkedForDeactivation)) ||
+            attributes.hasAttribute(EntityAttributeBit::MarkedForActivation))
     {
         throw Error("Attempt to remove a component from an activated entity");
     }

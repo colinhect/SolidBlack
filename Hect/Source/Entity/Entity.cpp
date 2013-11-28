@@ -14,6 +14,11 @@ Scene& Entity::scene()
     return *_scene;
 }
 
+Entity::Id Entity::id() const
+{
+    return _id;
+}
+
 void Entity::destroy()
 {
     assert(_scene);

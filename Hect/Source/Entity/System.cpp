@@ -2,45 +2,28 @@
 
 using namespace hect;
 
-System::System()
-{
-}
-
 void System::addEntity(Entity& entity)
 {
     _entities.push_back(entity);
-    onAddEntity(entity);
 }
 
 void System::removeEntity(Entity& entity)
 {
-    onRemoveEntity(entity);
     _entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
 }
 
 void System::removeAllEntities()
 {
-    for (Entity& entity : _entities)
+    // Possible performance issue
+    while (!_entities.empty())
     {
-        onRemoveEntity(entity);
+        removeEntity(_entities.back());
     }
-
-    _entities.clear();
 }
 
 const EntityAttributes& System::requiredAttributes() const
 {
     return _requiredAttributes;
-}
-
-void System::onAddEntity(Entity& entity)
-{
-    entity;
-}
-
-void System::onRemoveEntity(Entity& entity)
-{
-    entity;
 }
 
 std::vector<Entity>& System::entities()

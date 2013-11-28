@@ -111,9 +111,6 @@
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp">
       <Filter>Source\Entity\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity\Systems\DebugRenderingSystem.cpp">
-      <Filter>Source\Entity\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp">
       <Filter>Source\Entity\Systems</Filter>
     </ClCompile>
@@ -360,9 +357,6 @@
       <Filter>Source\Entity\Components</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h">
-      <Filter>Source\Entity\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity\Systems\DebugRenderingSystem.h">
       <Filter>Source\Entity\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h">

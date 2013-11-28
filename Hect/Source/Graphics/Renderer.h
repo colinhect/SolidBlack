@@ -9,7 +9,6 @@ namespace hect
 class Renderer :
     public Uncopyable
 {
-    friend class Engine;
 public:
 
     ///

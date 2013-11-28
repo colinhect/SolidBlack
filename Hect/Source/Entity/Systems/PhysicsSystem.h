@@ -23,14 +23,8 @@ public:
     void update(double timeStep, unsigned maxSubStepCount);
 
 protected:
-
-    ///
-    /// \copydoc System::onAddEntity()
-    void onAddEntity(Entity& entity);
-
-    ///
-    /// \copydoc System::onRemoveEntity()
-    void onRemoveEntity(Entity& entity);
+    void addEntity(Entity& entity);
+    void removeEntity(Entity& entity);
 
 private:
     void* _configuration;

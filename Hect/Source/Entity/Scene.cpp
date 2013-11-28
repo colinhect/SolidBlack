@@ -25,7 +25,7 @@ void Scene::refresh()
     {
         EntityAttributes& deactivatedAttributes = _deactivatedAttributes[entity._id];
         EntityAttributes& attributes = _attributes[entity._id];
-        bool wasReactivated = attributes.hasAttribute(EntityAttribute::Activated);
+        bool wasReactivated = attributes.hasAttribute(EntityAttributeBit::Activated);
 
         // The entity was deactivated and reactivated since last refresh
         if (wasReactivated)
@@ -54,9 +54,9 @@ void Scene::refresh()
                 }
             }
         }
-        
-        attributes.setAttribute(EntityAttribute::MarkedForDeactivation, false);
-        attributes.setAttribute(EntityAttribute::Activated, false);
+
+        attributes.setAttribute(EntityAttributeBit::MarkedForDeactivation, false);
+        attributes.setAttribute(EntityAttributeBit::Activated, false);
     }
     _deactivatedEntities.clear();
 
@@ -72,9 +72,9 @@ void Scene::refresh()
                 system->addEntity(entity);
             }
         }
-        
-        attributes.setAttribute(EntityAttribute::MarkedForActivation, false);
-        attributes.setAttribute(EntityAttribute::Activated, true);
+
+        attributes.setAttribute(EntityAttributeBit::MarkedForActivation, false);
+        attributes.setAttribute(EntityAttributeBit::Activated, true);
     }
     _activatedEntities.clear();
 
@@ -103,7 +103,7 @@ void Scene::addSystem(System& system)
     while (addedEntities < _entityCount)
     {
         EntityAttributes& attributes = _attributes[id];
-        if (attributes.hasAttribute(EntityAttribute::Exists))
+        if (attributes.hasAttribute(EntityAttributeBit::Exists))
         {
             ++addedEntities;
             if (attributes.contains(system.requiredAttributes()))
@@ -146,7 +146,7 @@ Entity Scene::createEntity()
         }
     }
 
-    _attributes[id].setAttribute(EntityAttribute::Exists, true);
+    _attributes[id].setAttribute(EntityAttributeBit::Exists, true);
     ++_entityCount;
     return Entity(*this, id);
 }
@@ -175,15 +175,15 @@ void Scene::_destroyEntity(Entity& entity)
     {
         throw Error("Attempt to destroy a null entity");
     }
-    else if (attributes.hasAttribute(EntityAttribute::MarkedForDestruction))
+    else if (attributes.hasAttribute(EntityAttributeBit::MarkedForDestruction))
     {
         throw Error("Entity is already marked for destruction");
     }
 #endif
 
-    attributes.setAttribute(EntityAttribute::MarkedForDestruction, true);
+    attributes.setAttribute(EntityAttributeBit::MarkedForDestruction, true);
 
-    if (_isActivated(entity) && !attributes.hasAttribute(EntityAttribute::MarkedForDeactivation))
+    if (_isActivated(entity) && !attributes.hasAttribute(EntityAttributeBit::MarkedForDeactivation))
     {
         _deactivateEntity(entity);
     }
@@ -196,23 +196,24 @@ void Scene::_activateEntity(Entity& entity)
     EntityAttributes& attributes = _attributes[entity._id];
 
 #ifdef HECT_DEBUG
-    if (_isActivated(entity) && !attributes.hasAttribute(EntityAttribute::MarkedForDeactivation))
+    if (_isActivated(entity) && !attributes.hasAttribute(EntityAttributeBit::MarkedForDeactivation))
     {
         throw Error("Entity is already activated");
     }
-    else if (attributes.hasAttribute(EntityAttribute::MarkedForActivation))
+    else if (attributes.hasAttribute(EntityAttributeBit::MarkedForActivation))
     {
         throw Error("Entity is already marked for activation");
     }
 #endif
 
-    attributes.setAttribute(EntityAttribute::MarkedForActivation, true);
+    attributes.setAttribute(EntityAttributeBit::MarkedForActivation, true);
 
-    // Call onActivate() for all components
     auto& components = _components[entity._id];
     for (auto& pair : components)
     {
-        pair.second->onActivate(entity);
+        const BaseComponent::Ref& component = pair.second;
+        component->_scene = this;
+        component->_entityId = entity._id;
     }
 
     _activatedEntities.push_back(entity);
@@ -227,19 +228,20 @@ void Scene::_deactivateEntity(Entity& entity)
     {
         throw Error("Entity is already deactivated");
     }
-    else if (attributes.hasAttribute(EntityAttribute::MarkedForDeactivation))
+    else if (attributes.hasAttribute(EntityAttributeBit::MarkedForDeactivation))
     {
         throw Error("Entity is already marked for deactivation");
     }
 #endif
 
-    attributes.setAttribute(EntityAttribute::MarkedForDeactivation, true);
+    attributes.setAttribute(EntityAttributeBit::MarkedForDeactivation, true);
 
-    // Call onDeactivate() for all components
     auto& components = _components[entity._id];
     for (auto& pair : components)
     {
-        pair.second->onDeactivate(entity);
+        const BaseComponent::Ref& component = pair.second;
+        component->_scene = nullptr;
+        component->_entityId = 0;
     }
 
     // Keep the attributes the entity had on deactivation
@@ -249,17 +251,17 @@ void Scene::_deactivateEntity(Entity& entity)
 
 bool Scene::_isActivated(const Entity& entity) const
 {
-    return _attributes[entity._id].hasAttribute(EntityAttribute::Activated);
+    return _attributes[entity._id].hasAttribute(EntityAttributeBit::Activated);
 }
 
 bool Scene::_isNull(const Entity& entity) const
 {
-    return !_attributes[entity._id].hasAttribute(EntityAttribute::Exists);
+    return !_attributes[entity._id].hasAttribute(EntityAttributeBit::Exists);
 }
 
 void Scene::_addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref& component)
 {
-    ComponentTypeId type = component->componentTypeId();
+    ComponentTypeId type = component->_componentTypeId();
 
 #ifdef HECT_DEBUG
     assert(!entity.isNull());

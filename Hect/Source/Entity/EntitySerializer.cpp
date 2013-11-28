@@ -28,6 +28,6 @@ void EntitySerializer::deserialize(Entity& entity, AssetCache& assetCache, const
         _componentSerializers[type]->_deserialize(component.get(), dataValue[componentTypeName], assetCache);
         entity.addComponent(component);
     }
-    
+
     entity.activate();
 }

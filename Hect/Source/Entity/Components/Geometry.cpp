@@ -2,38 +2,20 @@
 
 using namespace hect;
 
-Geometry::Geometry() :
-    _transform(nullptr)
-{
-}
-
-void Geometry::onActivate(Entity& entity)
-{
-    if (entity.hasComponent<Transform>())
-    {
-        _transform = &entity.component<Transform>();
-    }
-}
-
-void Geometry::onDeactivate(Entity& entity)
-{
-    _transform = nullptr;
-}
-
 void Geometry::addMesh(Mesh::Ref mesh, Material::Ref material)
 {
     _meshes.push_back(mesh);
     _materials.push_back(material);
-
-    _boundingBox.expandToInclude(mesh->boundingBox());
 }
 
 void Geometry::render(const Camera& camera, RenderingSystem& renderingSystem)
 {
-    if (!_transform)
+    if (!hasEntity() || !entity().hasComponent<Transform>())
     {
         return;
     }
+
+    Transform& transform = entity().component<Transform>();
 
     size_t i = 0;
     while (i < _meshes.size())
@@ -43,28 +25,10 @@ void Geometry::render(const Camera& camera, RenderingSystem& renderingSystem)
 
         if (mesh.indexCount() > 0)
         {
-            if (camera.frustum().testAxisAlignedBox(mesh.boundingBox()) != FrustumTestResult::Outside)
-            {
-                renderingSystem.renderMesh(mesh, material, *_transform);
-            }
+            renderingSystem.renderMesh(mesh, material, transform);
         }
 
         ++i;
-    }
-}
-
-void Geometry::renderDebug(const Camera& camera, DebugRenderingSystem& renderingSystem)
-{
-    if (!_transform)
-    {
-        return;
-    }
-
-    if (_boundingBox.hasSize())
-    {
-        Vector3<> scale = _boundingBox.maximum() - _boundingBox.minimum();
-        Vector4<> color = Vector4<>(1.0, 0.0, 0.0, 1.0);
-        renderingSystem.renderWireframeBox(_transform->position(), scale, color);
     }
 }
 

@@ -4,26 +4,22 @@ namespace hect
 {
 
 ///
-/// A system which handles entities which have specific components.
+/// A system which handles entities with specific components.
 class System
 {
 public:
 
     ///
-    /// Construct an entity system without an update priority.
-    System();
-
-    ///
     /// Adds an entity to the system.
     ///
     /// \param entity The entity.
-    void addEntity(Entity& entity);
+    virtual void addEntity(Entity& entity);
 
     ///
     /// Removes an entity from the system.
     ///
     /// \param entity The entity.
-    void removeEntity(Entity& entity);
+    virtual void removeEntity(Entity& entity);
 
     ///
     /// Removes all from the system.
@@ -34,18 +30,6 @@ public:
     const EntityAttributes& requiredAttributes() const;
 
 protected:
-
-    ///
-    /// Called when an entity is added to the system.
-    ///
-    /// \param entity The entity.
-    virtual void onAddEntity(Entity& entity);
-
-    ///
-    /// Called when an entity is removed from the system.
-    ///
-    /// \param entity The entity.
-    virtual void onRemoveEntity(Entity& entity);
 
     ///
     /// Returns the entities currently in the system.

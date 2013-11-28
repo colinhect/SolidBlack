@@ -27,7 +27,7 @@ public:
     /// \param title The window title.
     /// \param settings The settings.
     Window(const std::string& title, const DataValue& settings);
-    
+
     ///
     /// Closes the window.
     ~Window();

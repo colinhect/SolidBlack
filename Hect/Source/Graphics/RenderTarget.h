@@ -9,7 +9,6 @@ class Renderer;
 /// A target that can be rendered to.
 class RenderTarget
 {
-    friend class Engine;
 public:
 
     ///
@@ -22,6 +21,9 @@ public:
     /// \param width The width.
     /// \param height The height.
     RenderTarget(unsigned width, unsigned height);
+
+    ///
+    /// Virtual destructor.
     virtual ~RenderTarget() { }
 
     ///

@@ -35,18 +35,22 @@ void PhysicsSystem::update(double timeStep, unsigned maxSubStepCount)
     world->stepSimulation(timeStep, maxSubStepCount);
 }
 
-void PhysicsSystem::onAddEntity(Entity& entity)
+void PhysicsSystem::addEntity(Entity& entity)
 {
+    System::addEntity(entity);
+
     RigidBody& rigidBody = entity.component<RigidBody>();
 
     btDiscreteDynamicsWorld* world = (btDiscreteDynamicsWorld*)_world;
     world->addRigidBody((btRigidBody*)rigidBody._bulletRigidBody);
 }
 
-void PhysicsSystem::onRemoveEntity(Entity& entity)
+void PhysicsSystem::removeEntity(Entity& entity)
 {
     RigidBody& rigidBody = entity.component<RigidBody>();
 
     btDiscreteDynamicsWorld* world = (btDiscreteDynamicsWorld*)_world;
     world->removeRigidBody((btRigidBody*)rigidBody._bulletRigidBody);
+
+    System::removeEntity(entity);
 }

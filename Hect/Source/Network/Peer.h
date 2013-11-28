@@ -80,11 +80,7 @@ public:
     /// Returns the current state of the peer.
     PeerState state() const;
 
-    /// \cond INTERNAL
-
     bool operator==(const Peer& peer) const;
-
-    /// \endcond
 
 private:
     void* _enetPeer;

@@ -3,8 +3,6 @@
 namespace hect
 {
 
-// \cond INTERNAL
-
 class AssetCache;
 
 class AssetEntryBase
@@ -34,8 +32,6 @@ private:
     bool _errorOccurred;
     std::string _errorMessage;
 };
-
-// \endcond
 
 }
 

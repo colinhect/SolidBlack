@@ -2,8 +2,6 @@
 
 #include <GL/glew.h>
 
-// \cond INTERNAL
-
 using namespace hect;
 
 #ifdef HECT_DEBUG
@@ -413,8 +411,8 @@ void Renderer::uploadShader(Shader& shader)
     auto data = new ShaderData();
     data->id = GL_ASSERT( glCreateProgram(); )
 
-    // Attach each shader to the program
-    for (const ShaderModule::Ref& module : shader.modules())
+               // Attach each shader to the program
+               for (const ShaderModule::Ref& module : shader.modules())
     {
         if (!module->isUploaded())
         {
@@ -841,5 +839,3 @@ const Renderer::Capabilities& Renderer::capabilities() const
 {
     return _capabilities;
 }
-
-// \endcond

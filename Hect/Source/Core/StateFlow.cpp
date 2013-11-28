@@ -15,7 +15,7 @@ void StateFlow::push(State::Ref state)
 bool StateFlow::transition()
 {
     _ensureHighestState();
-    
+
     State::Ref state = _states.back();
     while (state->isDone())
     {
