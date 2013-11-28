@@ -88,33 +88,23 @@ void Window::showFatalError(const std::string& message)
 #endif
 }
 
-Window::Window(const std::string& title, const DataValue& settings) :
+Window::Window(const std::string& title, const VideoMode& videoMode) :
+    RenderTarget(videoMode.width(), videoMode.height()),
     _sfmlWindow(nullptr)
 {
-    // Create the default video mode
-    sf::VideoMode videoMode;
-    videoMode.width = _defaultWidth;
-    videoMode.height = _defaultHeight;
-    videoMode.bitsPerPixel = _defaultBitsPerPixel;
+    sf::VideoMode mode;
+    mode.width = videoMode.width();
+    mode.height = videoMode.height();
+    mode.bitsPerPixel = videoMode.bitsPerPixel();
 
-    // Create the default style
     unsigned style = sf::Style::Titlebar | sf::Style::Close;
-
-    // Video mode settings
-    const DataValue& videoModeValue = settings["videoMode"];
-    videoMode.width = videoModeValue["width"].or(_defaultWidth).asUnsigned();
-    videoMode.height = videoModeValue["height"].or(_defaultHeight).asUnsigned();
-    videoMode.bitsPerPixel = videoModeValue["bitsPerPixel"].or(_defaultBitsPerPixel).asUnsigned();
-    if (videoModeValue["fullwindow"].asBool())
+    if (videoMode.isFullscreen())
     {
         style |= sf::Style::Fullscreen;
     }
 
     // Create the window
-    _sfmlWindow = new sf::Window(videoMode, title, style);
-
-    setWidth(videoMode.width);
-    setHeight(videoMode.height);
+    _sfmlWindow = new sf::Window(mode, title, style);
 }
 
 Window::~Window()

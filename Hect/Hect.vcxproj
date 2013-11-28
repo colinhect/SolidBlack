@@ -63,6 +63,8 @@
     <ClCompile Include="Source\Graphics\PassUniformValue.cpp" />
     <ClCompile Include="Source\Graphics\RenderMode.cpp" />
     <ClCompile Include="Source\Graphics\RenderTarget.cpp" />
+    <ClCompile Include="Source\Graphics\VideoMode.cpp" />
+    <ClCompile Include="Source\Graphics\VideoModeDataFormat.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\ShaderDataFormat.cpp" />
@@ -145,6 +147,8 @@
     <ClInclude Include="Source\Graphics\PassUniformValue.h" />
     <ClInclude Include="Source\Graphics\RenderMode.h" />
     <ClInclude Include="Source\Graphics\RenderTarget.h" />
+    <ClInclude Include="Source\Graphics\VideoMode.h" />
+    <ClInclude Include="Source\Graphics\VideoModeDataFormat.h" />
     <ClInclude Include="Source\Graphics\Window.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
     <ClInclude Include="Source\Graphics\ShaderDataFormat.h" />

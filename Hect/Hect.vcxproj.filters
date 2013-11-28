@@ -300,6 +300,12 @@
     <ClCompile Include="Source\Entity\Components\DirectionalLight.cpp">
       <Filter>Source\Entity\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\VideoMode.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\VideoModeDataFormat.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -568,6 +574,12 @@
     </ClInclude>
     <ClInclude Include="Source\Math\Sphere.h">
       <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\VideoMode.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\VideoModeDataFormat.h">
+      <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

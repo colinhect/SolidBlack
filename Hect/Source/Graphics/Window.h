@@ -25,8 +25,8 @@ public:
     /// Constructs a window given a title and the settings.
     ///
     /// \param title The window title.
-    /// \param settings The settings.
-    Window(const std::string& title, const DataValue& settings);
+    /// \param videoMode The video mode to use.
+    Window(const std::string& title, const VideoMode& videoMode);
 
     ///
     /// Closes the window.

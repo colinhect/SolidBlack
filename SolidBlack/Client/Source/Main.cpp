@@ -29,8 +29,9 @@ int main()
             fileSystem.addDataSource(dataSource.asString());
         }
 
-        // Create window/renderer
-        Window window("Solid Black Client", settings);
+        // Create window
+        VideoMode videoMode = VideoModeDataFormat::load(settings["videoMode"]);
+        Window window("Solid Black Client", videoMode);
         Renderer renderer(window);
 
         // Load the input axes from the settings
