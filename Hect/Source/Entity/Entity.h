@@ -5,10 +5,6 @@ namespace hect
 
 ///
 /// A game object in a scene.
-///
-/// \remarks An entity is in one of two states; activated or deactivated.  On
-/// creation an entity is deactivated.  Components can only be added/removed
-/// when the entity is deactivated.
 class Entity
 {
     friend class BaseComponent;
@@ -38,18 +34,8 @@ public:
     /// \remarks Once the entity is activated, components can no longer be
     /// added or removed.
     ///
-    /// \throws Error If the entity is already activated (debug builds only).
+    /// \throws Error If the entity is already activated.
     void activate();
-
-    ///
-    /// Enqueues the entity to be removed from relevant systems on the next
-    /// call to Scene::refresh().
-    ///
-    /// \remarks Once the entity is deactivated, components can be added or
-    /// removed.
-    ///
-    /// \throws Error If the entity is already deactivated (debug builds only).
-    void deactivate();
 
     ///
     /// Enqueues the entity to be removed from relevant systems on the next
@@ -90,14 +76,6 @@ public:
     /// \throws Error If the entity is activated or already has a component of
     /// the type (debug builds only).
     void addComponent(const BaseComponent::Ref& component);
-
-    ///
-    /// Removes a component of a certain type from the entity.
-    ///
-    /// \throws Error If the entity is activated or already does not have a
-    /// component of the type (debug builds only).
-    template <typename T>
-    void removeComponent();
 
     ///
     /// Returns the component of a certain type from an entity.

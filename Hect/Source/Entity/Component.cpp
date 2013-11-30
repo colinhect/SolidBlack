@@ -23,15 +23,3 @@ Entity BaseComponent::entity() const
 {
     return Entity(*_scene, _entityId);
 }
-
-void BaseComponent::_activate(Entity& entity)
-{
-    _scene = &entity.scene();
-    _entityId = entity.id();
-}
-
-void BaseComponent::_deactivate(Entity& entity)
-{
-    _scene = nullptr;
-    _entityId = 0;
-}

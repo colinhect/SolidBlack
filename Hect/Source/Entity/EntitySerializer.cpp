@@ -9,11 +9,6 @@ void EntitySerializer::deserialize(Entity& entity, AssetCache& assetCache, const
         throw Error("Attempt to deserialize to a null entity");
     }
 
-    if (entity.isActivated())
-    {
-        entity.deactivate();
-    }
-
     const DataValue& dataValue = *assetCache.get<DataValue>(assetPath);
     for (const std::string& componentTypeName : dataValue.memberNames())
     {
@@ -28,6 +23,4 @@ void EntitySerializer::deserialize(Entity& entity, AssetCache& assetCache, const
         _componentSerializers[type]->_deserialize(component.get(), dataValue[componentTypeName], assetCache);
         entity.addComponent(component);
     }
-
-    entity.activate();
 }

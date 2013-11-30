@@ -2,27 +2,23 @@
 
 namespace hect
 {
-enum class EntityAttributeBit
-{
-    MarkedForDestruction = 59,
-    MarkedForActivation = 60,
-    MarkedForDeactivation = 61,
-    Activated = 62,
-    Exists = 63
-};
 
 class EntityAttributes
 {
 public:
-    bool hasAttribute(EntityAttributeBit attribute) const;
-    void setAttribute(EntityAttributeBit attribute, bool value);
+    bool isActivated() const;
+    void setActivated(bool activated);
+
+    bool isDestroyed() const;
+    void setDestroyed(bool destroyed);
+    
+    bool isNull() const;
+    void setNull(bool null);
 
     bool hasComponent(ComponentTypeId type) const;
     void setHasComponent(ComponentTypeId type, bool value);
 
     bool contains(const EntityAttributes& attributes) const;
-
-    EntityAttributes difference(const EntityAttributes& attributes) const;
 
 private:
     std::bitset<64> _bitset;

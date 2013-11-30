@@ -38,9 +38,6 @@ protected:
     virtual ComponentTypeId _componentTypeId() const = 0;
 
 private:
-    void _activate(Entity& entity);
-    void _deactivate(Entity& entity);
-
     Scene* _scene;
     uint32_t _entityId;
 };

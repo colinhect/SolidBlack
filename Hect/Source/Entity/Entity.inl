@@ -16,13 +16,6 @@ T& Entity::addComponent()
 }
 
 template <typename T>
-void Entity::removeComponent()
-{
-    assert(_scene);
-    return _scene->_removeComponent<T>(*this);
-}
-
-template <typename T>
 T& Entity::component()
 {
     assert(_scene);

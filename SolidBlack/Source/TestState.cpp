@@ -29,12 +29,15 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     
     Entity freeCamera = _scene.createEntity();
     _entitySerializer.deserialize(freeCamera, assetCache, "Entities/FreeCamera.entity");
-    
+    freeCamera.activate();
+
     Entity testCube = _scene.createEntity();
     _entitySerializer.deserialize(testCube, assetCache, "Entities/TestCube.entity");
+    testCube.activate();
 
     Entity sun = _scene.createEntity();
     _entitySerializer.deserialize(sun, assetCache, "Entities/Sun.entity");
+    sun.activate();
 
     _scene.refresh();
 }
@@ -89,6 +92,7 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     {
         Entity testCube = _scene.createEntity();
         _entitySerializer.deserialize(testCube, *_assetCache, "Entities/TestCube.entity");
+        testCube.activate();
 
         Entity debugCamera = _scene.entityWithComponent<DebugCamera>();
         if (debugCamera && debugCamera.hasComponent<Transform>())
