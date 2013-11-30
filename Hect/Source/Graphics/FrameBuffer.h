@@ -12,6 +12,10 @@ class FrameBuffer :
 public:
 
     ///
+    /// Constructs a frame buffer without any targets.
+    FrameBuffer();
+
+    ///
     /// Constructs a frame buffer of a given size with an optional depth
     /// component.
     ///
@@ -19,12 +23,6 @@ public:
     /// \param depthComponent True if the frame buffer will have a depth
     /// component; false otherwise.
     FrameBuffer(const Texture::Array& targets, bool depthComponent = true);
-
-    ///
-    /// Constructs a copy of the another frame buffer.
-    ///
-    /// \param frameBuffer The frame buffer to copy.
-    FrameBuffer(const FrameBuffer& frameBuffer);
 
     ///
     /// Destroys the frame buffer if it is uploaded.

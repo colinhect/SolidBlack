@@ -28,8 +28,9 @@ private:
     void _renderMeshTask(const MeshTask& task, Camera& camera, const RenderTarget& target);
 
     std::vector<MeshTask> _meshTasks;
-
-    std::unique_ptr<FrameBuffer> _frameBuffer;
+    
+    FrameBuffer _geometryBuffer;
+    FrameBuffer _lightBuffer;
 
     Shader::Ref _compositorShader;
     Mesh::Ref _windowMesh;
@@ -39,4 +40,6 @@ private:
 
     double _gamma;
     double _exposure;
+
+    bool _buffersInitialized;
 };

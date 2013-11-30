@@ -15,7 +15,7 @@ public:
     ///
     /// \param renderer The renderer.
     RenderingSystem(Renderer& renderer);
-    
+
     ///
     /// Adds a mesh to be rendered next frame.
     ///
@@ -23,6 +23,12 @@ public:
     /// \param material The material to render the mesh using.
     /// \param transform The global transformation of the mesh.
     virtual void addMesh(Mesh& mesh, const Material& material, const Transform& transform) { }
+    
+    ///
+    /// Adds an ambient light to be rendered next frame.
+    ///
+    /// \param light The ambient light.
+    virtual void addAmbientLight(AmbientLight& light) { }
 
     ///
     /// Adds a directional light to be rendered next frame.

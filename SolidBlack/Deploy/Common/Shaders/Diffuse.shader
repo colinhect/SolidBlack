@@ -16,6 +16,10 @@
             "type" : "Vector2",
             "defaultValue" : [ 0, 1 ]
         },
+        "modelView" :
+        {
+            "binding" : "ModelViewMatrix"
+        },
         "modelViewProjection" :
         {
             "binding" : "ModelViewProjectionMatrix"

@@ -5,7 +5,8 @@ DeferredRenderingSystem::DeferredRenderingSystem(Renderer& renderer, AssetCache&
     _oneOverGammaUniform(nullptr),
     _exposureUniform(nullptr),
     _gamma(2.2),
-    _exposure(0.025)
+    _exposure(0.025),
+    _buffersInitialized(false)
 {
     LOG_INFO("Initializing deferred rendering system...");
 
@@ -43,17 +44,30 @@ void DeferredRenderingSystem::addMesh(Mesh& mesh, const Material& material, cons
 
 void DeferredRenderingSystem::renderAll(Camera& camera, RenderTarget& target)
 {
-    if (!_frameBuffer || _frameBuffer->width() != target.width() || _frameBuffer->height() != target.height())
+    if (!_buffersInitialized)
     {
+        _buffersInitialized = true;
+
+
+        unsigned width = target.width();
+        unsigned height = target.height();
+
+        PixelType pixelType = PixelType::Half;
+        PixelFormat pixelFormat = PixelFormat::Rgba;
+        TextureFilter filter = TextureFilter::Nearest;
+        
         Texture::Array targets;
-        targets.push_back(Texture(target.width(), target.height(), PixelType::Half, PixelFormat::Rgb, TextureFilter::Nearest, TextureFilter::Nearest, false, false));
-        _frameBuffer.reset(new FrameBuffer(targets));
+        targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Color
+        targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Normal
+        _geometryBuffer = FrameBuffer(targets);
+
+        targets.clear();
+        targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Lighting
+        _lightBuffer = FrameBuffer(targets);
     }
 
-
-    // Render scene to floating point frame buffer
     renderer().beginFrame();
-    renderer().bindTarget(*_frameBuffer);
+    renderer().bindTarget(_geometryBuffer);
     renderer().clear();
 
     //
@@ -71,11 +85,9 @@ void DeferredRenderingSystem::renderAll(Camera& camera, RenderTarget& target)
     {
         _renderMeshTask(task, camera, target);
     }
-    //
 
     renderer().endFrame();
 
-    // Render the tonemapped frame buffer
     renderer().beginFrame();
     renderer().bindTarget(target);
     renderer().clear();
@@ -83,7 +95,8 @@ void DeferredRenderingSystem::renderAll(Camera& camera, RenderTarget& target)
     renderer().bindShader(*_compositorShader);
     renderer().setUniform(*_oneOverGammaUniform, 1.0f / (float)_gamma);
     renderer().setUniform(*_exposureUniform, (float)_exposure);
-    renderer().bindTexture(_frameBuffer->targets()[0], 0);
+    renderer().bindTexture(_geometryBuffer.targets()[0], 0);
+    renderer().bindTexture(_geometryBuffer.targets()[1], 1);
     renderer().bindMesh(*_windowMesh);
     renderer().draw();
 

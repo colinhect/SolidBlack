@@ -16,10 +16,15 @@
             "type" : "Float",
             "defaultValue" : 0.4545
         },
-        "sourceTexture" :
+        "colorTexture" :
         {
             "type" : "Texture",
             "defaultValue" : 0
+        },
+        "normalTexture" :
+        {
+            "type" : "Texture",
+            "defaultValue" : 1
         }
     }
 }

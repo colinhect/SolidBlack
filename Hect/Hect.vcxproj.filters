@@ -306,6 +306,9 @@
     <ClCompile Include="Source\Graphics\VideoModeDataFormat.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity\Components\AmbientLight.cpp">
+      <Filter>Source\Entity\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -580,6 +583,9 @@
     </ClInclude>
     <ClInclude Include="Source\Graphics\VideoModeDataFormat.h">
       <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\Components\AmbientLight.h">
+      <Filter>Source\Entity\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

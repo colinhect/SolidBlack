@@ -32,6 +32,7 @@
     <ClCompile Include="Source\Core\TaskPool.cpp" />
     <ClCompile Include="Source\Core\Timer.cpp" />
     <ClCompile Include="Source\Core\TimeSpan.cpp" />
+    <ClCompile Include="Source\Entity\Components\AmbientLight.cpp" />
     <ClCompile Include="Source\Entity\Components\Camera.cpp" />
     <ClCompile Include="Source\Entity\Components\DirectionalLight.cpp" />
     <ClCompile Include="Source\Entity\Components\Geometry.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\TimeSpan.h" />
     <ClInclude Include="Source\Core\Uncopyable.h" />
+    <ClInclude Include="Source\Entity\Components\AmbientLight.h" />
     <ClInclude Include="Source\Entity\Components\Camera.h" />
     <ClInclude Include="Source\Entity\Components\DirectionalLight.h" />
     <ClInclude Include="Source\Entity\Components\Geometry.h" />

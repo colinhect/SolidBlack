@@ -2,6 +2,11 @@
 
 using namespace hect;
 
+FrameBuffer::FrameBuffer() :
+    _depthComponent(false)
+{
+}
+
 FrameBuffer::FrameBuffer(const Texture::Array& targets, bool depthComponent) :
     _depthComponent(depthComponent),
     _targets(targets)

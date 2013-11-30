@@ -8,11 +8,6 @@ using namespace hect;
 #include <Windows.h>
 #endif
 
-// Default video mode values
-const unsigned _defaultWidth = 256;
-const unsigned _defaultHeight = 256;
-const unsigned _defaultBitsPerPixel = 32;
-
 // Translates an SFML mouse event to an internal mouse event.
 MouseEvent _translateMouseEvent(const sf::Event& event, const Vector2<int>& cursorPosition, const Vector2<int>& lastCursorPosition)
 {

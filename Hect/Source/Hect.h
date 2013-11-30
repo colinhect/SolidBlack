@@ -125,6 +125,7 @@ const double pi = 3.14159265358979323846;
 #include "Entity/Components/Renderable.h"
 #include "Entity/Components/Geometry.h"
 #include "Entity/Components/RigidBody.h"
+#include "Entity/Components/AmbientLight.h"
 #include "Entity/Components/DirectionalLight.h"
 
 #include "Entity/Systems/CameraSystem.h"

@@ -11,6 +11,7 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _debugCameraSystem(inputSystem)
 {
     _entitySerializer.registerComponent<Camera, CameraSerializer>("Camera");
+    _entitySerializer.registerComponent<AmbientLight, AmbientLightSerializer>("AmbientLight");
     _entitySerializer.registerComponent<DirectionalLight, DirectionalLightSerializer>("DirectionalLight");
     _entitySerializer.registerComponent<Geometry, GeometrySerializer>("Geometry");
     _entitySerializer.registerComponent<Transform, TransformSerializer>("Transform");
