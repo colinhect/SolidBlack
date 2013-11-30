@@ -3,13 +3,15 @@
 #include <Hect.h>
 using namespace hect;
 
-class DeferredRenderingSystem :
-    public RenderingSystem
+class RenderingSystem :
+    public System
 {
 public:
-    DeferredRenderingSystem(Renderer& renderer, AssetCache& assetCache, const DataValue& settings);
+    RenderingSystem(Renderer& renderer, AssetCache& assetCache, const DataValue& settings);
 
-    void addMesh(Mesh& mesh, const Material& material, const Transform& transform);
+    void addEntity(Entity& entity);
+    void removeEntity(Entity& entity);
+
     void renderAll(Camera& camera, RenderTarget& target);
 
     double gamma() const;
@@ -18,22 +20,14 @@ public:
     double exposure() const;
     void setExposure(double exposure);
 
-private:
-    struct MeshTask
-    {
-        Mesh* mesh;
-        const Pass* pass;
-        const Transform* transform;
-    };
-    void _renderMeshTask(const MeshTask& task, Camera& camera, const RenderTarget& target);
-
-    std::vector<MeshTask> _meshTasks;
-    
+private:    
     FrameBuffer _geometryBuffer;
     FrameBuffer _lightBuffer;
 
     Shader::Ref _compositorShader;
     Mesh::Ref _windowMesh;
+
+    Renderer* _renderer;
 
     const Uniform* _oneOverGammaUniform;
     const Uniform* _exposureUniform;

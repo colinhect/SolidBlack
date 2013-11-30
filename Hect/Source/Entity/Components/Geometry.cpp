@@ -8,28 +8,14 @@ void Geometry::addMesh(Mesh::Ref mesh, Material::Ref material)
     _materials.push_back(material);
 }
 
-void Geometry::render(const Camera& camera, RenderingSystem& renderingSystem)
+Mesh::RefArray& Geometry::meshes()
 {
-    if (!hasEntity() || !entity().hasComponent<Transform>())
-    {
-        return;
-    }
+    return _meshes;
+}
 
-    Transform& transform = entity().component<Transform>();
-
-    size_t i = 0;
-    while (i < _meshes.size())
-    {
-        Mesh& mesh = *_meshes[i];
-        Material& material = *_materials[i];
-
-        if (mesh.indexCount() > 0)
-        {
-            renderingSystem.addMesh(mesh, material, transform);
-        }
-
-        ++i;
-    }
+Material::RefArray& Geometry::materials()
+{
+    return _materials;
 }
 
 void GeometrySerializer::deserialize(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const

@@ -6,7 +6,7 @@ namespace hect
 ///
 /// A geometry component.
 class Geometry :
-    public Renderable
+    public Component<Geometry>
 {
 public:
 
@@ -18,8 +18,12 @@ public:
     void addMesh(Mesh::Ref mesh, Material::Ref material);
 
     ///
-    /// \copydoc Renderable::render()
-    void render(const Camera& camera, RenderingSystem& renderingSystem);
+    /// Returns the meshes.
+    Mesh::RefArray& meshes();
+
+    ///
+    /// Returns the materials.
+    Material::RefArray& materials();
 
 private:
     Mesh::RefArray _meshes;

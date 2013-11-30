@@ -17,11 +17,6 @@ void AmbientLight::setColor(const Vector3<>& color)
     _color = color;
 }
 
-void AmbientLight::render(const Camera& camera, RenderingSystem& renderingSystem)
-{
-    renderingSystem.addAmbientLight(*this);
-}
-
 void AmbientLightSerializer::deserialize(AmbientLight& light, const DataValue& dataValue, AssetCache& assetCache) const
 {
     // Color

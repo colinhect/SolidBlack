@@ -28,11 +28,6 @@ void DirectionalLight::setColor(const Vector3<>& color)
     _color = color;
 }
 
-void DirectionalLight::render(const Camera& camera, RenderingSystem& renderingSystem)
-{
-    renderingSystem.addDirectionalLight(*this);
-}
-
 void DirectionalLightSerializer::deserialize(DirectionalLight& light, const DataValue& dataValue, AssetCache& assetCache) const
 {
     // Direction

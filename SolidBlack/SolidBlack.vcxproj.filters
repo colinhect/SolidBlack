@@ -11,9 +11,6 @@
     <ClCompile Include="Source\Client.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DeferredRenderingSystem.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Player.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -26,12 +23,12 @@
     <ClCompile Include="Source\DebugCameraSystem.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\RenderingSystem.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Client.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DeferredRenderingSystem.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\PacketType.h">
@@ -50,6 +47,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\DebugCameraSystem.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderingSystem.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

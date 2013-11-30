@@ -114,9 +114,6 @@
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp">
       <Filter>Source\Entity\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity\Systems\RenderingSystem.cpp">
-      <Filter>Source\Entity\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Entity\Entity.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
@@ -359,9 +356,6 @@
     <ClInclude Include="Source\Entity\Components\Geometry.h">
       <Filter>Source\Entity\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entity\Components\Renderable.h">
-      <Filter>Source\Entity\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Entity\Components\RigidBody.h">
       <Filter>Source\Entity\Components</Filter>
     </ClInclude>
@@ -372,9 +366,6 @@
       <Filter>Source\Entity\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h">
-      <Filter>Source\Entity\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity\Systems\RenderingSystem.h">
       <Filter>Source\Entity\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\Entity.h">

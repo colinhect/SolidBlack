@@ -3,7 +3,7 @@
 #include <Hect.h>
 using namespace hect;
 
-#include "DeferredRenderingSystem.h"
+#include "RenderingSystem.h"
 #include "DebugCameraSystem.h"
 
 class TestState :
@@ -26,7 +26,7 @@ private:
     Window* _window;
 
     CameraSystem _cameraSystem;
-    DeferredRenderingSystem _renderingSystem;
+    RenderingSystem _renderingSystem;
     DebugCameraSystem _debugCameraSystem;
 
     Scene _scene;

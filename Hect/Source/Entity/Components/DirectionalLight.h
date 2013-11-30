@@ -6,7 +6,7 @@ namespace hect
 ///
 /// A directional light component
 class DirectionalLight :
-    public Renderable
+    public Component<DirectionalLight>
 {
 public:
 
@@ -33,10 +33,6 @@ public:
     ///
     /// \param color The new color.
     void setColor(const Vector3<>& color);
-
-    ///
-    /// \copydoc Renderable::render()
-    void render(const Camera& camera, RenderingSystem& renderingSystem);
 
 private:
     Vector3<> _direction;
