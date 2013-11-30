@@ -25,6 +25,12 @@ void Entity::destroy()
     _scene->_destroyEntity(*this);
 }
 
+Entity Entity::clone() const
+{
+    assert(_scene);
+    return _scene->_cloneEntity(*this);
+}
+
 void Entity::activate()
 {
     assert(_scene);

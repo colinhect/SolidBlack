@@ -26,8 +26,13 @@ public:
     void removeAllEntities();
 
     ///
-    /// Returns the required entity attributes to be added to this system.
-    const EntityAttributes& requiredAttributes() const;
+    /// Returns whether the system includes the given entity.
+    ///
+    /// \remarks If this returns false for an entity, then addEntity() will
+    /// not even be called for that entity.
+    ///
+    /// \param entity The entity to check if the system includes.
+    virtual bool includesEntity(const Entity& entity) const;
 
 protected:
 
@@ -39,16 +44,8 @@ protected:
     /// Returns the entities currently in the system.
     const std::vector<Entity>& entities() const;
 
-    ///
-    /// Adds a component requirement for entities in this system.
-    template <typename T>
-    void requireComponent();
-
 private:
     std::vector<Entity> _entities;
-    EntityAttributes _requiredAttributes;
 };
 
 }
-
-#include "System.inl"

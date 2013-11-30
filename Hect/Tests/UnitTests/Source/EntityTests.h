@@ -19,50 +19,13 @@ public:
     Vector3<double> velocity;
 };
 
-class Animal :
-    public Component<Animal>
-{
-public:
-    virtual bool isDog() const = 0;
-    virtual bool isCat() const = 0;
-};
-
-class Dog :
-    public Animal
-{
-public:
-    bool isDog() const
-    {
-        return true;
-    }
-    bool isCat() const
-    {
-        return false;
-    }
-};
-
-class Cat :
-    public Animal
-{
-public:
-    bool isDog() const
-    {
-        return false;
-    }
-    bool isCat() const
-    {
-        return true;
-    }
-};
-
 class MovementSystem :
     public System
 {
 public:
-    MovementSystem()
+    bool includesEntity(const Entity& entity) const
     {
-        requireComponent<Position>();
-        requireComponent<Velocity>();
+        return entity.hasComponent<Position>() && entity.hasComponent<Velocity>();
     }
 
     bool hasEntity(Entity entity)
@@ -76,9 +39,9 @@ class NamingSystem :
     public System
 {
 public:
-    NamingSystem()
+    bool includesEntity(const Entity& entity) const
     {
-        requireComponent<Name>();
+        return entity.hasComponent<Name>();
     }
 
     bool hasEntity(Entity entity)
@@ -124,23 +87,6 @@ SUITE(Entity)
         CHECK(a.hasComponent<Name>());
 
         CHECK_EQUAL("", a.component<Name>().name);
-    }
-
-    TEST(PolymorphicComponents)
-    {
-        Scene scene;
-
-        Entity a = scene.createEntity();
-        a.addComponent<Dog>();
-        CHECK(a.hasComponent<Animal>());
-        CHECK(a.component<Animal>().isDog());
-        CHECK(!a.component<Animal>().isCat());
-
-        Entity b = scene.createEntity();
-        b.addComponent<Cat>();
-        CHECK(b.hasComponent<Animal>());
-        CHECK(!b.component<Animal>().isDog());
-        CHECK(b.component<Animal>().isCat());
     }
 
     TEST(ActivationAndDestruction)

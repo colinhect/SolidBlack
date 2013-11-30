@@ -201,7 +201,6 @@
     <None Include="Source\Entity\Entity.inl" />
     <None Include="Source\Entity\Component.inl" />
     <None Include="Source\Entity\EntitySerializer.inl" />
-    <None Include="Source\Entity\System.inl" />
     <None Include="Source\Entity\Scene.inl" />
     <None Include="Source\Graphics\MeshBuilder.inl" />
     <None Include="Source\Math\Angle.inl" />

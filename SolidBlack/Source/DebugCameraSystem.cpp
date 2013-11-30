@@ -12,9 +12,11 @@ DebugCameraSystem::DebugCameraSystem(InputSystem& inputSystem) :
     _adjustSpeed(&inputSystem.axisWithName("adjustSpeed")),
     _speed(1)
 {
-    requireComponent<Transform>();
-    requireComponent<Camera>();
-    requireComponent<DebugCamera>();
+}
+
+bool DebugCameraSystem::includesEntity(const Entity& entity) const
+{
+    return entity.hasComponent<Transform>() && entity.hasComponent<Camera>() && entity.hasComponent<DebugCamera>();
 }
 
 void DebugCameraSystem::update(double timeStep)

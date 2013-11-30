@@ -31,4 +31,7 @@ private:
 
     Scene _scene;
     EntitySerializer _entitySerializer;
+
+    Entity _debugCamera;
+    Entity _testCube;
 };

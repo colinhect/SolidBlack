@@ -2,10 +2,9 @@
 
 using namespace hect;
 
-CameraSystem::CameraSystem()
+bool CameraSystem::includesEntity(const Entity& entity) const
 {
-    requireComponent<Transform>();
-    requireComponent<Camera>();
+    return entity.hasComponent<Transform>() && entity.hasComponent<Camera>();
 }
 
 bool CameraSystem::hasCamera() const

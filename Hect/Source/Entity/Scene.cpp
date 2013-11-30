@@ -22,11 +22,9 @@ void Scene::refresh()
 {
     for (Entity& entity : _activatedEntities)
     {
-        EntityAttributes& attributes = _attributes[entity._id];
-
         for (System* system : _systems)
         {
-            if (attributes.contains(system->requiredAttributes()))
+            if (system->includesEntity(entity))
             {
                 system->addEntity(entity);
             }
@@ -36,11 +34,9 @@ void Scene::refresh()
 
     for (Entity& entity : _destroyedEntities)
     {
-        EntityAttributes& attributes = _attributes[entity._id];
-
         for (System* system : _systems)
         {
-            if (attributes.contains(system->requiredAttributes()))
+            if (system->includesEntity(entity))
             {
                 system->removeEntity(entity);
             }
@@ -72,8 +68,7 @@ void Scene::addSystem(System& system)
         if (entity)
         {
             ++addedEntities;
-            EntityAttributes& attributes = _attributes[id];
-            if (attributes.contains(system.requiredAttributes()))
+            if (system.includesEntity(entity))
             {
                 system.addEntity(Entity(*this, id));
             }
@@ -117,11 +112,6 @@ Entity Scene::createEntity()
     return Entity(*this, id);
 }
 
-Entity Scene::copyEntity(Entity entity)
-{
-    throw Error("Not implemented");
-}
-
 Entity Scene::entityWithId(Entity::Id id)
 {
     if (id < _attributes.size())
@@ -130,6 +120,19 @@ Entity Scene::entityWithId(Entity::Id id)
     }
 
     return Entity(); // Outside of range
+}
+
+Entity Scene::_cloneEntity(Entity entity)
+{
+    Entity clone = createEntity();
+    
+    auto& components = _components[entity._id];
+    for (auto& pair : components)
+    {
+        _addComponentWithoutReturn(clone, pair.second->_clone());
+    }
+
+    return clone;
 }
 
 void Scene::_destroyEntity(Entity& entity)

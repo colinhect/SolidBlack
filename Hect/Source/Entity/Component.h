@@ -21,8 +21,9 @@ public:
     typedef std::shared_ptr<BaseComponent> Ref;
 
     static ComponentTypeId nextTypeId();
-
+    
     BaseComponent();
+    BaseComponent(const BaseComponent& component);
     virtual ~BaseComponent() { }
 
     ///
@@ -35,6 +36,7 @@ public:
 
 protected:
 
+    virtual BaseComponent::Ref _clone() const = 0;
     virtual ComponentTypeId _componentTypeId() const = 0;
 
 private:
@@ -55,7 +57,7 @@ public:
     static ComponentTypeId typeId();
 
 private:
-
+    BaseComponent::Ref _clone() const;
     ComponentTypeId _componentTypeId() const;
 };
 

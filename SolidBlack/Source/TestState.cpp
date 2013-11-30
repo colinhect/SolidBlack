@@ -27,13 +27,14 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     Mouse& mouse = _input->mouse();
     mouse.setCursorLocked(true);
     
-    Entity freeCamera = _scene.createEntity();
-    _entitySerializer.deserialize(freeCamera, assetCache, "Entities/FreeCamera.entity");
-    freeCamera.activate();
+    _debugCamera = _scene.createEntity();
+    _entitySerializer.deserialize(_debugCamera, assetCache, "Entities/FreeCamera.entity");
+    _debugCamera.activate();
 
-    Entity testCube = _scene.createEntity();
-    _entitySerializer.deserialize(testCube, assetCache, "Entities/TestCube.entity");
-    testCube.activate();
+    _testCube = _scene.createEntity();
+    _entitySerializer.deserialize(_testCube, assetCache, "Entities/TestCube.entity");
+
+    _testCube.clone().activate();
 
     Entity sun = _scene.createEntity();
     _entitySerializer.deserialize(sun, assetCache, "Entities/Sun.entity");
@@ -90,15 +91,12 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     }
     else if (event.key == Key::T)
     {
-        Entity testCube = _scene.createEntity();
-        _entitySerializer.deserialize(testCube, *_assetCache, "Entities/TestCube.entity");
-        testCube.activate();
-
-        Entity debugCamera = _scene.entityWithComponent<DebugCamera>();
-        if (debugCamera && debugCamera.hasComponent<Transform>())
+        Entity testCube = _testCube.clone();
+        if (_debugCamera && _debugCamera.hasComponent<Transform>())
         {
-            testCube.component<Transform>() = debugCamera.component<Transform>();
+            testCube.component<Transform>() = _debugCamera.component<Transform>();
         }
+        testCube.activate();
     }
     else if (event.key == Key::Tab)
     {

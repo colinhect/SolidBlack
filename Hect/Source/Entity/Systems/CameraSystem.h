@@ -11,8 +11,8 @@ class CameraSystem :
 public:
 
     ///
-    /// Constructs the system.
-    CameraSystem();
+    /// \copydoc System::includeEntity()
+    bool includesEntity(const Entity& entity) const;
 
     ///
     /// Returns whether there is an active camera in the scene.

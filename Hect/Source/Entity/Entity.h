@@ -43,6 +43,10 @@ public:
     void destroy();
 
     ///
+    /// Creates a clone of the entity.
+    Entity clone() const;
+
+    ///
     /// Returns whether the entity is activated.
     bool isActivated() const;
 

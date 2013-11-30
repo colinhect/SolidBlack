@@ -21,9 +21,9 @@ void System::removeAllEntities()
     }
 }
 
-const EntityAttributes& System::requiredAttributes() const
+bool System::includesEntity(const Entity& entity) const
 {
-    return _requiredAttributes;
+    return true;
 }
 
 std::vector<Entity>& System::entities()

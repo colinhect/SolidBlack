@@ -16,6 +16,10 @@ public:
     ~PhysicsSystem();
 
     ///
+    /// \copydoc System::includeEntity()
+    bool includesEntity(const Entity& entity) const;
+
+    ///
     /// Updates all physical bodies.
     ///
     /// \param timeStep The duration of time between each update (in seconds).

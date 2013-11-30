@@ -50,14 +50,6 @@ public:
     Entity createEntity();
 
     ///
-    /// Creates a new entity copied from another.
-    ///
-    /// \param entity The entity to copy from.
-    ///
-    /// \returns The new entity.
-    Entity copyEntity(Entity entity);
-
-    ///
     /// Returns the entity with the given ID.
     Entity entityWithId(Entity::Id id);
 
@@ -74,6 +66,8 @@ private:
     {
         InitialPoolSize = 128
     };
+
+    Entity _cloneEntity(Entity entity);
 
     void _destroyEntity(Entity& entity);
     void _activateEntity(Entity& entity);

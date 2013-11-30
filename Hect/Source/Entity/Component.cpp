@@ -14,6 +14,12 @@ BaseComponent::BaseComponent() :
 {
 }
 
+BaseComponent::BaseComponent(const BaseComponent& component) :
+    _scene(nullptr),
+    _entityId(0)
+{
+}
+
 bool BaseComponent::hasEntity() const
 {
     return _scene != nullptr;

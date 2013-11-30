@@ -16,8 +16,6 @@ PhysicsSystem::PhysicsSystem() :
                (btCollisionConfiguration*)_configuration
            ))
 {
-    requireComponent<Transform>();
-    requireComponent<RigidBody>();
 }
 
 PhysicsSystem::~PhysicsSystem()
@@ -27,6 +25,11 @@ PhysicsSystem::~PhysicsSystem()
     delete (btDbvtBroadphase*)_broadphase;
     delete (btCollisionDispatcher*)_dispatcher;
     delete (btDefaultCollisionConfiguration*)_configuration;
+}
+
+bool PhysicsSystem::includesEntity(const Entity& entity) const
+{
+    return entity.hasComponent<Transform>() && entity.hasComponent<RigidBody>();
 }
 
 void PhysicsSystem::update(double timeStep, unsigned maxSubStepCount)

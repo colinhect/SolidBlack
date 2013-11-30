@@ -9,6 +9,8 @@ class DebugCameraSystem :
 public:
     DebugCameraSystem(InputSystem& inputSystem);
 
+    bool includesEntity(const Entity& entity) const;
+
     void update(double timeStep);
 
 private:

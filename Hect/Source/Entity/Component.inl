@@ -9,6 +9,12 @@ ComponentTypeId Component<T>::typeId()
 }
 
 template <typename T>
+BaseComponent::Ref Component<T>::_clone() const
+{
+    return BaseComponent::Ref(new T(*(T*)this));
+}
+
+template <typename T>
 ComponentTypeId Component<T>::_componentTypeId() const
 {
     return typeId();
