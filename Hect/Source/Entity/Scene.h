@@ -13,7 +13,7 @@ class Scene :
 public:
 
     ///
-    /// Constructs a scene.
+    /// Constructs a scene with no entities.
     Scene();
 
     ///
@@ -21,15 +21,16 @@ public:
     ~Scene();
 
     ///
-    /// Adds any activated entities to the systems and removes any destroyed
-    /// entities from the systems.
+    /// All entities activated since the last call to refresh() are added to
+    /// the systems that include them.  All entities destroyed since the last
+    /// call to refresh are removed from the systems that include them.
     void refresh();
 
     ///
     /// Adds a system to the scene.
     ///
-    /// \remarks Any entities that are included in the system based on their
-    /// components will be added to the system.
+    /// \remarks All activated entities that are included in the system are
+    /// added to the system.
     ///
     /// \param system The system to add.
     void addSystem(System& system);
@@ -37,7 +38,8 @@ public:
     ///
     /// Removes a system from the scene.
     ///
-    /// \remarks Any entities the system has will be removed.
+    /// \remarks All entities included in the system are removed from the
+    /// system.
     ///
     /// \param system The system to remove.
     void removeSystem(System& system);
@@ -48,17 +50,13 @@ public:
     /// \returns The new entity.
     Entity createEntity();
 
-    ///
-    /// Returns the entity with the given id.
-    ///
-    /// \param id The id of the entity.
-    Entity entityWithId(Entity::Id id);
-
 private:
     enum
     {
         InitialPoolSize = 128
     };
+
+    Entity _entityWithId(Entity::Id id);
 
     Entity _cloneEntity(Entity entity);
 

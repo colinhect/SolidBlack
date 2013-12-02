@@ -13,12 +13,9 @@ Hect/Ignore.txt
 Hect/Doc/*
 Hect/Intermediate/*
 Hect/Tests/UnitTests/Intermediate/*
-SolidBlack/Dependencies/Sqlite/Intermediate/*
-SolidBlack/Dependencies/SqliteShell/Intermediate/*
 SolidBlack/Intermediate/*
 SolidBlack/Server/Intermediate/*
 SolidBlack/Client/Intermediate/*
-Judecca/Intermediate/*
 *.opensdf
 *.sdf
 *.suo

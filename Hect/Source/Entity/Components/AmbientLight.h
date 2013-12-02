@@ -32,6 +32,7 @@ class AmbientLightSerializer :
     public ComponentSerializer<AmbientLight>
 {
 public:
+    void serialize(const AmbientLight& light, DataValue& dataValue) const;
     void deserialize(AmbientLight& light, const DataValue& dataValue, AssetCache& assetCache) const;
 };
 

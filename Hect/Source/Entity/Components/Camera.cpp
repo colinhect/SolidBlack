@@ -105,6 +105,17 @@ const Frustum<>& Camera::frustum() const
     return _frustum;
 }
 
+void CameraSerializer::serialize(const Camera& camera, DataValue& dataValue) const
+{
+    DataValue::Object members;
+    members["fieldOfView"] = camera.fieldOfView().degrees();
+    members["aspectRatio"] = camera.aspectRatio();
+    members["nearClip"] = camera.nearClip();
+    members["farClip"] = camera.farClip();
+
+    dataValue = DataValue(members);
+}
+
 void CameraSerializer::deserialize(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const
 {
     // Field of view

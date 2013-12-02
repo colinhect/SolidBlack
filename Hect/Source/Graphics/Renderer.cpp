@@ -204,7 +204,6 @@ void Renderer::beginFrame()
 
 void Renderer::endFrame()
 {
-
     // Clear the bound target
     if (_boundTarget)
     {
@@ -497,33 +496,27 @@ void Renderer::setUniform(const Uniform& uniform, const UniformValue& value)
     }
 
     UniformType type = value.type();
-    if (type == UniformType::Int)
+    switch (value.type())
     {
+    case UniformType::Int:
+    case UniformType::Texture:
         GL_ASSERT( glUniform1i(location, *(GLint*)value.data()); )
-    }
-    else if (type == UniformType::Float)
-    {
+        break;
+    case UniformType::Float:
         GL_ASSERT( glUniform1f(location, *(GLfloat*)value.data()); )
-    }
-    else if (type == UniformType::Vector2)
-    {
+        break;
+    case UniformType::Vector2:
         GL_ASSERT( glUniform2fv(location, 1, (GLfloat*)value.data()); )
-    }
-    else if (type == UniformType::Vector3)
-    {
+        break;
+    case UniformType::Vector3:
         GL_ASSERT( glUniform3fv(location, 1, (GLfloat*)value.data()); )
-    }
-    else if (type == UniformType::Vector4)
-    {
+        break;
+    case UniformType::Vector4:
         GL_ASSERT( glUniform4fv(location, 1, (GLfloat*)value.data()); )
-    }
-    else if (type == UniformType::Matrix4)
-    {
+        break;
+    case UniformType::Matrix4:
         GL_ASSERT( glUniformMatrix4fv(location, 1, false, (GLfloat*)value.data()); )
-    }
-    else if (type == UniformType::Texture)
-    {
-        GL_ASSERT( glUniform1i(location, *(GLint*)value.data()); )
+        break;
     }
 }
 

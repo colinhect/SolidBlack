@@ -22,7 +22,7 @@ void Scene::refresh()
 {
     for (Entity::Id id : _activatedEntityIds)
     {
-        Entity& entity = entityWithId(id);
+        Entity& entity = _entityWithId(id);
         for (System* system : _systems)
         {
             if (system->includesEntity(entity))
@@ -35,7 +35,7 @@ void Scene::refresh()
 
     for (Entity::Id id : _destroyedEntityIds)
     {
-        Entity& entity = entityWithId(id);
+        Entity& entity = _entityWithId(id);
         for (System* system : _systems)
         {
             if (system->includesEntity(entity))
@@ -65,7 +65,7 @@ void Scene::addSystem(System& system)
     Entity::Id id = 0;
     while (addedEntities < _entityCount)
     {
-        Entity entity = entityWithId(id);
+        Entity entity = _entityWithId(id);
         if (entity)
         {
             ++addedEntities;
@@ -113,7 +113,7 @@ Entity Scene::createEntity()
     return Entity(*this, id);
 }
 
-Entity Scene::entityWithId(Entity::Id id)
+Entity Scene::_entityWithId(Entity::Id id)
 {
     if (id < _entityData.size())
     {
@@ -177,6 +177,8 @@ void Scene::_activateEntity(Entity& entity)
     auto& components = _entityComponents[id];
     for (auto& pair : components)
     {
+        // Give the component the entity id and scene to be sused in
+        // BaseComponent::entity()
         const BaseComponent::Ref& component = pair.second;
         component->_scene = this;
         component->_entityId = id;

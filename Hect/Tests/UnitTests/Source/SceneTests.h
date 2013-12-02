@@ -72,20 +72,7 @@ SUITE(Scene)
         CHECK(a.isNull());
     }
 
-    TEST(AddAndHasComponent)
-    {
-        Scene scene;
-
-        Entity a = scene.createEntity();
-
-        CHECK(!a.hasComponent<Name>());
-
-        a.addComponent<Name>();
-
-        CHECK(a.hasComponent<Name>());
-    }
-
-    TEST(Component)
+    TEST(AddComponent)
     {
         Scene scene;
 
@@ -211,24 +198,43 @@ SUITE(Scene)
         CHECK(!namingSystem.hasEntity(namelessHerold));
     }
 
-    TEST(Clone)
+    TEST(CloneSimpleEntity)
     {
         Scene scene;
 
         Entity a = scene.createEntity();
-        a.addComponent<Name>();
-        a.component<Name>().name = "Testing";
+        Entity b = a.clone();
+        
+        CHECK(a != b);
+    }
 
-        CHECK(!a.isActivated());
-        CHECK(a.hasComponent<Name>());
+    TEST(CloneEntityWithComponent)
+    {
+        Scene scene;
+
+        Entity a = scene.createEntity();
+        a.addComponent<Name>().name = "Testing";
+
         CHECK_EQUAL("Testing", a.component<Name>().name);
 
         Entity b = a.clone();
         
-        CHECK(a != b);
-        CHECK(!b.isActivated());
         CHECK(b.hasComponent<Name>());
         CHECK(&a.component<Name>() != &b.component<Name>());
         CHECK_EQUAL("Testing", b.component<Name>().name);
+    }
+
+    TEST(CloneActivatedEntity)
+    {
+        Scene scene;
+
+        Entity a = scene.createEntity();
+        a.activate();
+
+        CHECK(a.isActivated());
+
+        Entity b = a.clone();
+
+        CHECK(!b.isActivated());
     }
 }

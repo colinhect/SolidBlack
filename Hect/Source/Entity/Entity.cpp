@@ -54,6 +54,11 @@ void Entity::addComponent(BaseComponent* component)
     _scene->_addComponentWithoutReturn(*this, BaseComponent::Ref(component));
 }
 
+Entity::operator bool() const
+{
+    return !isNull();
+}
+
 bool Entity::operator==(const Entity& entity) const
 {
     return _scene == entity._scene && _id == entity._id;
@@ -62,11 +67,6 @@ bool Entity::operator==(const Entity& entity) const
 bool Entity::operator!=(const Entity& entity) const
 {
     return _scene != entity._scene || _id != entity._id;
-}
-
-Entity::operator bool() const
-{
-    return !isNull();
 }
 
 Entity::Entity(Scene& scene, Id id) :

@@ -3,7 +3,12 @@
 namespace hect
 {
 
+///
+/// Provides functionality to read from a packet.
 typedef MemoryReadStream PacketReadStream;
+
+///
+/// Provides functionality to write to a packet.
 typedef MemoryWriteStream PacketWriteStream;
 
 ///
@@ -23,7 +28,7 @@ enum PacketFlag
 };
 
 ///
-/// A packet of data transported across a network connection.
+/// A packet of data to be transported across a network connection.
 class Packet
 {
     friend class Socket;

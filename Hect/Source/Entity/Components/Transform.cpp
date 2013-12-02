@@ -94,11 +94,41 @@ void Transform::transformBy(const Transform& transform)
     _dirtyBits = PositionBit | ScaleBit | RotationBit;
 }
 
+void TransformSerializer::serialize(const Transform& transform, DataValue& dataValue) const
+{
+    Quaternion<> r = transform.rotation();
+    Vector4<> rotation(r.x, r.y, r.z, r.w);
+
+    DataValue::Object members;
+    members["position"] = transform.position();
+    members["rotation"] = rotation;
+    members["scale"] = transform.scale();
+
+    dataValue = DataValue(members);
+}
+
 void TransformSerializer::deserialize(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const
 {
+    // Position
     const DataValue& position = dataValue["position"];
     if (position.isArray())
     {
         transform.setPosition(position.asVector3());
+    }
+
+    // Rotation
+    const DataValue& rotation = dataValue["rotation"];
+    if (rotation.isArray())
+    {
+        Vector4<> v = rotation.asVector4();
+        Quaternion<> r(v.x, v.y, v.z, v.w);
+        transform.setRotation(r);
+    }
+    
+    // Scale
+    const DataValue& scale = dataValue["scale"];
+    if (scale.isArray())
+    {
+        transform.setScale(scale.asVector3());
     }
 }

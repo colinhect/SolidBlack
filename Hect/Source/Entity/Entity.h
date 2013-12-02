@@ -17,6 +17,8 @@ public:
 
     ///
     /// Constructs a null entity.
+    ///
+    /// \throws Error If the entity is not in a scene.
     Entity();
 
     ///
@@ -100,16 +102,11 @@ public:
     T& component();
 
     ///
-    /// Returns whether the entity is the same as another.
-    bool operator==(const Entity& entity) const;
-
-    ///
-    /// Returns whether the entity is not the same as another.
-    bool operator!=(const Entity& entity) const;
-
-    ///
     /// Returns true if the entity is not null; false otherwise.
     operator bool() const;
+
+    bool operator==(const Entity& entity) const;
+    bool operator!=(const Entity& entity) const;
 
 private:
     Entity(Scene& scene, Id id);
