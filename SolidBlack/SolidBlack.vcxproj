@@ -19,22 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Client.cpp" />
-    <ClCompile Include="Source\DebugCameraSystem.cpp" />
-    <ClCompile Include="Source\RenderingSystem.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Server.cpp" />
-    <ClCompile Include="Source\TestState.cpp" />
+    <ClCompile Include="Source\Network\Client.cpp" />
+    <ClCompile Include="Source\Network\Player.cpp" />
+    <ClCompile Include="Source\Network\Server.cpp" />
+    <ClCompile Include="Source\States\TestState.cpp" />
+    <ClCompile Include="Source\Systems\DebugCameraSystem.cpp" />
+    <ClCompile Include="Source\Systems\RenderingSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Client.h" />
-    <ClInclude Include="Source\DebugCamera.h" />
-    <ClInclude Include="Source\DebugCameraSystem.h" />
-    <ClInclude Include="Source\RenderingSystem.h" />
-    <ClInclude Include="Source\PacketType.h" />
-    <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\Server.h" />
-    <ClInclude Include="Source\TestState.h" />
+    <ClInclude Include="Source\Components\DebugCamera.h" />
+    <ClInclude Include="Source\Network\Client.h" />
+    <ClInclude Include="Source\Network\PacketType.h" />
+    <ClInclude Include="Source\Network\Player.h" />
+    <ClInclude Include="Source\Network\Server.h" />
+    <ClInclude Include="Source\SolidBlack.h" />
+    <ClInclude Include="Source\States\TestState.h" />
+    <ClInclude Include="Source\Systems\DebugCameraSystem.h" />
+    <ClInclude Include="Source\Systems\RenderingSystem.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{48BE311A-A0E6-429D-A7AD-B8AFE08FF4B7}</ProjectGuid>

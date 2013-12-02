@@ -39,7 +39,7 @@
     <ClCompile Include="Source\Entity\Components\RigidBody.cpp" />
     <ClCompile Include="Source\Entity\Components\Transform.cpp" />
     <ClCompile Include="Source\Entity\Entity.cpp" />
-    <ClCompile Include="Source\Entity\EntityAttributes.cpp" />
+    <ClCompile Include="Source\Entity\EntityData.cpp" />
     <ClCompile Include="Source\Entity\Component.cpp" />
     <ClCompile Include="Source\Entity\EntitySerializer.cpp" />
     <ClCompile Include="Source\Entity\System.cpp" />
@@ -124,7 +124,7 @@
     <ClInclude Include="Source\Entity\Components\RigidBody.h" />
     <ClInclude Include="Source\Entity\Components\Transform.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
-    <ClInclude Include="Source\Entity\EntityAttributes.h" />
+    <ClInclude Include="Source\Entity\EntityData.h" />
     <ClInclude Include="Source\Entity\Component.h" />
     <ClInclude Include="Source\Entity\ComponentSerializer.h" />
     <ClInclude Include="Source\Entity\EntitySerializer.h" />

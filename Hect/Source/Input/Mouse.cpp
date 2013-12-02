@@ -28,16 +28,6 @@ void Mouse::removeListener(MouseListener& listener)
     _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), &listener), _listeners.end());
 }
 
-void Mouse::setCursorLocked(bool locked)
-{
-    _cursorLocked = locked;
-}
-
-bool Mouse::isCursorLocked() const
-{
-    return _cursorLocked;
-}
-
 const Vector2<int>& Mouse::cursorPosition() const
 {
     return _cursorPosition;

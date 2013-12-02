@@ -14,7 +14,7 @@ bool CameraSystem::hasCamera() const
 
 Camera& CameraSystem::camera()
 {
-    assert(!entities().empty());
+    assert(hasCamera());
     return entities().back().component<Camera>();
 }
 

@@ -53,7 +53,7 @@ class Component :
 public:
 
     ///
-    /// Returns the component type ID for this type of component.
+    /// Returns the component type id for this type of component.
     static ComponentTypeId typeId();
 
 private:

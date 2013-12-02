@@ -49,7 +49,7 @@ SUITE(StateFlow)
         CHECK_EQUAL("Construct B", messages[1]);
         CHECK_EQUAL("Construct C", messages[2]);
         messages.clear();
-        
+
         CHECK(stateFlow.transition());
 
         CHECK_EQUAL(1, messages.size());
@@ -58,7 +58,7 @@ SUITE(StateFlow)
 
         c->setDone(true);
         c.reset();
-        
+
         CHECK(stateFlow.transition());
 
         CHECK_EQUAL(3, messages.size());

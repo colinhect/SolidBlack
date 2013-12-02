@@ -13,6 +13,11 @@ class EntitySerializer :
 public:
 
     ///
+    /// Constructs an entity serializer with all of the default components
+    /// registered.
+    EntitySerializer();
+
+    ///
     /// Deserializes an entity from an asset.
     ///
     /// \param entity The entity to deserialize to (cannot be null).
@@ -30,6 +35,7 @@ public:
     void registerComponent(const std::string& componentTypeName);
 
 private:
+
     // Component type names mapped to component types
     std::map<std::string, ComponentTypeId> _componentTypes;
 

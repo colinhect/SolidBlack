@@ -61,9 +61,6 @@
     <ClInclude Include="Source\AssetCacheTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EntityTests.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\FileSystemTests.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -80,6 +77,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateFlowTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityTests.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

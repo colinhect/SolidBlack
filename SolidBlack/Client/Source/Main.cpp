@@ -7,7 +7,7 @@ using namespace hect;
 #endif
 #endif
 
-#include "TestState.h"
+#include "SolidBlack.h"
 
 int main()
 {
@@ -49,7 +49,7 @@ int main()
         AssetCache assetCache(fileSystem);
 
         StateFlow stateFlow;
-        
+
         State::Ref testState(new TestState(assetCache, inputSystem, window, renderer, settings));
         stateFlow.push(testState);
 

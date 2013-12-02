@@ -48,15 +48,20 @@ bool Entity::isNull() const
     return !_scene || _scene->_isNull(*this);
 }
 
-void Entity::addComponent(const BaseComponent::Ref& component)
+void Entity::addComponent(BaseComponent* component)
 {
     assert(_scene);
-    _scene->_addComponentWithoutReturn(*this, component);
+    _scene->_addComponentWithoutReturn(*this, BaseComponent::Ref(component));
 }
 
 bool Entity::operator==(const Entity& entity) const
 {
-    return _scene == entity._scene &&_id == entity._id;
+    return _scene == entity._scene && _id == entity._id;
+}
+
+bool Entity::operator!=(const Entity& entity) const
+{
+    return _scene != entity._scene || _id != entity._id;
 }
 
 Entity::operator bool() const

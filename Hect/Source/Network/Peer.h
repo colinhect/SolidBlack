@@ -61,7 +61,7 @@ class Peer
 public:
 
     ///
-    /// A locally unique ID for a peer.
+    /// A locally unique id for a peer.
     typedef uint16_t Id;
 
     ///
@@ -69,7 +69,7 @@ public:
     Peer();
 
     ///
-    /// Returns the locally unique ID of the peer.
+    /// Returns the locally unique id of the peer.
     Id id() const;
 
     ///

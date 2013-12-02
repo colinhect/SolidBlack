@@ -85,7 +85,8 @@ void Window::showFatalError(const std::string& message)
 
 Window::Window(const std::string& title, const VideoMode& videoMode) :
     RenderTarget(videoMode.width(), videoMode.height()),
-    _sfmlWindow(nullptr)
+    _sfmlWindow(nullptr),
+    _cursorLocked(false)
 {
     sf::VideoMode mode;
     mode.width = videoMode.width();
@@ -127,7 +128,7 @@ bool Window::pollEvents(InputSystem& inputSystem)
     sf::Vector2i windowCenter(windowSize.x / 2, windowSize.y / 2);
 
     // Occurs the first time pollEvents() is called after the mouse is locked
-    if (mouse.isCursorLocked() && cursorVisible)
+    if (_cursorLocked && cursorVisible)
     {
         // Hide the cursor
         ((sf::Window*)_sfmlWindow)->setMouseCursorVisible(false);
@@ -139,7 +140,7 @@ bool Window::pollEvents(InputSystem& inputSystem)
     }
 
     // Occurs the first time pollEvents() is called after the mouse is unlocked
-    else if (!mouse.isCursorLocked() && !cursorVisible)
+    else if (!_cursorLocked && !cursorVisible)
     {
         // Show the cursor
         ((sf::Window*)_sfmlWindow)->setMouseCursorVisible(true);
@@ -175,7 +176,7 @@ bool Window::pollEvents(InputSystem& inputSystem)
     inputSystem._dispatchEvents();
 
     // If the cursor is locked then move it back to the center of the window
-    if (mouse.isCursorLocked())
+    if (_cursorLocked)
     {
         if (sf::Mouse::getPosition(*((sf::Window*)_sfmlWindow)) != windowCenter)
         {
@@ -193,6 +194,16 @@ bool Window::pollEvents(InputSystem& inputSystem)
 void Window::swapBuffers()
 {
     ((sf::Window*)_sfmlWindow)->display();
+}
+
+void Window::setCursorLocked(bool locked)
+{
+    _cursorLocked = locked;
+}
+
+bool Window::isCursorLocked() const
+{
+    return _cursorLocked;
 }
 
 Vector2<int> Window::_cursorPosition()

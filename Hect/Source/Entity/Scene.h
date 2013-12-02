@@ -9,6 +9,7 @@ class Scene :
     public Uncopyable
 {
     friend class Entity;
+    friend class EntitySerializer;
 public:
 
     ///
@@ -20,27 +21,25 @@ public:
     ~Scene();
 
     ///
-    /// Refreshes entity membership of all systems.
-    ///
-    /// \remarks If an entity was activated since the last refresh then it will
-    /// be added to each system based on its components.
+    /// Adds any activated entities to the systems and removes any destroyed
+    /// entities from the systems.
     void refresh();
 
     ///
     /// Adds a system to the scene.
     ///
-    /// \remarks Any entities that belong to the system based on their
+    /// \remarks Any entities that are included in the system based on their
     /// components will be added to the system.
     ///
-    /// \param system The system.
+    /// \param system The system to add.
     void addSystem(System& system);
 
     ///
     /// Removes a system from the scene.
     ///
-    /// \remarks Any entities the systems has will be removed.
+    /// \remarks Any entities the system has will be removed.
     ///
-    /// \param system The system.
+    /// \param system The system to remove.
     void removeSystem(System& system);
 
     ///
@@ -50,16 +49,10 @@ public:
     Entity createEntity();
 
     ///
-    /// Returns the entity with the given ID.
+    /// Returns the entity with the given id.
+    ///
+    /// \param id The id of the entity.
     Entity entityWithId(Entity::Id id);
-
-    ///
-    /// Returns the first entity with a specific component type.
-    ///
-    /// \returns The found entity; null if no entity with the component type
-    /// was found.
-    template <typename T>
-    Entity entityWithComponent();
 
 private:
     enum
@@ -85,26 +78,27 @@ private:
     template <typename T>
     T& _component(const Entity& entity);
 
+    // The number of entities (includes non-activated and activated entities)
     size_t _entityCount;
 
-    // The next entity ID to use when creating an entity (if the queue is
+    // The next entity id to use when creating an entity (if the queue is
     // empty)
-    Entity::Id _nextId;
+    Entity::Id _nextEntityId;
 
     // A queue of entity IDs to use next when creating an entity
-    std::queue<Entity::Id> _nextIds;
+    std::queue<Entity::Id> _nextEntityIds;
 
-    // For each entity, the attributes it possesses
-    std::vector<EntityAttributes> _attributes;
+    // Data for each entity
+    std::vector<EntityData> _entityData;
 
-    // For each entity, its components mapped by type
-    std::vector<std::map<ComponentTypeId, BaseComponent::Ref>> _components;
+    // Components for each entity
+    std::vector<std::map<ComponentTypeId, BaseComponent::Ref>> _entityComponents;
 
     // Entities activated since the last call to refresh()
-    std::vector<Entity> _activatedEntities;
+    std::vector<Entity::Id> _activatedEntityIds;
 
     // Entities destroyed since the last call to refresh()
-    std::vector<Entity> _destroyedEntities;
+    std::vector<Entity::Id> _destroyedEntityIds;
 
     // Systems involved in the scene
     std::vector<System*> _systems;

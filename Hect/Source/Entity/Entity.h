@@ -12,7 +12,7 @@ class Entity
 public:
 
     ///
-    /// The ID of an entity within the pool of the scene.
+    /// The id of an entity within a scene.
     typedef uint32_t Id;
 
     ///
@@ -24,7 +24,7 @@ public:
     Scene& scene();
 
     ///
-    /// Returns the ID.
+    /// Returns the id.
     Id id() const;
 
     ///
@@ -32,14 +32,18 @@ public:
     /// call to Scene::refresh().
     ///
     /// \remarks Once the entity is activated, components can no longer be
-    /// added or removed.
+    /// added or removed.  The entity cannot be deactivated.
     ///
-    /// \throws Error If the entity is already activated.
+    /// \throws Error If the entity is already activated or is null (debug
+    /// builds only).
     void activate();
 
     ///
     /// Enqueues the entity to be removed from relevant systems on the next
     /// call to Scene::refresh().
+    ///
+    /// \throws Error If the entity is already destroyed or is null (debug
+    /// builds only).
     void destroy();
 
     ///
@@ -59,6 +63,8 @@ public:
     ///
     /// \warning Always call this before component().  It is very fast to
     /// check if an entity has a component.
+    ///
+    /// \throws Error If the entity is null (debug builds only).
     template <typename T>
     bool hasComponent() const;
 
@@ -75,11 +81,12 @@ public:
     ///
     /// Adds a new component to the entity.
     ///
-    /// \param component The new component.
+    /// \param component The new component (the entity will take ownership of
+    /// the components lifetime.
     ///
     /// \throws Error If the entity is activated or already has a component of
     /// the type (debug builds only).
-    void addComponent(const BaseComponent::Ref& component);
+    void addComponent(BaseComponent* component);
 
     ///
     /// Returns the component of a certain type from an entity.
@@ -91,10 +98,14 @@ public:
     /// (debug builds only).
     template <typename T>
     T& component();
-
+    
     ///
     /// Returns whether the entity is the same as another.
     bool operator==(const Entity& entity) const;
+
+    ///
+    /// Returns whether the entity is not the same as another.
+    bool operator!=(const Entity& entity) const;
 
     ///
     /// Returns true if the entity is not null; false otherwise.
