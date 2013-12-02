@@ -76,6 +76,17 @@ DataValue::DataValue(const Matrix4<>& value) :
     _data = array;
 }
 
+DataValue::DataValue(const Quaternion<>& value) :
+    _type(DataValueType::Array)
+{
+    Array array;
+    array.push_back(value.x);
+    array.push_back(value.y);
+    array.push_back(value.z);
+    array.push_back(value.w);
+    _data = array;
+}
+
 DataValue::DataValue(const char* value) :
     _type(DataValueType::String),
     _data(std::string(value))
@@ -270,6 +281,26 @@ Matrix4<> DataValue::asMatrix4() const
     for (const DataValue& component : *this)
     {
         if (i < 16)
+        {
+            result[i++] = component.asDouble();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return result;
+}
+
+Quaternion<> DataValue::asQuaternion() const
+{
+    Quaternion<> result;
+
+    size_t i = 0;
+    for (const DataValue& component : *this)
+    {
+        if (i < 4)
         {
             result[i++] = component.asDouble();
         }

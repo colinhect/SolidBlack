@@ -113,8 +113,10 @@ class CameraSerializer :
     public ComponentSerializer<Camera>
 {
 public:
-    void serialize(const Camera& camera, DataValue& dataValue) const;
-    void deserialize(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const;
+    void save(const Camera& camera, WriteStream& stream) const;
+    void load(Camera& camera, ReadStream& stream, AssetCache& assetCache) const;
+
+    void load(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const;
 };
 
 }

@@ -18,13 +18,15 @@ Material::RefArray& Geometry::materials()
     return _materials;
 }
 
-void GeometrySerializer::serialize(const Geometry& geometry, DataValue& dataValue) const
+void GeometrySerializer::save(const Geometry& geometry, WriteStream& stream) const
 {
-    DataValue::Object members;
-    dataValue = DataValue(members);
 }
 
-void GeometrySerializer::deserialize(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const
+void GeometrySerializer::load(Geometry& geometry, ReadStream& stream, AssetCache& assetCache) const
+{
+}
+
+void GeometrySerializer::load(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const
 {
     for (const DataValue& meshValue : dataValue["meshes"])
     {

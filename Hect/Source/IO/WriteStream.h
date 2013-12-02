@@ -82,6 +82,30 @@ public:
     ///
     /// \param value The value to write.
     void writeDouble(double value);
+    
+    ///
+    /// Writes a 2-dimensional vector.
+    ///
+    /// \param value The vector to write.
+    void writeVector2(const Vector2<>& value);
+
+    ///
+    /// Writes a 3-dimensional vector.
+    ///
+    /// \param value The vector to write.
+    void writeVector3(const Vector3<>& value);
+
+    ///
+    /// Writes a 4-dimensional vector.
+    ///
+    /// \param value The vector to write.
+    void writeVector4(const Vector4<>& value);
+
+    ///
+    /// Writes a quaternion.
+    ///
+    /// \param value The quaternion to write.
+    void writeQuaternion(const Quaternion<>& value);
 
 };
 

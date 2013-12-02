@@ -12,8 +12,9 @@ public:
     virtual ~BaseComponentSerializer() { }
 
 protected:
-    virtual void _serialize(const BaseComponent* component, DataValue& dataValue) const = 0;
-    virtual void _deserialize(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const = 0;
+    virtual void _save(const BaseComponent* component, WriteStream& stream) const = 0;
+    virtual void _load(BaseComponent* component, ReadStream& stream, AssetCache& assetCache) const = 0;
+    virtual void _load(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const = 0;
 };
 
 ///
@@ -25,11 +26,19 @@ class ComponentSerializer :
 public:
 
     ///
-    /// Serializes a component to a data value.
+    /// Serializes a component to a binary stream.
     ///
     /// \param component The component.
-    /// \param dataValue The data value to serialize to.
-    virtual void serialize(const T& component, DataValue& dataValue) const;
+    /// \param stream The stream to serialize to.
+    virtual void save(const T& component, WriteStream& stream) const;
+
+    ///
+    /// Deserializes a component from a binary stream
+    ///
+    /// \param component The component.
+    /// \param stream The stream to deserialize from.
+    /// \param assetCache The asset cache to load referenced assets from.
+    virtual void load(T& component, ReadStream& stream, AssetCache& assetCache) const;
 
     ///
     /// Deserializes a component from a data value.
@@ -37,11 +46,12 @@ public:
     /// \param component The component.
     /// \param dataValue The data value to deserialize from.
     /// \param assetCache The asset cache to load referenced assets from.
-    virtual void deserialize(T& component, const DataValue& dataValue, AssetCache& assetCache) const;
+    virtual void load(T& component, const DataValue& dataValue, AssetCache& assetCache) const;
 
 private:
-    void _serialize(const BaseComponent* component, DataValue& dataValue) const;
-    void _deserialize(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const;
+    void _save(const BaseComponent* component, WriteStream& stream) const;
+    void _load(BaseComponent* component, ReadStream& stream, AssetCache& assetCache) const;
+    void _load(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const;
 };
 
 }

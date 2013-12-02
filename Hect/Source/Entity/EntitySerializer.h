@@ -18,12 +18,26 @@ public:
     EntitySerializer();
 
     ///
-    /// Deserializes an entity from an asset.
+    /// Serializes an entity to a binary stream.
     ///
-    /// \param entity The entity to deserialize to (cannot be null).
-    /// \param assetCache The asset cache to get the assets from.
-    /// \param assetPath The path to the asset describing the entity.
-    void deserialize(Entity& entity, AssetCache& assetCache, const Path& assetPath);
+    /// \param entity The entity to serialize.
+    /// \param stream The stream to write to.
+    void save(Entity& entity, WriteStream& stream);
+
+    ///
+    /// Deserializes an entity from a binary stream.
+    ///
+    /// \param entity The entity to deserialize to.
+    /// \param stream The stream to read from.
+    void load(Entity& entity, AssetCache& assetCache, ReadStream& stream);
+
+    ///
+    /// Deserializes an entity from a data value.
+    ///
+    /// \param entity The entity to deserialize to.
+    /// \param assetCache The asset cache to load referenced assets from.
+    /// \param dataValue The data value to deserialize from.
+    void load(Entity& entity, AssetCache& assetCache, const DataValue& dataValue);
 
     ///
     /// Registers a component with its serializer.

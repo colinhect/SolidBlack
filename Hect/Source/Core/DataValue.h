@@ -111,6 +111,12 @@ public:
     DataValue(const Matrix4<>& value);
 
     ///
+    /// Constructs a data value from a quaternion as an array of numbers.
+    ///
+    /// \param value The value.
+    DataValue(const Quaternion<>& value);
+
+    ///
     /// Constructs a string data value.
     ///
     /// \param value The string value.
@@ -200,7 +206,7 @@ public:
     /// Returns the value as a 3-dimensional vector (assumes the value is an
     /// array of numbers).
     Vector3<> asVector3() const;
-
+    
     ///
     /// Returns the value as a 4-dimensional vector (assumes the value is an
     /// array of numbers).
@@ -210,6 +216,11 @@ public:
     /// Returns the value as a 4 by 4 matrix (assumes the value is an
     /// array of numbers).
     Matrix4<> asMatrix4() const;
+
+    ///
+    /// Returns the value as a quaternion (assumes the value is an array of
+    /// numbers).
+    Quaternion<> asQuaternion() const;
 
     ///
     /// Returns the value as a string (empty string if the data value is not a

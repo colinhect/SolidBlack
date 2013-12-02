@@ -18,19 +18,22 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
 
     // Create debug camera
     _debugCamera = _scene.createEntity();
-    _entitySerializer.deserialize(_debugCamera, assetCache, "Entities/FreeCamera.entity");
+    DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Entities/FreeCamera.entity");
+    _entitySerializer.load(_debugCamera, assetCache, *debugCameraValue);
     _debugCamera.activate();
 
     // Create a test cube prefab
     _testCube = _scene.createEntity();
-    _entitySerializer.deserialize(_testCube, assetCache, "Entities/TestCube.entity");
+    DataValue::Ref testCubeValue = assetCache.get<DataValue>("Entities/TestCube.entity");
+    _entitySerializer.load(_testCube, assetCache, *testCubeValue);
 
     // Activate one at the origin
     _testCube.clone().activate();
 
     // Create the sun
     Entity sun = _scene.createEntity();
-    _entitySerializer.deserialize(sun, assetCache, "Entities/Sun.entity");
+    DataValue::Ref sunValue = assetCache.get<DataValue>("Entities/Sun.entity");
+    _entitySerializer.load(sun, assetCache, *sunValue);
     sun.activate();
 
     _scene.refresh();

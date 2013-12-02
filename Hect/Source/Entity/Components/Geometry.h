@@ -34,8 +34,10 @@ class GeometrySerializer :
     public ComponentSerializer<Geometry>
 {
 public:
-    void serialize(const Geometry& geometry, DataValue& dataValue) const;
-    void deserialize(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const;
+    void save(const Geometry& geometry, WriteStream& stream) const;
+    void load(Geometry& geometry, ReadStream& stream, AssetCache& assetCache) const;
+
+    void load(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const;
 };
 
 }

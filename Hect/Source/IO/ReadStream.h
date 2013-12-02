@@ -64,6 +64,22 @@ public:
     ///
     /// Reads a 64-bit float.
     double readDouble();
+    
+    ///
+    /// Reads a 2-dimensional vector.
+    Vector2<> readVector2();
+    
+    ///
+    /// Reads a 3-dimensional vector.
+    Vector3<> readVector3();
+    
+    ///
+    /// Reads a 4-dimensional vector.
+    Vector4<> readVector4();
+
+    ///
+    /// Reads a quaternion.
+    Quaternion<> readQuaternion();
 
     ///
     /// Returns whether the end of the stream has been reached.

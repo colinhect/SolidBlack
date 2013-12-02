@@ -14,6 +14,7 @@ typedef uint32_t ComponentTypeId;
 class BaseComponent
 {
     friend class Scene;
+    friend class EntitySerializer;
 public:
 
     ///

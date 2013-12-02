@@ -43,8 +43,10 @@ class DirectionalLightSerializer :
     public ComponentSerializer<DirectionalLight>
 {
 public:
-    void serialize(const DirectionalLight& light, DataValue& dataValue) const;
-    void deserialize(DirectionalLight& light, const DataValue& dataValue, AssetCache& assetCache) const;
+    void save(const DirectionalLight& light, WriteStream& stream) const;
+    void load(DirectionalLight& light, ReadStream& stream, AssetCache& assetCache) const;
+
+    void load(DirectionalLight& light, const DataValue& dataValue, AssetCache& assetCache) const;
 };
 
 }

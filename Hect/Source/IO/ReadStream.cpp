@@ -87,3 +87,36 @@ double ReadStream::readDouble()
     readBytes((uint8_t*)&value, 8);
     return value;
 }
+
+Vector2<> ReadStream::readVector2()
+{
+    double x = readDouble();
+    double y = readDouble();
+    return Vector2<>(x, y);
+}
+    
+Vector3<> ReadStream::readVector3()
+{
+    double x = readDouble();
+    double y = readDouble();
+    double z = readDouble();
+    return Vector3<>(x, y, z);
+}
+
+Vector4<> ReadStream::readVector4()
+{
+    double x = readDouble();
+    double y = readDouble();
+    double z = readDouble();
+    double w = readDouble();
+    return Vector4<>(x, y, z, w);
+}
+
+Quaternion<> ReadStream::readQuaternion()
+{
+    double x = readDouble();
+    double y = readDouble();
+    double z = readDouble();
+    double w = readDouble();
+    return Quaternion<>(x, y, z, w);
+}

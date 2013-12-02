@@ -2,25 +2,36 @@ namespace hect
 {
 
 template <typename T>
-void ComponentSerializer<T>::serialize(const T& component, DataValue& dataValue) const
+void ComponentSerializer<T>::save(const T& component, WriteStream& stream) const
 {
 }
 
 template <typename T>
-void ComponentSerializer<T>::deserialize(T& component, const DataValue& dataValue, AssetCache& assetCache) const
+void ComponentSerializer<T>::load(T& component, ReadStream& stream, AssetCache& assetCache) const
 {
 }
 
 template <typename T>
-void ComponentSerializer<T>::_serialize(const BaseComponent* component, DataValue& dataValue) const
+void ComponentSerializer<T>::load(T& component, const DataValue& dataValue, AssetCache& assetCache) const
 {
-    return serialize(*(const T*)component, dataValue);
 }
 
 template <typename T>
-void ComponentSerializer<T>::_deserialize(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const
+void ComponentSerializer<T>::_save(const BaseComponent* component, WriteStream& stream) const
 {
-    deserialize(*(T*)component, dataValue, assetCache);
+    return save(*(const T*)component, stream);
+}
+
+template <typename T>
+void ComponentSerializer<T>::_load(BaseComponent* component, ReadStream& stream, AssetCache& assetCache) const
+{
+    load(*(T*)component, stream, assetCache);
+}
+
+template <typename T>
+void ComponentSerializer<T>::_load(BaseComponent* component, const DataValue& dataValue, AssetCache& assetCache) const
+{
+    load(*(T*)component, dataValue, assetCache);
 }
 
 }

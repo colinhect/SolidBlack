@@ -28,16 +28,19 @@ void DirectionalLight::setColor(const Vector3<>& color)
     _color = color;
 }
 
-void DirectionalLightSerializer::serialize(const DirectionalLight& light, DataValue& dataValue) const
+void DirectionalLightSerializer::save(const DirectionalLight& light, WriteStream& stream) const
 {
-    DataValue::Object members;
-    members["direction"] = light.direction();
-    members["color"] = light.color();
-
-    dataValue = DataValue(members);
+    stream.writeVector3(light.direction());
+    stream.writeVector3(light.color());
 }
 
-void DirectionalLightSerializer::deserialize(DirectionalLight& light, const DataValue& dataValue, AssetCache& assetCache) const
+void DirectionalLightSerializer::load(DirectionalLight& light, ReadStream& stream, AssetCache& assetCache) const
+{
+    light.setDirection(stream.readVector3());
+    light.setColor(stream.readVector3());
+}
+
+void DirectionalLightSerializer::load(DirectionalLight& light, const DataValue& dataValue, AssetCache& assetCache) const
 {
     // Direction
     const DataValue& direction = dataValue["direction"];
