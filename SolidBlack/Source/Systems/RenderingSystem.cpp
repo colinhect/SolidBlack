@@ -19,7 +19,7 @@ RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache, con
     _oneOverGammaUniform = &_compositorShader->uniformWithName("oneOverGamma");
     LOG_INFO("Using compositor shader uniform: 'exposure'");
     _exposureUniform = &_compositorShader->uniformWithName("exposure");
-    
+
     // Load window mesh
     std::string windowMeshPath = settings["graphics"]["windowMesh"].asString();
     LOG_INFO(format("Using window mesh: '%s'", windowMeshPath.c_str()));
@@ -54,7 +54,7 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
         PixelType pixelType = PixelType::Half;
         PixelFormat pixelFormat = PixelFormat::Rgba;
         TextureFilter filter = TextureFilter::Nearest;
-        
+
         Texture::Array targets;
         targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Color
         targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Normal

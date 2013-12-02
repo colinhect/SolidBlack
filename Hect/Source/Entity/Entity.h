@@ -98,7 +98,7 @@ public:
     /// (debug builds only).
     template <typename T>
     T& component();
-    
+
     ///
     /// Returns whether the entity is the same as another.
     bool operator==(const Entity& entity) const;

@@ -22,7 +22,7 @@ int main()
 
         // Load the settings
         DataValue settings = DataJsonFormat::load(fileSystem.openFileForRead("Settings.json"));
-        
+
         // Add the data sources listed in the settings
         for (const DataValue& dataSource : settings["dataSources"])
         {
@@ -41,7 +41,7 @@ int main()
             InputAxis axis = InputAxisDataFormat::load(axisName, settings["inputAxes"][axisName]);
             axes.push_back(axis);
         }
-        
+
         // Create input system
         InputSystem inputSystem(axes);
 

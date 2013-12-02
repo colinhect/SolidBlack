@@ -117,10 +117,12 @@ bool Frustum<T>::containsSphere(const Sphere<T>& sphere, const Vector3<T>& posit
 {
     T radius = sphere.radius();
 
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i)
+    {
         T distance = _planes[i].distance() + _planes[i].normal().dot(position);
 
-        if (distance < -radius) {
+        if (distance < -radius)
+        {
             return false;
         }
     }

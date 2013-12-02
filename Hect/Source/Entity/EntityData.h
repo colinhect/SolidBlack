@@ -11,7 +11,7 @@ public:
 
     bool isDestroyed() const;
     void setDestroyed(bool destroyed);
-    
+
     bool isNull() const;
     void setNull(bool null);
 

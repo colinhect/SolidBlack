@@ -33,7 +33,7 @@ public:
     ///
     /// Returns the bits per pixel.
     unsigned bitsPerPixel() const;
-    
+
     ///
     /// Returns whether fullscreen is enabled.
     bool isFullscreen() const;

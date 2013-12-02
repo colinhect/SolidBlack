@@ -126,7 +126,7 @@ Entity Scene::entityWithId(Entity::Id id)
 Entity Scene::_cloneEntity(Entity entity)
 {
     Entity clone = createEntity();
-    
+
     auto& components = _entityComponents[entity._id];
     for (auto& pair : components)
     {

@@ -67,13 +67,15 @@ void Server::_receivePacketEvent(SocketEvent& event)
 
     switch (packetType)
     {
-    case PacketType::Authorization: {
-            std::string name = stream.readString();
-            player.authorized = true;
-            player.name = name;
+    case PacketType::Authorization:
+    {
+        std::string name = stream.readString();
+        player.authorized = true;
+        player.name = name;
 
-            LOG_INFO(format("Player authorized as \"%s\" (peerId  = %d)", name.c_str(), peerId));
-        } break;
+        LOG_INFO(format("Player authorized as \"%s\" (peerId  = %d)", name.c_str(), peerId));
+    }
+    break;
     }
 }
 

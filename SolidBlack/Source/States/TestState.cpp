@@ -15,7 +15,7 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
 
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
-    
+
     // Create debug camera
     _debugCamera = _scene.createEntity();
     _entitySerializer.deserialize(_debugCamera, assetCache, "Entities/FreeCamera.entity");
