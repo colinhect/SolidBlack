@@ -7,7 +7,7 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _renderingSystem(renderer, assetCache, settings),
     _debugCameraSystem(inputSystem)
 {
-    _entitySerializer.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
+    _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
 
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
@@ -17,23 +17,23 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _window->setCursorLocked(true);
 
     // Create debug camera
+    DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Entities/DebugCamera.entity");
     _debugCamera = _scene.createEntity();
-    DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Entities/FreeCamera.entity");
-    _entitySerializer.load(_debugCamera, assetCache, *debugCameraValue);
+    _debugCamera.load(*debugCameraValue, assetCache);
     _debugCamera.activate();
 
     // Create a test cube prefab
-    _testCube = _scene.createEntity();
     DataValue::Ref testCubeValue = assetCache.get<DataValue>("Entities/TestCube.entity");
-    _entitySerializer.load(_testCube, assetCache, *testCubeValue);
+    _testCube = _scene.createEntity();
+    _testCube.load(*testCubeValue, assetCache);
 
     // Activate one at the origin
     _testCube.clone().activate();
 
     // Create the sun
-    Entity sun = _scene.createEntity();
     DataValue::Ref sunValue = assetCache.get<DataValue>("Entities/Sun.entity");
-    _entitySerializer.load(sun, assetCache, *sunValue);
+    Entity sun = _scene.createEntity();
+    sun.load(*sunValue, assetCache);
     sun.activate();
 
     _scene.refresh();

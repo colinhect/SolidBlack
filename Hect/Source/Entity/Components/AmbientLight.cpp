@@ -17,22 +17,12 @@ void AmbientLight::setColor(const Vector3<>& color)
     _color = color;
 }
 
-void AmbientLightSerializer::save(const AmbientLight& light, WriteStream& stream) const
+void AmbientLightSerializer::save(const AmbientLight& light, ComponentWriter& writer) const
 {
-    stream.writeVector3(light.color());
+    writer.writeVector3("color", light.color());
 }
 
-void AmbientLightSerializer::load(AmbientLight& light, ReadStream& stream, AssetCache& assetCache) const
+void AmbientLightSerializer::load(AmbientLight& light, ComponentReader& reader, AssetCache& assetCache) const
 {
-    light.setColor(stream.readVector3());
-}
-
-void AmbientLightSerializer::load(AmbientLight& light, const DataValue& dataValue, AssetCache& assetCache) const
-{
-    // Color
-    const DataValue& color = dataValue["color"];
-    if (color.isArray())
-    {
-        light.setColor(color.asVector3());
-    }
+    light.setColor(reader.readVector3("color"));
 }

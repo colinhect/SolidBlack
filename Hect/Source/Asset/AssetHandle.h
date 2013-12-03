@@ -29,6 +29,10 @@ public:
     /// \throws Error If the asset failed to load.
     std::shared_ptr<T> getShared();
 
+    ///
+    /// Returns the path to the asset.
+    const Path& path() const;
+
 private:
     AssetHandle(AssetEntry<T>* entry);
 

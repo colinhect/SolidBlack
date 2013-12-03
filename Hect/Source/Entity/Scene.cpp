@@ -113,11 +113,32 @@ Entity Scene::createEntity()
     return Entity(*this, id);
 }
 
-Entity Scene::_entityWithId(Entity::Id id)
+void Scene::save(WriteStream& stream) const
+{
+    for (Entity::Id id = 0; id < _entityData.size(); ++id)
+    {
+        Entity entity = _entityWithId(id);
+        if (entity && entity.isActivated())
+        {
+            entity.save(stream);
+        }
+    }
+}
+
+void Scene::load(ReadStream& stream, AssetCache& assetCache)
+{
+    while (!stream.endOfStream())
+    {
+        Entity entity = createEntity();
+        entity.load(stream, assetCache);
+    }
+}
+
+Entity Scene::_entityWithId(Entity::Id id) const
 {
     if (id < _entityData.size())
     {
-        return Entity(*this, id); // Inside of range, still might be null
+        return Entity(*const_cast<Scene*>(this), id); // Inside of range, still might be null
     }
 
     return Entity(); // Outside of range

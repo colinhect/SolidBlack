@@ -306,6 +306,12 @@
     <ClCompile Include="Source\Entity\EntityData.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity\ComponentWriter.cpp">
+      <Filter>Source\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity\ComponentReader.cpp">
+      <Filter>Source\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -576,6 +582,12 @@
       <Filter>Source\Entity\Components</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entity\EntityData.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\ComponentWriter.h">
+      <Filter>Source\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\ComponentReader.h">
       <Filter>Source\Entity</Filter>
     </ClInclude>
   </ItemGroup>

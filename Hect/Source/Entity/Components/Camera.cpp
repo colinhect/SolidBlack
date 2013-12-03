@@ -105,49 +105,18 @@ const Frustum<>& Camera::frustum() const
     return _frustum;
 }
 
-void CameraSerializer::save(const Camera& camera, WriteStream& stream) const
+void CameraSerializer::save(const Camera& camera, ComponentWriter& writer) const
 {
-    stream.writeDouble(camera.fieldOfView().degrees());
-    stream.writeDouble(camera.aspectRatio());
-    stream.writeDouble(camera.nearClip());
-    stream.writeDouble(camera.farClip());
+    writer.writeNumber("fieldOfView", camera.fieldOfView().degrees());
+    writer.writeNumber("aspectRatio", camera.aspectRatio());
+    writer.writeNumber("nearClip", camera.nearClip());
+    writer.writeNumber("farClip", camera.farClip());
 }
 
-void CameraSerializer::load(Camera& camera, ReadStream& stream, AssetCache& assetCache) const
+void CameraSerializer::load(Camera& camera, ComponentReader& reader, AssetCache& assetCache) const
 {
-    camera.setFieldOfView(Angle<>::fromDegrees(stream.readDouble()));
-    camera.setAspectRatio(stream.readDouble());
-    camera.setNearClip(stream.readDouble());
-    camera.setFarClip(stream.readDouble());
-}
-
-void CameraSerializer::load(Camera& camera, const DataValue& dataValue, AssetCache& assetCache) const
-{
-    // Field of view
-    const DataValue& fieldOfView = dataValue["fieldOfView"];
-    if (fieldOfView.isNumber())
-    {
-        camera.setFieldOfView(Angle<>::fromDegrees(fieldOfView.asDouble()));
-    }
-
-    // Aspect ratio
-    const DataValue& aspectRatio = dataValue["aspectRatio"];
-    if (aspectRatio.isNumber())
-    {
-        camera.setAspectRatio(aspectRatio.asDouble());
-    }
-
-    // Near clip
-    const DataValue& nearClip = dataValue["nearClip"];
-    if (nearClip.isNumber())
-    {
-        camera.setNearClip(nearClip.asDouble());
-    }
-
-    // Far clip
-    const DataValue& farClip = dataValue["farClip"];
-    if (farClip.isNumber())
-    {
-        camera.setFarClip(farClip.asDouble());
-    }
+    camera.setFieldOfView(Angle<>::fromDegrees(reader.readNumber("fieldOfView")));
+    camera.setAspectRatio(reader.readNumber("aspectRatio"));
+    camera.setNearClip(reader.readNumber("nearClip"));
+    camera.setFarClip(reader.readNumber("farClip"));
 }

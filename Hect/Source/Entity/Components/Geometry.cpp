@@ -2,39 +2,50 @@
 
 using namespace hect;
 
-void Geometry::addMesh(Mesh::Ref mesh, Material::Ref material)
+AssetHandle<Mesh>& Geometry::mesh()
 {
-    _meshes.push_back(mesh);
-    _materials.push_back(material);
+    return _mesh;
 }
 
-Mesh::RefArray& Geometry::meshes()
+const AssetHandle<Mesh>& Geometry::mesh() const
 {
-    return _meshes;
+    return _mesh;
 }
 
-Material::RefArray& Geometry::materials()
+void Geometry::setMesh(const AssetHandle<Mesh>& mesh)
 {
-    return _materials;
+    _mesh = mesh;
 }
 
-void GeometrySerializer::save(const Geometry& geometry, WriteStream& stream) const
+AssetHandle<Material>& Geometry::material()
 {
+    return _material;
 }
 
-void GeometrySerializer::load(Geometry& geometry, ReadStream& stream, AssetCache& assetCache) const
+const AssetHandle<Material>& Geometry::material() const
 {
+    return _material;
 }
 
-void GeometrySerializer::load(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const
+void Geometry::setMaterial(const AssetHandle<Material>& material)
 {
-    for (const DataValue& meshValue : dataValue["meshes"])
-    {
-        if (meshValue.isArray())
-        {
-            Mesh::Ref mesh = assetCache.get<Mesh>(meshValue[0].asString());
-            Material::Ref material = assetCache.get<Material>(meshValue[1].asString());
-            geometry.addMesh(mesh, material);
-        }
-    }
+    _material = material;
+}
+
+void GeometrySerializer::save(const Geometry& geometry, ComponentWriter& writer) const
+{
+    writer.writeString("mesh", geometry.mesh().path().toString());
+    writer.writeString("material", geometry.material().path().toString());
+}
+
+void GeometrySerializer::load(Geometry& geometry, ComponentReader& reader, AssetCache& assetCache) const
+{
+    std::string meshPath = reader.readString("mesh");
+    std::string materialPath = reader.readString("material");
+
+    AssetHandle<Mesh> mesh = assetCache.getHandle<Mesh>(meshPath);
+    AssetHandle<Material> material = assetCache.getHandle<Material>(materialPath);
+
+    geometry.setMesh(mesh);
+    geometry.setMaterial(material);
 }

@@ -14,6 +14,12 @@ std::shared_ptr<T> AssetEntry<T>::get()
 }
 
 template <typename T>
+const Path& AssetEntry<T>::path() const
+{
+    return _path;
+}
+
+template <typename T>
 AssetEntry<T>::AssetEntry(AssetCache& assetCache, const Path& path) :
     _assetCache(&assetCache),
     _path(path),

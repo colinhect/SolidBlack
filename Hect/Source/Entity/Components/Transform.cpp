@@ -94,40 +94,16 @@ void Transform::transformBy(const Transform& transform)
     _dirtyBits = PositionBit | ScaleBit | RotationBit;
 }
 
-void TransformSerializer::save(const Transform& transform, WriteStream& stream) const
+void TransformSerializer::save(const Transform& transform, ComponentWriter& writer) const
 {
-    stream.writeVector3(transform.position());
-    stream.writeQuaternion(transform.rotation());
-    stream.writeVector3(transform.scale());
+    writer.writeVector3("position", transform.position());
+    //writer.writeQuaternion("rotation", transform.rotation());
+    //writer.writeVector3("scale", transform.scale());
 }
 
-void TransformSerializer::load(Transform& transform, ReadStream& stream, AssetCache& assetCache) const
+void TransformSerializer::load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const
 {
-    transform.setPosition(stream.readVector3());
-    transform.setRotation(stream.readQuaternion());
-    transform.setScale(stream.readVector3());
-}
-
-void TransformSerializer::load(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const
-{
-    // Position
-    const DataValue& position = dataValue["position"];
-    if (position.isArray())
-    {
-        transform.setPosition(position.asVector3());
-    }
-
-    // Rotation
-    const DataValue& rotation = dataValue["rotation"];
-    if (rotation.isArray())
-    {
-        transform.setRotation(rotation.asQuaternion());
-    }
-    
-    // Scale
-    const DataValue& scale = dataValue["scale"];
-    if (scale.isArray())
-    {
-        transform.setScale(scale.asVector3());
-    }
+    transform.setPosition(reader.readVector3("position"));
+    //transform.setRotation(reader.readQuaternion("rotation"));
+    //transform.setScale(reader.readVector3("scale"));
 }

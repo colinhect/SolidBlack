@@ -11,6 +11,7 @@ EntitySerializer::EntitySerializer()
     registerComponent<Transform, TransformSerializer>("Transform");
 }
 
+/*
 void EntitySerializer::save(Entity& entity, WriteStream& stream)
 {
     if (!entity)
@@ -37,7 +38,7 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
     }
 }
 
-void EntitySerializer::load(Entity& entity, AssetCache& assetCache, ReadStream& stream)
+void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& assetCache)
 {
     if (!entity)
     {
@@ -60,8 +61,8 @@ void EntitySerializer::load(Entity& entity, AssetCache& assetCache, ReadStream& 
         entity.scene()._addComponentWithoutReturn(entity, component);
     }
 }
-
-void EntitySerializer::load(Entity& entity, AssetCache& assetCache, const DataValue& dataValue)
+*/
+void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCache& assetCache)
 {
     if (!entity)
     {
@@ -78,8 +79,10 @@ void EntitySerializer::load(Entity& entity, AssetCache& assetCache, const DataVa
 
         ComponentTypeId typeId = (*it).second;
 
+        ComponentDataValueReader reader(dataValue[componentTypeName]);
+
         BaseComponent::Ref component = _componentConstructors[typeId]();
-        _componentSerializers[typeId]->_load(component.get(), dataValue[componentTypeName], assetCache);
+        _componentSerializers[typeId]->_load(component.get(), reader, assetCache);
         entity.scene()._addComponentWithoutReturn(entity, component);
     }
 }

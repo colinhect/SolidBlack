@@ -98,10 +98,8 @@ class TransformSerializer :
     public ComponentSerializer<Transform>
 {
 public:
-    void save(const Transform& transform, WriteStream& stream) const;
-    void load(Transform& transform, ReadStream& stream, AssetCache& assetCache) const;
-
-    void load(Transform& transform, const DataValue& dataValue, AssetCache& assetCache) const;
+    void save(const Transform& transform, ComponentWriter& writer) const;
+    void load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const;
 };
 
 }

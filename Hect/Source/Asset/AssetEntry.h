@@ -19,6 +19,8 @@ class AssetEntry :
 public:
     std::shared_ptr<T> get();
 
+    const Path& path() const;
+
 private:
     AssetEntry(AssetCache& assetCache, const Path& path);
 

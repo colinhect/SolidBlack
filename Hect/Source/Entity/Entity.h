@@ -30,6 +30,26 @@ public:
     Id id() const;
 
     ///
+    /// Loads and adds components from a data value.
+    ///
+    /// \param dataValue The data value.
+    /// \param assetCache The asset cache to use to load referenced assets.
+    void load(const DataValue& dataValue, AssetCache& assetCache);
+
+    ///
+    /// Loads and adds components from a binary stream.
+    ///
+    /// \param stream The stream to read from.
+    /// \param assetCache The asset cache to use to load referenced assets.
+    void load(ReadStream& stream, AssetCache& assetCache);
+
+    ///
+    /// Saves components to a binary stream.
+    ///
+    /// \param stream The stream to write to.
+    void save(WriteStream& stream);
+
+    ///
     /// Enqueues the entity to be added to relevant systems on the next
     /// call to Scene::refresh().
     ///

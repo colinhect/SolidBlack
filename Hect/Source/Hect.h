@@ -116,6 +116,8 @@ const double pi = 3.14159265358979323846;
 #include "Entity/EntityData.h"
 #include "Entity/Entity.h"
 #include "Entity/System.h"
+#include "Entity/ComponentReader.h"
+#include "Entity/ComponentWriter.h"
 #include "Entity/ComponentSerializer.h"
 #include "Entity/EntitySerializer.h"
 #include "Entity/Scene.h"

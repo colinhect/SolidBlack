@@ -9,35 +9,46 @@ class Geometry :
     public Component<Geometry>
 {
 public:
+    
+    ///
+    /// Returns the mesh.
+    AssetHandle<Mesh>& mesh();
 
     ///
-    /// Adds a mesh to the geometry with a material.
-    ///
-    /// \param mesh The mesh to add.
-    /// \param material The material to render the mesh with.
-    void addMesh(Mesh::Ref mesh, Material::Ref material);
+    /// Returns the mesh.
+    const AssetHandle<Mesh>& mesh() const;
 
     ///
-    /// Returns the meshes.
-    Mesh::RefArray& meshes();
+    /// Sets the mesh.
+    ///
+    /// \param mesh The new mesh.
+    void setMesh(const AssetHandle<Mesh>& mesh);
+    
+    ///
+    /// Returns the material.
+    AssetHandle<Material>& material();
 
     ///
-    /// Returns the materials.
-    Material::RefArray& materials();
+    /// Returns the material.
+    const AssetHandle<Material>& material() const;
+    
+    ///
+    /// Sets the material.
+    ///
+    /// \param material The new material.
+    void setMaterial(const AssetHandle<Material>& material);
 
 private:
-    Mesh::RefArray _meshes;
-    Material::RefArray _materials;
+    AssetHandle<Mesh> _mesh;
+    AssetHandle<Material> _material;
 };
 
 class GeometrySerializer :
     public ComponentSerializer<Geometry>
 {
 public:
-    void save(const Geometry& geometry, WriteStream& stream) const;
-    void load(Geometry& geometry, ReadStream& stream, AssetCache& assetCache) const;
-
-    void load(Geometry& geometry, const DataValue& dataValue, AssetCache& assetCache) const;
+    void save(const Geometry& geometry, ComponentWriter& writer) const;
+    void load(Geometry& geometry, ComponentReader& reader, AssetCache& assetCache) const;
 };
 
 }

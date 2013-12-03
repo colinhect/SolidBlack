@@ -50,13 +50,35 @@ public:
     /// \returns The new entity.
     Entity createEntity();
 
+    ///
+    /// Saves the scene to a binary stream.
+    ///
+    /// \param stream The stream to write to.
+    void save(WriteStream& stream) const;
+
+    ///
+    /// Loads the scene from a binary stream.
+    ///
+    /// \param stream The stream to read from.
+    /// \param assetCache The asset cache to use to load referenced assets.
+    void load(ReadStream& stream, AssetCache& assetCache);
+
+    ///
+    /// Registers a component with its serializer.
+    ///
+    /// \param componentTypeName The type name of the component.
+    ///
+    /// \throws Error If the component type is already registered.
+    template <typename T, typename S>
+    void registerComponent(const std::string& componentTypeName);
+
 private:
     enum
     {
         InitialPoolSize = 128
     };
 
-    Entity _entityWithId(Entity::Id id);
+    Entity _entityWithId(Entity::Id id) const;
 
     Entity _cloneEntity(Entity entity);
 
@@ -100,6 +122,9 @@ private:
 
     // Systems involved in the scene
     std::vector<System*> _systems;
+
+    // The entity serializer
+    EntitySerializer _entitySerializer;
 };
 
 }

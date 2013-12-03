@@ -24,6 +24,16 @@ std::shared_ptr<T> AssetHandle<T>::getShared()
 }
 
 template <typename T>
+const Path& AssetHandle<T>::path() const
+{
+    if (!_entry)
+    {
+        throw Error("Asset entry is null");
+    }
+    return _entry->path();
+}
+
+template <typename T>
 AssetHandle<T>::AssetHandle(AssetEntry<T>* entry) :
     _entry(entry)
 {
