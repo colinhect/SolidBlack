@@ -1,6 +1,6 @@
 namespace hect
 {
-    
+
 template <typename T, typename S>
 void Scene::registerComponent(const std::string& componentTypeName)
 {

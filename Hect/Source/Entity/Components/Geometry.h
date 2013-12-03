@@ -9,7 +9,7 @@ class Geometry :
     public Component<Geometry>
 {
 public:
-    
+
     ///
     /// Returns the mesh.
     AssetHandle<Mesh>& mesh();
@@ -23,7 +23,7 @@ public:
     ///
     /// \param mesh The new mesh.
     void setMesh(const AssetHandle<Mesh>& mesh);
-    
+
     ///
     /// Returns the material.
     AssetHandle<Material>& material();
@@ -31,7 +31,7 @@ public:
     ///
     /// Returns the material.
     const AssetHandle<Material>& material() const;
-    
+
     ///
     /// Sets the material.
     ///

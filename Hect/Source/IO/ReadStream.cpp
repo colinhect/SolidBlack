@@ -94,7 +94,7 @@ Vector2<> ReadStream::readVector2()
     double y = readDouble();
     return Vector2<>(x, y);
 }
-    
+
 Vector3<> ReadStream::readVector3()
 {
     double x = readDouble();

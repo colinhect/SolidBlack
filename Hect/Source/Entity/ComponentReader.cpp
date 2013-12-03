@@ -2,37 +2,82 @@
 
 using namespace hect;
 
-ComponentDataValueReader::ComponentDataValueReader(const DataValue& dataValue) :
+DataValueComponentReader::DataValueComponentReader(const DataValue& dataValue) :
     _dataValue(&dataValue)
 {
 }
 
-double ComponentDataValueReader::readNumber(const char* name)
+bool DataValueComponentReader::hasValue(const char* name)
+{
+    return !(*_dataValue)[name].isNull();
+}
+
+double DataValueComponentReader::readNumber(const char* name)
 {
     return (*_dataValue)[name].asDouble();
 }
 
-std::string ComponentDataValueReader::readString(const char* name)
+std::string DataValueComponentReader::readString(const char* name)
 {
     return (*_dataValue)[name].asString();
 }
 
-Vector2<> ComponentDataValueReader::readVector2(const char* name)
+Vector2<> DataValueComponentReader::readVector2(const char* name)
 {
     return (*_dataValue)[name].asVector2();
 }
 
-Vector3<> ComponentDataValueReader::readVector3(const char* name)
+Vector3<> DataValueComponentReader::readVector3(const char* name)
 {
     return (*_dataValue)[name].asVector3();
 }
 
-Vector4<> ComponentDataValueReader::readVector4(const char* name)
+Vector4<> DataValueComponentReader::readVector4(const char* name)
 {
     return (*_dataValue)[name].asVector4();
 }
 
-Quaternion<> ComponentDataValueReader::readQuaternion(const char* name)
+Quaternion<> DataValueComponentReader::readQuaternion(const char* name)
 {
     return (*_dataValue)[name].asQuaternion();
+}
+
+BinaryComponentReader::BinaryComponentReader(ReadStream& stream) :
+    _stream(&stream)
+{
+}
+
+bool BinaryComponentReader::hasValue(const char* name)
+{
+    return true;
+}
+
+double BinaryComponentReader::readNumber(const char* name)
+{
+    return _stream->readDouble();
+}
+
+std::string BinaryComponentReader::readString(const char* name)
+{
+    return _stream->readString();
+}
+
+Vector2<> BinaryComponentReader::readVector2(const char* name)
+{
+    return _stream->readVector2();
+}
+
+Vector3<> BinaryComponentReader::readVector3(const char* name)
+{
+    return _stream->readVector3();
+}
+
+Vector4<> BinaryComponentReader::readVector4(const char* name)
+{
+    return _stream->readVector4();
+}
+
+Quaternion<> BinaryComponentReader::readQuaternion(const char* name)
+{
+    return _stream->readQuaternion();
 }

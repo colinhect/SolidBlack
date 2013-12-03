@@ -1,9 +1,10 @@
-SUITE(DataJsonFormat)
+SUITE(DataValueJsonFormat)
 {
     TEST(Simple)
     {
         std::string json = "{ \"someBool\" : true, \"someArray\" : [ 0, 1, 2 ] }";
-        DataValue value = DataJsonFormat::load(json);
+        DataValue value;
+        DataValueJsonFormat::load(value, json);
 
         CHECK(value.isObject());
         CHECK_EQUAL(2, value.size());

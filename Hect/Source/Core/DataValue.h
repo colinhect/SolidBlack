@@ -206,7 +206,7 @@ public:
     /// Returns the value as a 3-dimensional vector (assumes the value is an
     /// array of numbers).
     Vector3<> asVector3() const;
-    
+
     ///
     /// Returns the value as a 4-dimensional vector (assumes the value is an
     /// array of numbers).

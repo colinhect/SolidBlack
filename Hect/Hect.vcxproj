@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Asset\AssetCache.cpp" />
     <ClCompile Include="Source\Core\Any.cpp" />
+    <ClCompile Include="Source\Core\DataValueJsonFormat.cpp" />
     <ClCompile Include="Source\Core\DataValue.cpp" />
     <ClCompile Include="Source\Core\DataValueLoader.cpp" />
     <ClCompile Include="Source\Core\Error.cpp" />
@@ -89,7 +90,6 @@
     <ClCompile Include="Source\Internal\Bullet.cpp" />
     <ClCompile Include="Source\IO\FileReadStream.cpp" />
     <ClCompile Include="Source\IO\FileWriteStream.cpp" />
-    <ClCompile Include="Source\IO\DataJsonFormat.cpp" />
     <ClCompile Include="Source\IO\MemoryReadStream.cpp" />
     <ClCompile Include="Source\IO\MemoryWriteStream.cpp" />
     <ClCompile Include="Source\IO\Path.cpp" />
@@ -108,6 +108,7 @@
     <ClInclude Include="Source\Asset\AssetHandle.h" />
     <ClInclude Include="Source\Asset\AssetLoader.h" />
     <ClInclude Include="Source\Core\Any.h" />
+    <ClInclude Include="Source\Core\DataValueJsonFormat.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Error.h" />
     <ClInclude Include="Source\Core\StateFlow.h" />
@@ -172,7 +173,6 @@
     <ClInclude Include="Source\Internal\Bullet.h" />
     <ClInclude Include="Source\IO\FileReadStream.h" />
     <ClInclude Include="Source\IO\FileWriteStream.h" />
-    <ClInclude Include="Source\IO\DataJsonFormat.h" />
     <ClInclude Include="Source\IO\MemoryReadStream.h" />
     <ClInclude Include="Source\IO\MemoryWriteStream.h" />
     <ClInclude Include="Source\IO\Path.h" />

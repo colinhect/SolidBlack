@@ -97,13 +97,24 @@ void Transform::transformBy(const Transform& transform)
 void TransformSerializer::save(const Transform& transform, ComponentWriter& writer) const
 {
     writer.writeVector3("position", transform.position());
-    //writer.writeQuaternion("rotation", transform.rotation());
-    //writer.writeVector3("scale", transform.scale());
+    writer.writeQuaternion("rotation", transform.rotation());
+    writer.writeVector3("scale", transform.scale());
 }
 
 void TransformSerializer::load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const
 {
-    transform.setPosition(reader.readVector3("position"));
-    //transform.setRotation(reader.readQuaternion("rotation"));
-    //transform.setScale(reader.readVector3("scale"));
+    if (reader.hasValue("position"))
+    {
+        transform.setPosition(reader.readVector3("position"));
+    }
+
+    if (reader.hasValue("rotation"))
+    {
+        transform.setRotation(reader.readQuaternion("rotation"));
+    }
+
+    if (reader.hasValue("scale"))
+    {
+        transform.setScale(reader.readVector3("scale"));
+    }
 }

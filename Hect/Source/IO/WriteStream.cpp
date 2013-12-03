@@ -2,10 +2,13 @@
 
 using namespace hect;
 
-void WriteStream::writeString(const std::string& string)
+void WriteStream::writeString(const std::string& string, bool prependLength)
 {
     size_t length = string.size();
-    writeUnsignedInt((uint32_t)length);
+    if (prependLength)
+    {
+        writeUnsignedInt((uint32_t)length);
+    }
     writeBytes((uint8_t*)&string[0], length);
 }
 

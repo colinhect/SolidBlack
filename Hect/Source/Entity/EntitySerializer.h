@@ -11,12 +11,18 @@ class EntitySerializer :
 public:
     EntitySerializer();
 
+    void save(Entity& entity, DataValue& dataValue);
+    void save(Entity& entity, WriteStream& stream);
     void load(Entity& entity, const DataValue& dataValue, AssetCache& assetCache);
+    void load(Entity& entity, ReadStream& stream, AssetCache& assetCache);
 
     template <typename T, typename S>
     void registerComponent(const std::string& componentTypeName);
 
 private:
+
+    // Component types mapped to component type names
+    std::map<ComponentTypeId, std::string> _componentTypeNames;
 
     // Component type names mapped to component types
     std::map<std::string, ComponentTypeId> _componentTypes;

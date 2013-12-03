@@ -24,7 +24,4 @@ private:
     DebugCameraSystem _debugCameraSystem;
 
     Scene _scene;
-
-    Entity _debugCamera;
-    Entity _testCube;
 };

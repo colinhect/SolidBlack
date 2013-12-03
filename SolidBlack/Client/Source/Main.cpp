@@ -20,8 +20,13 @@ int main()
         Path workingDirectory = fileSystem.workingDirectory();
         fileSystem.addDataSource(workingDirectory);
 
+        // Set the working directory as the write directory
+        fileSystem.setWriteDirectory(workingDirectory);
+
         // Load the settings
-        DataValue settings = DataJsonFormat::load(fileSystem.openFileForRead("Settings.json"));
+        std::string settingsJson = fileSystem.openFileForRead("Settings.json").readAllToString();
+        DataValue settings;
+        DataValueJsonFormat::load(settings, settingsJson);
 
         // Add the data sources listed in the settings
         for (const DataValue& dataSource : settings["dataSources"])

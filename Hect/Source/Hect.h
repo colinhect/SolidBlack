@@ -64,12 +64,12 @@ const double pi = 3.14159265358979323846;
 #include "IO/MemoryReadStream.h"
 #include "IO/MemoryWriteStream.h"
 #include "IO/FileSystem.h"
-#include "IO/DataJsonFormat.h"
-
 #include "Asset/AssetLoader.h"
 #include "Asset/AssetEntry.h"
 #include "Asset/AssetHandle.h"
 #include "Asset/AssetCache.h"
+
+#include "Core/DataValueJsonFormat.h"
 
 #include "Graphics/VertexAttribute.h"
 #include "Graphics/VertexLayout.h"

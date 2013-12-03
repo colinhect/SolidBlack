@@ -4,6 +4,7 @@ using namespace hect;
 
 EntitySerializer::EntitySerializer()
 {
+    // Register all hect components
     registerComponent<Camera, CameraSerializer>("Camera");
     registerComponent<AmbientLight, AmbientLightSerializer>("AmbientLight");
     registerComponent<DirectionalLight, DirectionalLightSerializer>("DirectionalLight");
@@ -11,7 +12,40 @@ EntitySerializer::EntitySerializer()
     registerComponent<Transform, TransformSerializer>("Transform");
 }
 
-/*
+void EntitySerializer::save(Entity& entity, DataValue& dataValue)
+{
+    if (!entity)
+    {
+        throw Error("Entity is null");
+    }
+
+    DataValue::Object members;
+
+    auto& components = entity.scene()._entityComponents[entity.id()];
+    for (auto& pair : components)
+    {
+        ComponentTypeId typeId = pair.first;
+        std::string typeName = _componentTypeNames[typeId];
+        BaseComponent* component = pair.second.get();
+
+        auto it = _componentSerializers.find(typeId);
+        if (it == _componentSerializers.end())
+        {
+            throw Error(format("No serializer registered for component type id '%d'", typeId));
+        }
+
+        BaseComponentSerializer* serializer = (*it).second.get();
+
+        // Serialize
+        DataValueComponentWriter writer;
+        serializer->_save(component, writer);
+
+        members[typeName] = writer.dataValue();
+    }
+
+    dataValue = DataValue(members);
+}
+
 void EntitySerializer::save(Entity& entity, WriteStream& stream)
 {
     if (!entity)
@@ -24,31 +58,11 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
 
     for (auto& pair : components)
     {
+        ComponentTypeId typeId = pair.first;
+        stream.writeByte((uint8_t)typeId);
+
+        std::string typeName = _componentTypeNames[typeId];
         BaseComponent* component = pair.second.get();
-        
-        ComponentTypeId typeId = component->_componentTypeId();
-        
-        auto it = _componentSerializers.find(typeId);
-        if (it == _componentSerializers.end())
-        {
-            throw Error(format("No serializer registered for component type id '%d'", typeId));
-        }
-
-        (*it).second->_save(component, stream);
-    }
-}
-
-void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& assetCache)
-{
-    if (!entity)
-    {
-        throw Error("Entity is null");
-    }
-
-    uint8_t componentCount = stream.readByte();
-    for (uint8_t i = 0; i < componentCount; ++i)
-    {
-        ComponentTypeId typeId = stream.readByte();
 
         auto it = _componentSerializers.find(typeId);
         if (it == _componentSerializers.end())
@@ -56,12 +70,14 @@ void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& asse
             throw Error(format("No serializer registered for component type id '%d'", typeId));
         }
 
-        BaseComponent::Ref component = _componentConstructors[typeId]();
-        (*it).second->_load(component.get(), stream, assetCache);
-        entity.scene()._addComponentWithoutReturn(entity, component);
+        BaseComponentSerializer* serializer = (*it).second.get();
+
+        // Serialize
+        BinaryComponentWriter writer(stream);
+        serializer->_save(component, writer);
     }
 }
-*/
+
 void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCache& assetCache)
 {
     if (!entity)
@@ -78,11 +94,48 @@ void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCac
         }
 
         ComponentTypeId typeId = (*it).second;
+        BaseComponentSerializer* serializer = _componentSerializers[typeId].get();
 
-        ComponentDataValueReader reader(dataValue[componentTypeName]);
-
+        // Create component
         BaseComponent::Ref component = _componentConstructors[typeId]();
-        _componentSerializers[typeId]->_load(component.get(), reader, assetCache);
+
+        // Deserialize
+        DataValueComponentReader reader(dataValue[componentTypeName]);
+        serializer->_load(component.get(), reader, assetCache);
+
+        // Add component
+        entity.scene()._addComponentWithoutReturn(entity, component);
+    }
+}
+
+void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& assetCache)
+{
+    if (!entity)
+    {
+        throw Error("Entity is null");
+    }
+
+    uint8_t componentCount = stream.readByte();
+    for (uint8_t i = 0; i < componentCount; ++i)
+    {
+        ComponentTypeId typeId = stream.readByte();
+
+        auto it = _componentTypeNames.find(typeId);
+        if (it == _componentTypeNames.end())
+        {
+            throw Error(format("No serializer registered for component type id '%d'", typeId));
+        }
+
+        BaseComponentSerializer* serializer = _componentSerializers[typeId].get();
+
+        // Create component
+        BaseComponent::Ref component = _componentConstructors[typeId]();
+
+        // Deserialize
+        BinaryComponentReader reader(stream);
+        serializer->_load(component.get(), reader, assetCache);
+
+        // Add component
         entity.scene()._addComponentWithoutReturn(entity, component);
     }
 }

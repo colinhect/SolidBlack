@@ -51,10 +51,23 @@ public:
     Entity createEntity();
 
     ///
+    /// Saves the scene to a data value.
+    ///
+    /// \param dataValue The data value.
+    void save(DataValue& dataValue) const;
+
+    ///
     /// Saves the scene to a binary stream.
     ///
     /// \param stream The stream to write to.
     void save(WriteStream& stream) const;
+
+    ///
+    /// Loads the scene from a data value.
+    ///
+    /// \param dataValue The data value.
+    /// \param assetCache The asset cache to use to load referenced assets.
+    void load(const DataValue& dataValue, AssetCache& assetCache);
 
     ///
     /// Loads the scene from a binary stream.
@@ -100,6 +113,9 @@ private:
 
     // The number of entities (includes non-activated and activated entities)
     size_t _entityCount;
+
+    // The number of activated entities
+    size_t _activatedEntityCount;
 
     // The next entity id to use when creating an entity (if the queue is
     // empty)

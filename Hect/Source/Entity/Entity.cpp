@@ -19,6 +19,18 @@ Entity::Id Entity::id() const
     return _id;
 }
 
+void Entity::save(DataValue& dataValue)
+{
+    assert(_scene);
+    _scene->_entitySerializer.save(*this, dataValue);
+}
+
+void Entity::save(WriteStream& stream)
+{
+    assert(_scene);
+    _scene->_entitySerializer.save(*this, stream);
+}
+
 void Entity::load(const DataValue& dataValue, AssetCache& assetCache)
 {
     assert(_scene);
@@ -27,14 +39,8 @@ void Entity::load(const DataValue& dataValue, AssetCache& assetCache)
 
 void Entity::load(ReadStream& stream, AssetCache& assetCache)
 {
-    //assert(_scene);
-    //_scene->_entitySerializer.load(*this, stream, assetCache);
-}
-
-void Entity::save(WriteStream& stream)
-{
-    //assert(_scene);
-    //_scene->_entitySerializer.save(*this, stream);
+    assert(_scene);
+    _scene->_entitySerializer.load(*this, stream, assetCache);
 }
 
 void Entity::destroy()

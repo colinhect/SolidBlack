@@ -115,8 +115,23 @@ void CameraSerializer::save(const Camera& camera, ComponentWriter& writer) const
 
 void CameraSerializer::load(Camera& camera, ComponentReader& reader, AssetCache& assetCache) const
 {
-    camera.setFieldOfView(Angle<>::fromDegrees(reader.readNumber("fieldOfView")));
-    camera.setAspectRatio(reader.readNumber("aspectRatio"));
-    camera.setNearClip(reader.readNumber("nearClip"));
-    camera.setFarClip(reader.readNumber("farClip"));
+    if (reader.hasValue("fieldOfView"))
+    {
+        camera.setFieldOfView(Angle<>::fromDegrees(reader.readNumber("fieldOfView")));
+    }
+
+    if (reader.hasValue("aspectRatio"))
+    {
+        camera.setAspectRatio(reader.readNumber("aspectRatio"));
+    }
+
+    if (reader.hasValue("nearClip"))
+    {
+        camera.setNearClip(reader.readNumber("nearClip"));
+    }
+
+    if (reader.hasValue("farClip"))
+    {
+        camera.setFarClip(reader.readNumber("farClip"));
+    }
 }

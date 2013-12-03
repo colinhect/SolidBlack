@@ -55,9 +55,6 @@
     <ClInclude Include="Source\VertexLayoutTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DataJsonFormatTests.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\AssetCacheTests.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -83,6 +80,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntityTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DataValueJsonFormatTests.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,7 +21,9 @@ public:
     /// integer.
     ///
     /// \param string The string to write.
-    void writeString(const std::string& string);
+    /// \param prependLength Whether or not to prepend the length of the
+    /// string.
+    void writeString(const std::string& string, bool prependLength = true);
 
     ///
     /// Writes a signed 8-bit integer.
@@ -82,7 +84,7 @@ public:
     ///
     /// \param value The value to write.
     void writeDouble(double value);
-    
+
     ///
     /// Writes a 2-dimensional vector.
     ///

@@ -40,6 +40,11 @@ void GeometrySerializer::save(const Geometry& geometry, ComponentWriter& writer)
 
 void GeometrySerializer::load(Geometry& geometry, ComponentReader& reader, AssetCache& assetCache) const
 {
+    if (!reader.hasValue("mesh") || !reader.hasValue("material"))
+    {
+        return;
+    }
+
     std::string meshPath = reader.readString("mesh");
     std::string materialPath = reader.readString("material");
 

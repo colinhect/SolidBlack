@@ -282,9 +282,6 @@
     <ClCompile Include="Source\Graphics\TextureDataFormat.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IO\DataJsonFormat.cpp">
-      <Filter>Source\IO</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\StateFlow.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
@@ -311,6 +308,9 @@
     </ClCompile>
     <ClCompile Include="Source\Entity\ComponentReader.cpp">
       <Filter>Source\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\DataValueJsonFormat.cpp">
+      <Filter>Source\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -557,9 +557,6 @@
     <ClInclude Include="Source\Graphics\TextureDataFormat.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IO\DataJsonFormat.h">
-      <Filter>Source\IO</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\StateFlow.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
@@ -589,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="Source\Entity\ComponentReader.h">
       <Filter>Source\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\DataValueJsonFormat.h">
+      <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

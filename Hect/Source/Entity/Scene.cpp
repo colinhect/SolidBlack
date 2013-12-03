@@ -4,6 +4,7 @@ using namespace hect;
 
 Scene::Scene() :
     _entityCount(0),
+    _activatedEntityCount(0),
     _nextEntityId(0),
     _entityData(InitialPoolSize),
     _entityComponents(InitialPoolSize)
@@ -30,6 +31,8 @@ void Scene::refresh()
                 system->addEntity(entity);
             }
         }
+
+        ++_activatedEntityCount;
     }
     _activatedEntityIds.clear();
 
@@ -42,6 +45,12 @@ void Scene::refresh()
             {
                 system->removeEntity(entity);
             }
+        }
+
+        EntityData& data = _entityData[id];
+        if (data.isActivated())
+        {
+            --_activatedEntityCount;
         }
 
         // Clear entity data
@@ -63,14 +72,14 @@ void Scene::addSystem(System& system)
     // Add any entities the systems is filtered for
     size_t addedEntities = 0;
     Entity::Id id = 0;
-    while (addedEntities < _entityCount)
+    while (addedEntities < _activatedEntityCount)
     {
         Entity entity = _entityWithId(id);
         if (entity)
         {
-            ++addedEntities;
             if (entity.isActivated() && system.includesEntity(entity))
             {
+                ++addedEntities;
                 system.addEntity(Entity(*this, id));
             }
         }
@@ -113,6 +122,25 @@ Entity Scene::createEntity()
     return Entity(*this, id);
 }
 
+void Scene::save(DataValue& dataValue) const
+{
+    DataValue::Array elements;
+    for (Entity::Id id = 0; id < _entityData.size(); ++id)
+    {
+        Entity entity = _entityWithId(id);
+        if (entity && entity.isActivated())
+        {
+            DataValue entityDataValue;
+            entity.save(entityDataValue);
+            elements.push_back(entityDataValue);
+        }
+    }
+
+    DataValue::Object members;
+    members["entities"] = DataValue(elements);
+    dataValue = DataValue(members);
+}
+
 void Scene::save(WriteStream& stream) const
 {
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
@@ -125,12 +153,23 @@ void Scene::save(WriteStream& stream) const
     }
 }
 
+void Scene::load(const DataValue& dataValue, AssetCache& assetCache)
+{
+    for (const DataValue& entityValue : dataValue["entities"])
+    {
+        Entity entity = createEntity();
+        entity.load(entityValue, assetCache);
+        entity.activate();
+    }
+}
+
 void Scene::load(ReadStream& stream, AssetCache& assetCache)
 {
     while (!stream.endOfStream())
     {
         Entity entity = createEntity();
         entity.load(stream, assetCache);
+        entity.activate();
     }
 }
 

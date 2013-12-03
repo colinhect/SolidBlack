@@ -16,25 +16,10 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
 
-    // Create debug camera
-    DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Entities/DebugCamera.entity");
-    _debugCamera = _scene.createEntity();
-    _debugCamera.load(*debugCameraValue, assetCache);
-    _debugCamera.activate();
-
-    // Create a test cube prefab
-    DataValue::Ref testCubeValue = assetCache.get<DataValue>("Entities/TestCube.entity");
-    _testCube = _scene.createEntity();
-    _testCube.load(*testCubeValue, assetCache);
-
-    // Activate one at the origin
-    _testCube.clone().activate();
-
-    // Create the sun
-    DataValue::Ref sunValue = assetCache.get<DataValue>("Entities/Sun.entity");
-    Entity sun = _scene.createEntity();
-    sun.load(*sunValue, assetCache);
-    sun.activate();
+    FileReadStream stream = assetCache.fileSystem().openFileForRead("TestBinary.scene");
+    //DataValue sceneValue;
+    //DataValueJsonFormat::load(sceneValue, stream);
+    _scene.load(stream, assetCache);
 
     _scene.refresh();
 }
@@ -84,15 +69,6 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     {
         setDone(true);
     }
-    else if (event.key == Key::T)
-    {
-        Entity testCube = _testCube.clone();
-        if (_debugCamera && _debugCamera.hasComponent<Transform>())
-        {
-            testCube.component<Transform>() = _debugCamera.component<Transform>();
-        }
-        testCube.activate();
-    }
     else if (event.key == Key::Tab)
     {
         bool cursorLocked = _window->isCursorLocked();
@@ -113,5 +89,18 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     else if (event.key == Key::C)
     {
         _renderingSystem.setGamma(_renderingSystem.gamma() - 0.1);
+    }
+    else if (event.key == Key::F5)
+    {
+        DataValue dataValue;
+        _scene.save(dataValue);
+
+        FileWriteStream stream = _assetCache->fileSystem().openFileForWrite("Test.scene");
+        DataValueJsonFormat::save(dataValue, stream);
+    }
+    else if (event.key == Key::F6)
+    {
+        FileWriteStream stream = _assetCache->fileSystem().openFileForWrite("TestBinary.scene");
+        _scene.save(stream);
     }
 }

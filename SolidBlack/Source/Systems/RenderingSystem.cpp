@@ -78,7 +78,7 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
 
             Mesh& mesh = *geometry.mesh().get();
             Material& material = *geometry.material().get();
-            
+
             for (const Pass& pass : material.techniques()[0].passes())
             {
                 // Prepare the pass
