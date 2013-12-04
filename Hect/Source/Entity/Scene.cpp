@@ -3,7 +3,6 @@
 using namespace hect;
 
 Scene::Scene() :
-    _entityCount(0),
     _activatedEntityCount(0),
     _nextEntityId(0),
     _entityData(InitialPoolSize),
@@ -59,8 +58,6 @@ void Scene::refresh()
 
         // Re-use this id
         _nextEntityIds.push(id);
-
-        --_entityCount;
     }
     _destroyedEntityIds.clear();
 }
@@ -118,7 +115,6 @@ Entity Scene::createEntity()
     }
 
     _entityData[id].setNull(false);
-    ++_entityCount;
     return Entity(*this, id);
 }
 
@@ -177,20 +173,26 @@ Entity Scene::_entityWithId(Entity::Id id) const
 {
     if (id < _entityData.size())
     {
-        return Entity(*const_cast<Scene*>(this), id); // Inside of range, still might be null
+        return Entity(*const_cast<Scene*>(this), id);
     }
 
     return Entity(); // Outside of range
 }
 
-Entity Scene::_cloneEntity(Entity entity)
+Entity Scene::_cloneEntity(const Entity& entity)
 {
     Entity clone = createEntity();
 
     auto& components = _entityComponents[entity._id];
     for (auto& pair : components)
     {
-        _addComponentWithoutReturn(clone, pair.second->_clone());
+        BaseComponent* component = pair.second.get();
+
+        // Clone the component
+        BaseComponent::Ref clonedComponent(component->clone());
+
+        // Add the clone component to the cloned entity
+        _addComponentWithoutReturn(clone, clonedComponent);
     }
 
     return clone;
@@ -233,17 +235,6 @@ void Scene::_activateEntity(Entity& entity)
 #endif
 
     data.setActivated(true);
-
-    auto& components = _entityComponents[id];
-    for (auto& pair : components)
-    {
-        // Give the component the entity id and scene to be sused in
-        // BaseComponent::entity()
-        const BaseComponent::Ref& component = pair.second;
-        component->_scene = this;
-        component->_entityId = id;
-    }
-
     _activatedEntityIds.push_back(id);
 }
 
@@ -262,7 +253,7 @@ void Scene::_addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref&
     Entity::Id id = entity._id;
     EntityData& data = _entityData[id];
 
-    ComponentTypeId typeId = component->_componentTypeId();
+    ComponentTypeId typeId = component->componentTypeId();
 
 #ifdef HECT_DEBUG
     if (entity.isNull())

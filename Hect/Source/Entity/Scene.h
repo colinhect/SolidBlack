@@ -21,9 +21,12 @@ public:
     ~Scene();
 
     ///
-    /// All entities activated since the last call to refresh() are added to
-    /// the systems that include them.  All entities destroyed since the last
-    /// call to refresh are removed from the systems that include them.
+    /// Refreshes the scene.
+    ///
+    /// \remarks All entities activated since the last call to refresh() are
+    /// added to the systems that include them.  All entities destroyed since
+    /// the last call to refresh are removed from the systems that include
+    /// them.
     void refresh();
 
     ///
@@ -51,26 +54,28 @@ public:
     Entity createEntity();
 
     ///
-    /// Saves the scene to a data value.
+    /// Serializes all activated entities in the scene to a data value.
     ///
     /// \param dataValue The data value.
     void save(DataValue& dataValue) const;
 
     ///
-    /// Saves the scene to a binary stream.
+    /// Serializes all activated entities in the scene to a binary stream.
     ///
     /// \param stream The stream to write to.
     void save(WriteStream& stream) const;
 
     ///
-    /// Loads the scene from a data value.
+    /// Deserializes all entities from a data value and activates them in the
+    /// scene.
     ///
     /// \param dataValue The data value.
     /// \param assetCache The asset cache to use to load referenced assets.
     void load(const DataValue& dataValue, AssetCache& assetCache);
 
     ///
-    /// Loads the scene from a binary stream.
+    /// Deserializes all entities from a binary stream and activates them in
+    /// the scene.
     ///
     /// \param stream The stream to read from.
     /// \param assetCache The asset cache to use to load referenced assets.
@@ -93,7 +98,7 @@ private:
 
     Entity _entityWithId(Entity::Id id) const;
 
-    Entity _cloneEntity(Entity entity);
+    Entity _cloneEntity(const Entity& entity);
 
     void _destroyEntity(Entity& entity);
     void _activateEntity(Entity& entity);
@@ -111,9 +116,6 @@ private:
     template <typename T>
     T& _component(const Entity& entity);
 
-    // The number of entities (includes non-activated and activated entities)
-    size_t _entityCount;
-
     // The number of activated entities
     size_t _activatedEntityCount;
 
@@ -121,7 +123,7 @@ private:
     // empty)
     Entity::Id _nextEntityId;
 
-    // A queue of entity IDs to use next when creating an entity
+    // A queue of entity ids to use next when creating an entity
     std::queue<Entity::Id> _nextEntityIds;
 
     // Data for each entity

@@ -9,13 +9,14 @@ ComponentTypeId Component<T>::typeId()
 }
 
 template <typename T>
-BaseComponent::Ref Component<T>::_clone() const
+BaseComponent* Component<T>::clone() const
 {
-    return BaseComponent::Ref(new T(*(T*)this));
+    // Invoke the copy constructor of the component
+    return new T(*(T*)this);
 }
 
 template <typename T>
-ComponentTypeId Component<T>::_componentTypeId() const
+ComponentTypeId Component<T>::componentTypeId() const
 {
     return typeId();
 }

@@ -18,10 +18,12 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
     {
         throw Error("Entity is null");
     }
+    Scene* scene = entity._scene;
+    Entity::Id id = entity._id;
 
     DataValue::Object members;
 
-    auto& components = entity.scene()._entityComponents[entity.id()];
+    auto& components = scene->_entityComponents[id];
     for (auto& pair : components)
     {
         ComponentTypeId typeId = pair.first;
@@ -52,8 +54,10 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
     {
         throw Error("Entity is null");
     }
+    Scene* scene = entity._scene;
+    Entity::Id id = entity._id;
 
-    auto& components = entity.scene()._entityComponents[entity.id()];
+    auto& components = scene->_entityComponents[id];
     stream.writeByte((uint8_t)components.size());
 
     for (auto& pair : components)
@@ -104,7 +108,7 @@ void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCac
         serializer->_load(component.get(), reader, assetCache);
 
         // Add component
-        entity.scene()._addComponentWithoutReturn(entity, component);
+        entity._scene->_addComponentWithoutReturn(entity, component);
     }
 }
 
@@ -136,6 +140,6 @@ void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& asse
         serializer->_load(component.get(), reader, assetCache);
 
         // Add component
-        entity.scene()._addComponentWithoutReturn(entity, component);
+        entity._scene->_addComponentWithoutReturn(entity, component);
     }
 }

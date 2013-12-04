@@ -8,62 +8,91 @@ Entity::Entity() :
 {
 }
 
-Scene& Entity::scene()
-{
-    assert(_scene);
-    return *_scene;
-}
-
-Entity::Id Entity::id() const
-{
-    return _id;
-}
-
 void Entity::save(DataValue& dataValue)
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     _scene->_entitySerializer.save(*this, dataValue);
 }
 
 void Entity::save(WriteStream& stream)
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     _scene->_entitySerializer.save(*this, stream);
 }
 
 void Entity::load(const DataValue& dataValue, AssetCache& assetCache)
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+    else if (isActivated())
+    {
+        throw Error("Entity is activated");
+    }
+
     _scene->_entitySerializer.load(*this, dataValue, assetCache);
 }
 
 void Entity::load(ReadStream& stream, AssetCache& assetCache)
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+    else if (isActivated())
+    {
+        throw Error("Entity is activated");
+    }
+
     _scene->_entitySerializer.load(*this, stream, assetCache);
 }
 
 void Entity::destroy()
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     _scene->_destroyEntity(*this);
 }
 
 Entity Entity::clone() const
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     return _scene->_cloneEntity(*this);
 }
 
 void Entity::activate()
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     _scene->_activateEntity(*this);
 }
 
 bool Entity::isActivated() const
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     return _scene->_isActivated(*this);
 }
 
@@ -74,7 +103,11 @@ bool Entity::isNull() const
 
 void Entity::addComponent(BaseComponent* component)
 {
-    assert(_scene);
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
     _scene->_addComponentWithoutReturn(*this, BaseComponent::Ref(component));
 }
 

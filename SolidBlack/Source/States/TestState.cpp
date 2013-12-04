@@ -16,10 +16,10 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
 
-    FileReadStream stream = assetCache.fileSystem().openFileForRead("TestBinary.scene");
-    //DataValue sceneValue;
-    //DataValueJsonFormat::load(sceneValue, stream);
-    _scene.load(stream, assetCache);
+    FileReadStream stream = assetCache.fileSystem().openFileForRead("Test.scene");
+    DataValue sceneValue;
+    DataValueJsonFormat::load(sceneValue, stream);
+    _scene.load(sceneValue, assetCache);
 
     _scene.refresh();
 }

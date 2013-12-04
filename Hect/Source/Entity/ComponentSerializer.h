@@ -28,14 +28,14 @@ public:
     /// Serializes a component to a binary stream.
     ///
     /// \param component The component.
-    /// \param stream The stream to serialize to.
+    /// \param writer The component writer.
     virtual void save(const T& component, ComponentWriter& writer) const;
 
     ///
     /// Deserializes a component from a binary stream
     ///
     /// \param component The component.
-    /// \param stream The stream to deserialize from.
+    /// \param reader The component reader.
     /// \param assetCache The asset cache to load referenced assets from.
     virtual void load(T& component, ComponentReader& reader, AssetCache& assetCache) const;
 
