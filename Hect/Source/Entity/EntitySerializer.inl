@@ -7,7 +7,7 @@ void EntitySerializer::registerComponent(const std::string& componentTypeName)
     ComponentTypeId typeId = T::typeId();
 
     // Check that the type name is not already registered
-    if (_componentTypes.find(componentTypeName) != _componentTypes.end())
+    if (_componentTypeIds.find(componentTypeName) != _componentTypeIds.end())
     {
         throw Error(format("Component type '%s' is already registered", componentTypeName.c_str()));
     }
@@ -19,7 +19,7 @@ void EntitySerializer::registerComponent(const std::string& componentTypeName)
     }
 
     // Map the type name to the type id
-    _componentTypes[componentTypeName] = typeId;
+    _componentTypeIds[componentTypeName] = typeId;
 
     // Map the type id to the type name
     _componentTypeNames[typeId] = componentTypeName;

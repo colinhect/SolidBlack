@@ -26,21 +26,14 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
     auto& components = scene->_entityComponents[id];
     for (auto& pair : components)
     {
-        ComponentTypeId typeId = pair.first;
-        std::string typeName = _componentTypeNames[typeId];
         BaseComponent* component = pair.second.get();
-
-        auto it = _componentSerializers.find(typeId);
-        if (it == _componentSerializers.end())
-        {
-            throw Error(format("No serializer registered for component type id '%d'", typeId));
-        }
-
-        BaseComponentSerializer* serializer = (*it).second.get();
+        ComponentTypeId typeId = component->componentTypeId();
+        const std::string& typeName = _typeName(typeId);
+        const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Serialize
         DataValueComponentWriter writer;
-        serializer->_save(component, writer);
+        serializer._save(component, writer);
 
         members[typeName] = writer.dataValue();
     }
@@ -62,23 +55,15 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
 
     for (auto& pair : components)
     {
-        ComponentTypeId typeId = pair.first;
-        stream.writeByte((uint8_t)typeId);
-
-        std::string typeName = _componentTypeNames[typeId];
         BaseComponent* component = pair.second.get();
+        ComponentTypeId typeId = component->componentTypeId();
+        const BaseComponentSerializer& serializer = _serializer(typeId);
 
-        auto it = _componentSerializers.find(typeId);
-        if (it == _componentSerializers.end())
-        {
-            throw Error(format("No serializer registered for component type id '%d'", typeId));
-        }
-
-        BaseComponentSerializer* serializer = (*it).second.get();
+        stream.writeByte((uint8_t)typeId);
 
         // Serialize
         BinaryComponentWriter writer(stream);
-        serializer->_save(component, writer);
+        serializer._save(component, writer);
     }
 }
 
@@ -89,23 +74,17 @@ void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCac
         throw Error("Entity is null");
     }
 
-    for (const std::string& componentTypeName : dataValue.memberNames())
+    for (const std::string& typeName : dataValue.memberNames())
     {
-        auto it = _componentTypes.find(componentTypeName);
-        if (it == _componentTypes.end())
-        {
-            throw Error(format("No serializer registered for component type '%s'", componentTypeName.c_str()));
-        }
-
-        ComponentTypeId typeId = (*it).second;
-        BaseComponentSerializer* serializer = _componentSerializers[typeId].get();
+        ComponentTypeId typeId = _typeId(typeName);
+        const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Create component
-        BaseComponent::Ref component = _componentConstructors[typeId]();
+        BaseComponent::Ref component = _constructComponent(typeId);
 
         // Deserialize
-        DataValueComponentReader reader(dataValue[componentTypeName]);
-        serializer->_load(component.get(), reader, assetCache);
+        DataValueComponentReader reader(dataValue[typeName]);
+        serializer._load(component.get(), reader, assetCache);
 
         // Add component
         entity._scene->_addComponentWithoutReturn(entity, component);
@@ -123,23 +102,56 @@ void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& asse
     for (uint8_t i = 0; i < componentCount; ++i)
     {
         ComponentTypeId typeId = stream.readByte();
-
-        auto it = _componentTypeNames.find(typeId);
-        if (it == _componentTypeNames.end())
-        {
-            throw Error(format("No serializer registered for component type id '%d'", typeId));
-        }
-
-        BaseComponentSerializer* serializer = _componentSerializers[typeId].get();
+        const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Create component
-        BaseComponent::Ref component = _componentConstructors[typeId]();
+        BaseComponent::Ref component = _constructComponent(typeId);
 
         // Deserialize
         BinaryComponentReader reader(stream);
-        serializer->_load(component.get(), reader, assetCache);
+        serializer._load(component.get(), reader, assetCache);
 
         // Add component
         entity._scene->_addComponentWithoutReturn(entity, component);
     }
+}
+
+ComponentTypeId EntitySerializer::_typeId(const std::string& typeName) const
+{
+    auto it = _componentTypeIds.find(typeName);
+    if (it == _componentTypeIds.end())
+    {
+        throw Error(format("No serializer registered for component type name '%s'", typeName));
+    }
+    return (*it).second;
+}
+
+const std::string& EntitySerializer::_typeName(ComponentTypeId typeId) const
+{
+    auto it = _componentTypeNames.find(typeId);
+    if (it == _componentTypeNames.end())
+    {
+        throw Error(format("No serializer registered for component type id '%d'", typeId));
+    }
+    return (*it).second;
+}
+
+const BaseComponentSerializer& EntitySerializer::_serializer(ComponentTypeId typeId) const
+{
+    auto it = _componentSerializers.find(typeId);
+    if (it == _componentSerializers.end())
+    {
+        throw Error(format("No serializer registered for component type id '%d'", typeId));
+    }
+    return *(*it).second;
+}
+
+BaseComponent::Ref EntitySerializer::_constructComponent(ComponentTypeId typeId) const
+{
+    auto it = _componentConstructors.find(typeId);
+    if (it == _componentConstructors.end())
+    {
+        throw Error(format("No serializer registered for component type id '%d'", typeId));
+    }
+    return (*it).second();
 }
