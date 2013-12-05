@@ -25,7 +25,7 @@ void Scene::refresh()
     // Add all activated entities to systems that include them
     for (Entity::Id id : _activatedEntityIds)
     {
-        Entity& entity = _entityWithId(id);
+        Entity entity = _entityWithId(id);
         for (System* system : _systems)
         {
             if (system->includesEntity(entity))
@@ -42,7 +42,7 @@ void Scene::refresh()
     // Remove all destroyed entities from systems that include them
     for (Entity::Id id : _destroyedEntityIds)
     {
-        Entity& entity = _entityWithId(id);
+        Entity entity = _entityWithId(id);
         for (System* system : _systems)
         {
             if (system->includesEntity(entity))
@@ -59,7 +59,6 @@ void Scene::refresh()
 
         // Clear entity data
         _entityComponents[id].clear();
-        EntityData& data = _entityData[id];
         _entityData[id] = EntityData();
 
         // Re-use this id
@@ -79,7 +78,7 @@ void Scene::addSystem(System& system)
         Entity entity = _entityWithId(id);
         if (entity && entity.isActivated() && system.includesEntity(entity))
         {
-            system.addEntity(Entity(*this, id));
+            system.addEntity(entity);
         }
     }
 }

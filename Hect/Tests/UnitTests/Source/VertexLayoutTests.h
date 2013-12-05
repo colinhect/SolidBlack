@@ -36,7 +36,7 @@ SUITE(VertexLayout)
 
         VertexLayout vertexLayout(attributes);
 
-        CHECK_EQUAL(0, vertexLayout.attributes()[0].offset());
+        CHECK_EQUAL(0u, vertexLayout.attributes()[0].offset());
         CHECK_EQUAL(vertexLayout.attributes()[0].size(), vertexLayout.attributes()[1].offset());
     }
 
@@ -48,8 +48,8 @@ SUITE(VertexLayout)
 
         VertexLayout vertexLayout(attributes);
 
-        CHECK_EQUAL(4, vertexLayout.attributeWithSemantic(VertexAttributeSemantic::Position)->cardinality());
-        CHECK_EQUAL(3, vertexLayout.attributeWithSemantic(VertexAttributeSemantic::Normal)->cardinality());
+        CHECK_EQUAL(4u, vertexLayout.attributeWithSemantic(VertexAttributeSemantic::Position)->cardinality());
+        CHECK_EQUAL(3u, vertexLayout.attributeWithSemantic(VertexAttributeSemantic::Normal)->cardinality());
     }
 
     TEST(AttributeWithSemanticNegative)
@@ -71,6 +71,6 @@ SUITE(VertexLayout)
 
         VertexLayout vertexLayout(attributes);
 
-        CHECK_EQUAL(4 * 3 + 2 * 3, vertexLayout.vertexSize());
+        CHECK_EQUAL(4u * 3u + 2u * 3u, vertexLayout.vertexSize());
     }
 }

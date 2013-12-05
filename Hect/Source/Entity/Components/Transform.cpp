@@ -103,6 +103,8 @@ void TransformSerializer::save(const Transform& transform, ComponentWriter& writ
 
 void TransformSerializer::load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const
 {
+    assetCache;
+
     if (reader.hasValue("position"))
     {
         transform.setPosition(reader.readVector3("position"));

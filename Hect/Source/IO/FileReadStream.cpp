@@ -29,7 +29,7 @@ void FileReadStream::readBytes(uint8_t* bytes, size_t byteCount)
 
     auto file = (PHYSFS_File*)_handle;
     PHYSFS_sint64 result = PHYSFS_read(file, bytes, 1, (PHYSFS_uint32)byteCount);
-    if (result != byteCount)
+    if (result != (PHYSFS_sint64)byteCount)
     {
         throw Error(format("Failed to read from file: %s", PHYSFS_getLastError()));
     }

@@ -44,30 +44,36 @@ BinaryComponentWriter::BinaryComponentWriter(WriteStream& stream) :
 
 void BinaryComponentWriter::writeNumber(const char* name, double value)
 {
+    name;
     _stream->writeDouble(value);
 }
 
 void BinaryComponentWriter::writeString(const char* name, const std::string& value)
 {
+    name;
     _stream->writeString(value);
 }
 
 void BinaryComponentWriter::writeVector2(const char* name, const Vector2<>& value)
 {
+    name;
     _stream->writeVector2(value);
 }
 
 void BinaryComponentWriter::writeVector3(const char* name, const Vector3<>& value)
 {
+    name;
     _stream->writeVector3(value);
 }
 
 void BinaryComponentWriter::writeVector4(const char* name, const Vector4<>& value)
 {
+    name;
     _stream->writeVector4(value);
 }
 
 void BinaryComponentWriter::writeQuaternion(const char* name, const Quaternion<>& value)
 {
+    name;
     _stream->writeQuaternion(value);
 }

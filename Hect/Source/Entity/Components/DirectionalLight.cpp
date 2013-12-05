@@ -36,6 +36,8 @@ void DirectionalLightSerializer::save(const DirectionalLight& light, ComponentWr
 
 void DirectionalLightSerializer::load(DirectionalLight& light, ComponentReader& reader, AssetCache& assetCache) const
 {
+    assetCache;
+
     if (reader.hasValue("direction"))
     {
         light.setDirection(reader.readVector3("direction"));

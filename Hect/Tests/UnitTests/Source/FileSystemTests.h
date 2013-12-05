@@ -233,7 +233,7 @@ SUITE(FileSystem)
         }, [] (ReadStream* stream)
         {
             uint32_t value = stream->readUnsignedInt();
-            CHECK_EQUAL(123, value);
+            CHECK_EQUAL(123u, value);
             CHECK(stream->endOfStream());
         });
     }

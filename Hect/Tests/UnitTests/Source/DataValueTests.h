@@ -163,6 +163,7 @@ SUITE(DataValue)
         DataValue value;
         for (const DataValue& element : value)
         {
+            element;
             CHECK(false);
         }
     }

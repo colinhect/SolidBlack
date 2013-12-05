@@ -115,6 +115,8 @@ void CameraSerializer::save(const Camera& camera, ComponentWriter& writer) const
 
 void CameraSerializer::load(Camera& camera, ComponentReader& reader, AssetCache& assetCache) const
 {
+    assetCache;
+
     if (reader.hasValue("fieldOfView"))
     {
         camera.setFieldOfView(Angle<>::fromDegrees(reader.readNumber("fieldOfView")));

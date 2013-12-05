@@ -24,6 +24,7 @@ void System::removeAllEntities()
 
 bool System::includesEntity(const Entity& entity) const
 {
+    entity;
     return true;
 }
 

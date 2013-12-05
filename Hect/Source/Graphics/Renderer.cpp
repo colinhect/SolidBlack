@@ -165,6 +165,10 @@ Renderer::Renderer(Window& window) :
     _boundShader(nullptr),
     _boundMesh(nullptr)
 {
+    // This is a parameter only to ensure the window is created before the
+    // renderer; I'm not sure if the renderer has any use for it
+    window;
+
     glewExperimental = GL_TRUE;
     GLenum error = glewInit();
     if (error != GLEW_OK)
@@ -495,7 +499,6 @@ void Renderer::setUniform(const Uniform& uniform, const UniformValue& value)
         return;
     }
 
-    UniformType type = value.type();
     switch (value.type())
     {
     case UniformType::Int:

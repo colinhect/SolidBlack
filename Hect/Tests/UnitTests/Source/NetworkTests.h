@@ -109,6 +109,8 @@ SUITE(Network)
         {
             runTestClient(1, 1, [] (Socket& socket, SocketEvent& event)
             {
+                socket;
+
                 if (event.type == SocketEventType::Receive)
                 {
                     PacketReadStream stream = event.packet.readStream();

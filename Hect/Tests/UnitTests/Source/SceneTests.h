@@ -18,6 +18,8 @@ SUITE(Scene)
 
         void load(Name& name, ComponentReader& reader, AssetCache& assetCache) const
         {
+            assetCache;
+
             if (reader.hasValue("value"))
             {
                 name.value = reader.readString("value");
@@ -43,6 +45,8 @@ SUITE(Scene)
 
         void load(Position& position, ComponentReader& reader, AssetCache& assetCache) const
         {
+            assetCache;
+
             if (reader.hasValue("value"))
             {
                 position.value = reader.readVector3("value");
@@ -68,6 +72,8 @@ SUITE(Scene)
 
         void load(Velocity& velocity, ComponentReader& reader, AssetCache& assetCache) const
         {
+            assetCache;
+
             if (reader.hasValue("value"))
             {
                 velocity.value = reader.readVector3("value");

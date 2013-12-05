@@ -21,10 +21,10 @@ SUITE(Mesh)
         Mesh mesh(vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
 
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
-        CHECK_EQUAL(2, meshVertexLayout.attributes().size());
+        CHECK_EQUAL(2u, meshVertexLayout.attributes().size());
         CHECK(VertexAttributeSemantic::Position == meshVertexLayout.attributes()[0].semantic());
         CHECK(VertexAttributeType::Float == meshVertexLayout.attributes()[0].type());
-        CHECK_EQUAL(3, meshVertexLayout.attributes()[0].cardinality());
+        CHECK_EQUAL(3u, meshVertexLayout.attributes()[0].cardinality());
 
         CHECK(PrimitiveType::Triangles == mesh.primitiveType());
         CHECK(IndexType::UnsignedByte == mesh.indexType());

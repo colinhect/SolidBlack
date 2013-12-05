@@ -24,6 +24,8 @@ void AmbientLightSerializer::save(const AmbientLight& light, ComponentWriter& wr
 
 void AmbientLightSerializer::load(AmbientLight& light, ComponentReader& reader, AssetCache& assetCache) const
 {
+    assetCache;
+
     if (reader.hasValue("color"))
     {
         light.setColor(reader.readVector3("color"));

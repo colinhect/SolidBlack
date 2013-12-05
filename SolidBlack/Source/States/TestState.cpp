@@ -45,6 +45,8 @@ void TestState::update(double timeStep)
 
 void TestState::render(double delta)
 {
+    delta;
+
     if (!isActivated() || !_cameraSystem.hasCamera())
     {
         return;

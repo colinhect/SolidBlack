@@ -2,7 +2,15 @@
 
 #include "Hect.h"
 
+#ifdef HECT_WINDOWS
+#pragma warning(push, 0)
+#endif
+
 #include <btBulletDynamicsCommon.h>
+
+#ifdef HECT_WINDOWS
+#pragma warning(pop)
+#endif
 
 namespace hect
 {

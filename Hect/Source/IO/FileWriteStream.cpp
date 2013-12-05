@@ -21,7 +21,7 @@ void FileWriteStream::writeBytes(const uint8_t* bytes, size_t byteCount)
 
     auto file = (PHYSFS_File*)_handle;
     PHYSFS_sint64 result = PHYSFS_write(file, bytes, 1, (PHYSFS_uint32)byteCount);
-    if (result != byteCount)
+    if (result != (PHYSFS_sint64)byteCount)
     {
         throw Error(format("Failed to write to file: %s", PHYSFS_getLastError()));
     }

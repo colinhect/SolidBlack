@@ -65,7 +65,6 @@ void testTasksWithErrors(unsigned threadCount, unsigned taskCount, TaskAction ac
         }));
     }
 
-    unsigned i = 0;
     for (auto& task : tasks)
     {
         bool errorThrown = false;

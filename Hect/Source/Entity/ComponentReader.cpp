@@ -49,35 +49,42 @@ BinaryComponentReader::BinaryComponentReader(ReadStream& stream) :
 
 bool BinaryComponentReader::hasValue(const char* name)
 {
+    name;
     return true; // Assume that all values are written
 }
 
 double BinaryComponentReader::readNumber(const char* name)
 {
+    name;
     return _stream->readDouble();
 }
 
 std::string BinaryComponentReader::readString(const char* name)
 {
+    name;
     return _stream->readString();
 }
 
 Vector2<> BinaryComponentReader::readVector2(const char* name)
 {
+    name;
     return _stream->readVector2();
 }
 
 Vector3<> BinaryComponentReader::readVector3(const char* name)
 {
+    name;
     return _stream->readVector3();
 }
 
 Vector4<> BinaryComponentReader::readVector4(const char* name)
 {
+    name;
     return _stream->readVector4();
 }
 
 Quaternion<> BinaryComponentReader::readQuaternion(const char* name)
 {
+    name;
     return _stream->readQuaternion();
 }
