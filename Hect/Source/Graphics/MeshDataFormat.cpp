@@ -33,12 +33,12 @@ void MeshDataFormat::load(Mesh& mesh, const DataValue& dataValue)
         mesh.setVertexLayout(VertexLayout(attributes));
     }
 
-    MeshBuilder meshBuilder(mesh);
+    MeshWriter meshWriter(mesh);
 
     // Add the vertices
     for (const DataValue& vertex : dataValue["vertices"])
     {
-        meshBuilder.addVertex();
+        meshWriter.addVertex();
 
         // For each attribute
         for (const DataValue& attribute : vertex)
@@ -51,10 +51,10 @@ void MeshDataFormat::load(Mesh& mesh, const DataValue& dataValue)
             case VertexAttributeSemantic::Normal:
             case VertexAttributeSemantic::Tangent:
             case VertexAttributeSemantic::Binormal:
-                meshBuilder.setAttributeData(semantic, attribute["data"].asVector3());
+                meshWriter.setAttributeData(semantic, attribute["data"].asVector3());
                 break;
             default:
-                meshBuilder.setAttributeData(semantic, attribute["data"].asVector2());
+                meshWriter.setAttributeData(semantic, attribute["data"].asVector2());
             }
         }
     }
@@ -63,7 +63,7 @@ void MeshDataFormat::load(Mesh& mesh, const DataValue& dataValue)
     for (const DataValue& index : dataValue["indices"])
     {
         unsigned indexValue = index.asUnsigned();
-        meshBuilder.addIndex(indexValue);
+        meshWriter.addIndex(indexValue);
     }
 }
 

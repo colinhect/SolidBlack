@@ -168,7 +168,7 @@
     <ClInclude Include="Source\FrustumTests.h" />
     <ClInclude Include="Source\DataValueJsonFormatTests.h" />
     <ClInclude Include="Source\Matrix4Tests.h" />
-    <ClInclude Include="Source\MeshBuilderTests.h" />
+    <ClInclude Include="Source\MeshWriterTests.h" />
     <ClInclude Include="Source\MeshDataFormatTests.h" />
     <ClInclude Include="Source\MeshTests.h" />
     <ClInclude Include="Source\NetworkTests.h" />

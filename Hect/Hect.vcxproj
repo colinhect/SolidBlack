@@ -59,7 +59,7 @@
     <ClCompile Include="Source\Graphics\MaterialDataFormat.cpp" />
     <ClCompile Include="Source\Graphics\MaterialLoader.cpp" />
     <ClCompile Include="Source\Graphics\Mesh.cpp" />
-    <ClCompile Include="Source\Graphics\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Graphics\MeshWriter.cpp" />
     <ClCompile Include="Source\Graphics\MeshDataFormat.cpp" />
     <ClCompile Include="Source\Graphics\MeshLoader.cpp" />
     <ClCompile Include="Source\Graphics\Pass.cpp" />
@@ -145,7 +145,7 @@
     <ClInclude Include="Source\Graphics\Material.h" />
     <ClInclude Include="Source\Graphics\MaterialDataFormat.h" />
     <ClInclude Include="Source\Graphics\Mesh.h" />
-    <ClInclude Include="Source\Graphics\MeshBuilder.h" />
+    <ClInclude Include="Source\Graphics\MeshWriter.h" />
     <ClInclude Include="Source\Graphics\MeshDataFormat.h" />
     <ClInclude Include="Source\Graphics\Pass.h" />
     <ClInclude Include="Source\Graphics\PassUniformValue.h" />
@@ -206,7 +206,7 @@
     <None Include="Source\Entity\Component.inl" />
     <None Include="Source\Entity\EntitySerializer.inl" />
     <None Include="Source\Entity\Scene.inl" />
-    <None Include="Source\Graphics\MeshBuilder.inl" />
+    <None Include="Source\Graphics\MeshWriter.inl" />
     <None Include="Source\Math\Angle.inl" />
     <None Include="Source\Math\AxisAlignedBox.inl" />
     <None Include="Source\Math\Box.inl" />

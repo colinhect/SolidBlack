@@ -4,20 +4,20 @@ namespace hect
 {
 
 ///
-/// Provides an interface for building a mesh without knowledge of the
+/// Provides an interface for writing to a mesh without knowledge of the
 /// vertex layout.
-class MeshBuilder
+class MeshWriter
 {
 public:
 
     ///
-    /// Constructs a mesh builder given a mesh to build on.
+    /// Constructs a mesh writer given a mesh to build on.
     ///
     /// \param mesh The mesh to build on.
-    MeshBuilder(Mesh& mesh);
+    MeshWriter(Mesh& mesh);
 
     ///
-    /// Adds a new vertex.
+    /// Adds a new vertex to the mesh.
     ///
     /// \returns The index of the added vertex.
     size_t addVertex();
@@ -55,7 +55,7 @@ public:
     void setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value);
 
     ///
-    /// Adds an index.
+    /// Adds an index to the mesh.
     void addIndex(uint64_t value);
 
 private:
@@ -70,4 +70,4 @@ private:
 
 }
 
-#include "MeshBuilder.inl"
+#include "MeshWriter.inl"

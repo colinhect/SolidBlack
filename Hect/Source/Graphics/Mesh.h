@@ -28,7 +28,7 @@ enum class IndexType
 class Mesh :
     public RendererObject
 {
-    friend class MeshBuilder;
+    friend class MeshWriter;
 public:
 
     ///

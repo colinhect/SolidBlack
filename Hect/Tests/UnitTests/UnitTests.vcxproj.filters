@@ -22,9 +22,6 @@
     <ClInclude Include="Source\MemoryStreamTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MeshBuilderTests.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MeshTests.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -83,6 +80,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\DataValueJsonFormatTests.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshWriterTests.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

@@ -141,9 +141,6 @@
     <ClCompile Include="Source\Graphics\Mesh.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\MeshBuilder.cpp">
-      <Filter>Source\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\MeshLoader.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
@@ -312,6 +309,9 @@
     <ClCompile Include="Source\Core\DataValueJsonFormat.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\MeshWriter.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -393,9 +393,6 @@
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Mesh.h">
-      <Filter>Source\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\MeshBuilder.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Pass.h">
@@ -590,6 +587,9 @@
     <ClInclude Include="Source\Core\DataValueJsonFormat.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\MeshWriter.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -609,9 +609,6 @@
     </None>
     <None Include="Source\Entity\Scene.inl">
       <Filter>Source\Entity</Filter>
-    </None>
-    <None Include="Source\Graphics\MeshBuilder.inl">
-      <Filter>Source\Graphics</Filter>
     </None>
     <None Include="Source\Math\Angle.inl">
       <Filter>Source\Math</Filter>
@@ -654,6 +651,9 @@
     </None>
     <None Include="Source\Math\Sphere.inl">
       <Filter>Source\Math</Filter>
+    </None>
+    <None Include="Source\Graphics\MeshWriter.inl">
+      <Filter>Source\Graphics</Filter>
     </None>
   </ItemGroup>
 </Project>

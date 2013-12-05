@@ -2,13 +2,13 @@
 
 using namespace hect;
 
-MeshBuilder::MeshBuilder(Mesh& mesh) :
+MeshWriter::MeshWriter(Mesh& mesh) :
     _mesh(&mesh),
     _vertexDataIndex(0)
 {
 }
 
-size_t MeshBuilder::addVertex()
+size_t MeshWriter::addVertex()
 {
     _vertexDataIndex = _mesh->_vertexData.size();
 
@@ -21,7 +21,7 @@ size_t MeshBuilder::addVertex()
     return _mesh->_vertexCount++;
 }
 
-void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, float value)
+void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, float value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -30,7 +30,7 @@ void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, float value
     }
 }
 
-void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value)
+void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -61,7 +61,7 @@ void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vecto
     }
 }
 
-void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value)
+void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value)
 {
     // If this data is a position then expand the bounding box to include it
     if (semantic == VertexAttributeSemantic::Position)
@@ -103,7 +103,7 @@ void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vecto
     }
 }
 
-void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value)
+void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -144,7 +144,7 @@ void MeshBuilder::setAttributeData(VertexAttributeSemantic semantic, const Vecto
     }
 }
 
-void MeshBuilder::addIndex(uint64_t value)
+void MeshWriter::addIndex(uint64_t value)
 {
     IndexType indexType = _mesh->indexType();
     size_t indexSize = _mesh->indexSize();
@@ -173,7 +173,7 @@ void MeshBuilder::addIndex(uint64_t value)
     ++_mesh->_indexCount;
 }
 
-void MeshBuilder::_setComponentValue(const VertexAttribute* attribute, unsigned index, float value)
+void MeshWriter::_setComponentValue(const VertexAttribute* attribute, unsigned index, float value)
 {
     switch (attribute->type())
     {
