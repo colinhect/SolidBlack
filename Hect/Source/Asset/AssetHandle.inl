@@ -8,6 +8,12 @@ AssetHandle<T>::AssetHandle() :
 }
 
 template <typename T>
+AssetHandle<T>::AssetHandle(AssetEntry<T>& entry) :
+    _entry(&entry)
+{
+}
+
+template <typename T>
 T* AssetHandle<T>::get()
 {
     return getShared().get();
@@ -31,12 +37,6 @@ const Path& AssetHandle<T>::path() const
         throw Error("Asset entry is null");
     }
     return _entry->path();
-}
-
-template <typename T>
-AssetHandle<T>::AssetHandle(AssetEntry<T>* entry) :
-    _entry(entry)
-{
 }
 
 }

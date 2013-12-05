@@ -22,8 +22,15 @@ template <typename T>
 class AssetEntry :
     public AssetEntryBase
 {
-    friend class AssetCache;
 public:
+
+    ///
+    /// Constructs an asset entry given the asset cache and the path to the
+    /// asset.
+    ///
+    /// \param assetCache The asset cache.
+    /// \param path The path to the asset.
+    AssetEntry(AssetCache& assetCache, const Path& path);
 
     ///
     /// Returns a shared pointer to the asset.
@@ -34,8 +41,6 @@ public:
     const Path& path() const;
 
 private:
-    AssetEntry(AssetCache& assetCache, const Path& path);
-
     void _load();
 
     AssetCache* _assetCache;

@@ -8,12 +8,17 @@ namespace hect
 template <typename T>
 class AssetHandle
 {
-    friend class AssetCache;
 public:
 
     ///
     /// Constructs an empty asset handle.
     AssetHandle();
+
+    ///
+    /// Constructs an asset handle given an asset entry.
+    ///
+    /// \param entry The asset entry.
+    AssetHandle(AssetEntry<T>& entry);
 
     ///
     /// Returns a raw pointer to the asset.
@@ -34,8 +39,6 @@ public:
     const Path& path() const;
 
 private:
-    AssetHandle(AssetEntry<T>* entry);
-
     AssetEntry<T>* _entry;
 };
 

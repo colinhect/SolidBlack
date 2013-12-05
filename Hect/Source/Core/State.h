@@ -14,7 +14,12 @@ public:
     /// A shared reference to a state.
     typedef std::shared_ptr<State> Ref;
 
+    ///
+    /// Constructs a state.
     State();
+
+    ///
+    /// Virtual destructor.
     virtual ~State() { }
 
     ///

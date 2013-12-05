@@ -18,9 +18,6 @@ AssetHandle<T> AssetCache::getHandle(const Path& path)
         std::shared_ptr<AssetEntry<T>> sharedEntry(new AssetEntry<T>(*this, path));
         entry = sharedEntry.get();
 
-        // Load the asset
-        entry->_load();
-
         // Add the new entry to the entry map
         _entries[path] = sharedEntry;
     }
@@ -37,7 +34,7 @@ AssetHandle<T> AssetCache::getHandle(const Path& path)
         }
     }
 
-    return AssetHandle<T>(entry);
+    return AssetHandle<T>(*entry);
 }
 
 }
