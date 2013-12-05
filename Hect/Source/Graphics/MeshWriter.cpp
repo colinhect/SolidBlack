@@ -156,17 +156,20 @@ void MeshWriter::addIndex(uint64_t value)
         _mesh->_indexData.push_back(0);
     }
 
+    // Get the location of the index
+    void* index = &_mesh->_indexData[indexDataIndex];
+
     // Set the index data based on the type
     switch (indexType)
     {
     case IndexType::UnsignedByte:
-        *(uint8_t*)&_mesh->_indexData[indexDataIndex] = (uint8_t)value;
+        *(uint8_t*)index = (uint8_t)value;
         break;
     case IndexType::UnsignedShort:
-        *(uint16_t*)&_mesh->_indexData[indexDataIndex] = (uint16_t)value;
+        *(uint16_t*)index = (uint16_t)value;
         break;
     case IndexType::UnsignedInt:
-        *(uint32_t*)&_mesh->_indexData[indexDataIndex] = (uint32_t)value;
+        *(uint32_t*)index = (uint32_t)value;
         break;
     }
 
@@ -174,14 +177,17 @@ void MeshWriter::addIndex(uint64_t value)
 }
 
 void MeshWriter::_setComponentValue(const VertexAttribute* attribute, unsigned index, float value)
-{
+{    
+    size_t offset = _vertexDataIndex + attribute->offset();
+
+    // Set the vertex data based on the type
     switch (attribute->type())
     {
     case VertexAttributeType::Half:
         throw Error("16-bit floats are not yet implemented");
         break;
     case VertexAttributeType::Float:
-        *(float*)&_mesh->_vertexData[_vertexDataIndex + attribute->offset() + index * 4] = value;
+        *(float*)&_mesh->_vertexData[offset + index * 4] = value;
         break;
     }
 }
