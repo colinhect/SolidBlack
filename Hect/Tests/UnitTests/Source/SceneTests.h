@@ -56,7 +56,7 @@ SUITE(Scene)
     public:
         Vector3<double> value;
     };
-    
+
     class VelocitySerializer :
         public ComponentSerializer<Velocity>
     {
@@ -117,7 +117,7 @@ SUITE(Scene)
         CHECK(!a.isActivated());
 
         a.destroy();
-        
+
         CHECK(!a.isNull());
         CHECK(!a.isActivated());
 
@@ -197,7 +197,7 @@ SUITE(Scene)
     {
         MovementSystem movementSystem;
         NamingSystem namingSystem;
-        
+
         Scene scene;
 
         scene.addSystem(movementSystem);
@@ -258,7 +258,7 @@ SUITE(Scene)
 
         Entity a = scene.createEntity();
         Entity b = a.clone();
-        
+
         CHECK(a != b);
     }
 
@@ -272,7 +272,7 @@ SUITE(Scene)
         CHECK_EQUAL("Testing", a.component<Name>().value);
 
         Entity b = a.clone();
-        
+
         CHECK(b.hasComponent<Name>());
         CHECK(&a.component<Name>() != &b.component<Name>());
         CHECK_EQUAL("Testing", b.component<Name>().value);
@@ -335,14 +335,14 @@ SUITE(Scene)
 
         {
             MemoryWriteStream stream(data);
-            frank.save(stream); 
+            frank.save(stream);
         }
 
         Entity frankDeserialized = scene.createEntity();
 
         {
             MemoryReadStream stream(data);
-            frankDeserialized.load(stream, assetCache); 
+            frankDeserialized.load(stream, assetCache);
         }
 
         CHECK(frankDeserialized.hasComponent<Name>());
@@ -356,7 +356,7 @@ SUITE(Scene)
     {
         FileSystem fileSystem;
         AssetCache assetCache(fileSystem);
-        
+
         DataValue sceneValue;
         {
             Scene scene;
@@ -396,7 +396,7 @@ SUITE(Scene)
     {
         FileSystem fileSystem;
         AssetCache assetCache(fileSystem);
-        
+
         std::vector<uint8_t> data;
         {
             Scene scene;
@@ -413,7 +413,7 @@ SUITE(Scene)
             scene.refresh();
             {
                 MemoryWriteStream stream(data);
-                scene.save(stream); 
+                scene.save(stream);
             }
         }
 
@@ -426,7 +426,7 @@ SUITE(Scene)
 
         {
             MemoryReadStream stream(data);
-            scene.load(stream, assetCache); 
+            scene.load(stream, assetCache);
         }
         scene.refresh();
 

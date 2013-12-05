@@ -4,7 +4,7 @@ SUITE(AssetCache)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
@@ -16,7 +16,7 @@ SUITE(AssetCache)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("DoesNotExist");
@@ -38,7 +38,7 @@ SUITE(AssetCache)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
@@ -51,7 +51,7 @@ SUITE(AssetCache)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");

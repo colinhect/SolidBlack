@@ -4,7 +4,7 @@ SUITE(MeshDataFormat)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         Mesh* mesh = assetCache.getHandle<Mesh>("Window.mesh").get();
@@ -20,7 +20,7 @@ SUITE(MeshDataFormat)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         Mesh* mesh = assetCache.getHandle<Mesh>("IndexType.mesh").get();
@@ -32,7 +32,7 @@ SUITE(MeshDataFormat)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         Mesh* mesh = assetCache.getHandle<Mesh>("PrimitiveType.mesh").get();

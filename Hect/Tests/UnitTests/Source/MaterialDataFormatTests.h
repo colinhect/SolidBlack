@@ -4,7 +4,7 @@ SUITE(MaterialDataFormat)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         Material* base = assetCache.getHandle<Material>("Base.material").get();
@@ -29,7 +29,7 @@ SUITE(MaterialDataFormat)
     {
         FileSystem fileSystem;
         fileSystem.addDataSource("Data");
-        
+
         AssetCache assetCache(fileSystem);
 
         Material* test = assetCache.getHandle<Material>("Test.material").get();

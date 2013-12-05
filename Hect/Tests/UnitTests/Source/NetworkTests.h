@@ -20,7 +20,7 @@ void runTestServer(unsigned maxConnectionCount, uint8_t channelCount, std::funct
             break;
         }
     }
-            
+
     CHECK(connection);
     CHECK(disconnection);
 }
@@ -58,7 +58,7 @@ void runTestClient(unsigned maxConnectionCount, uint8_t channelCount, std::funct
             }
         }
     }
-            
+
     CHECK(connection);
     CHECK(disconnection);
 }
