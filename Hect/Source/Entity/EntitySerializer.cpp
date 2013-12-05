@@ -18,23 +18,22 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
     {
         throw Error("Entity is null");
     }
-    Scene* scene = entity._scene;
-    Entity::Id id = entity._id;
 
     DataValue::Object members;
 
-    auto& components = scene->_entityComponents[id];
-    for (auto& pair : components)
+    // For each component in the entity
+    for (BaseComponent* component : entity.components())
     {
-        BaseComponent* component = pair.second.get();
         ComponentTypeId typeId = component->componentTypeId();
         const std::string& typeName = _typeName(typeId);
         const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Serialize
         DataValueComponentWriter writer;
-        serializer._save(component, writer);
+        serializer.save(component, writer);
 
+        // Save the resulting data value from the writer to the member data
+        // value
         members[typeName] = writer.dataValue();
     }
 
@@ -47,23 +46,23 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
     {
         throw Error("Entity is null");
     }
-    Scene* scene = entity._scene;
-    Entity::Id id = entity._id;
 
-    auto& components = scene->_entityComponents[id];
+    // Write the number of components as a byte
+    std::vector<BaseComponent*> components = entity.components();
     stream.writeByte((uint8_t)components.size());
 
-    for (auto& pair : components)
+    // For each component in the entity
+    for (BaseComponent* component : components)
     {
-        BaseComponent* component = pair.second.get();
         ComponentTypeId typeId = component->componentTypeId();
         const BaseComponentSerializer& serializer = _serializer(typeId);
 
+        // Write the type id as a byte
         stream.writeByte((uint8_t)typeId);
 
         // Serialize
         BinaryComponentWriter writer(stream);
-        serializer._save(component, writer);
+        serializer.save(component, writer);
     }
 }
 
@@ -74,20 +73,21 @@ void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCac
         throw Error("Entity is null");
     }
 
+    // For each component type name
     for (const std::string& typeName : dataValue.memberNames())
     {
         ComponentTypeId typeId = _typeId(typeName);
         const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Create component
-        BaseComponent::Ref component = _constructComponent(typeId);
+        BaseComponent* component = _constructComponent(typeId);
 
         // Deserialize
         DataValueComponentReader reader(dataValue[typeName]);
-        serializer._load(component.get(), reader, assetCache);
+        serializer.load(component, reader, assetCache);
 
         // Add component
-        entity._scene->_addComponentWithoutReturn(entity, component);
+        entity.addComponent(component);
     }
 }
 
@@ -98,21 +98,24 @@ void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& asse
         throw Error("Entity is null");
     }
 
+    // Read the number of components
     uint8_t componentCount = stream.readByte();
+
+    // For each component
     for (uint8_t i = 0; i < componentCount; ++i)
     {
         ComponentTypeId typeId = stream.readByte();
         const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Create component
-        BaseComponent::Ref component = _constructComponent(typeId);
+        BaseComponent* component = _constructComponent(typeId);
 
         // Deserialize
         BinaryComponentReader reader(stream);
-        serializer._load(component.get(), reader, assetCache);
+        serializer.load(component, reader, assetCache);
 
         // Add component
-        entity._scene->_addComponentWithoutReturn(entity, component);
+        entity.addComponent(component);
     }
 }
 
@@ -146,7 +149,7 @@ const BaseComponentSerializer& EntitySerializer::_serializer(ComponentTypeId typ
     return *(*it).second;
 }
 
-BaseComponent::Ref EntitySerializer::_constructComponent(ComponentTypeId typeId) const
+BaseComponent* EntitySerializer::_constructComponent(ComponentTypeId typeId) const
 {
     auto it = _componentConstructors.find(typeId);
     if (it == _componentConstructors.end())

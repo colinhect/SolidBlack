@@ -4,21 +4,75 @@ SUITE(Scene)
         public Component<Name>
     {
     public:
-        std::string name;
+        std::string value;
+    };
+
+    class NameSerializer :
+        public ComponentSerializer<Name>
+    {
+    public:
+        void save(const Name& name, ComponentWriter& writer) const
+        {
+            writer.writeString("value", name.value);
+        }
+
+        void load(Name& name, ComponentReader& reader, AssetCache& assetCache) const
+        {
+            if (reader.hasValue("value"))
+            {
+                name.value = reader.readString("value");
+            }
+        }
     };
 
     class Position :
         public Component<Position>
     {
     public:
-        Vector3<double> position;
+        Vector3<double> value;
+    };
+
+    class PositionSerializer :
+        public ComponentSerializer<Position>
+    {
+    public:
+        void save(const Position& position, ComponentWriter& writer) const
+        {
+            writer.writeVector3("value", position.value);
+        }
+
+        void load(Position& position, ComponentReader& reader, AssetCache& assetCache) const
+        {
+            if (reader.hasValue("value"))
+            {
+                position.value = reader.readVector3("value");
+            }
+        }
     };
 
     class Velocity :
         public Component<Velocity>
     {
     public:
-        Vector3<double> velocity;
+        Vector3<double> value;
+    };
+    
+    class VelocitySerializer :
+        public ComponentSerializer<Velocity>
+    {
+    public:
+        void save(const Velocity& velocity, ComponentWriter& writer) const
+        {
+            writer.writeVector3("value", velocity.value);
+        }
+
+        void load(Velocity& velocity, ComponentReader& reader, AssetCache& assetCache) const
+        {
+            if (reader.hasValue("value"))
+            {
+                velocity.value = reader.readVector3("value");
+            }
+        }
     };
 
     class MovementSystem :
@@ -85,9 +139,9 @@ SUITE(Scene)
         CHECK(a.hasComponent<Name>());
 
         Name& name = a.component<Name>();
-        name.name = "Testing";
+        name.value = "Testing";
 
-        CHECK_EQUAL("Testing", a.component<Name>().name);
+        CHECK_EQUAL("Testing", a.component<Name>().value);
     }
 
     TEST(ActivationAndDestruction)
@@ -135,7 +189,7 @@ SUITE(Scene)
         {
             CHECK(!entity.isNull());
             CHECK(entity.hasComponent<Name>());
-            CHECK_EQUAL("", entity.component<Name>().name);
+            CHECK_EQUAL("", entity.component<Name>().value);
         }
     }
 
@@ -150,12 +204,12 @@ SUITE(Scene)
         scene.addSystem(namingSystem);
 
         Entity frank = scene.createEntity();
-        frank.addComponent<Name>().name = "Frank";
+        frank.addComponent<Name>().value = "Frank";
         frank.addComponent<Velocity>();
         frank.activate();
 
         Entity joe = scene.createEntity();
-        joe.addComponent<Name>().name = "Joe";
+        joe.addComponent<Name>().value = "Joe";
         joe.addComponent<Velocity>();
         joe.addComponent<Position>();
         joe.activate();
@@ -213,15 +267,15 @@ SUITE(Scene)
         Scene scene;
 
         Entity a = scene.createEntity();
-        a.addComponent<Name>().name = "Testing";
+        a.addComponent<Name>().value = "Testing";
 
-        CHECK_EQUAL("Testing", a.component<Name>().name);
+        CHECK_EQUAL("Testing", a.component<Name>().value);
 
         Entity b = a.clone();
         
         CHECK(b.hasComponent<Name>());
         CHECK(&a.component<Name>() != &b.component<Name>());
-        CHECK_EQUAL("Testing", b.component<Name>().name);
+        CHECK_EQUAL("Testing", b.component<Name>().value);
     }
 
     TEST(CloneActivatedEntity)
@@ -236,5 +290,151 @@ SUITE(Scene)
         Entity b = a.clone();
 
         CHECK(!b.isActivated());
+    }
+
+    TEST(SaveAndLoadEntityUsingDataValue)
+    {
+        FileSystem fileSystem;
+        AssetCache assetCache(fileSystem);
+
+        Scene scene;
+        scene.registerComponent<Name, NameSerializer>("Name");
+        scene.registerComponent<Position, PositionSerializer>("Position");
+
+        Entity frank = scene.createEntity();
+        frank.addComponent<Name>().value = "Frank";
+        frank.addComponent<Position>().value = Vector3<>(1, 2, 3);
+
+        DataValue frankValue;
+        frank.save(frankValue);
+
+        Entity frankDeserialized = scene.createEntity();
+        frankDeserialized.load(frankValue, assetCache);
+
+        CHECK(frankDeserialized.hasComponent<Name>());
+        CHECK(frankDeserialized.hasComponent<Position>());
+
+        CHECK_EQUAL("Frank", frankDeserialized.component<Name>().value);
+        CHECK_EQUAL(2, frankDeserialized.component<Position>().value.y);
+    }
+
+    TEST(SaveAndLoadEntityUsingStream)
+    {
+        FileSystem fileSystem;
+        AssetCache assetCache(fileSystem);
+
+        Scene scene;
+        scene.registerComponent<Name, NameSerializer>("Name");
+        scene.registerComponent<Position, PositionSerializer>("Position");
+
+        Entity frank = scene.createEntity();
+        frank.addComponent<Name>().value = "Frank";
+        frank.addComponent<Position>().value = Vector3<>(1, 2, 3);
+
+        std::vector<uint8_t> data;
+
+        {
+            MemoryWriteStream stream(data);
+            frank.save(stream); 
+        }
+
+        Entity frankDeserialized = scene.createEntity();
+
+        {
+            MemoryReadStream stream(data);
+            frankDeserialized.load(stream, assetCache); 
+        }
+
+        CHECK(frankDeserialized.hasComponent<Name>());
+        CHECK(frankDeserialized.hasComponent<Position>());
+
+        CHECK_EQUAL("Frank", frankDeserialized.component<Name>().value);
+        CHECK_EQUAL(2, frankDeserialized.component<Position>().value.y);
+    }
+
+    TEST(SaveAndLoadSceneUsingDataValue)
+    {
+        FileSystem fileSystem;
+        AssetCache assetCache(fileSystem);
+        
+        DataValue sceneValue;
+        {
+            Scene scene;
+            scene.registerComponent<Name, NameSerializer>("Name");
+
+            Entity frank = scene.createEntity();
+            frank.addComponent<Name>().value = "Frank";
+            frank.activate();
+
+            Entity joe = scene.createEntity();
+            joe.addComponent<Name>().value = "Joe";
+            joe.activate();
+
+            scene.refresh();
+            scene.save(sceneValue);
+        }
+
+        NamingSystem namingSystem;
+
+        Scene scene;
+        scene.registerComponent<Name, NameSerializer>("Name");
+
+        scene.addSystem(namingSystem);
+
+        scene.load(sceneValue, assetCache);
+        scene.refresh();
+
+        auto& entities = namingSystem.entities();
+        CHECK_EQUAL(2, entities.size());
+        CHECK(entities[0].hasComponent<Name>());
+        CHECK_EQUAL("Frank", entities[0].component<Name>().value);
+        CHECK(entities[1].hasComponent<Name>());
+        CHECK_EQUAL("Joe", entities[1].component<Name>().value);
+    }
+
+    TEST(SaveAndLoadSceneUsingStream)
+    {
+        FileSystem fileSystem;
+        AssetCache assetCache(fileSystem);
+        
+        std::vector<uint8_t> data;
+        {
+            Scene scene;
+            scene.registerComponent<Name, NameSerializer>("Name");
+
+            Entity frank = scene.createEntity();
+            frank.addComponent<Name>().value = "Frank";
+            frank.activate();
+
+            Entity joe = scene.createEntity();
+            joe.addComponent<Name>().value = "Joe";
+            joe.activate();
+
+            scene.refresh();
+            {
+                MemoryWriteStream stream(data);
+                scene.save(stream); 
+            }
+        }
+
+        NamingSystem namingSystem;
+
+        Scene scene;
+        scene.registerComponent<Name, NameSerializer>("Name");
+
+        scene.addSystem(namingSystem);
+
+        {
+            MemoryReadStream stream(data);
+            scene.load(stream, assetCache); 
+        }
+        scene.refresh();
+
+        auto& entities = namingSystem.entities();
+        CHECK_EQUAL(2, entities.size());
+        CHECK(entities[0].hasComponent<Name>());
+        CHECK_EQUAL("Frank", entities[0].component<Name>().value);
+        CHECK(entities[1].hasComponent<Name>());
+        CHECK_EQUAL("Joe", entities[1].component<Name>().value);
     }
 }

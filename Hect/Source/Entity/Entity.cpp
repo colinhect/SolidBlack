@@ -8,6 +8,16 @@ Entity::Entity() :
 {
 }
 
+Scene& Entity::scene() const
+{
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
+    return *_scene;
+}
+
 void Entity::save(DataValue& dataValue)
 {
     if (!_scene)
@@ -109,6 +119,23 @@ void Entity::addComponent(BaseComponent* component)
     }
 
     _scene->_addComponentWithoutReturn(*this, BaseComponent::Ref(component));
+}
+
+std::vector<BaseComponent*> Entity::components() const
+{
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
+    std::vector<BaseComponent*> resultingComponents;
+    auto& components = _scene->_entityComponents[_id];
+    for (auto& pair : components)
+    {
+        resultingComponents.push_back(pair.second.get());
+    }
+
+    return resultingComponents;
 }
 
 Entity::operator bool() const

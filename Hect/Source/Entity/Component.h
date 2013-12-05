@@ -38,7 +38,7 @@ public:
 };
 
 ///
-/// A typed entity component.
+/// A component of an entity.
 template <typename T>
 class Component :
     public BaseComponent

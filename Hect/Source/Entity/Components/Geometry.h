@@ -43,11 +43,19 @@ private:
     AssetHandle<Material> _material;
 };
 
+///
+/// Serializer for Geometry.
 class GeometrySerializer :
     public ComponentSerializer<Geometry>
 {
 public:
+
+    ///
+    /// See BaseComponentSerializer::save()
     void save(const Geometry& geometry, ComponentWriter& writer) const;
+
+    ///
+    /// See BaseComponentSerializer::load()
     void load(Geometry& geometry, ComponentReader& reader, AssetCache& assetCache) const;
 };
 

@@ -39,11 +39,19 @@ private:
     Vector3<> _color;
 };
 
+///
+/// Serializer for DirectionalLight.
 class DirectionalLightSerializer :
     public ComponentSerializer<DirectionalLight>
 {
 public:
+
+    ///
+    /// See BaseComponentSerializer::save()
     void save(const DirectionalLight& light, ComponentWriter& writer) const;
+
+    ///
+    /// See BaseComponentSerializer::load()
     void load(DirectionalLight& light, ComponentReader& reader, AssetCache& assetCache) const;
 };
 

@@ -94,11 +94,19 @@ private:
     Quaternion<> _rotation;
 };
 
+///
+/// Serializer for Transform.
 class TransformSerializer :
     public ComponentSerializer<Transform>
 {
 public:
+
+    ///
+    /// See BaseComponentSerializer::save()
     void save(const Transform& transform, ComponentWriter& writer) const;
+
+    ///
+    /// See BaseComponentSerializer::load()
     void load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const;
 };
 

@@ -9,7 +9,6 @@ class Scene :
     public Uncopyable
 {
     friend class Entity;
-    friend class EntitySerializer;
 public:
 
     ///

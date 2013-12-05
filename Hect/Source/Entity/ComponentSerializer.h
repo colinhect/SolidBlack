@@ -3,17 +3,34 @@
 namespace hect
 {
 
+///
+/// Base component serializer.
 class BaseComponentSerializer
 {
-    friend class EntitySerializer;
 public:
+
+    ///
+    /// A shared reference to a base component serializer.
     typedef std::shared_ptr<BaseComponentSerializer> Ref;
 
+    ///
+    /// Virtual destructor.
     virtual ~BaseComponentSerializer() { }
 
-protected:
-    virtual void _save(const BaseComponent* component, ComponentWriter& writer) const = 0;
-    virtual void _load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const = 0;
+    ///
+    /// Serializes a component using a component writer.
+    ///
+    /// \param component The component.
+    /// \param writer The component writer.
+    virtual void save(const BaseComponent* component, ComponentWriter& writer) const = 0;
+
+    ///
+    /// Deserializes a component using a component reader.
+    ///
+    /// \param component The component.
+    /// \param reader The component reader.
+    /// \param assetCache The asset cache to load referenced assets from.
+    virtual void load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const = 0;
 };
 
 ///
@@ -25,23 +42,20 @@ class ComponentSerializer :
 public:
 
     ///
-    /// Serializes a component to a binary stream.
-    ///
-    /// \param component The component.
-    /// \param writer The component writer.
+    /// \copydoc BaseComponentSerializer::save()
     virtual void save(const T& component, ComponentWriter& writer) const;
 
     ///
-    /// Deserializes a component from a binary stream
-    ///
-    /// \param component The component.
-    /// \param reader The component reader.
-    /// \param assetCache The asset cache to load referenced assets from.
+    /// \copydoc BaseComponentSerializer::load()
     virtual void load(T& component, ComponentReader& reader, AssetCache& assetCache) const;
 
-private:
-    void _save(const BaseComponent* component, ComponentWriter& writer) const;
-    void _load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const;
+    ///
+    /// \copydoc BaseComponentSerializer::save()
+    void save(const BaseComponent* component, ComponentWriter& writer) const;
+
+    ///
+    /// \copydoc BaseComponentSerializer::load()
+    void load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const;
 };
 
 }

@@ -49,7 +49,7 @@ BinaryComponentReader::BinaryComponentReader(ReadStream& stream) :
 
 bool BinaryComponentReader::hasValue(const char* name)
 {
-    return true;
+    return true; // Assume that all values are written
 }
 
 double BinaryComponentReader::readNumber(const char* name)

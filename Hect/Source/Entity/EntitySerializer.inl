@@ -28,7 +28,7 @@ void EntitySerializer::registerComponent(const std::string& componentTypeName)
     _componentSerializers[typeId] = BaseComponentSerializer::Ref(new S());
 
     // Create the constructor
-    _componentConstructors[typeId] = [] { return std::make_shared<T>(); };
+    _componentConstructors[typeId] = [] { return new T(); };
 }
 
 }

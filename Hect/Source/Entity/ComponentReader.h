@@ -5,8 +5,7 @@ namespace hect
 
 ///
 /// Provides access for reading values from a component serialization medium.
-class ComponentReader :
-    public Uncopyable
+class ComponentReader
 {
 public:
 
@@ -67,36 +66,90 @@ public:
     virtual Quaternion<> readQuaternion(const char* name) = 0;
 };
 
+///
+/// Implementation of ComponentReader for reading from data values.
 class DataValueComponentReader :
     public ComponentReader
 {
 public:
+
+    ///
+    /// Constructs the reader given the data value to read from.
+    ///
+    /// \param dataValue The data value to read from.
     DataValueComponentReader(const DataValue& dataValue);
 
+    ///
+    /// \copydoc ComponentReader::hasValue()
     bool hasValue(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readNumber()
     double readNumber(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readString()
     std::string readString(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readVector2()
     Vector2<> readVector2(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readVector3()
     Vector3<> readVector3(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readVector4()
     Vector4<> readVector4(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readQuaternion()
     Quaternion<> readQuaternion(const char* name);
 
 private:
     const DataValue* _dataValue;
 };
 
+///
+/// Implementation of ComponentReader for reading from binary streams.
 class BinaryComponentReader :
     public ComponentReader
 {
 public:
+
+    ///
+    /// Constructs the component reader given the stream for it to read from.
+    ///
+    /// \param stream The stream to read from.
     BinaryComponentReader(ReadStream& stream);
 
+    ///
+    /// \copydoc ComponentReader::hasValue()
     bool hasValue(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readNumber()
     double readNumber(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readString()
     std::string readString(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readVector2()
     Vector2<> readVector2(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readVector3()
     Vector3<> readVector3(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readVector4()
     Vector4<> readVector4(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readQuaternion()
     Quaternion<> readQuaternion(const char* name);
 
 private:

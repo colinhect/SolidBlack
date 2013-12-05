@@ -12,7 +12,6 @@ namespace hect
 class Entity
 {
     friend class Scene;
-    friend class EntitySerializer;
 public:
 
     ///
@@ -22,6 +21,12 @@ public:
     ///
     /// Constructs a null entity.
     Entity();
+
+    ///
+    /// Returns the scene that the entity belongs to.
+    ///
+    /// \throws Error If the entity is null.
+    Scene& scene() const;
 
     ///
     /// Serializes the entity's components to a data value.
@@ -130,10 +135,23 @@ public:
     T& component();
 
     ///
+    /// Returns the components of the entity.
+    std::vector<BaseComponent*> components() const;
+
+    ///
     /// Returns true if the entity is not null; false otherwise.
     operator bool() const;
 
+    ///
+    /// Returns whether an entity is equivalent to another.
+    ///
+    /// \param entity The other entity.
     bool operator==(const Entity& entity) const;
+
+    ///
+    /// Returns whether an entity differs from another.
+    ///
+    /// \param entity The other entity.
     bool operator!=(const Entity& entity) const;
 
 private:

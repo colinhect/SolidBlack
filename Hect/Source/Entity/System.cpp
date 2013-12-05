@@ -9,6 +9,7 @@ void System::addEntity(Entity& entity)
 
 void System::removeEntity(Entity& entity)
 {
+    // Possible performance issue
     _entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());
 }
 

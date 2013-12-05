@@ -39,12 +39,12 @@ void EntityData::setNull(bool null)
     _bitset.set((size_t)EntityDataBit::NotNull, !null);
 }
 
-bool EntityData::hasComponent(ComponentTypeId type) const
+bool EntityData::hasComponent(ComponentTypeId typeId) const
 {
-    return _bitset.test(type);
+    return _bitset.test(typeId);
 }
 
-void EntityData::setHasComponent(ComponentTypeId type, bool value)
+void EntityData::setHasComponent(ComponentTypeId typeId, bool value)
 {
-    _bitset.set(type, value);
+    _bitset.set(typeId, value);
 }

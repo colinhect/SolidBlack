@@ -10,12 +10,15 @@ void Scene::registerComponent(const std::string& componentTypeName)
 template <typename T>
 bool Scene::_hasComponent(const Entity& entity) const
 {
-    if (entity.isNull())
+    Entity::Id id = entity._id;
+    const EntityData& data = _entityData[id];
+
+    if (data.isNull())
     {
         throw Error("Entity is null");
     }
 
-    return _entityData[entity._id].hasComponent(Component<T>::typeId());
+    return data.hasComponent(Component<T>::typeId());
 }
 
 template <typename T>

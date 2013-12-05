@@ -80,6 +80,10 @@ public:
     /// Returns the current state of the peer.
     PeerState state() const;
 
+    ///
+    /// Returns whether the peer the is same as another.
+    ///
+    /// \param peer The other peer.
     bool operator==(const Peer& peer) const;
 
 private:

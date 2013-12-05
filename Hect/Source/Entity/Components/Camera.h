@@ -109,11 +109,19 @@ private:
     Frustum<> _frustum;
 };
 
+///
+/// Serializer for Camera.
 class CameraSerializer :
     public ComponentSerializer<Camera>
 {
 public:
+
+    ///
+    /// See BaseComponentSerializer::save()
     void save(const Camera& camera, ComponentWriter& writer) const;
+
+    ///
+    /// See BaseComponentSerializer::load()
     void load(Camera& camera, ComponentReader& reader, AssetCache& assetCache) const;
 };
 

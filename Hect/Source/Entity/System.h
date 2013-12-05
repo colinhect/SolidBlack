@@ -34,8 +34,6 @@ public:
     /// \param entity The entity to check if the system includes.
     virtual bool includesEntity(const Entity& entity) const;
 
-protected:
-
     ///
     /// Returns the entities currently in the system.
     std::vector<Entity>& entities();

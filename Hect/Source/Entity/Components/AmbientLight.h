@@ -28,11 +28,19 @@ private:
     Vector3<> _color;
 };
 
+///
+/// Serializer for AmbientLight.
 class AmbientLightSerializer :
     public ComponentSerializer<AmbientLight>
 {
 public:
+
+    ///
+    /// See BaseComponentSerializer::save()
     void save(const AmbientLight& light, ComponentWriter& writer) const;
+
+    ///
+    /// See BaseComponentSerializer::load()
     void load(AmbientLight& light, ComponentReader& reader, AssetCache& assetCache) const;
 };
 
