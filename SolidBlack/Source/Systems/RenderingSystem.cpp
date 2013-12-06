@@ -1,6 +1,6 @@
 #include "SolidBlack.h"
 
-RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache, const DataValue& settings) :
+RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache) :
     _renderer(&renderer),
     _oneOverGammaUniform(nullptr),
     _exposureUniform(nullptr),
@@ -8,22 +8,13 @@ RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache, con
     _exposure(0.025),
     _buffersInitialized(false)
 {
-    LOG_INFO("Initializing deferred rendering system...");
-
     // Load compositor shader
-    std::string compositorShaderPath = settings["graphics"]["compositorShader"].asString();
-    LOG_INFO(format("Using compositor shader: '%s'", compositorShaderPath.c_str()));
-    _compositorShader = assetCache.get<Shader>(compositorShaderPath);
-
-    LOG_INFO("Using compositor shader uniform: 'oneOverGamma'");
+    _compositorShader = assetCache.get<Shader>("DeferredShading/Compositor.shader");
     _oneOverGammaUniform = &_compositorShader->uniformWithName("oneOverGamma");
-    LOG_INFO("Using compositor shader uniform: 'exposure'");
     _exposureUniform = &_compositorShader->uniformWithName("exposure");
 
-    // Load window mesh
-    std::string windowMeshPath = settings["graphics"]["windowMesh"].asString();
-    LOG_INFO(format("Using window mesh: '%s'", windowMeshPath.c_str()));
-    _windowMesh = assetCache.get<Mesh>(windowMeshPath);
+    // Load screen mesh
+    _screenMesh = assetCache.get<Mesh>("DeferredShading/Screen.mesh");
 }
 
 void RenderingSystem::addEntity(Entity& entity)
@@ -147,7 +138,7 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
     _renderer->setUniform(*_exposureUniform, (float)_exposure);
     _renderer->bindTexture(_geometryBuffer.targets()[0], 0);
     _renderer->bindTexture(_geometryBuffer.targets()[1], 1);
-    _renderer->bindMesh(*_windowMesh);
+    _renderer->bindMesh(*_screenMesh);
     _renderer->draw();
 
     _renderer->endFrame();

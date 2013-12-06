@@ -6,7 +6,7 @@ class TestState :
     public Uncopyable
 {
 public:
-    TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings);
+    TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer);
     ~TestState();
 
     void update(double timeStep);

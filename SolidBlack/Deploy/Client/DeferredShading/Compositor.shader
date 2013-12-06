@@ -1,8 +1,8 @@
 {
     "modules" :
     [
-        "Shaders/Compositor.frag",
-        "Shaders/Compositor.vert"
+        "DeferredShading/Compositor.frag",
+        "DeferredShading/Compositor.vert"
     ],
     "uniforms" :
     {

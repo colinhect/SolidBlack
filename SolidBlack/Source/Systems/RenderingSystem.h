@@ -4,7 +4,7 @@ class RenderingSystem :
     public System
 {
 public:
-    RenderingSystem(Renderer& renderer, AssetCache& assetCache, const DataValue& settings);
+    RenderingSystem(Renderer& renderer, AssetCache& assetCache);
 
     void addEntity(Entity& entity);
     void removeEntity(Entity& entity);
@@ -22,7 +22,7 @@ private:
     FrameBuffer _lightBuffer;
 
     Shader::Ref _compositorShader;
-    Mesh::Ref _windowMesh;
+    Mesh::Ref _screenMesh;
 
     Renderer* _renderer;
 

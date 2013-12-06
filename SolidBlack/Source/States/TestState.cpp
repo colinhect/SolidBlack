@@ -1,10 +1,10 @@
 #include "SolidBlack.h"
 
-TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer, const DataValue& settings) :
+TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer) :
     _assetCache(&assetCache),
     _input(&inputSystem),
     _window(&window),
-    _renderingSystem(renderer, assetCache, settings),
+    _renderingSystem(renderer, assetCache),
     _debugCameraSystem(inputSystem)
 {
     _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
@@ -16,11 +16,12 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
 
-    FileReadStream stream = assetCache.fileSystem().openFileForRead("Test.scene");
     DataValue sceneValue;
-    DataValueJsonFormat::load(sceneValue, stream);
+    {
+        FileReadStream stream = assetCache.fileSystem().openFileForRead("Test.scene");
+        DataValueJsonFormat::load(sceneValue, stream);
+    }
     _scene.load(sceneValue, assetCache);
-
     _scene.refresh();
 }
 

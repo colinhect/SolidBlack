@@ -1,15 +1,16 @@
 {
     "videoMode" :
     {
-        "width" : 1280,
-        "height" : 900,
+        "width" : 256,
+        "height" : 256,
         "bitsPerPixel" : 32,
         "fullscreen" : false
     },
     "dataSources" :
     [
         "Common",
-        "DeferredShading"
+        "Client",
+        "Server"
     ],
     "inputAxes" :
     {
@@ -55,10 +56,5 @@
             "acceleration" : 4,
             "gravity" : 1000
         }
-    },
-    "graphics" :
-    {
-        "compositorShader" : "Shaders/Compositor.shader",
-        "windowMesh" : "Meshes/Window.mesh"
     }
 }

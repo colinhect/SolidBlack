@@ -5,7 +5,7 @@
     },
     "Geometry" :
     {
-        "mesh" : "Meshes/Test.Cube.mesh",
-        "material" : "Materials/Diffuse.material"
+        "mesh" : "Testing/Test.Cube.mesh",
+        "material" : "Common/Diffuse.material"
     }
 }

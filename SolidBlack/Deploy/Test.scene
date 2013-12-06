@@ -21,8 +21,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 0.0, 0.0, 0.0 ],
@@ -38,8 +38,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -2.755592479509136, 0.004275004770578982, 9.537638690592917 ],
@@ -54,8 +54,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -9.349839282764195, 0.1448570094997380, 4.963312903762750 ],
@@ -70,8 +70,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -12.38001297003359, 0.6029416152611018, -0.8130228502463526 ],
@@ -86,8 +86,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -11.19738018137699, 1.831737262520088, -7.673873548997692 ],
@@ -102,8 +102,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -7.924762815667577, 3.128671128136628, -12.00829312922139 ],
@@ -118,8 +118,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -3.053390218637080, 4.476939358500275, -14.40033942640201 ],
@@ -134,8 +134,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 2.420938945627438, 5.611367417155638, -14.90352903147092 ],
@@ -150,8 +150,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 9.368291642660289, 6.66434098345670, -13.58205712049380 ],
@@ -166,8 +166,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 15.63528229586372, 7.195440011534161, -10.23003759167354 ],
@@ -182,8 +182,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 19.72769316021185, 6.845833718590979, -3.870498316734060 ],
@@ -198,8 +198,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 21.01490092531282, 6.056262078580696, 2.602993151237286 ],
@@ -214,8 +214,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 19.65156305258845, 4.958492354282009, 8.905595279092118 ],
@@ -230,8 +230,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 16.07672290230281, 3.925705609211506, 13.10590678570890 ],
@@ -246,8 +246,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 11.08299939192519, 2.885395738261959, 16.51214133021603 ],
@@ -262,8 +262,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 5.924097454791280, 2.082109664341505, 18.58695761432681 ],
@@ -278,8 +278,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -0.1382445894044527, 1.521835656605502, 19.28630505998983 ],
@@ -294,8 +294,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -5.561451425053392, 1.520636449705443, 17.97197966132381 ],
@@ -310,8 +310,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -10.83301125646126, 2.284966070184907, 14.02718821451817 ],
@@ -326,8 +326,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -13.95619766741908, 3.597085863829058, 8.966624234976921 ],
@@ -342,8 +342,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -15.23880522168177, 5.344101363415875, 3.227642168353579 ],
@@ -358,8 +358,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -15.23858786049517, 7.134681145468477, -2.103323424458875 ],
@@ -374,8 +374,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -13.55680866393682, 9.252652980455116, -7.569743016717934 ],
@@ -390,8 +390,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -9.894441461848983, 11.18065565718547, -11.34117312518780 ],
@@ -406,8 +406,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ -4.574615847844797, 13.00370922328052, -13.73668957601834 ],
@@ -422,8 +422,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 1.860987093737298, 14.49921065121917, -14.27465220577120 ],
@@ -438,8 +438,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 7.306371293624443, 15.33451752519832, -13.21405045780309 ],
@@ -454,8 +454,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 12.07432583629808, 15.43941850651974, -9.539531129271694 ],
@@ -470,8 +470,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 14.23244372996468, 15.02473415361370, -3.842152684124238 ],
@@ -486,8 +486,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 14.40604103489528, 14.66644792297110, 2.269861731050232 ],
@@ -502,8 +502,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 13.32096858903440, 14.49346034956914, 7.780338138713839 ],
@@ -518,8 +518,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 10.73775627002903, 14.60429828131905, 12.75728442796231 ],
@@ -534,8 +534,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 6.98057368309430, 15.07472968176755, 16.15125325721312 ],
@@ -550,8 +550,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 0.8619768393130139, 16.54042418731871, 16.50895867450474 ],
@@ -566,8 +566,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 2.258488077267765, 17.31970859043538, 13.37661733019650 ],
@@ -582,8 +582,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 4.948803420684575, 16.00253355678326, 17.22961339840555 ],
@@ -598,8 +598,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 5.160448675830923, 14.70709086537849, 22.15736924847727 ],
@@ -614,8 +614,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 1.109515013163092, 14.94815523655332, 23.72730231827830 ],
@@ -630,8 +630,8 @@
       },
       {
          "Geometry" : {
-            "material" : "Materials/Diffuse.material",
-            "mesh" : "Meshes/Test.Cube.mesh"
+            "material" : "Common/Diffuse.material",
+            "mesh" : "Testing/Test.Cube.mesh"
          },
          "Transform" : {
             "position" : [ 3.044095949712934, 15.48888664541177, 19.82571766562087 ],

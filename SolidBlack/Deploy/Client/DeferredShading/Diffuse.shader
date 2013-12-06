@@ -1,8 +1,8 @@
 {
     "modules" :
     [
-        "Shaders/Diffuse.frag",
-        "Shaders/Diffuse.vert"
+        "DeferredShading/Diffuse.frag",
+        "DeferredShading/Diffuse.vert"
     ],
     "uniforms" :
     {

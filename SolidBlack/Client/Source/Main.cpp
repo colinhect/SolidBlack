@@ -55,7 +55,7 @@ int main()
 
         StateFlow stateFlow;
 
-        State::Ref testState(new TestState(assetCache, inputSystem, window, renderer, settings));
+        State::Ref testState(new TestState(assetCache, inputSystem, window, renderer));
         stateFlow.push(testState);
 
         TimeSpan timeStep = TimeSpan::fromSeconds(1.0 / 60.0);
