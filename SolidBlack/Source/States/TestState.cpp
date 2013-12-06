@@ -32,7 +32,6 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     }
     _testRigidBody = _scene.createEntity();
     _testRigidBody.load(testRigidBodyValue, assetCache);
-
 }
 
 TestState::~TestState()

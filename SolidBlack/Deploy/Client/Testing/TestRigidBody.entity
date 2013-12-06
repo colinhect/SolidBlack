@@ -5,12 +5,12 @@
     },
     "Geometry" :
     {
-        "mesh" : "Testing/Test.Cube.mesh",
+        "mesh" : "Testing/Ship.Hull.mesh",
         "material" : "Common/Diffuse.material"
     },
     "RigidBody" :
     {
         "mass" : 123,
-        "mesh" : "Testing/Test.Cube.mesh"
+        "mesh" : "Testing/Ship.Collision.mesh"
     }
 }
