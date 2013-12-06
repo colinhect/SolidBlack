@@ -22,6 +22,9 @@ private:
     CameraSystem _cameraSystem;
     RenderingSystem _renderingSystem;
     DebugCameraSystem _debugCameraSystem;
+    PhysicsSystem _physicsSystem;
 
     Scene _scene;
+
+    Entity _testRigidBody;
 };

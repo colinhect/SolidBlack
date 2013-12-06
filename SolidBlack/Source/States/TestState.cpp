@@ -12,6 +12,7 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _scene.addSystem(_cameraSystem);
     _scene.addSystem(_renderingSystem);
     _scene.addSystem(_debugCameraSystem);
+    _scene.addSystem(_physicsSystem);
 
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
@@ -23,6 +24,15 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     }
     _scene.load(sceneValue, assetCache);
     _scene.refresh();
+
+    DataValue testRigidBodyValue;
+    {
+        FileReadStream stream = assetCache.fileSystem().openFileForRead("Testing/TestRigidBody.entity");
+        DataValueJsonFormat::load(testRigidBodyValue, stream);
+    }
+    _testRigidBody = _scene.createEntity();
+    _testRigidBody.load(testRigidBodyValue, assetCache);
+
 }
 
 TestState::~TestState()
@@ -39,6 +49,7 @@ void TestState::update(double timeStep)
 
     _cameraSystem.update();
     _debugCameraSystem.update(timeStep);
+    _physicsSystem.update(timeStep, 1);
     _scene.refresh();
 
     _input->updateAxes(timeStep);
@@ -92,6 +103,21 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     else if (event.key == Key::C)
     {
         _renderingSystem.setGamma(_renderingSystem.gamma() - 0.1);
+    }
+    else if (event.key == Key::F)
+    {
+        if (_cameraSystem.hasCamera())
+        {
+            Entity testRigidBody = _testRigidBody.clone();
+            Transform& transform = testRigidBody.component<Transform>();
+            RigidBody& rigidBody = testRigidBody.component<RigidBody>();
+
+            Camera& camera = _cameraSystem.camera();
+            transform.setPosition(camera.position());
+            rigidBody.setLinearVelocity(camera.front() * 10);
+
+            testRigidBody.activate();
+        }
     }
     else if (event.key == Key::F5)
     {

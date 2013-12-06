@@ -10,6 +10,7 @@ EntitySerializer::EntitySerializer()
     registerComponent<DirectionalLight, DirectionalLightSerializer>("DirectionalLight");
     registerComponent<Geometry, GeometrySerializer>("Geometry");
     registerComponent<Transform, TransformSerializer>("Transform");
+    registerComponent<RigidBody, RigidBodySerializer>("RigidBody");
 }
 
 void EntitySerializer::save(Entity& entity, DataValue& dataValue)
@@ -124,7 +125,7 @@ ComponentTypeId EntitySerializer::_typeId(const std::string& typeName) const
     auto it = _componentTypeIds.find(typeName);
     if (it == _componentTypeIds.end())
     {
-        throw Error(format("No serializer registered for component type name '%s'", typeName));
+        throw Error(format("No serializer registered for component type name '%s'", typeName.c_str()));
     }
     return (*it).second;
 }
