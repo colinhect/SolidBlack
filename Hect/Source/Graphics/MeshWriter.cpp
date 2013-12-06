@@ -21,7 +21,7 @@ size_t MeshWriter::addVertex()
     return _mesh->_vertexCount++;
 }
 
-void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, float value)
+void MeshWriter::writeAttributeData(VertexAttributeSemantic semantic, float value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -30,7 +30,7 @@ void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, float value)
     }
 }
 
-void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value)
+void MeshWriter::writeAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -42,7 +42,7 @@ void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector
         // all components at the same time
         if (type == VertexAttributeType::Float && cardinality >= 2)
         {
-            _setAttributeData(*attribute, value);
+            _writeAttributeData(*attribute, value);
         }
 
         // Otherwise set each component individually
@@ -61,7 +61,7 @@ void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector
     }
 }
 
-void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value)
+void MeshWriter::writeAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value)
 {
     // If this data is a position then expand the bounding box to include it
     if (semantic == VertexAttributeSemantic::Position)
@@ -79,7 +79,7 @@ void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector
         // all components at the same time
         if (type == VertexAttributeType::Float && cardinality >= 3)
         {
-            _setAttributeData(*attribute, value);
+            _writeAttributeData(*attribute, value);
         }
 
         // Otherwise set each component individually
@@ -103,7 +103,7 @@ void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector
     }
 }
 
-void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value)
+void MeshWriter::writeAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value)
 {
     const VertexAttribute* attribute = _mesh->vertexLayout().attributeWithSemantic(semantic);
     if (attribute)
@@ -115,7 +115,7 @@ void MeshWriter::setAttributeData(VertexAttributeSemantic semantic, const Vector
         // all components at the same time
         if (type == VertexAttributeType::Float && cardinality >= 4)
         {
-            _setAttributeData(*attribute, value);
+            _writeAttributeData(*attribute, value);
         }
 
         // Otherwise set each component individually
@@ -177,7 +177,7 @@ void MeshWriter::addIndex(uint64_t value)
 }
 
 void MeshWriter::_setComponentValue(const VertexAttribute* attribute, unsigned index, float value)
-{    
+{
     size_t offset = _vertexDataIndex + attribute->offset();
 
     // Set the vertex data based on the type

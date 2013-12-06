@@ -51,10 +51,10 @@ void MeshDataFormat::load(Mesh& mesh, const DataValue& dataValue)
             case VertexAttributeSemantic::Normal:
             case VertexAttributeSemantic::Tangent:
             case VertexAttributeSemantic::Binormal:
-                meshWriter.setAttributeData(semantic, attribute["data"].asVector3());
+                meshWriter.writeAttributeData(semantic, attribute["data"].asVector3());
                 break;
             default:
-                meshWriter.setAttributeData(semantic, attribute["data"].asVector2());
+                meshWriter.writeAttributeData(semantic, attribute["data"].asVector2());
             }
         }
     }

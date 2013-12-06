@@ -312,6 +312,9 @@
     <ClCompile Include="Source\Graphics\MeshWriter.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\MeshReader.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -590,6 +593,9 @@
     <ClInclude Include="Source\Graphics\MeshWriter.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\MeshReader.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -653,6 +659,9 @@
       <Filter>Source\Math</Filter>
     </None>
     <None Include="Source\Graphics\MeshWriter.inl">
+      <Filter>Source\Graphics</Filter>
+    </None>
+    <None Include="Source\Graphics\MeshReader.inl">
       <Filter>Source\Graphics</Filter>
     </None>
   </ItemGroup>

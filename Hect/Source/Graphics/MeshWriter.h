@@ -13,7 +13,7 @@ public:
     ///
     /// Constructs a mesh writer given a mesh to build on.
     ///
-    /// \param mesh The mesh to build on.
+    /// \param mesh The mesh to write to.
     MeshWriter(Mesh& mesh);
 
     ///
@@ -23,36 +23,36 @@ public:
     size_t addVertex();
 
     ///
-    /// Sets attribute data of the most recently added vertex for a given
+    /// Writes attribute data of the most recently added vertex for a given
     /// semantic.
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttributeSemantic semantic, float value);
+    void writeAttributeData(VertexAttributeSemantic semantic, float value);
 
     ///
-    /// Sets attribute data of the most recently added vertex for a given
+    /// Writes attribute data of the most recently added vertex for a given
     /// semantic.
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value);
+    void writeAttributeData(VertexAttributeSemantic semantic, const Vector2<float>& value);
 
     ///
-    /// Sets attribute data of the most recently added vertex for a given
+    /// Writes attribute data of the most recently added vertex for a given
     /// semantic.
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value);
+    void writeAttributeData(VertexAttributeSemantic semantic, const Vector3<float>& value);
 
     ///
-    /// Sets attribute data of the most recently added vertex for a given
+    /// Writes attribute data of the most recently added vertex for a given
     /// semantic.
     ///
     /// \param semantic The semantic of the attribute to set the data for.
     /// \param value The value.
-    void setAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value);
+    void writeAttributeData(VertexAttributeSemantic semantic, const Vector4<float>& value);
 
     ///
     /// Adds an index to the mesh.
@@ -62,7 +62,7 @@ private:
     void _setComponentValue(const VertexAttribute* attribute, unsigned index, float value);
 
     template <typename T>
-    void _setAttributeData(const VertexAttribute& attribute, const T& value);
+    void _writeAttributeData(const VertexAttribute& attribute, const T& value);
 
     Mesh* _mesh;
     size_t _vertexDataIndex;

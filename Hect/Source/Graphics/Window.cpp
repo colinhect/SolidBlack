@@ -120,7 +120,7 @@ void Window::bind(Renderer* renderer)
 bool Window::pollEvents(InputSystem& inputSystem)
 {
     static bool cursorVisible = true;
-    
+
     sf::Vector2u windowSize = ((sf::Window*)_sfmlWindow)->getSize();
     sf::Vector2i windowCenter(windowSize.x / 2, windowSize.y / 2);
 

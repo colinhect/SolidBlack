@@ -50,6 +50,7 @@
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\MeshReader.cpp" />
     <ClCompile Include="Source\Graphics\Renderer.cpp" />
     <ClCompile Include="Source\Graphics\RendererObject.cpp" />
     <ClCompile Include="Source\Graphics\Image.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\MeshReader.h" />
     <ClInclude Include="Source\Graphics\Renderer.h" />
     <ClInclude Include="Source\Graphics\RendererObject.h" />
     <ClInclude Include="Source\Graphics\Image.h" />
@@ -206,6 +208,7 @@
     <None Include="Source\Entity\Component.inl" />
     <None Include="Source\Entity\EntitySerializer.inl" />
     <None Include="Source\Entity\Scene.inl" />
+    <None Include="Source\Graphics\MeshReader.inl" />
     <None Include="Source\Graphics\MeshWriter.inl" />
     <None Include="Source\Math\Angle.inl" />
     <None Include="Source\Math\AxisAlignedBox.inl" />

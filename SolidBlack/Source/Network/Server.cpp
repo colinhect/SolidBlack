@@ -7,6 +7,8 @@ Server::Server() :
 
 void Server::update(double timeStep)
 {
+    timeStep;
+
     SocketEvent event;
     while (_socket.pollEvent(event))
     {

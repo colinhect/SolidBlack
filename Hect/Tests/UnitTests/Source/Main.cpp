@@ -27,6 +27,7 @@ const double epsilon = 0.0001;
 #include "MeshDataFormatTests.h"
 #include "MeshTests.h"
 #include "MeshWriterTests.h"
+#include "MeshReaderTests.h"
 #include "NetworkTests.h"
 #include "PathTests.h"
 #include "PlaneTests.h"
