@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void DataValueComponentWriter::writeNumber(const char* name, double value)
+void DataValueComponentWriter::writeDouble(const char* name, double value)
 {
     _members[name] = value;
 }
@@ -42,7 +42,7 @@ BinaryComponentWriter::BinaryComponentWriter(WriteStream& stream) :
 {
 }
 
-void BinaryComponentWriter::writeNumber(const char* name, double value)
+void BinaryComponentWriter::writeDouble(const char* name, double value)
 {
     name;
     _stream->writeDouble(value);

@@ -14,7 +14,7 @@ public:
     ///
     /// \param name The name of the value.
     /// \param value The value.
-    virtual void writeNumber(const char* name, double value) = 0;
+    virtual void writeDouble(const char* name, double value) = 0;
 
     ///
     /// Writes a string value.
@@ -60,8 +60,8 @@ class DataValueComponentWriter :
 public:
 
     ///
-    /// \copydoc ComponentWriter::writeNumber()
-    void writeNumber(const char* name, double value);
+    /// \copydoc ComponentWriter::writeDouble()
+    void writeDouble(const char* name, double value);
 
     ///
     /// \copydoc ComponentWriter::writeString()
@@ -105,8 +105,8 @@ public:
     BinaryComponentWriter(WriteStream& stream);
 
     ///
-    /// \copydoc ComponentWriter::writeNumber()
-    void writeNumber(const char* name, double value);
+    /// \copydoc ComponentWriter::writeDouble()
+    void writeDouble(const char* name, double value);
 
     ///
     /// \copydoc ComponentWriter::writeString()

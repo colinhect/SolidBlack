@@ -13,7 +13,7 @@ std::string format(const char* fmt, ...)
 
     va_start(args, fmt);
 
-    char buffer[4096];
+    char buffer[16384];
     vsprintf(buffer, fmt, args);
 
     va_end(args);

@@ -15,7 +15,7 @@ const Vector3<>& DirectionalLight::direction() const
 
 void DirectionalLight::setDirection(const Vector3<>& direction)
 {
-    _direction = direction;
+    _direction = direction.normalized();
 }
 
 const Vector3<>& DirectionalLight::color() const

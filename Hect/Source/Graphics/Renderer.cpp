@@ -455,6 +455,10 @@ void Renderer::uploadShader(Shader& shader)
         {
             uniform.setLocation(location);
         }
+        else
+        {
+            LOG_WARNING(format("Unreferenced uniform '%s'", uniform.name().c_str()));
+        }
     }
 
     GL_ASSERT( glUseProgram(0); )

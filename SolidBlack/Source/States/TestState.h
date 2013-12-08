@@ -26,5 +26,6 @@ private:
 
     Scene _scene;
 
+    Entity _debugCamera;
     Entity _testRigidBody;
 };

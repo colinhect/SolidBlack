@@ -12,7 +12,7 @@ bool DataValueComponentReader::hasValue(const char* name)
     return !(*_dataValue)[name].isNull();
 }
 
-double DataValueComponentReader::readNumber(const char* name)
+double DataValueComponentReader::readDouble(const char* name)
 {
     return (*_dataValue)[name].asDouble();
 }
@@ -53,7 +53,7 @@ bool BinaryComponentReader::hasValue(const char* name)
     return true; // Assume that all values are written
 }
 
-double BinaryComponentReader::readNumber(const char* name)
+double BinaryComponentReader::readDouble(const char* name)
 {
     name;
     return _stream->readDouble();

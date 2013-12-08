@@ -1,27 +1,21 @@
 {
     "modules" :
     [
-        "DeferredShading/Compositor.frag",
+        "DeferredShading/AmbientLight.frag",
         "DeferredShading/Screen.vert"
     ],
     "uniforms" :
     {
-        "exposure" :
+        "color" :
         {
-            "type" : "Float",
-            "defaultValue" : 0.0015
-        },
-        "oneOverGamma" :
-        {
-            "type" : "Float",
-            "defaultValue" : 0.4545
+            "type" : "Vector3"
         },
         "colorTexture" :
         {
             "type" : "Texture",
             "defaultValue" : 0
         },
-        "lightTexture" :
+        "normalTexture" :
         {
             "type" : "Texture",
             "defaultValue" : 1

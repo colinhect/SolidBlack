@@ -23,7 +23,7 @@ public:
     /// \param name The name of the value.
     ///
     /// \returns The read value.
-    virtual double readNumber(const char* name) = 0;
+    virtual double readDouble(const char* name) = 0;
 
     ///
     /// Reads a value as a string.
@@ -84,8 +84,8 @@ public:
     bool hasValue(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readNumber()
-    double readNumber(const char* name);
+    /// \copydoc ComponentReader::readDouble()
+    double readDouble(const char* name);
 
     ///
     /// \copydoc ComponentReader::readString()
@@ -129,8 +129,8 @@ public:
     bool hasValue(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readNumber()
-    double readNumber(const char* name);
+    /// \copydoc ComponentReader::readDouble()
+    double readDouble(const char* name);
 
     ///
     /// \copydoc ComponentReader::readString()

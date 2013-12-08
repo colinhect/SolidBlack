@@ -2,12 +2,31 @@
 
 RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache) :
     _renderer(&renderer),
+    _ambientLightColorUniform(nullptr),
+    _directionalLightColorUniform(nullptr),
+    _directionalLightDirectionUniform(nullptr),
+    _directionalLightViewUniform(nullptr),
     _oneOverGammaUniform(nullptr),
     _exposureUniform(nullptr),
     _gamma(2.2),
     _exposure(0.025),
     _buffersInitialized(false)
 {
+    // Set up additive blending
+    _additiveLightMode.enableState(RenderState::Blend);
+    _additiveLightMode.disableState(RenderState::DepthTest);
+    _additiveLightMode.setBlendFactors(BlendFactor::One, BlendFactor::One);
+    
+    // Load ambient light shader
+    _ambientLightShader = assetCache.get<Shader>("DeferredShading/AmbientLight.shader");
+    _ambientLightColorUniform = &_ambientLightShader->uniformWithName("color");
+    
+    // Load directional light shader
+    _directionalLightShader = assetCache.get<Shader>("DeferredShading/DirectionalLight.shader");
+    _directionalLightColorUniform = &_directionalLightShader->uniformWithName("color");
+    _directionalLightDirectionUniform = &_directionalLightShader->uniformWithName("direction");
+    _directionalLightViewUniform = &_directionalLightShader->uniformWithName("view");
+
     // Load compositor shader
     _compositorShader = assetCache.get<Shader>("DeferredShading/Compositor.shader");
     _oneOverGammaUniform = &_compositorShader->uniformWithName("oneOverGamma");
@@ -17,20 +36,9 @@ RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache) :
     _screenMesh = assetCache.get<Mesh>("DeferredShading/Screen.mesh");
 }
 
-void RenderingSystem::addEntity(Entity& entity)
+bool RenderingSystem::includesEntity(const Entity& entity) const
 {
-    if (entity.hasComponent<Geometry>())
-    {
-        System::addEntity(entity);
-    }
-}
-
-void RenderingSystem::removeEntity(Entity& entity)
-{
-    if (entity.hasComponent<Geometry>())
-    {
-        System::removeEntity(entity);
-    }
+    return entity.hasComponent<Geometry>() || entity.hasComponent<AmbientLight>() || entity.hasComponent<DirectionalLight>();
 }
 
 void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
@@ -60,6 +68,7 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
     _renderer->bindTarget(_geometryBuffer);
     _renderer->clear();
 
+    // Render geometer
     for (Entity& entity : entities())
     {
         if (entity.hasComponent<Geometry>() && entity.hasComponent<Transform>())
@@ -130,6 +139,44 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
     _renderer->endFrame();
 
     _renderer->beginFrame();
+    _renderer->bindTarget(_lightBuffer);
+    _renderer->clear();
+
+    _renderer->bindTexture(_geometryBuffer.targets()[0], 0);
+    _renderer->bindTexture(_geometryBuffer.targets()[1], 1);
+
+    _renderer->bindMesh(*_screenMesh);
+    _renderer->bindMode(_additiveLightMode);
+
+    _renderer->bindShader(*_ambientLightShader);
+    for (Entity& entity : entities())
+    {
+        if (entity.hasComponent<AmbientLight>())
+        {
+            AmbientLight& light = entity.component<AmbientLight>();
+            _renderer->setUniform(*_ambientLightColorUniform, (Vector3<float>)light.color());
+
+            _renderer->draw();
+        }
+    }
+
+    _renderer->bindShader(*_directionalLightShader);
+    _renderer->setUniform(*_directionalLightViewUniform, (Matrix4<float>)camera.viewMatrix());
+    for (Entity& entity : entities())
+    {
+        if (entity.hasComponent<DirectionalLight>())
+        {
+            DirectionalLight& light = entity.component<DirectionalLight>();
+            _renderer->setUniform(*_directionalLightColorUniform, (Vector3<float>)light.color());
+            _renderer->setUniform(*_directionalLightDirectionUniform, (Vector3<float>)light.direction());
+
+            _renderer->draw();
+        }
+    }
+
+    _renderer->endFrame();
+
+    _renderer->beginFrame();
     _renderer->bindTarget(target);
     _renderer->clear();
 
@@ -137,7 +184,7 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
     _renderer->setUniform(*_oneOverGammaUniform, 1.0f / (float)_gamma);
     _renderer->setUniform(*_exposureUniform, (float)_exposure);
     _renderer->bindTexture(_geometryBuffer.targets()[0], 0);
-    _renderer->bindTexture(_geometryBuffer.targets()[1], 1);
+    _renderer->bindTexture(_lightBuffer.targets()[0], 1);
     _renderer->bindMesh(*_screenMesh);
     _renderer->draw();
 

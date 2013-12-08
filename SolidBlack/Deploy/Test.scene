@@ -9,12 +9,12 @@
          },
          "DebugCamera" : {},
          "Transform" : {
-            "position" : [ 10.99699112291718, 34.84348695973621, 20.26194186855927 ],
+            "position" : [ 7.124311091641879, 0.4371404347922974, -112.9239526324448 ],
             "rotation" : [
-               -0.07778669084207443,
-               -0.2933053842151173,
-               -0.7099050245128977,
-               0.6355753601970455
+               0.08519655888305747,
+               0.9609141382461823,
+               -0.04874777255841955,
+               -0.2588613913732117
             ],
             "scale" : [ 1.0, 1.0, 1.0 ]
          }
@@ -22,32 +22,21 @@
       {
          "Geometry" : {
             "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
+            "mesh" : "Testing/Ship.Hull.mesh"
+         },
+         "RigidBody" : {
+            "angularVelocity" : [ 0.08203548428788925, 0.2185371475468056, 0.02937459843585540 ],
+            "linearVelocity" : [ -1.135375475476081, -0.2647866923695761, -0.7786311600291483 ],
+            "mass" : 123.0,
+            "mesh" : "Testing/Ship.Collision.mesh"
          },
          "Transform" : {
-            "position" : [ 0.0, 0.0, 0.0 ],
-            "rotation" : [ 0.0, 0.0, 0.0, 1.0 ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "DirectionalLight" : {
-            "color" : [ 10.0, 10.0, 10.0 ],
-            "direction" : [ 1.0, 0.0, 0.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -2.755592479509136, 0.004275004770578982, 9.537638690592917 ],
+            "position" : [ -4.000966579006406, -0.9170324830077837, -85.10781261864439 ],
             "rotation" : [
-               -0.01420499122735386,
-               0.1534714102666858,
-               -5.856084856938199e-006,
-               0.9880509827031659
+               0.1431573235288408,
+               0.3741201850367671,
+               0.04934789164704558,
+               -0.9149343437963762
             ],
             "scale" : [ 1.0, 1.0, 1.0 ]
          }
@@ -55,608 +44,16 @@
       {
          "Geometry" : {
             "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -9.349839282764195, 0.1448570094997380, 4.963312903762750 ],
-            "rotation" : [
-               -0.04859823290660557,
-               0.3902752031160302,
-               -0.003457510101871683,
-               0.9194082462187254
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -12.38001297003359, 0.6029416152611018, -0.8130228502463526 ],
-            "rotation" : [
-               -0.1027410709121548,
-               0.6640293740130610,
-               -0.008050641522817712,
-               0.7405703545016620
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -11.19738018137699, 1.831737262520088, -7.673873548997692 ],
-            "rotation" : [
-               -0.1234895036285314,
-               0.8453715806240945,
-               0.003707651585096815,
-               0.5196955709705663
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -7.924762815667577, 3.128671128136628, -12.00829312922139 ],
-            "rotation" : [
-               -0.1195173565642094,
-               0.9399980811404625,
-               0.03272719758830803,
-               0.3178807000592649
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -3.053390218637080, 4.476939358500275, -14.40033942640201 ],
-            "rotation" : [
-               -0.1034670944159797,
-               0.9844173108759703,
-               0.07527949471516199,
-               0.1206238620517026
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 2.420938945627438, 5.611367417155638, -14.90352903147092 ],
-            "rotation" : [
-               -0.08985138360667198,
-               0.9907013852338424,
-               0.09916902774294238,
-               -0.02455601955187321
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 9.368291642660289, 6.66434098345670, -13.58205712049380 ],
-            "rotation" : [
-               -0.07499375638957408,
-               0.9780776992091311,
-               0.1091691919871592,
-               -0.1606923717331492
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 15.63528229586372, 7.195440011534161, -10.23003759167354 ],
-            "rotation" : [
-               -0.04990370480676430,
-               0.9292646401191098,
-               0.1077880991209068,
-               -0.3497979053092832
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 19.72769316021185, 6.845833718590979, -3.870498316734060 ],
-            "rotation" : [
-               -0.01205006425476940,
-               0.7949457918974123,
-               0.1023512541416571,
-               -0.5978630316984669
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 21.01490092531282, 6.056262078580696, 2.602993151237286 ],
-            "rotation" : [
-               0.003637599922893289,
-               0.7270648327640478,
-               0.09627911734167992,
-               -0.6797748365366987
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 19.65156305258845, 4.958492354282009, 8.905595279092118 ],
-            "rotation" : [
-               0.03968851470355404,
-               0.4849466456879480,
-               0.08414323373909678,
-               -0.8695812146387257
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 16.07672290230281, 3.925705609211506, 13.10590678570890 ],
-            "rotation" : [
-               0.06002367448026641,
-               0.3458122641327854,
-               0.07295474266927131,
-               -0.9335355601150414
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 11.08299939192519, 2.885395738261959, 16.51214133021603 ],
-            "rotation" : [
-               0.07911907325249387,
-               0.2462196655363940,
-               0.06193344208986459,
-               -0.9639918554125414
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 5.924097454791280, 2.082109664341505, 18.58695761432681 ],
-            "rotation" : [
-               0.103989099550070,
-               0.1216154414341386,
-               0.04647414520041127,
-               -0.9860203372179686
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -0.1382445894044527, 1.521835656605502, 19.28630505998983 ],
-            "rotation" : [
-               0.1241071456436154,
-               -0.01668016018020027,
-               0.02939591119537854,
-               -0.9916930316693523
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -5.561451425053392, 1.520636449705443, 17.97197966132381 ],
-            "rotation" : [
-               0.1447715758403007,
-               -0.2439211918401774,
-               -0.0001659531181818677,
-               -0.9589283682630034
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -10.83301125646126, 2.284966070184907, 14.02718821451817 ],
-            "rotation" : [
-               0.1547434570740825,
-               -0.4042670031537904,
-               -0.02167447291253904,
-               -0.9011952451482302
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -13.95619766741908, 3.597085863829058, 8.966624234976921 ],
-            "rotation" : [
-               0.1609275197956741,
-               -0.5908447644243716,
-               -0.04882003269482953,
-               -0.7890636236276499
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -15.23880522168177, 5.344101363415875, 3.227642168353579 ],
-            "rotation" : [
-               0.1631724888505274,
-               -0.6717255579014225,
-               -0.05963749216154516,
-               -0.7201408773795783
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -15.23858786049517, 7.134681145468477, -2.103323424458875 ],
-            "rotation" : [
-               0.1631229653880795,
-               -0.7417068051234211,
-               -0.06934852442274682,
-               -0.6468791970352692
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -13.55680866393682, 9.252652980455116, -7.569743016717934 ],
-            "rotation" : [
-               0.1528394242043793,
-               -0.8639766059678612,
-               -0.09469758876451137,
-               -0.4703370083581732
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -9.894441461848983, 11.18065565718547, -11.34117312518780 ],
-            "rotation" : [
-               0.1359177413277330,
-               -0.9383965168574867,
-               -0.1139967223271852,
-               -0.2965520056259324
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -4.574615847844797, 13.00370922328052, -13.73668957601834 ],
-            "rotation" : [
-               0.1160773915775323,
-               -0.9766412044394199,
-               -0.1291740262582451,
-               -0.1265387999623428
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 1.860987093737298, 14.49921065121917, -14.27465220577120 ],
-            "rotation" : [
-               0.09554414755755052,
-               -0.9854186572417595,
-               -0.1379262912695606,
-               0.02824400828446835
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 7.306371293624443, 15.33451752519832, -13.21405045780309 ],
-            "rotation" : [
-               0.07252741695096325,
-               -0.9703563609911496,
-               -0.1414236826023146,
-               0.1820649567424625
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 12.07432583629808, 15.43941850651974, -9.539531129271694 ],
-            "rotation" : [
-               0.004566793945601117,
-               -0.8693043091980564,
-               -0.06561934772878897,
-               0.4898808667486379
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 14.23244372996468, 15.02473415361370, -3.842152684124238 ],
-            "rotation" : [
-               -0.04016525766744408,
-               -0.7615264674557172,
-               -0.005741814600630245,
-               0.6468625997891798
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 14.40604103489528, 14.66644792297110, 2.269861731050232 ],
-            "rotation" : [
-               -0.06300621074049032,
-               -0.6701578233039073,
-               0.02683183148985925,
-               0.7390526111797413
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 13.32096858903440, 14.49346034956914, 7.780338138713839 ],
-            "rotation" : [
-               -0.07388889097956826,
-               -0.5754104506698661,
-               0.04823470331251036,
-               0.8130908057812888
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 10.73775627002903, 14.60429828131905, 12.75728442796231 ],
-            "rotation" : [
-               -0.07765169878155730,
-               -0.4342395447998952,
-               0.06872149766987583,
-               0.8948092462454371
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 6.98057368309430, 15.07472968176755, 16.15125325721312 ],
-            "rotation" : [
-               -0.08191068423237358,
-               -0.2356382399385160,
-               0.09371701954921589,
-               0.9638373202642003
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 0.8619768393130139, 16.54042418731871, 16.50895867450474 ],
-            "rotation" : [
-               -0.07500263734214095,
-               0.3619140185138201,
-               0.1413279681190925,
-               0.9183786000458801
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 2.258488077267765, 17.31970859043538, 13.37661733019650 ],
-            "rotation" : [
-               0.07876998874241495,
-               0.9730481678187544,
-               0.1157877931410330,
-               -0.1832095492533465
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 4.948803420684575, 16.00253355678326, 17.22961339840555 ],
-            "rotation" : [
-               0.1255561924019638,
-               0.7630630367813271,
-               0.05863640942640667,
-               -0.6312940803913490
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 5.160448675830923, 14.70709086537849, 22.15736924847727 ],
-            "rotation" : [
-               0.1415641646251391,
-               0.6213343249826006,
-               0.02458072308849831,
-               -0.7702590680705090
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 1.109515013163092, 14.94815523655332, 23.72730231827830 ],
-            "rotation" : [
-               0.06073965670288090,
-               -0.5059452669200090,
-               -0.1330643089632571,
-               -0.8500729207926741
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 3.044095949712934, 15.48888664541177, 19.82571766562087 ],
-            "rotation" : [
-               -0.09355569053961131,
-               -0.9759144932216720,
-               -0.1486651470911766,
-               -0.1293712051729538
-            ],
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
+            "mesh" : "Testing/Ship.Hull.mesh"
          },
          "RigidBody" : {
             "angularVelocity" : [ 0.0, 0.0, 0.0 ],
-            "linearVelocity" : [ 1.831959080061252, 8.794666867896686, 4.392921648709595 ],
+            "linearVelocity" : [ 0.0, 0.0, -10.0 ],
             "mass" : 123.0,
-            "mesh" : "Testing/Test.Cube.mesh"
+            "mesh" : "Testing/Ship.Collision.mesh"
          },
          "Transform" : {
-            "position" : [ 2.531353436463664, 21.77784120032282, 3.326882575407693 ],
+            "position" : [ 0.0, 0.0, -52.84357892660232 ],
             "rotation" : [ 0.0, 0.0, 0.0, -1.0 ],
             "scale" : [ 1.0, 1.0, 1.0 ]
          }
@@ -664,17 +61,22 @@
       {
          "Geometry" : {
             "material" : "Common/Diffuse.material",
-            "mesh" : "Testing/Test.Cube.mesh"
+            "mesh" : "Testing/Ship.Hull.mesh"
          },
          "RigidBody" : {
-            "angularVelocity" : [ 0.0, 0.0, 0.0 ],
-            "linearVelocity" : [ -4.822436721224435, -3.207991033055619, -8.151864670222444 ],
+            "angularVelocity" : [ 0.2112601672290843, -0.2045290912784317, 0.05891552312814516 ],
+            "linearVelocity" : [ -3.176986993036718, 1.735516965615588, -0.3196565101143155 ],
             "mass" : 123.0,
-            "mesh" : "Testing/Test.Cube.mesh"
+            "mesh" : "Testing/Ship.Collision.mesh"
          },
          "Transform" : {
-            "position" : [ 6.336447794263694, 31.74195323951793, 12.38369302936058 ],
-            "rotation" : [ 0.0, 0.0, 0.0, -1.0 ],
+            "position" : [ -8.711597992859982, 8.119533557374494, -104.5307932940847 ],
+            "rotation" : [
+               0.3569354526217586,
+               -0.3451246580778468,
+               0.1000871168853758,
+               -0.8622462653337055
+            ],
             "scale" : [ 1.0, 1.0, 1.0 ]
          }
       }

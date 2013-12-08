@@ -17,13 +17,28 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
 
-    DataValue sceneValue;
+    FileSystem& fileSystem = assetCache.fileSystem();
+    if (fileSystem.exists("Testing/Test.scene"))
     {
-        FileReadStream stream = assetCache.fileSystem().openFileForRead("Test.scene");
-        DataValueJsonFormat::load(sceneValue, stream);
+        DataValue sceneValue;
+        {
+            FileReadStream stream = assetCache.fileSystem().openFileForRead("Testing/Test.scene");
+            DataValueJsonFormat::load(sceneValue, stream);
+        }
+        _scene.load(sceneValue, assetCache);
+        _scene.refresh();
     }
-    _scene.load(sceneValue, assetCache);
-    _scene.refresh();
+    else
+    {
+        DataValue debugCameraValue;
+        {
+            FileReadStream stream = assetCache.fileSystem().openFileForRead("Testing/DebugCamera.entity");
+            DataValueJsonFormat::load(debugCameraValue, stream);
+        }
+        _debugCamera = _scene.createEntity();
+        _debugCamera.load(debugCameraValue, assetCache);
+        _debugCamera.activate();
+    }
 
     DataValue testRigidBodyValue;
     {

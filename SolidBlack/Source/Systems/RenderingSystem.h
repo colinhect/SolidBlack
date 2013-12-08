@@ -6,8 +6,7 @@ class RenderingSystem :
 public:
     RenderingSystem(Renderer& renderer, AssetCache& assetCache);
 
-    void addEntity(Entity& entity);
-    void removeEntity(Entity& entity);
+    bool includesEntity(const Entity& entity) const;
 
     void renderAll(Camera& camera, RenderTarget& target);
 
@@ -20,12 +19,20 @@ public:
 private:
     FrameBuffer _geometryBuffer;
     FrameBuffer _lightBuffer;
-
+    
+    Shader::Ref _ambientLightShader;
+    Shader::Ref _directionalLightShader;
     Shader::Ref _compositorShader;
     Mesh::Ref _screenMesh;
 
-    Renderer* _renderer;
+    RenderMode _additiveLightMode;
 
+    Renderer* _renderer;
+    
+    const Uniform* _ambientLightColorUniform;
+    const Uniform* _directionalLightColorUniform;
+    const Uniform* _directionalLightDirectionUniform;
+    const Uniform* _directionalLightViewUniform;
     const Uniform* _oneOverGammaUniform;
     const Uniform* _exposureUniform;
 

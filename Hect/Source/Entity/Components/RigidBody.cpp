@@ -113,7 +113,7 @@ void RigidBody::setMesh(const AssetHandle<Mesh>& mesh)
 
 void RigidBodySerializer::save(const RigidBody& rigidBody, ComponentWriter& writer) const
 {
-    writer.writeNumber("mass", rigidBody.mass());
+    writer.writeDouble("mass", rigidBody.mass());
     writer.writeVector3("linearVelocity", rigidBody.linearVelocity());
     writer.writeVector3("angularVelocity", rigidBody.angularVelocity());
     writer.writeString("mesh", rigidBody.mesh().path().toString());
@@ -123,7 +123,7 @@ void RigidBodySerializer::load(RigidBody& rigidBody, ComponentReader& reader, As
 {
     if (reader.hasValue("mass"))
     {
-        rigidBody.setMass(reader.readNumber("mass"));
+        rigidBody.setMass(reader.readDouble("mass"));
     }
 
     if (reader.hasValue("linearVelocity"))
