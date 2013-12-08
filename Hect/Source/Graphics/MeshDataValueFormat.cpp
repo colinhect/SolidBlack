@@ -10,7 +10,7 @@ void MeshDataValueFormat::load(Mesh& mesh, const std::string& name, const DataVa
     {
         indexType = _parseIndexType(dataValue["indexType"].asString());
     }
-    
+
     // Primitive type (optional)
     PrimitiveType primitiveType = mesh.primitiveType();
     if (dataValue["primitiveType"].isString())

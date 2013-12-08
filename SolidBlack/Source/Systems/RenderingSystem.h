@@ -19,7 +19,7 @@ public:
 private:
     FrameBuffer _geometryBuffer;
     FrameBuffer _lightBuffer;
-    
+
     Shader::Ref _ambientLightShader;
     Shader::Ref _directionalLightShader;
     Shader::Ref _compositorShader;
@@ -28,7 +28,7 @@ private:
     RenderMode _additiveLightMode;
 
     Renderer* _renderer;
-    
+
     const Uniform* _ambientLightColorUniform;
     const Uniform* _directionalLightColorUniform;
     const Uniform* _directionalLightDirectionUniform;

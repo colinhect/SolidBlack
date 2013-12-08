@@ -16,11 +16,11 @@ RenderingSystem::RenderingSystem(Renderer& renderer, AssetCache& assetCache) :
     _additiveLightMode.enableState(RenderState::Blend);
     _additiveLightMode.disableState(RenderState::DepthTest);
     _additiveLightMode.setBlendFactors(BlendFactor::One, BlendFactor::One);
-    
+
     // Load ambient light shader
     _ambientLightShader = assetCache.get<Shader>("DeferredShading/AmbientLight.shader");
     _ambientLightColorUniform = &_ambientLightShader->uniformWithName("color");
-    
+
     // Load directional light shader
     _directionalLightShader = assetCache.get<Shader>("DeferredShading/DirectionalLight.shader");
     _directionalLightColorUniform = &_directionalLightShader->uniformWithName("color");
