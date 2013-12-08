@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading meshes from data values.
-class MeshDataFormat
+class MeshDataValueFormat
 {
 public:
 

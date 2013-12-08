@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void TextureDataFormat::load(Texture& texture, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
+void TextureDataValueFormat::load(Texture& texture, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
     // Image
     if (dataValue["image"].isString())
@@ -36,7 +36,7 @@ void TextureDataFormat::load(Texture& texture, const std::string& name, const Da
     }
 }
 
-TextureFilter TextureDataFormat::_parseTextureFilter(const DataValue& dataValue)
+TextureFilter TextureDataValueFormat::_parseTextureFilter(const DataValue& dataValue)
 {
     static std::map<std::string, TextureFilter> textureFilters;
 

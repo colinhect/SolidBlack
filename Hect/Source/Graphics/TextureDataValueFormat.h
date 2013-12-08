@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading textures from data values.
-class TextureDataFormat
+class TextureDataValueFormat
 {
 public:
 

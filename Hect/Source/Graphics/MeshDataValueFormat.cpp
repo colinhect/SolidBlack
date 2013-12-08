@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void MeshDataFormat::load(Mesh& mesh, const std::string& name, const DataValue& dataValue)
+void MeshDataValueFormat::load(Mesh& mesh, const std::string& name, const DataValue& dataValue)
 {
     // Index type (optional)
     IndexType indexType = mesh.indexType();
@@ -69,7 +69,7 @@ void MeshDataFormat::load(Mesh& mesh, const std::string& name, const DataValue& 
     }
 }
 
-IndexType MeshDataFormat::_parseIndexType(const DataValue& dataValue)
+IndexType MeshDataValueFormat::_parseIndexType(const DataValue& dataValue)
 {
     static std::map<std::string, IndexType> indexTypes;
 
@@ -89,7 +89,7 @@ IndexType MeshDataFormat::_parseIndexType(const DataValue& dataValue)
     return (*it).second;
 }
 
-PrimitiveType MeshDataFormat::_parsePrimitiveType(const DataValue& dataValue)
+PrimitiveType MeshDataValueFormat::_parsePrimitiveType(const DataValue& dataValue)
 {
     static std::map<std::string, PrimitiveType> primitiveTypes;
 
@@ -111,7 +111,7 @@ PrimitiveType MeshDataFormat::_parsePrimitiveType(const DataValue& dataValue)
     return (*it).second;
 }
 
-VertexAttributeSemantic MeshDataFormat::_parseAttributeSemantic(const DataValue& dataValue)
+VertexAttributeSemantic MeshDataValueFormat::_parseAttributeSemantic(const DataValue& dataValue)
 {
     static std::map<std::string, VertexAttributeSemantic> attributeSemantics;
 
@@ -141,7 +141,7 @@ VertexAttributeSemantic MeshDataFormat::_parseAttributeSemantic(const DataValue&
     return (*it).second;
 }
 
-VertexAttributeType MeshDataFormat::_parseAttributeType(const DataValue& dataValue)
+VertexAttributeType MeshDataValueFormat::_parseAttributeType(const DataValue& dataValue)
 {
     static std::map<std::string, VertexAttributeType> attributeTypes;
 

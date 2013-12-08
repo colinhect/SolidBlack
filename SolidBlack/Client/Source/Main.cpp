@@ -35,7 +35,7 @@ int main()
         }
 
         // Create window
-        VideoMode videoMode = VideoModeDataFormat::load(settings["videoMode"]);
+        VideoMode videoMode = VideoModeDataValueFormat::load(settings["videoMode"]);
         Window window("Solid Black Client", videoMode);
         Renderer renderer(window);
 
@@ -43,7 +43,7 @@ int main()
         InputAxis::Array axes;
         for (const std::string& axisName : settings["inputAxes"].memberNames())
         {
-            InputAxis axis = InputAxisDataFormat::load(axisName, settings["inputAxes"][axisName]);
+            InputAxis axis = InputAxisDataValueFormat::load(axisName, settings["inputAxes"][axisName]);
             axes.push_back(axis);
         }
 

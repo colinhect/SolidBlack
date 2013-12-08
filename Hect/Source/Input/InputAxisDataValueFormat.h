@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading input axes from data values.
-class InputAxisDataFormat
+class InputAxisDataValueFormat
 {
 public:
 

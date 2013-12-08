@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-VideoMode VideoModeDataFormat::load(const DataValue& dataValue)
+VideoMode VideoModeDataValueFormat::load(const DataValue& dataValue)
 {
     unsigned width = dataValue["width"].asUnsigned();
     unsigned height =  dataValue["height"].asUnsigned();

@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void ShaderDataFormat::load(Shader& shader, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
+void ShaderDataValueFormat::load(Shader& shader, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
     ShaderModule::RefArray modules;
 
@@ -24,7 +24,7 @@ void ShaderDataFormat::load(Shader& shader, const std::string& name, const DataV
     shader = Shader(name, modules, uniforms);
 }
 
-UniformValue ShaderDataFormat::parseValue(UniformType type, const DataValue& dataValue)
+UniformValue ShaderDataValueFormat::parseValue(UniformType type, const DataValue& dataValue)
 {
     switch (type)
     {
@@ -46,7 +46,7 @@ UniformValue ShaderDataFormat::parseValue(UniformType type, const DataValue& dat
     }
 }
 
-Uniform ShaderDataFormat::_parseUniform(const std::string& name, const DataValue& dataValue)
+Uniform ShaderDataValueFormat::_parseUniform(const std::string& name, const DataValue& dataValue)
 {
     if (!dataValue["type"].isNull())
     {
@@ -73,7 +73,7 @@ Uniform ShaderDataFormat::_parseUniform(const std::string& name, const DataValue
     }
 }
 
-UniformBinding ShaderDataFormat::_parseUniformBinding(const DataValue& dataValue)
+UniformBinding ShaderDataValueFormat::_parseUniformBinding(const DataValue& dataValue)
 {
     static std::map<std::string, UniformBinding> uniformBindings;
 
@@ -100,7 +100,7 @@ UniformBinding ShaderDataFormat::_parseUniformBinding(const DataValue& dataValue
     return (*it).second;
 }
 
-UniformType ShaderDataFormat::_parseType(const DataValue& dataValue)
+UniformType ShaderDataValueFormat::_parseType(const DataValue& dataValue)
 {
     static std::map<std::string, UniformType> valueTypes;
 

@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void MaterialDataFormat::load(Material& material, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
+void MaterialDataValueFormat::load(Material& material, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
     Technique::Array techniques;
 
@@ -58,7 +58,7 @@ void MaterialDataFormat::load(Material& material, const std::string& name, const
                 }
 
                 const Uniform& uniform = shader->uniformWithName(name);
-                UniformValue value = ShaderDataFormat::parseValue(uniform.type(), uniformValue[name]);
+                UniformValue value = ShaderDataValueFormat::parseValue(uniform.type(), uniformValue[name]);
 
                 bool foundUniformValue = false;
                 for (PassUniformValue& uniformValue : uniformValues)
@@ -160,7 +160,7 @@ void MaterialDataFormat::load(Material& material, const std::string& name, const
     material = Material(name, techniques);
 }
 
-RenderState MaterialDataFormat::_parseState(const DataValue& dataValue)
+RenderState MaterialDataValueFormat::_parseState(const DataValue& dataValue)
 {
     static std::map<std::string, RenderState> states;
 
@@ -181,7 +181,7 @@ RenderState MaterialDataFormat::_parseState(const DataValue& dataValue)
     return (*it).second;
 }
 
-BlendFactor MaterialDataFormat::_parseBlendFactor(const DataValue& dataValue)
+BlendFactor MaterialDataValueFormat::_parseBlendFactor(const DataValue& dataValue)
 {
     static std::map<std::string, BlendFactor> blendFactors;
 

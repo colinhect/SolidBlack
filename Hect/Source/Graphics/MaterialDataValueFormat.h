@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading materials from data values.
-class MaterialDataFormat
+class MaterialDataValueFormat
 {
 public:
 

@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-InputAxis InputAxisDataFormat::load(const std::string& name, const DataValue& dataValue)
+InputAxis InputAxisDataValueFormat::load(const std::string& name, const DataValue& dataValue)
 {
     InputAxisSource source = _parseSource(dataValue["source"]);
     InputAxis axis(name, source);
@@ -44,7 +44,7 @@ InputAxis InputAxisDataFormat::load(const std::string& name, const DataValue& da
     return axis;
 }
 
-InputAxisSource InputAxisDataFormat::_parseSource(const DataValue& dataValue)
+InputAxisSource InputAxisDataValueFormat::_parseSource(const DataValue& dataValue)
 {
     static std::map<std::string, InputAxisSource> sources;
 
@@ -66,7 +66,7 @@ InputAxisSource InputAxisDataFormat::_parseSource(const DataValue& dataValue)
     return (*it).second;
 }
 
-Key InputAxisDataFormat::_parseKey(const DataValue& dataValue)
+Key InputAxisDataValueFormat::_parseKey(const DataValue& dataValue)
 {
     static std::map<std::string, Key> keys;
 
@@ -140,7 +140,7 @@ Key InputAxisDataFormat::_parseKey(const DataValue& dataValue)
     return (*it).second;
 }
 
-MouseButton InputAxisDataFormat::_parseMouseButton(const DataValue& dataValue)
+MouseButton InputAxisDataValueFormat::_parseMouseButton(const DataValue& dataValue)
 {
     static std::map<std::string, MouseButton> mouseButtons;
 

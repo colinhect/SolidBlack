@@ -9,5 +9,5 @@ void AssetLoader<Shader>::load(Shader& shader, const Path& assetPath, AssetCache
         FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
         DataValueJsonFormat::load(dataValue, stream);
     }
-    ShaderDataFormat::load(shader, assetPath.toString(), dataValue, assetCache);
+    ShaderDataValueFormat::load(shader, assetPath.toString(), dataValue, assetCache);
 }

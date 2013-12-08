@@ -9,5 +9,5 @@ void AssetLoader<Material>::load(Material& material, const Path& assetPath, Asse
         FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
         DataValueJsonFormat::load(dataValue, stream);
     }
-    MaterialDataFormat::load(material, assetPath.toString(), dataValue, assetCache);
+    MaterialDataValueFormat::load(material, assetPath.toString(), dataValue, assetCache);
 }

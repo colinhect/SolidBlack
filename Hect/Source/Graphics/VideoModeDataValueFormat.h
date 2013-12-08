@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading video modes from data values.
-class VideoModeDataFormat
+class VideoModeDataValueFormat
 {
 public:
 

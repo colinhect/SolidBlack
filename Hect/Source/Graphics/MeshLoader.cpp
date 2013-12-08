@@ -9,5 +9,5 @@ void AssetLoader<Mesh>::load(Mesh& mesh, const Path& assetPath, AssetCache& asse
         FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
         DataValueJsonFormat::load(dataValue, stream);
     }
-    MeshDataFormat::load(mesh, assetPath.toString(), dataValue);
+    MeshDataValueFormat::load(mesh, assetPath.toString(), dataValue);
 }

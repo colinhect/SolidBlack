@@ -5,7 +5,7 @@ namespace hect
 
 ///
 /// Provides functionality for loading shaders from data values.
-class ShaderDataFormat
+class ShaderDataValueFormat
 {
 public:
 
