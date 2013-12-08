@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void ShaderDataFormat::load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache)
+void ShaderDataFormat::load(Shader& shader, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
     ShaderModule::RefArray modules;
 
@@ -21,7 +21,7 @@ void ShaderDataFormat::load(Shader& shader, const DataValue& dataValue, AssetCac
         uniforms.push_back(_parseUniform(name, dataValue["uniforms"][name]));
     }
 
-    shader = Shader(modules, uniforms);
+    shader = Shader(name, modules, uniforms);
 }
 
 UniformValue ShaderDataFormat::parseValue(UniformType type, const DataValue& dataValue)

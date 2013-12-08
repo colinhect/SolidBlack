@@ -4,8 +4,10 @@ using namespace hect;
 
 void AssetLoader<Material>::load(Material& material, const Path& assetPath, AssetCache& assetCache)
 {
-    FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
     DataValue dataValue;
-    DataValueJsonFormat::load(dataValue, stream);
-    MaterialDataFormat::load(material, dataValue, assetCache);
+    {
+        FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
+        DataValueJsonFormat::load(dataValue, stream);
+    }
+    MaterialDataFormat::load(material, assetPath.toString(), dataValue, assetCache);
 }

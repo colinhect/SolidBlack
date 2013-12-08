@@ -11,7 +11,8 @@ Mesh::Mesh() :
 {
 }
 
-Mesh::Mesh(const VertexLayout& vertexLayout, PrimitiveType primitiveType, IndexType indexType) :
+Mesh::Mesh(const std::string& name, const VertexLayout& vertexLayout, PrimitiveType primitiveType, IndexType indexType) :
+    _name(name),
     _vertexLayout(vertexLayout),
     _primitiveType(primitiveType),
     _indexType(indexType),
@@ -30,6 +31,11 @@ Mesh::Mesh(const Mesh& mesh) :
     _indexCount(mesh._indexCount),
     _boundingBox(mesh._boundingBox)
 {
+}
+
+const std::string& Mesh::name() const
+{
+    return _name;
 }
 
 void Mesh::setVertexData(const VertexData& vertexData)
@@ -93,39 +99,14 @@ const VertexLayout& Mesh::vertexLayout() const
     return _vertexLayout;
 }
 
-void Mesh::setVertexLayout(const VertexLayout& vertexLayout)
-{
-    if (_vertexData.size() > 0)
-    {
-        throw Error("Attempt to set the vertex layout of a mesh with vertex data");
-    }
-
-    _vertexLayout = vertexLayout;
-}
-
 PrimitiveType Mesh::primitiveType() const
 {
     return _primitiveType;
 }
 
-void Mesh::setPrimitiveType(PrimitiveType primitiveType)
-{
-    _primitiveType = primitiveType;
-}
-
 IndexType Mesh::indexType() const
 {
     return _indexType;
-}
-
-void Mesh::setIndexType(IndexType indexType)
-{
-    if (_indexData.size() > 0)
-    {
-        throw Error("Attempt to set the index type of a mesh with index data");
-    }
-
-    _indexType = indexType;
 }
 
 AxisAlignedBox<float>& Mesh::boundingBox()

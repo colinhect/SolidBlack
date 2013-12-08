@@ -2,13 +2,13 @@
 
 using namespace hect;
 
-void TextureDataFormat::load(Texture& texture, const DataValue& dataValue, AssetCache& assetCache)
+void TextureDataFormat::load(Texture& texture, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
     // Image
     if (dataValue["image"].isString())
     {
         AssetHandle<Image> handle = assetCache.getHandle<Image>(dataValue["image"].asString());
-        texture = Texture(handle.getShared());
+        texture = Texture(name, handle.getShared());
     }
 
     // Min filter

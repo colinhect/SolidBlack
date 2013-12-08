@@ -42,6 +42,7 @@ public:
     ///
     /// Constructs a 2-dimensional texture given its properties.
     ///
+    /// \param name The name.
     /// \param width The width.
     /// \param height The height.
     /// \param pixelType The pixel type.
@@ -50,7 +51,7 @@ public:
     /// \param magFilter The Magnification filter.
     /// \param mipmapped True if the texture is mipmapped; false otherwise.
     /// \param wrapped True if the texture is wrapped; false otherwise.
-    Texture(unsigned width, unsigned height, PixelType pixelType, PixelFormat pixelFormat, TextureFilter minFilter, TextureFilter magFilter, bool mipmapped, bool wrapped);
+    Texture(const std::string& name, unsigned width, unsigned height, PixelType pixelType, PixelFormat pixelFormat, TextureFilter minFilter, TextureFilter magFilter, bool mipmapped, bool wrapped);
 
     ///
     /// Constructs a 2-dimensional texture given a source image.
@@ -58,8 +59,9 @@ public:
     /// \remarks Once the texture is uploaded it will no longer hold a
     /// reference to the source image.
     ///
+    /// \param name The name.
     /// \param image The source image.
-    Texture(Image::Ref image);
+    Texture(const std::string& name, Image::Ref image);
 
     ///
     /// Constructs a copy of another texture.
@@ -70,6 +72,10 @@ public:
     ///
     /// Destroys the texture on the GPU if it is uploaded.
     ~Texture();
+
+    ///
+    /// Returns the name.
+    const std::string& name() const;
 
     ///
     /// Returns the minification filter.
@@ -140,6 +146,7 @@ public:
     int bytesPerPixel() const;
 
 private:
+    std::string _name;
 
     // A texture will only have an image if it hasn't been uploaded yet
     Image::Ref _image;

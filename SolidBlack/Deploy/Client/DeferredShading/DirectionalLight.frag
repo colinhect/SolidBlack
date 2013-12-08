@@ -21,7 +21,7 @@ void main()
     if (x > 0.0)
     {
         vec3 normal = texture(normalTexture, vertexTextureCoords).rgb;
-        outputColor = vec4(color, 1.0) * max(dot(normal, normalize(normalMatrix * direction)), 0.0);
+        outputColor = vec4(color, 1.0) * max(dot(normal, -normalize(normalMatrix * direction)), 0.0);
     }
     else
     {

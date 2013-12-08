@@ -55,16 +55,21 @@ public:
     ///
     /// Constructs a mesh.
     ///
+    /// \param name The name of the mesh.
     /// \param vertexLayout The vertex layout.
     /// \param primitiveType The primitive type.
     /// \param indexType The index type.
-    Mesh(const VertexLayout& vertexLayout, PrimitiveType primitiveType, IndexType indexType);
+    Mesh(const std::string& name, const VertexLayout& vertexLayout, PrimitiveType primitiveType, IndexType indexType);
 
     ///
     /// Constructs a mesh as a copy from another mesh.
     ///
     /// \param mesh The mesh to copy from.
     Mesh(const Mesh& mesh);
+
+    ///
+    /// Returns the name.
+    const std::string& name() const;
 
     ///
     /// Sets the raw vertex data.
@@ -109,34 +114,12 @@ public:
     const VertexLayout& vertexLayout() const;
 
     ///
-    /// Sets the vertex layout.
-    ///
-    /// \param vertexLayout The new vertex layout.
-    ///
-    /// \throws Error If the mesh has vertex data.
-    void setVertexLayout(const VertexLayout& vertexLayout);
-
-    ///
     /// Returns the primitive type.
     PrimitiveType primitiveType() const;
 
     ///
-    /// Sets the primitive type.
-    ///
-    /// \param primitiveType The new primitive type.
-    void setPrimitiveType(PrimitiveType primitiveType);
-
-    ///
     /// Returns the index type.
     IndexType indexType() const;
-
-    ///
-    /// Sets the index type.
-    ///
-    /// \param indexType The new index type.
-    ///
-    /// \throws Error If the mesh has index data.
-    void setIndexType(IndexType indexType);
 
     ///
     /// Returns the bounding box.
@@ -147,6 +130,8 @@ public:
     const AxisAlignedBox<float>& boundingBox() const;
 
 private:
+    std::string _name;
+
     VertexLayout _vertexLayout;
     PrimitiveType _primitiveType;
     IndexType _indexType;

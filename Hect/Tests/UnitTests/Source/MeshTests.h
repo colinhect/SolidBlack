@@ -18,7 +18,7 @@ SUITE(Mesh)
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
+        Mesh mesh("Test", vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
 
         const VertexLayout& meshVertexLayout = mesh.vertexLayout();
         CHECK_EQUAL(2u, meshVertexLayout.attributes().size());
@@ -37,7 +37,7 @@ SUITE(Mesh)
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
+        Mesh mesh("Test", vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
 
         const float rawVertexData[9] =
         {
@@ -60,7 +60,7 @@ SUITE(Mesh)
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
+        Mesh mesh("Test", vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
 
         const float rawOriginalVertexData[9] =
         {
@@ -93,7 +93,7 @@ SUITE(Mesh)
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
+        Mesh mesh("Test", vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
 
         std::vector<uint8_t> indexData;
         indexData.push_back(0);
@@ -115,7 +115,7 @@ SUITE(Mesh)
 
         VertexLayout vertexLayout(attributes);
 
-        Mesh mesh(vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
+        Mesh mesh("Test", vertexLayout, PrimitiveType::Triangles, IndexType::UnsignedByte);
 
         std::vector<uint8_t> originalIndexData;
         originalIndexData.push_back(0);
@@ -136,64 +136,5 @@ SUITE(Mesh)
         CHECK_EQUAL(2, indexData[3]);
         CHECK_EQUAL(3, indexData[4]);
         CHECK_EQUAL(0, indexData[5]);
-    }
-
-    TEST(SetVertexLayout)
-    {
-        VertexAttribute::Array attributes;
-        attributes.push_back(VertexAttribute(VertexAttributeSemantic::Tangent, VertexAttributeType::Float, 3));
-
-        VertexLayout vertexLayout(attributes);
-
-        Mesh mesh;
-        mesh.setVertexLayout(vertexLayout);
-
-        const VertexLayout& meshVertexLayout = mesh.vertexLayout();
-        CHECK(VertexAttributeSemantic::Tangent == meshVertexLayout.attributes()[0].semantic());
-    }
-
-    TEST(SetVertexLayoutWithVertexData)
-    {
-        Mesh mesh;
-        mesh.setVertexData(std::vector<uint8_t>(10, 0));
-
-        bool errorThrown = false;
-        try
-        {
-            mesh.setVertexLayout(VertexLayout());
-        }
-        catch (Error&)
-        {
-            errorThrown = true;
-        }
-
-        CHECK(errorThrown);
-    }
-
-    TEST(SetIndexType)
-    {
-        Mesh mesh;
-        mesh.setIndexType(IndexType::UnsignedByte);
-
-        CHECK(IndexType::UnsignedByte == mesh.indexType());
-    }
-
-    TEST(SetIndexTypeWithIndexData)
-    {
-        Mesh mesh;
-
-        mesh.setIndexData(std::vector<uint8_t>(10, 0));
-
-        bool errorThrown = false;
-        try
-        {
-            mesh.setIndexType(IndexType::UnsignedByte);
-        }
-        catch (Error&)
-        {
-            errorThrown = true;
-        }
-
-        CHECK(errorThrown);
     }
 }

@@ -15,7 +15,8 @@ Texture::Texture() :
 {
 }
 
-Texture::Texture(unsigned width, unsigned height, PixelType pixelType, PixelFormat pixelFormat, TextureFilter minFilter, TextureFilter magFilter, bool mipmapped, bool wrapped) :
+Texture::Texture(const std::string& name, unsigned width, unsigned height, PixelType pixelType, PixelFormat pixelFormat, TextureFilter minFilter, TextureFilter magFilter, bool mipmapped, bool wrapped) :
+    _name(name),
     _image(Image::Ref(new Image(width, height, pixelType, pixelFormat))),
     _width(width),
     _height(height),
@@ -28,7 +29,8 @@ Texture::Texture(unsigned width, unsigned height, PixelType pixelType, PixelForm
 {
 }
 
-Texture::Texture(Image::Ref image) :
+Texture::Texture(const std::string& name, Image::Ref image) :
+    _name(name),
     _image(image),
     _width(_image->width()),
     _height(_image->height()),
@@ -42,6 +44,7 @@ Texture::Texture(Image::Ref image) :
 }
 
 Texture::Texture(const Texture& texture) :
+    _name(texture._name),
     _image(texture._image),
     _width(texture.width()),
     _height(texture.height()),
@@ -66,6 +69,11 @@ Texture::~Texture()
     {
         renderer()->destroyTexture(*this);
     }
+}
+
+const std::string& Texture::name() const
+{
+    return _name;
 }
 
 TextureFilter Texture::minFilter() const

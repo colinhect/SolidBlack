@@ -6,7 +6,8 @@ Shader::Shader()
 {
 }
 
-Shader::Shader(const ShaderModule::RefArray& modules, const Uniform::Array& uniforms) :
+Shader::Shader(const std::string& name, const ShaderModule::RefArray& modules, const Uniform::Array& uniforms) :
+    _name(name),
     _modules(modules),
     _uniforms(uniforms)
 {
@@ -18,6 +19,11 @@ Shader::~Shader()
     {
         renderer()->destroyShader(*this);
     }
+}
+
+const std::string& Shader::name() const
+{
+    return _name;
 }
 
 const ShaderModule::RefArray& Shader::modules() const

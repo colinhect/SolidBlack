@@ -410,6 +410,8 @@ void Renderer::uploadShader(Shader& shader)
         return;
     }
 
+    LOG_DEBUG(format("Uploading shader '%s'...", shader.name().c_str()));
+
     // Create the shader.
     auto data = new ShaderData();
     data->id = GL_ASSERT( glCreateProgram(); )
@@ -440,7 +442,7 @@ void Renderer::uploadShader(Shader& shader)
 
         if (infoLog.size() > 0)
         {
-            throw Error(format("Failed to link shader: %s", infoLog.c_str()));
+            throw Error(format("Failed to link shader '%s': %s", shader.name().c_str(), infoLog.c_str()));
         }
     }
 
@@ -457,7 +459,7 @@ void Renderer::uploadShader(Shader& shader)
         }
         else
         {
-            LOG_WARNING(format("Unreferenced uniform '%s'", uniform.name().c_str()));
+            LOG_WARNING(format("Uniform '%s' is not referenced in shader '%s'", uniform.name().c_str(), shader.name().c_str()));
         }
     }
 
@@ -474,6 +476,8 @@ void Renderer::destroyShader(Shader& shader)
     {
         return;
     }
+
+    LOG_DEBUG(format("Destroying shader '%s'...", shader.name().c_str()));
 
     auto data = (ShaderData*)shader._data;
 
@@ -534,6 +538,8 @@ void Renderer::uploadShaderModule(ShaderModule& module)
         return;
     }
 
+    LOG_DEBUG(format("Uploading shader module '%s'...", module.name().c_str()));
+
     // Create the shader
     auto data = new ShaderModuleData();
     GL_ASSERT( data->id = glCreateShader(_shaderModuleTypeLookUp[(int)module.type()]); )
@@ -554,7 +560,7 @@ void Renderer::uploadShaderModule(ShaderModule& module)
 
         if (infoLog.size() > 0)
         {
-            throw Error(format("Failed to compile shader module: %s", infoLog.c_str()));
+            throw Error(format("Failed to compile shader module '%s': %s", module.name().c_str(), infoLog.c_str()));
         }
     }
 
@@ -569,6 +575,8 @@ void Renderer::destroyShaderModule(ShaderModule& module)
     {
         return;
     }
+
+    LOG_DEBUG(format("Destroying shader module '%s'...", module.name().c_str()));
 
     auto data = (ShaderModuleData*)module._data;
     GL_ASSERT( glDeleteShader(data->id); )
@@ -606,6 +614,8 @@ void Renderer::uploadTexture(Texture& texture)
     {
         return;
     }
+
+    LOG_DEBUG(format("Uploading texture '%s'...", texture.name().c_str()));
 
     auto data = new TextureData();
     GL_ASSERT( glGenTextures(1, &data->id); )
@@ -677,6 +687,8 @@ void Renderer::destroyTexture(Texture& texture)
         return;
     }
 
+    LOG_DEBUG(format("Destroying texture '%s'...", texture.name().c_str()));
+
     auto data = (TextureData*)texture._data;
     GL_ASSERT( glDeleteTextures(1, &data->id); )
 
@@ -735,6 +747,8 @@ void Renderer::uploadMesh(Mesh& mesh)
     {
         return;
     }
+
+    LOG_DEBUG(format("Uploading mesh '%s'...", mesh.name().c_str()));
 
     auto data = new MeshData();
 
@@ -800,6 +814,8 @@ void Renderer::destroyMesh(Mesh& mesh)
     {
         return;
     }
+
+    LOG_DEBUG(format("Destroying mesh '%s'...", mesh.name().c_str()));
 
     auto data = (MeshData*)mesh._data;
 

@@ -7,5 +7,5 @@ void AssetLoader<Texture>::load(Texture& texture, const Path& assetPath, AssetCa
     FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
     DataValue dataValue;
     DataValueJsonFormat::load(dataValue, stream);
-    TextureDataFormat::load(texture, dataValue, assetCache);
+    TextureDataFormat::load(texture, assetPath.toString(), dataValue, assetCache);
 }

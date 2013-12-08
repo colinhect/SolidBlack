@@ -13,9 +13,10 @@ public:
     /// Loads a shader from a data value.
     ///
     /// \param shader The shader to load to.
+    /// \param name The name of the shader.
     /// \param dataValue The root data value.
     /// \param assetCache The asset cache to use to load referenced assets.
-    static void load(Shader& shader, const DataValue& dataValue, AssetCache& assetCache);
+    static void load(Shader& shader, const std::string& name, const DataValue& dataValue, AssetCache& assetCache);
 
     ///
     /// Parses a uniform value of a certain type.

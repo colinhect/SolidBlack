@@ -43,13 +43,18 @@ public:
     ///
     /// Constructs a shader module given its type and source.
     ///
+    /// \param name The name.
     /// \param type The type.
     /// \param source The source.
-    ShaderModule(ShaderModuleType type, const std::string& source);
+    ShaderModule(const std::string& name, ShaderModuleType type, const std::string& source);
 
     ///
     /// Destroys the shader if it is uploaded.
     ~ShaderModule();
+
+    ///
+    /// Returns the name.
+    const std::string& name() const;
 
     ///
     /// Returns the type.
@@ -59,6 +64,7 @@ public:
     const std::string& source() const;
 
 private:
+    std::string _name;
     ShaderModuleType _type;
     std::string _source;
 };

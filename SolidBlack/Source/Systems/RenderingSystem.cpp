@@ -55,12 +55,12 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
         TextureFilter filter = TextureFilter::Nearest;
 
         Texture::Array targets;
-        targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Color
-        targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Normal
+        targets.push_back(Texture("Color", width, height, pixelType, pixelFormat, filter, filter, false, false));
+        targets.push_back(Texture("Normal", width, height, pixelType, pixelFormat, filter, filter, false, false));
         _geometryBuffer = FrameBuffer(targets);
 
         targets.clear();
-        targets.push_back(Texture(width, height, pixelType, pixelFormat, filter, filter, false, false)); // Lighting
+        targets.push_back(Texture("Lighting", width, height, pixelType, pixelFormat, filter, filter, false, false));
         _lightBuffer = FrameBuffer(targets);
     }
 

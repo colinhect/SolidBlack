@@ -7,6 +7,13 @@ ShaderModule::ShaderModule() :
 {
 }
 
+ShaderModule::ShaderModule(const std::string& name, ShaderModuleType type, const std::string& source) :
+    _name(name),
+    _type(type),
+    _source(source)
+{
+}
+
 ShaderModule::~ShaderModule()
 {
     if (isUploaded())
@@ -15,10 +22,9 @@ ShaderModule::~ShaderModule()
     }
 }
 
-ShaderModule::ShaderModule(ShaderModuleType type, const std::string& source) :
-    _type(type),
-    _source(source)
+const std::string& ShaderModule::name() const
 {
+    return _name;
 }
 
 ShaderModuleType ShaderModule::type() const

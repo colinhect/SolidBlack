@@ -21,13 +21,18 @@ public:
     ///
     /// Constructs a shader given its modules and uniforms.
     ///
+    /// \param name The name.
     /// \param modules The modules.
     /// \param uniforms The uniforms.
-    Shader(const ShaderModule::RefArray& modules, const Uniform::Array& uniforms);
+    Shader(const std::string& name, const ShaderModule::RefArray& modules, const Uniform::Array& uniforms);
 
     ///
     /// Destroys the shader if it is uploaded.
     ~Shader();
+
+    ///
+    /// Returns the name.
+    const std::string& name() const;
 
     ///
     /// Returns the modules.
@@ -50,6 +55,7 @@ public:
     const Uniform& uniformWithName(const std::string& name) const;
 
 private:
+    std::string _name;
     ShaderModule::RefArray _modules;
     Uniform::Array _uniforms;
 };

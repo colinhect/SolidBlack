@@ -2,7 +2,7 @@
 
 using namespace hect;
 
-void MaterialDataFormat::load(Material& material, const DataValue& dataValue, AssetCache& assetCache)
+void MaterialDataFormat::load(Material& material, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
     Technique::Array techniques;
 
@@ -157,7 +157,7 @@ void MaterialDataFormat::load(Material& material, const DataValue& dataValue, As
         ++techniqueIndex;
     }
 
-    material = Material(techniques);
+    material = Material(name, techniques);
 }
 
 RenderState MaterialDataFormat::_parseState(const DataValue& dataValue)

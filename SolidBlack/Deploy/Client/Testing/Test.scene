@@ -16,7 +16,7 @@
             "mesh" : "Testing/Test.Cube.mesh"
          },
          "RigidBody" : {
-            "angularVelocity" : [ 0.1, 0.0, 0.0 ],
+            "angularVelocity" : [ 0.0, 0.0, 0.0 ],
             "linearVelocity" : [ 0, 0, 0 ],
             "mass" : 123.0,
             "mesh" : "Testing/Test.Cube.mesh"

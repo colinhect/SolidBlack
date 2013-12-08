@@ -2,23 +2,24 @@
 
 using namespace hect;
 
-void MeshDataFormat::load(Mesh& mesh, const DataValue& dataValue)
+void MeshDataFormat::load(Mesh& mesh, const std::string& name, const DataValue& dataValue)
 {
     // Index type (optional)
+    IndexType indexType = mesh.indexType();
     if (dataValue["indexType"].isString())
     {
-        IndexType indexType = _parseIndexType(dataValue["indexType"].asString());
-        mesh.setIndexType(indexType);
+        indexType = _parseIndexType(dataValue["indexType"].asString());
     }
-
+    
     // Primitive type (optional)
+    PrimitiveType primitiveType = mesh.primitiveType();
     if (dataValue["primitiveType"].isString())
     {
-        PrimitiveType primitiveType = _parsePrimitiveType(dataValue["primitiveType"].asString());
-        mesh.setPrimitiveType(primitiveType);
+        primitiveType = _parsePrimitiveType(dataValue["primitiveType"].asString());
     }
 
     // Vertex layout (optional)
+    VertexLayout vertexLayout = mesh.vertexLayout();
     if (dataValue["vertexLayout"].isArray())
     {
         VertexAttribute::Array attributes;
@@ -30,9 +31,10 @@ void MeshDataFormat::load(Mesh& mesh, const DataValue& dataValue)
 
             attributes.push_back(VertexAttribute(semantic, type, cardinality));
         }
-        mesh.setVertexLayout(VertexLayout(attributes));
+        vertexLayout = VertexLayout(attributes);
     }
 
+    mesh = Mesh(name, vertexLayout, primitiveType, indexType);
     MeshWriter meshWriter(mesh);
 
     // Add the vertices
