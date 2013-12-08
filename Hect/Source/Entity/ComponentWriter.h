@@ -9,47 +9,50 @@ class ComponentWriter
 {
 public:
 
+    virtual void beginObject(const char* name) = 0;
+    virtual void endObject() = 0;
+
     ///
     /// Writes a number value.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member to write.
     /// \param value The value.
-    virtual void writeDouble(const char* name, double value) = 0;
+    virtual void writeMemberDouble(const char* name, double value) = 0;
 
     ///
     /// Writes a string value.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member to write.
     /// \param value The value.
-    virtual void writeString(const char* name, const std::string& value) = 0;
+    virtual void writeMemberString(const char* name, const std::string& value) = 0;
 
     ///
     /// Writes a 2-dimensional vector value.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member to write.
     /// \param value The value.
-    virtual void writeVector2(const char* name, const Vector2<>& value) = 0;
+    virtual void writeMemberVector2(const char* name, const Vector2<>& value) = 0;
 
     ///
     /// Writes a 3-dimensional vector value.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member to write.
     /// \param value The value
-    virtual void writeVector3(const char* name, const Vector3<>& value) = 0;
+    virtual void writeMemberVector3(const char* name, const Vector3<>& value) = 0;
 
     ///
     /// Writes a 4-dimensional vector value.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member to write.
     /// \param value The value
-    virtual void writeVector4(const char* name, const Vector4<>& value) = 0;
+    virtual void writeMemberVector4(const char* name, const Vector4<>& value) = 0;
 
     ///
     /// Writes a quaternion value.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member to write.
     /// \param value The value
-    virtual void writeQuaternion(const char* name, const Quaternion<>& value) = 0;
+    virtual void writeMemberQuaternion(const char* name, const Quaternion<>& value) = 0;
 };
 
 ///
@@ -60,35 +63,48 @@ class DataValueComponentWriter :
 public:
 
     ///
-    /// \copydoc ComponentWriter::writeDouble()
-    void writeDouble(const char* name, double value);
+    /// Constructs the component writer.
+    DataValueComponentWriter();
 
     ///
-    /// \copydoc ComponentWriter::writeString()
-    void writeString(const char* name, const std::string& value);
+    /// \copydoc ComponentWriter::beginObject()
+    void beginObject(const char* name);
 
     ///
-    /// \copydoc ComponentWriter::writeVector2()
-    void writeVector2(const char* name, const Vector2<>& value);
+    /// \copydoc ComponentWriter::beginObject()
+    void endObject();
 
     ///
-    /// \copydoc ComponentWriter::writeVector3()
-    void writeVector3(const char* name, const Vector3<>& value);
+    /// \copydoc ComponentWriter::writeMemberDouble()
+    void writeMemberDouble(const char* name, double value);
 
     ///
-    /// \copydoc ComponentWriter::writeVector4()
-    void writeVector4(const char* name, const Vector4<>& value);
+    /// \copydoc ComponentWriter::writeMemberString()
+    void writeMemberString(const char* name, const std::string& value);
 
     ///
-    /// \copydoc ComponentWriter::writeQuaternion()
-    void writeQuaternion(const char* name, const Quaternion<>& value);
+    /// \copydoc ComponentWriter::writeMemberVector2()
+    void writeMemberVector2(const char* name, const Vector2<>& value);
+
+    ///
+    /// \copydoc ComponentWriter::writeMemberVector3()
+    void writeMemberVector3(const char* name, const Vector3<>& value);
+
+    ///
+    /// \copydoc ComponentWriter::writeMemberVector4()
+    void writeMemberVector4(const char* name, const Vector4<>& value);
+
+    ///
+    /// \copydoc ComponentWriter::writeMemberQuaternion()
+    void writeMemberQuaternion(const char* name, const Quaternion<>& value);
 
     ///
     /// Returns the data value written thus far.
     DataValue dataValue() const;
 
 private:
-    DataValue::Object _members;
+    std::stack<std::string> _objectNameStack;
+    std::stack<DataValue::Object> _objectStack;
 };
 
 ///
@@ -105,28 +121,36 @@ public:
     BinaryComponentWriter(WriteStream& stream);
 
     ///
-    /// \copydoc ComponentWriter::writeDouble()
-    void writeDouble(const char* name, double value);
+    /// \copydoc ComponentWriter::beginObject()
+    void beginObject(const char* name);
 
     ///
-    /// \copydoc ComponentWriter::writeString()
-    void writeString(const char* name, const std::string& value);
+    /// \copydoc ComponentWriter::beginObject()
+    void endObject();
 
     ///
-    /// \copydoc ComponentWriter::writeVector2()
-    void writeVector2(const char* name, const Vector2<>& value);
+    /// \copydoc ComponentWriter::writeMemberDouble()
+    void writeMemberDouble(const char* name, double value);
 
     ///
-    /// \copydoc ComponentWriter::writeVector3()
-    void writeVector3(const char* name, const Vector3<>& value);
+    /// \copydoc ComponentWriter::writeMemberString()
+    void writeMemberString(const char* name, const std::string& value);
 
     ///
-    /// \copydoc ComponentWriter::writeVector4()
-    void writeVector4(const char* name, const Vector4<>& value);
+    /// \copydoc ComponentWriter::writeMemberVector2()
+    void writeMemberVector2(const char* name, const Vector2<>& value);
 
     ///
-    /// \copydoc ComponentWriter::writeQuaternion()
-    void writeQuaternion(const char* name, const Quaternion<>& value);
+    /// \copydoc ComponentWriter::writeMemberVector3()
+    void writeMemberVector3(const char* name, const Vector3<>& value);
+
+    ///
+    /// \copydoc ComponentWriter::writeMemberVector4()
+    void writeMemberVector4(const char* name, const Vector4<>& value);
+
+    ///
+    /// \copydoc ComponentWriter::writeMemberQuaternion()
+    void writeMemberQuaternion(const char* name, const Quaternion<>& value);
 
 private:
     WriteStream* _stream;

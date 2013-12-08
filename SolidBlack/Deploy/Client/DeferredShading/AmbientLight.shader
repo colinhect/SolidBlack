@@ -10,15 +10,10 @@
         {
             "type" : "Vector3"
         },
-        "colorTexture" :
+        "normalBuffer" :
         {
             "type" : "Texture",
             "defaultValue" : 0
-        },
-        "normalTexture" :
-        {
-            "type" : "Texture",
-            "defaultValue" : 1
         }
     }
 }

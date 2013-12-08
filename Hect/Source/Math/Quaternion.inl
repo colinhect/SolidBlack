@@ -98,20 +98,13 @@ Quaternion<T> Quaternion<T>::inverse() const
 }
 
 template <typename T>
-void Quaternion<T>::toAxisAngle(Vector3<T>* axis, Angle<T>* angle)
+void Quaternion<T>::toAxisAngle(Vector3<T>& axis, Angle<T>& angle) const
 {
-    assert(axis);
-    assert(angle);
-
     Quaternion q(*this);
     q.normalize();
 
-    axis->x = q.x;
-    axis->y = q.y;
-    axis->z = q.z;
-    axis->normalize();
-
-    *angle = Angle<T>::fromRadians((T)2.0 * (T)std::acos(w));
+    axis = Vector3<T>(q.x, q.y, q.z).normalized();
+    angle = Angle<T>::fromRadians((T)2.0 * (T)std::acos(w));
 }
 
 template <typename T>

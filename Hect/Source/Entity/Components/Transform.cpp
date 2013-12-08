@@ -96,27 +96,49 @@ void Transform::transformBy(const Transform& transform)
 
 void TransformSerializer::save(const Transform& transform, ComponentWriter& writer) const
 {
-    writer.writeVector3("position", transform.position());
-    writer.writeQuaternion("rotation", transform.rotation());
-    writer.writeVector3("scale", transform.scale());
+    Vector3<> axis;
+    Angle<> angle;
+    transform.rotation().toAxisAngle(axis, angle);
+
+    writer.writeMemberVector3("position", transform.position());
+    writer.writeMemberVector3("scale", transform.scale());
+    writer.beginObject("rotation");
+    writer.writeMemberVector3("axis", axis);
+    writer.writeMemberDouble("angle", angle.degrees());
+    writer.endObject();
 }
 
 void TransformSerializer::load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const
 {
     assetCache;
 
-    if (reader.hasValue("position"))
+    if (reader.hasMember("position"))
     {
-        transform.setPosition(reader.readVector3("position"));
+        transform.setPosition(reader.readMemberVector3("position"));
     }
 
-    if (reader.hasValue("rotation"))
+    if (reader.hasMember("scale"))
     {
-        transform.setRotation(reader.readQuaternion("rotation"));
+        transform.setScale(reader.readMemberVector3("scale"));
     }
 
-    if (reader.hasValue("scale"))
+    if (reader.beginObject("rotation"))
     {
-        transform.setScale(reader.readVector3("scale"));
+        Vector3<> axis;
+        Angle<> angle;
+
+        if (reader.hasMember("axis"))
+        {
+            axis = reader.readMemberVector3("axis");
+        }
+        
+        if (reader.hasMember("angle"))
+        {
+            double degrees = reader.readMemberDouble("angle");
+            angle = Angle<>::fromDegrees(degrees);
+        }
+
+        transform.setRotation(Quaternion<>::fromAxisAngle(axis, angle));
+        reader.endObject();
     }
 }

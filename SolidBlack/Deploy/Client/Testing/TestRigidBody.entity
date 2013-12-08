@@ -1,7 +1,12 @@
 {
     "Transform" :
     {
-        "position" : [ 0, 0, 0 ]
+        "position" : [ 0, 0, 0 ],
+        "rotation" :
+        {
+            "angle" : 90.0,
+            "axis" : [ 1, 0, 0 ]
+        }
     },
     "Geometry" :
     {

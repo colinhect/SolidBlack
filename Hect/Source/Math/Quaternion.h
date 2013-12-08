@@ -82,7 +82,7 @@ public:
     ///
     /// \param axis The resulting axis.
     /// \param angle The resulting angle.
-    void toAxisAngle(Vector3<T>* axis, Angle<T>* angle);
+    void toAxisAngle(Vector3<T>& axis, Angle<T>& angle) const;
 
     ///
     /// Returns the product of the quaternion and a scalar.

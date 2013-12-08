@@ -2,44 +2,55 @@
 
 using namespace hect;
 
-DataValueComponentReader::DataValueComponentReader(const DataValue& dataValue) :
-    _dataValue(&dataValue)
+DataValueComponentReader::DataValueComponentReader(const DataValue& dataValue)
 {
+    _dataValueStack.push(dataValue);
 }
 
-bool DataValueComponentReader::hasValue(const char* name)
+bool DataValueComponentReader::beginObject(const char* name)
 {
-    return !(*_dataValue)[name].isNull();
+    _dataValueStack.push(_dataValueStack.top()[name]);
+    return !_dataValueStack.top().isNull();
 }
 
-double DataValueComponentReader::readDouble(const char* name)
+void DataValueComponentReader::endObject()
 {
-    return (*_dataValue)[name].asDouble();
+    _dataValueStack.pop();
 }
 
-std::string DataValueComponentReader::readString(const char* name)
+bool DataValueComponentReader::hasMember(const char* name)
 {
-    return (*_dataValue)[name].asString();
+    return !_dataValueStack.top()[name].isNull();
 }
 
-Vector2<> DataValueComponentReader::readVector2(const char* name)
+double DataValueComponentReader::readMemberDouble(const char* name)
 {
-    return (*_dataValue)[name].asVector2();
+    return _dataValueStack.top()[name].asDouble();
 }
 
-Vector3<> DataValueComponentReader::readVector3(const char* name)
+std::string DataValueComponentReader::readMemberString(const char* name)
 {
-    return (*_dataValue)[name].asVector3();
+    return _dataValueStack.top()[name].asString();
 }
 
-Vector4<> DataValueComponentReader::readVector4(const char* name)
+Vector2<> DataValueComponentReader::readMemberVector2(const char* name)
 {
-    return (*_dataValue)[name].asVector4();
+    return _dataValueStack.top()[name].asVector2();
 }
 
-Quaternion<> DataValueComponentReader::readQuaternion(const char* name)
+Vector3<> DataValueComponentReader::readMemberVector3(const char* name)
 {
-    return (*_dataValue)[name].asQuaternion();
+    return _dataValueStack.top()[name].asVector3();
+}
+
+Vector4<> DataValueComponentReader::readMemberVector4(const char* name)
+{
+    return _dataValueStack.top()[name].asVector4();
+}
+
+Quaternion<> DataValueComponentReader::readMemberQuaternion(const char* name)
+{
+    return _dataValueStack.top()[name].asQuaternion();
 }
 
 BinaryComponentReader::BinaryComponentReader(ReadStream& stream) :
@@ -47,43 +58,53 @@ BinaryComponentReader::BinaryComponentReader(ReadStream& stream) :
 {
 }
 
-bool BinaryComponentReader::hasValue(const char* name)
+bool BinaryComponentReader::beginObject(const char* name)
+{
+    name;
+    return true;
+}
+
+void BinaryComponentReader::endObject()
+{
+}
+
+bool BinaryComponentReader::hasMember(const char* name)
 {
     name;
     return true; // Assume that all values are written
 }
 
-double BinaryComponentReader::readDouble(const char* name)
+double BinaryComponentReader::readMemberDouble(const char* name)
 {
     name;
     return _stream->readDouble();
 }
 
-std::string BinaryComponentReader::readString(const char* name)
+std::string BinaryComponentReader::readMemberString(const char* name)
 {
     name;
     return _stream->readString();
 }
 
-Vector2<> BinaryComponentReader::readVector2(const char* name)
+Vector2<> BinaryComponentReader::readMemberVector2(const char* name)
 {
     name;
     return _stream->readVector2();
 }
 
-Vector3<> BinaryComponentReader::readVector3(const char* name)
+Vector3<> BinaryComponentReader::readMemberVector3(const char* name)
 {
     name;
     return _stream->readVector3();
 }
 
-Vector4<> BinaryComponentReader::readVector4(const char* name)
+Vector4<> BinaryComponentReader::readMemberVector4(const char* name)
 {
     name;
     return _stream->readVector4();
 }
 
-Quaternion<> BinaryComponentReader::readQuaternion(const char* name)
+Quaternion<> BinaryComponentReader::readMemberQuaternion(const char* name)
 {
     name;
     return _stream->readQuaternion();

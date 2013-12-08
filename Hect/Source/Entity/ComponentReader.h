@@ -9,61 +9,64 @@ class ComponentReader
 {
 public:
 
+    virtual bool beginObject(const char* name) = 0;
+    virtual void endObject() = 0;
+
     ///
     /// Returns whether there is a value with a given name.
     ///
-    /// \param name The name of the value in question.
+    /// \param name The name of the member in question.
     ///
     /// \returns The read value.
-    virtual bool hasValue(const char* name) = 0;
+    virtual bool hasMember(const char* name) = 0;
 
     ///
     /// Reads a value as a number.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member.
     ///
     /// \returns The read value.
-    virtual double readDouble(const char* name) = 0;
+    virtual double readMemberDouble(const char* name) = 0;
 
     ///
     /// Reads a value as a string.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member.
     ///
     /// \returns The read value.
-    virtual std::string readString(const char* name) = 0;
+    virtual std::string readMemberString(const char* name) = 0;
 
     ///
     /// Reads a value as a 2-dimensional vector.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member.
     ///
     /// \returns The read value.
-    virtual Vector2<> readVector2(const char* name) = 0;
+    virtual Vector2<> readMemberVector2(const char* name) = 0;
 
     ///
     /// Reads a value as a 3-dimensional vector.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member.
     ///
     /// \returns The read value.
-    virtual Vector3<> readVector3(const char* name) = 0;
+    virtual Vector3<> readMemberVector3(const char* name) = 0;
 
     ///
     /// Reads a value as a 4-dimensional vector.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member.
     ///
     /// \returns The read value.
-    virtual Vector4<> readVector4(const char* name) = 0;
+    virtual Vector4<> readMemberVector4(const char* name) = 0;
 
     ///
     /// Reads a value as a quaternion.
     ///
-    /// \param name The name of the value.
+    /// \param name The name of the member.
     ///
     /// \returns The read value.
-    virtual Quaternion<> readQuaternion(const char* name) = 0;
+    virtual Quaternion<> readMemberQuaternion(const char* name) = 0;
 };
 
 ///
@@ -80,35 +83,43 @@ public:
     DataValueComponentReader(const DataValue& dataValue);
 
     ///
-    /// \copydoc ComponentReader::hasValue()
-    bool hasValue(const char* name);
+    /// \copydoc ComponentWriter::beginObject()
+    bool beginObject(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readDouble()
-    double readDouble(const char* name);
+    /// \copydoc ComponentWriter::beginObject()
+    void endObject();
 
     ///
-    /// \copydoc ComponentReader::readString()
-    std::string readString(const char* name);
+    /// \copydoc ComponentReader::hasMember()
+    bool hasMember(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readVector2()
-    Vector2<> readVector2(const char* name);
+    /// \copydoc ComponentReader::readMemberDouble()
+    double readMemberDouble(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readVector3()
-    Vector3<> readVector3(const char* name);
+    /// \copydoc ComponentReader::readMemberString()
+    std::string readMemberString(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readVector4()
-    Vector4<> readVector4(const char* name);
+    /// \copydoc ComponentReader::readMemberVector2()
+    Vector2<> readMemberVector2(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readQuaternion()
-    Quaternion<> readQuaternion(const char* name);
+    /// \copydoc ComponentReader::readMemberVector3()
+    Vector3<> readMemberVector3(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readMemberVector4()
+    Vector4<> readMemberVector4(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readMemberQuaternion()
+    Quaternion<> readMemberQuaternion(const char* name);
 
 private:
-    const DataValue* _dataValue;
+    std::stack<DataValue> _dataValueStack;
 };
 
 ///
@@ -125,32 +136,40 @@ public:
     BinaryComponentReader(ReadStream& stream);
 
     ///
-    /// \copydoc ComponentReader::hasValue()
-    bool hasValue(const char* name);
+    /// \copydoc ComponentWriter::beginObject()
+    bool beginObject(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readDouble()
-    double readDouble(const char* name);
+    /// \copydoc ComponentWriter::beginObject()
+    void endObject();
 
     ///
-    /// \copydoc ComponentReader::readString()
-    std::string readString(const char* name);
+    /// \copydoc ComponentReader::hasMember()
+    bool hasMember(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readVector2()
-    Vector2<> readVector2(const char* name);
+    /// \copydoc ComponentReader::readMemberDouble()
+    double readMemberDouble(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readVector3()
-    Vector3<> readVector3(const char* name);
+    /// \copydoc ComponentReader::readMemberString()
+    std::string readMemberString(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readVector4()
-    Vector4<> readVector4(const char* name);
+    /// \copydoc ComponentReader::readMemberVector2()
+    Vector2<> readMemberVector2(const char* name);
 
     ///
-    /// \copydoc ComponentReader::readQuaternion()
-    Quaternion<> readQuaternion(const char* name);
+    /// \copydoc ComponentReader::readMemberVector3()
+    Vector3<> readMemberVector3(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readMemberVector4()
+    Vector4<> readMemberVector4(const char* name);
+
+    ///
+    /// \copydoc ComponentReader::readMemberQuaternion()
+    Quaternion<> readMemberQuaternion(const char* name);
 
 private:
     ReadStream* _stream;

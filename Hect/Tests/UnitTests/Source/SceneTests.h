@@ -13,16 +13,16 @@ SUITE(Scene)
     public:
         void save(const Name& name, ComponentWriter& writer) const
         {
-            writer.writeString("value", name.value);
+            writer.writeMemberString("value", name.value);
         }
 
         void load(Name& name, ComponentReader& reader, AssetCache& assetCache) const
         {
             assetCache;
 
-            if (reader.hasValue("value"))
+            if (reader.hasMember("value"))
             {
-                name.value = reader.readString("value");
+                name.value = reader.readMemberString("value");
             }
         }
     };
@@ -40,16 +40,16 @@ SUITE(Scene)
     public:
         void save(const Position& position, ComponentWriter& writer) const
         {
-            writer.writeVector3("value", position.value);
+            writer.writeMemberVector3("value", position.value);
         }
 
         void load(Position& position, ComponentReader& reader, AssetCache& assetCache) const
         {
             assetCache;
 
-            if (reader.hasValue("value"))
+            if (reader.hasMember("value"))
             {
-                position.value = reader.readVector3("value");
+                position.value = reader.readMemberVector3("value");
             }
         }
     };
@@ -67,16 +67,16 @@ SUITE(Scene)
     public:
         void save(const Velocity& velocity, ComponentWriter& writer) const
         {
-            writer.writeVector3("value", velocity.value);
+            writer.writeMemberVector3("value", velocity.value);
         }
 
         void load(Velocity& velocity, ComponentReader& reader, AssetCache& assetCache) const
         {
             assetCache;
 
-            if (reader.hasValue("value"))
+            if (reader.hasMember("value"))
             {
-                velocity.value = reader.readVector3("value");
+                velocity.value = reader.readMemberVector3("value");
             }
         }
     };

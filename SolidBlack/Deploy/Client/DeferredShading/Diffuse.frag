@@ -16,6 +16,7 @@ void main()
 
     vec4 diffuse = texture(diffuseTexture, vertexTextureCoords);
     outputColor = blackPoint + diffuse * intensity;
-    
-    outputNormal = vec4(vertexNormal, 1.0);
+
+    float depth = gl_FragCoord.z;
+    outputNormal = vec4(vertexNormal, depth);
 }

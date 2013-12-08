@@ -87,7 +87,7 @@ SUITE(Quaternion)
 
         Vector3<T> axis;
         Angle<T> angle;
-        a.toAxisAngle(&axis, &angle);
+        a.toAxisAngle(axis, angle);
 
         CHECK_CLOSE((T)0.0, axis.x, (T)epsilon);
         CHECK_CLOSE((T)1.0, axis.y, (T)epsilon);
@@ -112,7 +112,7 @@ SUITE(Quaternion)
         a = Quaternion<T>::fromAxisAngle(Vector3<T>::unitY(), Angle<T>::fromDegrees((T)90.0));
         b = Quaternion<T>::fromAxisAngle(Vector3<T>::unitY(), Angle<T>::fromDegrees((T)180.0));
         a = b * a;
-        a.toAxisAngle(&axis, &angle);
+        a.toAxisAngle(axis, angle);
 
         CHECK_CLOSE((T)0.0, axis.x, (T)epsilon);
         CHECK_CLOSE((T)1.0, axis.y, (T)epsilon);
@@ -122,7 +122,7 @@ SUITE(Quaternion)
         a = Quaternion<T>::fromAxisAngle(Vector3<T>::unitY(), Angle<T>::fromDegrees((T)90.0));
         b = Quaternion<T>::fromAxisAngle(Vector3<T>::unitY(), Angle<T>::fromDegrees((T)180.0));
         a *= b;
-        a.toAxisAngle(&axis, &angle);
+        a.toAxisAngle(axis, angle);
 
         CHECK_CLOSE((T)0.0, axis.x, (T)epsilon);
         CHECK_CLOSE((T)1.0, axis.y, (T)epsilon);

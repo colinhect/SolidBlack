@@ -34,19 +34,19 @@ void Geometry::setMaterial(const AssetHandle<Material>& material)
 
 void GeometrySerializer::save(const Geometry& geometry, ComponentWriter& writer) const
 {
-    writer.writeString("mesh", geometry.mesh().path().toString());
-    writer.writeString("material", geometry.material().path().toString());
+    writer.writeMemberString("mesh", geometry.mesh().path().toString());
+    writer.writeMemberString("material", geometry.material().path().toString());
 }
 
 void GeometrySerializer::load(Geometry& geometry, ComponentReader& reader, AssetCache& assetCache) const
 {
-    if (!reader.hasValue("mesh") || !reader.hasValue("material"))
+    if (!reader.hasMember("mesh") || !reader.hasMember("material"))
     {
         return;
     }
 
-    std::string meshPath = reader.readString("mesh");
-    std::string materialPath = reader.readString("material");
+    std::string meshPath = reader.readMemberString("mesh");
+    std::string materialPath = reader.readMemberString("material");
 
     AssetHandle<Mesh> mesh = assetCache.getHandle<Mesh>(meshPath);
     AssetHandle<Material> material = assetCache.getHandle<Material>(materialPath);

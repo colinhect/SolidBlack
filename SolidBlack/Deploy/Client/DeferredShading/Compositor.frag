@@ -3,8 +3,8 @@
 uniform float exposure;
 uniform float oneOverGamma;
 
-uniform sampler2D colorTexture;
-uniform sampler2D lightTexture;
+uniform sampler2D colorBuffer;
+uniform sampler2D lightingBuffer;
 
 in vec2 vertexTextureCoords;
 
@@ -22,8 +22,8 @@ vec3 expose(vec3 color, float exposure)
 
 void main()
 {
-    vec3 color = texture(colorTexture, vertexTextureCoords).rgb;
-    vec3 lighting = texture(lightTexture, vertexTextureCoords).rgb;
+    vec3 color = texture(colorBuffer, vertexTextureCoords).rgb;
+    vec3 lighting = texture(lightingBuffer, vertexTextureCoords).rgb;
 
     color *= lighting;
 

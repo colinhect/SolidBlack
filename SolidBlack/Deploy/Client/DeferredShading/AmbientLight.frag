@@ -1,18 +1,18 @@
 #version 330
 
 uniform vec3 color;
-uniform sampler2D normalTexture;
+uniform sampler2D normalBuffer;
 
 in vec2 vertexTextureCoords;
 
-out vec4 outputColor;
+out vec3 outputColor;
 
 void main()
 {
-    float x = texture(normalTexture, vertexTextureCoords).a;
-    if (x > 0.0)
+    float depth = texture(normalBuffer, vertexTextureCoords).a;
+    if (depth > 0.0)
     {
-        outputColor = vec4(color, 1.0);
+        outputColor = color;
     }
     else
     {

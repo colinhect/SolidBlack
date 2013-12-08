@@ -14,19 +14,14 @@
         {
             "type" : "Vector3"
         },
-        "colorTexture" :
-        {
-            "type" : "Texture",
-            "defaultValue" : 0
-        },
-        "normalTexture" :
-        {
-            "type" : "Texture",
-            "defaultValue" : 1
-        },
         "view" :
         {
             "type" : "Matrix4"
+        },
+        "normalBuffer" :
+        {
+            "type" : "Texture",
+            "defaultValue" : 0
         }
     }
 }

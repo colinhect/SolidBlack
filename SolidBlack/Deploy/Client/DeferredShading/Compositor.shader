@@ -16,12 +16,12 @@
             "type" : "Float",
             "defaultValue" : 0.4545
         },
-        "colorTexture" :
+        "colorBuffer" :
         {
             "type" : "Texture",
             "defaultValue" : 0
         },
-        "lightTexture" :
+        "lightingBuffer" :
         {
             "type" : "Texture",
             "defaultValue" : 1

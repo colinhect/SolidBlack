@@ -107,33 +107,34 @@ const Frustum<>& Camera::frustum() const
 
 void CameraSerializer::save(const Camera& camera, ComponentWriter& writer) const
 {
-    writer.writeDouble("fieldOfView", camera.fieldOfView().degrees());
-    writer.writeDouble("aspectRatio", camera.aspectRatio());
-    writer.writeDouble("nearClip", camera.nearClip());
-    writer.writeDouble("farClip", camera.farClip());
+    writer.writeMemberDouble("fieldOfView", camera.fieldOfView().degrees());
+    writer.writeMemberDouble("aspectRatio", camera.aspectRatio());
+    writer.writeMemberDouble("nearClip", camera.nearClip());
+    writer.writeMemberDouble("farClip", camera.farClip());
 }
 
 void CameraSerializer::load(Camera& camera, ComponentReader& reader, AssetCache& assetCache) const
 {
     assetCache;
 
-    if (reader.hasValue("fieldOfView"))
+    if (reader.hasMember("fieldOfView"))
     {
-        camera.setFieldOfView(Angle<>::fromDegrees(reader.readDouble("fieldOfView")));
+        double degrees = reader.readMemberDouble("fieldOfView");
+        camera.setFieldOfView(Angle<>::fromDegrees(degrees));
     }
 
-    if (reader.hasValue("aspectRatio"))
+    if (reader.hasMember("aspectRatio"))
     {
-        camera.setAspectRatio(reader.readDouble("aspectRatio"));
+        camera.setAspectRatio(reader.readMemberDouble("aspectRatio"));
     }
 
-    if (reader.hasValue("nearClip"))
+    if (reader.hasMember("nearClip"))
     {
-        camera.setNearClip(reader.readDouble("nearClip"));
+        camera.setNearClip(reader.readMemberDouble("nearClip"));
     }
 
-    if (reader.hasValue("farClip"))
+    if (reader.hasMember("farClip"))
     {
-        camera.setFarClip(reader.readDouble("farClip"));
+        camera.setFarClip(reader.readMemberDouble("farClip"));
     }
 }

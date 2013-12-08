@@ -19,15 +19,15 @@ void AmbientLight::setColor(const Vector3<>& color)
 
 void AmbientLightSerializer::save(const AmbientLight& light, ComponentWriter& writer) const
 {
-    writer.writeVector3("color", light.color());
+    writer.writeMemberVector3("color", light.color());
 }
 
 void AmbientLightSerializer::load(AmbientLight& light, ComponentReader& reader, AssetCache& assetCache) const
 {
     assetCache;
 
-    if (reader.hasValue("color"))
+    if (reader.hasMember("color"))
     {
-        light.setColor(reader.readVector3("color"));
+        light.setColor(reader.readMemberVector3("color"));
     }
 }

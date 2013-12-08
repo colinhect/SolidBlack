@@ -18,7 +18,15 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _window->setCursorLocked(true);
 
     FileSystem& fileSystem = assetCache.fileSystem();
-    if (fileSystem.exists("Testing/Test.scene"))
+    if (fileSystem.exists("Testing/TestBinary.scene"))
+    {
+        {
+            FileReadStream stream = assetCache.fileSystem().openFileForRead("Testing/TestBinary.scene");
+            _scene.load(stream, assetCache);
+        }
+        _scene.refresh();
+    }
+    else if (fileSystem.exists("Testing/Test.scene"))
     {
         DataValue sceneValue;
         {
@@ -143,7 +151,7 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     }
     else if (event.key == Key::F6)
     {
-        FileWriteStream stream = _assetCache->fileSystem().openFileForWrite("TestBinary.scene");
+        FileWriteStream stream = _assetCache->fileSystem().openFileForWrite("Testing/TestBinary.scene");
         _scene.save(stream);
     }
 }
