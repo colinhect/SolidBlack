@@ -52,11 +52,11 @@ public:
 
     ///
     /// See BaseComponentSerializer::save()
-    void save(const Geometry& geometry, ComponentWriter& writer) const;
+    void save(const Geometry& geometry, DataWriter& writer) const;
 
     ///
     /// See BaseComponentSerializer::load()
-    void load(Geometry& geometry, ComponentReader& reader, AssetCache& assetCache) const;
+    void load(Geometry& geometry, DataReader& reader, AssetCache& assetCache) const;
 };
 
 }

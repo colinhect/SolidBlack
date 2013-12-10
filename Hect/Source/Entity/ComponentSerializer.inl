@@ -2,14 +2,14 @@ namespace hect
 {
 
 template <typename T>
-void ComponentSerializer<T>::save(const T& component, ComponentWriter& writer) const
+void ComponentSerializer<T>::save(const T& component, DataWriter& writer) const
 {
     component;
     writer;
 }
 
 template <typename T>
-void ComponentSerializer<T>::load(T& component, ComponentReader& reader, AssetCache& assetCache) const
+void ComponentSerializer<T>::load(T& component, DataReader& reader, AssetCache& assetCache) const
 {
     component;
     reader;
@@ -17,7 +17,7 @@ void ComponentSerializer<T>::load(T& component, ComponentReader& reader, AssetCa
 }
 
 template <typename T>
-void ComponentSerializer<T>::save(const BaseComponent* component, ComponentWriter& writer) const
+void ComponentSerializer<T>::save(const BaseComponent* component, DataWriter& writer) const
 {
     // Cast the component into its type
     const T& typedComponent = *(const T*)component;
@@ -27,7 +27,7 @@ void ComponentSerializer<T>::save(const BaseComponent* component, ComponentWrite
 }
 
 template <typename T>
-void ComponentSerializer<T>::load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const
+void ComponentSerializer<T>::load(BaseComponent* component, DataReader& reader, AssetCache& assetCache) const
 {
     // Cast the component into its type
     T& typedComponent = *(T*)component;

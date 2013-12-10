@@ -22,7 +22,7 @@ public:
     ///
     /// \param component The component.
     /// \param writer The component writer.
-    virtual void save(const BaseComponent* component, ComponentWriter& writer) const = 0;
+    virtual void save(const BaseComponent* component, DataWriter& writer) const = 0;
 
     ///
     /// Deserializes a component using a component reader.
@@ -30,7 +30,7 @@ public:
     /// \param component The component.
     /// \param reader The component reader.
     /// \param assetCache The asset cache to load referenced assets from.
-    virtual void load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const = 0;
+    virtual void load(BaseComponent* component, DataReader& reader, AssetCache& assetCache) const = 0;
 };
 
 ///
@@ -43,19 +43,19 @@ public:
 
     ///
     /// \copydoc BaseComponentSerializer::save()
-    virtual void save(const T& component, ComponentWriter& writer) const;
+    virtual void save(const T& component, DataWriter& writer) const;
 
     ///
     /// \copydoc BaseComponentSerializer::load()
-    virtual void load(T& component, ComponentReader& reader, AssetCache& assetCache) const;
+    virtual void load(T& component, DataReader& reader, AssetCache& assetCache) const;
 
     ///
     /// \copydoc BaseComponentSerializer::save()
-    void save(const BaseComponent* component, ComponentWriter& writer) const;
+    void save(const BaseComponent* component, DataWriter& writer) const;
 
     ///
     /// \copydoc BaseComponentSerializer::load()
-    void load(BaseComponent* component, ComponentReader& reader, AssetCache& assetCache) const;
+    void load(BaseComponent* component, DataReader& reader, AssetCache& assetCache) const;
 };
 
 }

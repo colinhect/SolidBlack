@@ -30,12 +30,12 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
         const BaseComponentSerializer& serializer = _serializer(typeId);
 
         // Serialize
-        DataValueComponentWriter writer;
+        DataValueWriter writer;
         serializer.save(component, writer);
 
         // Save the resulting data value from the writer to the member data
         // value
-        members[typeName] = writer.dataValue();
+        members[typeName] = writer.rootDataValue();
     }
 
     dataValue = DataValue(members);
@@ -62,7 +62,7 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
         stream.writeByte((uint8_t)typeId);
 
         // Serialize
-        BinaryComponentWriter writer(stream);
+        BinaryDataWriter writer(stream);
         serializer.save(component, writer);
     }
 }
@@ -84,7 +84,7 @@ void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCac
         BaseComponent* component = _constructComponent(typeId);
 
         // Deserialize
-        DataValueComponentReader reader(dataValue[typeName]);
+        DataValueReader reader(dataValue[typeName]);
         serializer.load(component, reader, assetCache);
 
         // Add component
@@ -112,7 +112,7 @@ void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& asse
         BaseComponent* component = _constructComponent(typeId);
 
         // Deserialize
-        BinaryComponentReader reader(stream);
+        BinaryDataReader reader(stream);
         serializer.load(component, reader, assetCache);
 
         // Add component

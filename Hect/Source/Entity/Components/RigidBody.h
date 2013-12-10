@@ -82,11 +82,11 @@ public:
 
     ///
     /// See BaseComponentSerializer::save()
-    void save(const RigidBody& rigidBody, ComponentWriter& writer) const;
+    void save(const RigidBody& rigidBody, DataWriter& writer) const;
 
     ///
     /// See BaseComponentSerializer::load()
-    void load(RigidBody& rigidBody, ComponentReader& reader, AssetCache& assetCache) const;
+    void load(RigidBody& rigidBody, DataReader& reader, AssetCache& assetCache) const;
 };
 
 }

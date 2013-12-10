@@ -33,14 +33,12 @@
     <ClCompile Include="Source\Core\TaskPool.cpp" />
     <ClCompile Include="Source\Core\Timer.cpp" />
     <ClCompile Include="Source\Core\TimeSpan.cpp" />
-    <ClCompile Include="Source\Entity\ComponentReader.cpp" />
     <ClCompile Include="Source\Entity\Components\AmbientLight.cpp" />
     <ClCompile Include="Source\Entity\Components\Camera.cpp" />
     <ClCompile Include="Source\Entity\Components\DirectionalLight.cpp" />
     <ClCompile Include="Source\Entity\Components\Geometry.cpp" />
     <ClCompile Include="Source\Entity\Components\RigidBody.cpp" />
     <ClCompile Include="Source\Entity\Components\Transform.cpp" />
-    <ClCompile Include="Source\Entity\ComponentWriter.cpp" />
     <ClCompile Include="Source\Entity\Entity.cpp" />
     <ClCompile Include="Source\Entity\EntityData.cpp" />
     <ClCompile Include="Source\Entity\Component.cpp" />
@@ -89,6 +87,8 @@
     <ClCompile Include="Source\Input\Keyboard.cpp" />
     <ClCompile Include="Source\Input\Mouse.cpp" />
     <ClCompile Include="Source\Internal\Bullet.cpp" />
+    <ClCompile Include="Source\IO\DataReader.cpp" />
+    <ClCompile Include="Source\IO\DataWriter.cpp" />
     <ClCompile Include="Source\IO\FileReadStream.cpp" />
     <ClCompile Include="Source\IO\FileWriteStream.cpp" />
     <ClCompile Include="Source\IO\MemoryReadStream.cpp" />
@@ -121,14 +121,12 @@
     <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\TimeSpan.h" />
     <ClInclude Include="Source\Core\Uncopyable.h" />
-    <ClInclude Include="Source\Entity\ComponentReader.h" />
     <ClInclude Include="Source\Entity\Components\AmbientLight.h" />
     <ClInclude Include="Source\Entity\Components\Camera.h" />
     <ClInclude Include="Source\Entity\Components\DirectionalLight.h" />
     <ClInclude Include="Source\Entity\Components\Geometry.h" />
     <ClInclude Include="Source\Entity\Components\RigidBody.h" />
     <ClInclude Include="Source\Entity\Components\Transform.h" />
-    <ClInclude Include="Source\Entity\ComponentWriter.h" />
     <ClInclude Include="Source\Entity\Entity.h" />
     <ClInclude Include="Source\Entity\EntityData.h" />
     <ClInclude Include="Source\Entity\Component.h" />
@@ -173,6 +171,8 @@
     <ClInclude Include="Source\Input\Keyboard.h" />
     <ClInclude Include="Source\Input\Mouse.h" />
     <ClInclude Include="Source\Internal\Bullet.h" />
+    <ClInclude Include="Source\IO\DataReader.h" />
+    <ClInclude Include="Source\IO\DataWriter.h" />
     <ClInclude Include="Source\IO\FileReadStream.h" />
     <ClInclude Include="Source\IO\FileWriteStream.h" />
     <ClInclude Include="Source\IO\MemoryReadStream.h" />

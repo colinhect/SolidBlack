@@ -22,7 +22,12 @@ Angle<T>::Angle():
 template <typename T>
 T Angle<T>::degrees() const
 {
-    return ((T)180 / (T)pi) * _radians;
+    T degrees = ((T)180 / (T)pi) * _radians;
+    if (degrees == (T)360)
+    {
+        degrees = (T)0;
+    }
+    return degrees;
 }
 
 template <typename T>

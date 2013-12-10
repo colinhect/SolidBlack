@@ -94,32 +94,32 @@ void Transform::transformBy(const Transform& transform)
     _dirtyBits = PositionBit | ScaleBit | RotationBit;
 }
 
-void TransformSerializer::save(const Transform& transform, ComponentWriter& writer) const
+void TransformSerializer::save(const Transform& transform, DataWriter& writer) const
 {
     Vector3<> axis;
     Angle<> angle;
     transform.rotation().toAxisAngle(axis, angle);
 
-    writer.writeMemberVector3("position", transform.position());
-    writer.writeMemberVector3("scale", transform.scale());
+    writer.writeVector3("position", transform.position());
+    writer.writeVector3("scale", transform.scale());
     writer.beginObject("rotation");
-    writer.writeMemberVector3("axis", axis);
-    writer.writeMemberDouble("angle", angle.degrees());
+    writer.writeVector3("axis", axis);
+    writer.writeDouble("angle", angle.degrees());
     writer.endObject();
 }
 
-void TransformSerializer::load(Transform& transform, ComponentReader& reader, AssetCache& assetCache) const
+void TransformSerializer::load(Transform& transform, DataReader& reader, AssetCache& assetCache) const
 {
     assetCache;
 
     if (reader.hasMember("position"))
     {
-        transform.setPosition(reader.readMemberVector3("position"));
+        transform.setPosition(reader.readVector3("position"));
     }
 
     if (reader.hasMember("scale"))
     {
-        transform.setScale(reader.readMemberVector3("scale"));
+        transform.setScale(reader.readVector3("scale"));
     }
 
     if (reader.beginObject("rotation"))
@@ -129,12 +129,12 @@ void TransformSerializer::load(Transform& transform, ComponentReader& reader, As
 
         if (reader.hasMember("axis"))
         {
-            axis = reader.readMemberVector3("axis");
+            axis = reader.readVector3("axis");
         }
         
         if (reader.hasMember("angle"))
         {
-            double degrees = reader.readMemberDouble("angle");
+            double degrees = reader.readDouble("angle");
             angle = Angle<>::fromDegrees(degrees);
         }
 

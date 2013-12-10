@@ -11,18 +11,18 @@ SUITE(Scene)
         public ComponentSerializer<Name>
     {
     public:
-        void save(const Name& name, ComponentWriter& writer) const
+        void save(const Name& name, DataWriter& writer) const
         {
-            writer.writeMemberString("value", name.value);
+            writer.writeString("value", name.value);
         }
 
-        void load(Name& name, ComponentReader& reader, AssetCache& assetCache) const
+        void load(Name& name, DataReader& reader, AssetCache& assetCache) const
         {
             assetCache;
 
             if (reader.hasMember("value"))
             {
-                name.value = reader.readMemberString("value");
+                name.value = reader.readString("value");
             }
         }
     };
@@ -38,18 +38,18 @@ SUITE(Scene)
         public ComponentSerializer<Position>
     {
     public:
-        void save(const Position& position, ComponentWriter& writer) const
+        void save(const Position& position, DataWriter& writer) const
         {
-            writer.writeMemberVector3("value", position.value);
+            writer.writeVector3("value", position.value);
         }
 
-        void load(Position& position, ComponentReader& reader, AssetCache& assetCache) const
+        void load(Position& position, DataReader& reader, AssetCache& assetCache) const
         {
             assetCache;
 
             if (reader.hasMember("value"))
             {
-                position.value = reader.readMemberVector3("value");
+                position.value = reader.readVector3("value");
             }
         }
     };
@@ -65,18 +65,18 @@ SUITE(Scene)
         public ComponentSerializer<Velocity>
     {
     public:
-        void save(const Velocity& velocity, ComponentWriter& writer) const
+        void save(const Velocity& velocity, DataWriter& writer) const
         {
-            writer.writeMemberVector3("value", velocity.value);
+            writer.writeVector3("value", velocity.value);
         }
 
-        void load(Velocity& velocity, ComponentReader& reader, AssetCache& assetCache) const
+        void load(Velocity& velocity, DataReader& reader, AssetCache& assetCache) const
         {
             assetCache;
 
             if (reader.hasMember("value"))
             {
-                velocity.value = reader.readMemberVector3("value");
+                velocity.value = reader.readVector3("value");
             }
         }
     };

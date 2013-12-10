@@ -48,11 +48,11 @@ public:
 
     ///
     /// See BaseComponentSerializer::save()
-    void save(const DirectionalLight& light, ComponentWriter& writer) const;
+    void save(const DirectionalLight& light, DataWriter& writer) const;
 
     ///
     /// See BaseComponentSerializer::load()
-    void load(DirectionalLight& light, ComponentReader& reader, AssetCache& assetCache) const;
+    void load(DirectionalLight& light, DataReader& reader, AssetCache& assetCache) const;
 };
 
 }
