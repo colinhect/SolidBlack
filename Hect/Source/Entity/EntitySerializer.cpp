@@ -20,7 +20,7 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
         throw Error("Entity is null");
     }
 
-    DataValue::Object members;
+    dataValue = DataValue(DataValueType::Object);
 
     // For each component in the entity
     for (BaseComponent* component : entity.components())
@@ -35,10 +35,8 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
 
         // Save the resulting data value from the writer to the member data
         // value
-        members[typeName] = writer.rootDataValue();
+        dataValue.addMember(typeName, writer.rootDataValue());
     }
-
-    dataValue = DataValue(members);
 }
 
 void EntitySerializer::save(Entity& entity, WriteStream& stream)

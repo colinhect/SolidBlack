@@ -124,7 +124,7 @@ Entity Scene::createEntity()
 void Scene::save(DataValue& dataValue) const
 {
     // Save each activated entity to a separate data value
-    DataValue::Array elements;
+    DataValue entities(DataValueType::Array);
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
     {
         Entity entity = _entityWithId(id);
@@ -135,15 +135,14 @@ void Scene::save(DataValue& dataValue) const
             entity.save(entityDataValue);
 
             // Add the data value to the elements
-            elements.push_back(entityDataValue);
+            entities.addElement(entityDataValue);
         }
     }
 
     // Save the entire scene as a data value object with the entities as a
     // member
-    DataValue::Object members;
-    members["entities"] = DataValue(elements);
-    dataValue = DataValue(members);
+    dataValue = DataValue(DataValueType::Object);
+    dataValue.addMember("entities", entities);
 }
 
 void Scene::save(WriteStream& stream) const

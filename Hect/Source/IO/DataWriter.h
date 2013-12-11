@@ -9,13 +9,23 @@ class DataWriter
 {
 public:
     virtual ~DataWriter() { }
-
+    
+    virtual void beginObject() = 0;
     virtual void beginObject(const char* name) = 0;
     virtual void endObject() = 0;
+
+    virtual void beginArray(const char* name) = 0;
+    virtual void endArray() = 0;
+
+    virtual void writeDouble(double value) = 0;
     virtual void writeDouble(const char* name, double value) = 0;
+    virtual void writeString(const std::string& value) = 0;
     virtual void writeString(const char* name, const std::string& value) = 0;
+    virtual void writeVector2(const Vector2<>& value) = 0;
     virtual void writeVector2(const char* name, const Vector2<>& value) = 0;
+    virtual void writeVector3(const Vector3<>& value) = 0;
     virtual void writeVector3(const char* name, const Vector3<>& value) = 0;
+    virtual void writeVector4(const Vector4<>& value) = 0;
     virtual void writeVector4(const char* name, const Vector4<>& value) = 0;
 };
 
@@ -24,20 +34,31 @@ class DataValueWriter :
 {
 public:
     DataValueWriter();
-
+    
+    void beginObject();
     void beginObject(const char* name);
     void endObject();
+    void beginArray(const char* name);
+    void endArray();
+    void writeDouble(double value);
     void writeDouble(const char* name, double value);
+    void writeString(const std::string& value);
     void writeString(const char* name, const std::string& value);
+    void writeVector2(const Vector2<>& value);
     void writeVector2(const char* name, const Vector2<>& value);
+    void writeVector3(const Vector3<>& value);
     void writeVector3(const char* name, const Vector3<>& value);
+    void writeVector4(const Vector4<>& value);
     void writeVector4(const char* name, const Vector4<>& value);
 
     DataValue rootDataValue() const;
 
 private:
-    std::stack<std::string> _objectNameStack;
-    std::stack<DataValue::Object> _objectStack;
+    void _write(const DataValue& value);
+    void _write(const char* name, const DataValue& value);
+
+    std::stack<std::string> _nameStack;
+    std::stack<DataValue> _valueStack;
 };
 
 class BinaryDataWriter :
@@ -45,36 +66,26 @@ class BinaryDataWriter :
 {
 public:
     BinaryDataWriter(WriteStream& stream);
-
-    ///
-    /// \copydoc DataWriter::beginObject()
+    
+    void beginObject();
     void beginObject(const char* name);
-
-    ///
-    /// \copydoc DataWriter::beginObject()
     void endObject();
-
-    ///
-    /// \copydoc DataWriter::writeDouble()
+    void beginArray(const char* name);
+    void endArray();
+    void writeDouble(double value);
     void writeDouble(const char* name, double value);
-
-    ///
-    /// \copydoc DataWriter::writeString()
+    void writeString(const std::string& value);
     void writeString(const char* name, const std::string& value);
-
-    ///
-    /// \copydoc DataWriter::writeVector2()
+    void writeVector2(const Vector2<>& value);
     void writeVector2(const char* name, const Vector2<>& value);
-
-    ///
-    /// \copydoc DataWriter::writeVector3()
+    void writeVector3(const Vector3<>& value);
     void writeVector3(const char* name, const Vector3<>& value);
-
-    ///
-    /// \copydoc DataWriter::writeVector4()
+    void writeVector4(const Vector4<>& value);
     void writeVector4(const char* name, const Vector4<>& value);
 
 private:
+    size_t _elementCountPosition;
+    unsigned _elementCount;
     WriteStream* _stream;
 };
 

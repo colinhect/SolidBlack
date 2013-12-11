@@ -11,36 +11,35 @@ class Geometry :
 public:
 
     ///
-    /// Returns the mesh.
-    AssetHandle<Mesh>& mesh();
+    /// Adds a surface.
+    ///
+    /// \param mesh The mesh.
+    /// \param material The material.
+    void addSurface(const AssetHandle<Mesh>& mesh, const AssetHandle<Material>& material);
 
     ///
-    /// Returns the mesh.
-    const AssetHandle<Mesh>& mesh() const;
+    /// Returns the number of surfaces.
+    size_t surfaceCount() const;
 
     ///
-    /// Sets the mesh.
-    ///
-    /// \param mesh The new mesh.
-    void setMesh(const AssetHandle<Mesh>& mesh);
+    /// Returns the meshes.
+    AssetHandle<Mesh>::Array& meshes();
 
     ///
-    /// Returns the material.
-    AssetHandle<Material>& material();
+    /// Returns the meshes.
+    const AssetHandle<Mesh>::Array& meshes() const;
+    
+    ///
+    /// Returns the materials
+    AssetHandle<Material>::Array& materials();
 
     ///
-    /// Returns the material.
-    const AssetHandle<Material>& material() const;
-
-    ///
-    /// Sets the material.
-    ///
-    /// \param material The new material.
-    void setMaterial(const AssetHandle<Material>& material);
+    /// Returns the materials
+    const AssetHandle<Material>::Array& materials() const;
 
 private:
-    AssetHandle<Mesh> _mesh;
-    AssetHandle<Material> _material;
+    AssetHandle<Mesh>::Array _meshes;
+    AssetHandle<Material>::Array _materials;
 };
 
 ///

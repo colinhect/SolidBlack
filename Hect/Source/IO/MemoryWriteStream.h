@@ -20,6 +20,14 @@ public:
     /// \copydoc WriteStream::writeBytes()
     void writeBytes(const uint8_t* bytes, size_t byteCount);
 
+    ///
+    /// \copydoc WriteStream::position()
+    size_t position() const;
+
+    ///
+    /// \copydoc WriteStream::seek()
+    void seek(size_t position);
+
 private:
     std::vector<uint8_t>* _data;
     size_t _position;

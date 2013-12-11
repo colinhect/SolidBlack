@@ -2,55 +2,73 @@
 
 using namespace hect;
 
-AssetHandle<Mesh>& Geometry::mesh()
+void Geometry::addSurface(const AssetHandle<Mesh>& mesh, const AssetHandle<Material>& material)
 {
-    return _mesh;
+    _meshes.push_back(mesh);
+    _materials.push_back(material);
 }
 
-const AssetHandle<Mesh>& Geometry::mesh() const
+size_t Geometry::surfaceCount() const
 {
-    return _mesh;
+    return _meshes.size();
 }
 
-void Geometry::setMesh(const AssetHandle<Mesh>& mesh)
+AssetHandle<Mesh>::Array& Geometry::meshes()
 {
-    _mesh = mesh;
+    return _meshes;
 }
 
-AssetHandle<Material>& Geometry::material()
+const AssetHandle<Mesh>::Array& Geometry::meshes() const
 {
-    return _material;
+    return _meshes;
 }
 
-const AssetHandle<Material>& Geometry::material() const
+AssetHandle<Material>::Array& Geometry::materials()
 {
-    return _material;
+    return _materials;
 }
 
-void Geometry::setMaterial(const AssetHandle<Material>& material)
+const AssetHandle<Material>::Array& Geometry::materials() const
 {
-    _material = material;
+    return _materials;
 }
 
 void GeometrySerializer::save(const Geometry& geometry, DataWriter& writer) const
 {
-    writer.writeString("mesh", geometry.mesh().path().toString());
-    writer.writeString("material", geometry.material().path().toString());
+    size_t surfaceCount = geometry.surfaceCount();
+
+    writer.beginArray("surfaces");
+    for (size_t i = 0; i < surfaceCount; ++i)
+    {
+        writer.beginObject();
+        writer.writeString("mesh", geometry.meshes()[i].path().toString());
+        writer.writeString("material", geometry.materials()[i].path().toString());
+        writer.endObject();
+    }
+    writer.endArray();
 }
 
 void GeometrySerializer::load(Geometry& geometry, DataReader& reader, AssetCache& assetCache) const
 {
-    if (!reader.hasMember("mesh") || !reader.hasMember("material"))
+    if (reader.beginArray("surfaces"))
     {
-        return;
+        while (!reader.endArray())
+        {
+            if (reader.beginObject())
+            {
+                if (reader.hasMember("mesh") && reader.hasMember("material"))
+                {
+                    std::string meshPath = reader.readString("mesh");
+                    std::string materialPath = reader.readString("material");
+
+                    AssetHandle<Mesh> mesh = assetCache.getHandle<Mesh>(meshPath);
+                    AssetHandle<Material> material = assetCache.getHandle<Material>(materialPath);
+
+                    geometry.addSurface(mesh, material);
+                }
+
+            }
+            reader.endObject();
+        }
     }
-
-    std::string meshPath = reader.readString("mesh");
-    std::string materialPath = reader.readString("material");
-
-    AssetHandle<Mesh> mesh = assetCache.getHandle<Mesh>(meshPath);
-    AssetHandle<Material> material = assetCache.getHandle<Material>(materialPath);
-
-    geometry.setMesh(mesh);
-    geometry.setMaterial(material);
 }

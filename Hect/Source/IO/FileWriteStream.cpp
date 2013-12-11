@@ -27,6 +27,21 @@ void FileWriteStream::writeBytes(const uint8_t* bytes, size_t byteCount)
     }
 }
 
+size_t FileWriteStream::position() const
+{
+    auto file = (PHYSFS_File*)_handle;
+    return (size_t)PHYSFS_tell(file);
+}
+
+void FileWriteStream::seek(size_t position)
+{
+    auto file = (PHYSFS_File*)_handle;
+    if (!PHYSFS_seek(file, position))
+    {
+        throw Error(format("Failed to seek in file: %s", PHYSFS_getLastError()));
+    }
+}
+
 FileWriteStream::FileWriteStream(const Path& path) :
     _path(path),
     _handle(nullptr)

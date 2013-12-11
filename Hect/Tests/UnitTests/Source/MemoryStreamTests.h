@@ -155,4 +155,21 @@ SUITE(MemoryStream)
             CHECK(stream->endOfStream());
         });
     }
+
+    TEST(SeekOnWrite)
+    {
+        testWriteAndReadMemory([] (WriteStream* stream)
+        {
+            size_t position = stream->position();
+            stream->writeUnsignedInt(3);
+            stream->writeUnsignedInt(2);
+            stream->seek(position);
+            stream->writeUnsignedInt(1);
+        }, [] (ReadStream* stream)
+        {
+            CHECK_EQUAL(1u, stream->readUnsignedInt());
+            CHECK_EQUAL(2u, stream->readUnsignedInt());
+            CHECK(stream->endOfStream());
+        });
+    }
 }

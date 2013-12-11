@@ -60,6 +60,10 @@ public:
     DataValue();
 
     ///
+    /// Constructs a data value of a certain type.
+    DataValue(DataValueType type);
+
+    ///
     /// Constructs a bool data value.
     ///
     /// \param value The bool value.
@@ -127,18 +131,6 @@ public:
     ///
     /// \param value The string value.
     DataValue(const std::string& value);
-
-    ///
-    /// Constructs an array of data values.
-    ///
-    /// \param elements The elements.
-    DataValue(const Array& elements);
-
-    ///
-    /// Constructs an object of data values.
-    ///
-    /// \param members The members.
-    DataValue(const Object& members);
 
     ///
     /// Constructs a data value moved from another.
@@ -236,6 +228,26 @@ public:
     std::vector<std::string> memberNames() const;
 
     ///
+    /// Adds a new member to the data value.
+    ///
+    /// \remarks If a member with the given name already exists then its value
+    /// is overwritten with the new value.
+    ///
+    /// \param name The member name.
+    /// \param value The member value.
+    ///
+    /// \throws Error If the data value is not an object.
+    void addMember(const std::string& name, const DataValue& value);
+
+    ///
+    /// Adds a new element to the data value.
+    ///
+    /// \param value The element value.
+    ///
+    /// \throws Error If the data value is not an array.
+    void addElement(const DataValue& value);
+
+    ///
     /// Returns the element at the given index.
     ///
     /// \remarks Only applies to data values that are arrays.
@@ -265,7 +277,11 @@ public:
 
 private:
     DataValueType _type;
-    Any _data;
+
+    std::string _stringValue;
+    double _numberValue;
+    Array _elements;
+    Object _members;
 
     static const DataValue _null;
     static const Array _emptyArray;

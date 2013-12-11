@@ -2,60 +2,195 @@
 
 using namespace hect;
 
-DataValueReader::DataValueReader(const DataValue& dataValue)
+DataValueReader::DataValueReader(const DataValue& dataValue) :
+    _elementIndex(0)
 {
-    _dataValueStack.push(dataValue);
+    _valueStack.push(dataValue);
 }
 
-bool DataValueReader::beginObject(const char* memberName)
+bool DataValueReader::beginObject()
 {
-    _dataValueStack.push(_dataValueStack.top()[memberName]);
-    return !_dataValueStack.top().isNull();
+    DataValue& top = _valueStack.top();
+    if (!top.isArray())
+    {
+        throw Error("Cannot begin an unnamed object when the current value is an object");
+    }
+
+    if (_elementIndex >= top.size())
+    {
+        return false;
+    }
+
+    _valueStack.push(_read());
+    return true;
+}
+
+bool DataValueReader::beginObject(const char* name)
+{
+    DataValue& top = _valueStack.top();
+    if (!top.isObject())
+    {
+        throw Error("Cannot begin a named object when the current value is an array");
+    }
+
+    const DataValue& value = top[name];
+    if (!value.isNull())
+    {
+        _valueStack.push(value);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void DataValueReader::endObject()
 {
-    _dataValueStack.pop();
+    DataValue top = _valueStack.top();
+    if (!top.isObject())
+    {
+        throw Error("Current value is not an object");
+    }
+
+    _valueStack.pop();
 }
 
-bool DataValueReader::hasMember(const char* memberName)
+bool DataValueReader::beginArray(const char* name)
 {
-    return !_dataValueStack.top()[memberName].isNull();
+    DataValue& top = _valueStack.top();
+    if (!top.isObject())
+    {
+        throw Error("Cannot begin a named array when the current value is an array");
+    }
+
+    const DataValue& value = top[name];
+    if (!value.isNull())
+    {
+        _elementIndex = 0;
+        _valueStack.push(value);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-double DataValueReader::readDouble(const char* memberName)
+bool DataValueReader::endArray()
 {
-    return _dataValueStack.top()[memberName].asDouble();
+    const DataValue& top = _valueStack.top();
+    if (!top.isArray())
+    {
+        throw Error("Current value is not an array");
+    }
+
+    if (_elementIndex >= top.size())
+    {
+        _valueStack.pop();
+        return true;
+    }
+    return false;
 }
 
-std::string DataValueReader::readString(const char* memberName)
+bool DataValueReader::hasMember(const char* name)
 {
-    return _dataValueStack.top()[memberName].asString();
+    return !_valueStack.top()[name].isNull();
 }
 
-Vector2<> DataValueReader::readVector2(const char* memberName)
+double DataValueReader::readDouble()
 {
-    return _dataValueStack.top()[memberName].asVector2();
+    return _read().asDouble();
 }
 
-Vector3<> DataValueReader::readVector3(const char* memberName)
+double DataValueReader::readDouble(const char* name)
 {
-    return _dataValueStack.top()[memberName].asVector3();
+    return _read(name).asDouble();
 }
 
-Vector4<> DataValueReader::readVector4(const char* memberName)
+std::string DataValueReader::readString()
 {
-    return _dataValueStack.top()[memberName].asVector4();
+    return _read().asString();
+}
+
+std::string DataValueReader::readString(const char* name)
+{
+    return _read(name).asString();
+}
+
+Vector2<> DataValueReader::readVector2()
+{
+    return _read().asVector2();
+}
+
+Vector2<> DataValueReader::readVector2(const char* name)
+{
+    return _read(name).asVector2();
+}
+
+Vector3<> DataValueReader::readVector3()
+{
+    return _read().asVector3();
+}
+
+Vector3<> DataValueReader::readVector3(const char* name)
+{
+    return _read(name).asVector3();
+}
+
+Vector4<> DataValueReader::readVector4()
+{
+    return _read().asVector4();
+}
+
+Vector4<> DataValueReader::readVector4(const char* name)
+{
+    return _read(name).asVector4();
+}
+
+const DataValue& DataValueReader::_read()
+{
+    DataValue& top = _valueStack.top();
+    if (!top.isArray())
+    {
+        throw Error("Current value is not an array");
+    }
+
+    if (_elementIndex >= top.size())
+    {
+        throw Error("Attempt to read past the end of an array");
+    }
+
+    return top[_elementIndex++];
+}
+
+const DataValue& DataValueReader::_read(const char* name)
+{
+    DataValue& top = _valueStack.top();
+    if (!top.isObject())
+    {
+        throw Error("Current value is not an object");
+    }
+
+    return top[name];
 }
 
 BinaryDataReader::BinaryDataReader(ReadStream& stream) :
+    _elementIndex(0),
+    _elementCount(0),
     _stream(&stream)
 {
 }
 
-bool BinaryDataReader::beginObject(const char* memberName)
+bool BinaryDataReader::beginObject()
 {
-    memberName;
+    ++_elementIndex;
+    return true;
+}
+
+bool BinaryDataReader::beginObject(const char* name)
+{
+    name;
     return true;
 }
 
@@ -63,38 +198,81 @@ void BinaryDataReader::endObject()
 {
 }
 
-bool BinaryDataReader::hasMember(const char* memberName)
+bool BinaryDataReader::beginArray(const char* name)
 {
-    memberName;
+    name;
+    _elementCount = _stream->readUnsignedInt();
+    _elementIndex = 0;
+    return true;
+}
+
+bool BinaryDataReader::endArray()
+{
+    return _elementIndex >= _elementCount;
+}
+
+bool BinaryDataReader::hasMember(const char* name)
+{
+    name;
     return true; // Assume that all values are written
 }
 
-double BinaryDataReader::readDouble(const char* memberName)
+double BinaryDataReader::readDouble()
 {
-    memberName;
+    ++_elementIndex;
     return _stream->readDouble();
 }
 
-std::string BinaryDataReader::readString(const char* memberName)
+double BinaryDataReader::readDouble(const char* name)
 {
-    memberName;
+    name;
+    return _stream->readDouble();
+}
+
+std::string BinaryDataReader::readString()
+{
+    ++_elementIndex;
     return _stream->readString();
 }
 
-Vector2<> BinaryDataReader::readVector2(const char* memberName)
+std::string BinaryDataReader::readString(const char* name)
 {
-    memberName;
+    name;
+    return _stream->readString();
+}
+
+Vector2<> BinaryDataReader::readVector2()
+{
+    ++_elementIndex;
     return _stream->readVector2();
 }
 
-Vector3<> BinaryDataReader::readVector3(const char* memberName)
+Vector2<> BinaryDataReader::readVector2(const char* name)
 {
-    memberName;
+    name;
+    return _stream->readVector2();
+}
+
+Vector3<> BinaryDataReader::readVector3()
+{
+    ++_elementIndex;
     return _stream->readVector3();
 }
 
-Vector4<> BinaryDataReader::readVector4(const char* memberName)
+Vector3<> BinaryDataReader::readVector3(const char* name)
 {
-    memberName;
+    name;
+    return _stream->readVector3();
+}
+
+Vector4<> BinaryDataReader::readVector4()
+{
+    ++_elementIndex;
+    return _stream->readVector4();
+}
+
+Vector4<> BinaryDataReader::readVector4(const char* name)
+{
+    name;
     return _stream->readVector4();
 }

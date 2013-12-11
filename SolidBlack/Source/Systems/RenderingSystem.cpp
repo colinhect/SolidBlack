@@ -90,18 +90,22 @@ void RenderingSystem::renderAll(Camera& camera, RenderTarget& target)
 
     // Render geometery
     size_t geometryCount = _geometryComponents.size();
-    for (size_t i = 0; i < geometryCount; ++i)
+    for (size_t geometryIndex = 0; geometryIndex < geometryCount; ++geometryIndex)
     {
-        Geometry& geometry = *_geometryComponents[i];
-        Transform& transform = *_transformComponents[i];
+        Geometry& geometry = *_geometryComponents[geometryIndex];
+        Transform& transform = *_transformComponents[geometryIndex];
 
-        Mesh& mesh = *geometry.mesh().get();
-        Material& material = *geometry.material().get();
-
-        // Render the mesh for each pass
-        for (const Pass& pass : material.techniques()[0].passes())
+        size_t surfaceCount = geometry.surfaceCount();
+        for (size_t surfaceIndex = 0; surfaceIndex < surfaceCount; ++surfaceIndex)
         {
-            _renderMeshPass(camera, target, pass, mesh, transform);
+            Mesh& mesh = *geometry.meshes()[surfaceIndex].get();
+            Material& material = *geometry.materials()[surfaceIndex].get();
+
+            // Render the mesh for each pass
+            for (const Pass& pass : material.techniques()[0].passes())
+            {
+                _renderMeshPass(camera, target, pass, mesh, transform);
+            }
         }
     }
 

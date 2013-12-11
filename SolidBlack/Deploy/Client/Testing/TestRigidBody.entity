@@ -10,8 +10,13 @@
     },
     "Geometry" :
     {
-        "mesh" : "Testing/Test.Cube.mesh",
-        "material" : "Common/Diffuse.material"
+        "surfaces" :
+        [
+            {
+                "mesh" : "Testing/Test.Cube.mesh",
+                "material" : "Common/Diffuse.material"
+            }
+        ]
     },
     "RigidBody" :
     {

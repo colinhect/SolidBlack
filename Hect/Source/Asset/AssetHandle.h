@@ -11,6 +11,10 @@ class AssetHandle
 public:
 
     ///
+    /// An array of asset handles.
+    typedef std::vector<AssetHandle<T>> Array;
+
+    ///
     /// Constructs an empty asset handle.
     AssetHandle();
 

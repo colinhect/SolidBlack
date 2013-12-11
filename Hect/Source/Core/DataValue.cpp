@@ -11,109 +11,95 @@ DataValue::DataValue() :
 {
 }
 
+DataValue::DataValue(DataValueType type) :
+    _type(type)
+{
+}
+
 DataValue::DataValue(bool value) :
     _type(DataValueType::Bool),
-    _data(value)
+    _numberValue(value ? 1 : 0)
 {
 }
 
 DataValue::DataValue(int value) :
     _type(DataValueType::Number),
-    _data((double)value)
+    _numberValue((double)value)
 {
 }
 
 DataValue::DataValue(unsigned value) :
     _type(DataValueType::Number),
-    _data((double)value)
+    _numberValue((double)value)
 {
 }
 
 DataValue::DataValue(double value) :
     _type(DataValueType::Number),
-    _data(value)
+    _numberValue(value)
 {
 }
 
 DataValue::DataValue(const Vector2<>& value) :
     _type(DataValueType::Array)
 {
-    Array array;
-    array.push_back(value.x);
-    array.push_back(value.y);
-    _data = array;
+    _elements.push_back(value.x);
+    _elements.push_back(value.y);
 }
 
 DataValue::DataValue(const Vector3<>& value) :
     _type(DataValueType::Array)
 {
-    Array array;
-    array.push_back(value.x);
-    array.push_back(value.y);
-    array.push_back(value.z);
-    _data = array;
+    _elements.push_back(value.x);
+    _elements.push_back(value.y);
+    _elements.push_back(value.z);
 }
 
 DataValue::DataValue(const Vector4<>& value) :
     _type(DataValueType::Array)
 {
-    Array array;
-    array.push_back(value.x);
-    array.push_back(value.y);
-    array.push_back(value.z);
-    array.push_back(value.w);
-    _data = array;
+    _elements.push_back(value.x);
+    _elements.push_back(value.y);
+    _elements.push_back(value.z);
+    _elements.push_back(value.w);
 }
 
 DataValue::DataValue(const Matrix4<>& value) :
     _type(DataValueType::Array)
 {
-    Array array;
     for (unsigned i = 0; i < 16; ++i)
     {
-        _data.as<Array>().push_back(value[i]);
+        _elements.push_back(value[i]);
     }
-    _data = array;
 }
 
 DataValue::DataValue(const Quaternion<>& value) :
     _type(DataValueType::Array)
 {
-    Array array;
-    array.push_back(value.x);
-    array.push_back(value.y);
-    array.push_back(value.z);
-    array.push_back(value.w);
-    _data = array;
+    _elements.push_back(value.x);
+    _elements.push_back(value.y);
+    _elements.push_back(value.z);
+    _elements.push_back(value.w);
 }
 
 DataValue::DataValue(const char* value) :
     _type(DataValueType::String),
-    _data(std::string(value))
+    _stringValue(value)
 {
 }
 
 DataValue::DataValue(const std::string& value) :
     _type(DataValueType::String),
-    _data(value)
-{
-}
-
-DataValue::DataValue(const Array& elements) :
-    _type(DataValueType::Array),
-    _data(elements)
-{
-}
-
-DataValue::DataValue(const Object& members) :
-    _type(DataValueType::Object),
-    _data(members)
+    _stringValue(value)
 {
 }
 
 DataValue::DataValue(DataValue&& dataValue) :
     _type(dataValue._type),
-    _data(std::move(dataValue._data))
+    _stringValue(std::move(dataValue._stringValue)),
+    _numberValue(dataValue._numberValue),
+    _elements(std::move(dataValue._elements)),
+    _members(std::move(dataValue._members))
 {
     dataValue._type = DataValueType::Null;
 }
@@ -169,7 +155,7 @@ bool DataValue::asBool() const
 {
     if (isBool())
     {
-        return _data.as<bool>();
+        return _numberValue == 1;
     }
     else
     {
@@ -181,7 +167,7 @@ int DataValue::asInt() const
 {
     if (isNumber())
     {
-        return (int)_data.as<double>();
+        return (int)_numberValue;
     }
     else
     {
@@ -193,7 +179,7 @@ unsigned DataValue::asUnsigned() const
 {
     if (isNumber())
     {
-        return (unsigned)_data.as<double>();
+        return (unsigned)_numberValue;
     }
     else
     {
@@ -205,7 +191,7 @@ double DataValue::asDouble() const
 {
     if (isNumber())
     {
-        return _data.as<double>();
+        return _numberValue;
     }
     else
     {
@@ -317,7 +303,7 @@ const std::string& DataValue::asString() const
 {
     if (isString())
     {
-        return _data.as<std::string>();
+        return _stringValue;
     }
     else
     {
@@ -329,11 +315,11 @@ size_t DataValue::size() const
 {
     if (isArray())
     {
-        return _data.as<Array>().size();
+        return _elements.size();
     }
     else if (isObject())
     {
-        return _data.as<Object>().size();
+        return _members.size();
     }
 
     return 0;
@@ -344,8 +330,7 @@ std::vector<std::string> DataValue::memberNames() const
     if (isObject())
     {
         std::vector<std::string> result;
-        Object& object = _data.as<Object>();
-        for (auto& pair : object)
+        for (auto& pair : _members)
         {
             result.push_back(pair.first);
         }
@@ -357,11 +342,35 @@ std::vector<std::string> DataValue::memberNames() const
     }
 }
 
+void DataValue::addMember(const std::string& name, const DataValue& value)
+{
+    if (isObject())
+    {
+        _members[name] = value;
+    }
+    else
+    {
+        throw Error("The data value is not an object");
+    }
+}
+
+void DataValue::addElement(const DataValue& value)
+{
+    if (isArray())
+    {
+        _elements.push_back(value);
+    }
+    else
+    {
+        throw Error("The data value is not an array");
+    }
+}
+
 const DataValue& DataValue::operator[](size_t index) const
 {
     if (isArray())
     {
-        Array& array = _data.as<Array>();
+        const Array& array = _elements;
         if (index < array.size())
         {
             return array[index];
@@ -381,7 +390,12 @@ const DataValue& DataValue::operator[](const std::string& name) const
 {
     if (isObject())
     {
-        return _data.as<Object>()[name];
+        auto it = _members.find(name);
+        if (it == _members.end())
+        {
+            return _null;
+        }
+        return (*it).second;
     }
     else
     {
@@ -393,7 +407,7 @@ DataValue::Array::const_iterator DataValue::begin() const
 {
     if (isArray())
     {
-        return _data.as<Array>().begin();
+        return _elements.begin();
     }
     else
     {
@@ -405,7 +419,7 @@ DataValue::Array::const_iterator DataValue::end() const
 {
     if (isArray())
     {
-        return _data.as<Array>().end();
+        return _elements.end();
     }
     else
     {

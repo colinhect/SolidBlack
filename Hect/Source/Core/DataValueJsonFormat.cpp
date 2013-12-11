@@ -53,21 +53,21 @@ DataValue toDataValue(Json::Value& jsonValue)
     }
     else if (jsonValue.isArray())
     {
-        auto elements = DataValue::Array();
+        DataValue dataValue(DataValueType::Array);
         for (Json::Value& element : jsonValue)
         {
-            elements.push_back(toDataValue(element));
+            dataValue.addElement(toDataValue(element));
         }
-        return DataValue(elements);
+        return dataValue;
     }
     else if (jsonValue.isObject())
     {
-        auto members = DataValue::Object();
+        DataValue dataValue(DataValueType::Object);
         for (std::string& name : jsonValue.getMemberNames())
         {
-            members[name] = toDataValue(jsonValue[name]);
+            dataValue.addMember(name, toDataValue(jsonValue[name]));
         }
-        return DataValue(members);
+        return dataValue;
     }
 
     return DataValue();

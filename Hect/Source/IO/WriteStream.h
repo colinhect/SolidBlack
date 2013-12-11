@@ -109,6 +109,16 @@ public:
     /// \param value The quaternion to write.
     void writeQuaternion(const Quaternion<>& value);
 
+    ///
+    /// Returns the current byte offset position in the stream.
+    virtual size_t position() const = 0;
+
+    ///
+    /// Sets the current byte offset position in the stream.
+    ///
+    /// \param position The new position.
+    virtual void seek(size_t position) = 0;
+
 };
 
 }

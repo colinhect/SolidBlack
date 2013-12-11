@@ -29,12 +29,11 @@ SUITE(DataValue)
 
     TEST(Array)
     {
-        auto elements = DataValue::Array();
-        elements.push_back(true);
-        elements.push_back(5.0);
-        elements.push_back("Testing");
+        DataValue value(DataValueType::Array);
+        value.addElement(true);
+        value.addElement(5.0);
+        value.addElement("Testing");
 
-        DataValue value(elements);
         CHECK(value.isArray());
         CHECK_EQUAL(3, value.size());
 
@@ -60,12 +59,11 @@ SUITE(DataValue)
 
     TEST(Object)
     {
-        auto members = DataValue::Object();
-        members["someBool"] = true;
-        members["someNumber"] = 5.0;
-        members["someString"] = "Testing";
+        DataValue value(DataValueType::Object);
+        value.addMember("someBool", true);
+        value.addMember("someNumber", 5.0);
+        value.addMember("someString", "Testing");
 
-        DataValue value(members);
         CHECK(value.isObject());
         CHECK_EQUAL(3, value.size());
 
@@ -112,12 +110,11 @@ SUITE(DataValue)
 
     TEST(MemberNames)
     {
-        auto members = DataValue::Object();
-        members["someBool"] = true;
-        members["someNumber"] = 5.0;
-        members["someString"] = "Testing";
+        DataValue value(DataValueType::Object);
+        value.addMember("someBool", true);
+        value.addMember("someNumber", 5.0);
+        value.addMember("someString", "Testing");
 
-        DataValue value(members);
         auto memberNames = value.memberNames();
 
         CHECK_EQUAL(3, memberNames.size());
@@ -140,13 +137,12 @@ SUITE(DataValue)
 
     TEST(Iterate)
     {
-        auto elements = DataValue::Array();
+        DataValue value(DataValueType::Array);
         for (int i = 0; i < 10; ++i)
         {
-            elements.push_back((double)i);
+            value.addElement((double)i);
         }
 
-        DataValue value(elements);
         CHECK(value.isArray());
         CHECK_EQUAL(10, value.size());
 
