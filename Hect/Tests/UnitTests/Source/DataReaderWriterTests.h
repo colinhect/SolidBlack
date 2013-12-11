@@ -16,18 +16,18 @@ SUITE(DataReaderWriter)
 
         CHECK(reader.hasMember("Double"));
         CHECK_EQUAL(5, reader.readDouble("Double"));
-        
+
         CHECK(reader.hasMember("Vector2"));
         Vector2<> vector2 = reader.readVector2("Vector2");
         CHECK_EQUAL(1, vector2.x);
         CHECK_EQUAL(2, vector2.y);
-        
+
         CHECK(reader.hasMember("Vector3"));
         Vector3<> vector3 = reader.readVector3("Vector3");
         CHECK_EQUAL(1, vector3.x);
         CHECK_EQUAL(2, vector3.y);
         CHECK_EQUAL(3, vector3.z);
-        
+
         CHECK(reader.hasMember("Vector4"));
         Vector4<> vector4 = reader.readVector4("Vector4");
         CHECK_EQUAL(1, vector4.x);
@@ -42,7 +42,7 @@ SUITE(DataReaderWriter)
         {
             DataValueWriter writer;
             writeSimple(writer);
-            dataValue = writer.rootDataValue();
+            dataValue = writer.currentDataValue();
         }
 
         {
@@ -85,20 +85,20 @@ SUITE(DataReaderWriter)
 
         CHECK(reader.hasMember("Double"));
         CHECK_EQUAL(5, reader.readDouble("Double"));
-        
+
         CHECK(reader.beginObject("Object"));
 
         CHECK(reader.hasMember("Vector2"));
         Vector2<> vector2 = reader.readVector2("Vector2");
         CHECK_EQUAL(1, vector2.x);
         CHECK_EQUAL(2, vector2.y);
-        
+
         CHECK(reader.hasMember("Vector3"));
         Vector3<> vector3 = reader.readVector3("Vector3");
         CHECK_EQUAL(1, vector3.x);
         CHECK_EQUAL(2, vector3.y);
         CHECK_EQUAL(3, vector3.z);
-        
+
         CHECK(reader.hasMember("Vector4"));
         Vector4<> vector4 = reader.readVector4("Vector4");
         CHECK_EQUAL(1, vector4.x);
@@ -115,7 +115,7 @@ SUITE(DataReaderWriter)
         {
             DataValueWriter writer;
             writeObject(writer);
-            dataValue = writer.rootDataValue();
+            dataValue = writer.currentDataValue();
         }
 
         {
@@ -158,7 +158,7 @@ SUITE(DataReaderWriter)
 
         CHECK(reader.hasMember("Double"));
         CHECK_EQUAL(5, reader.readDouble("Double"));
-        
+
         CHECK(reader.beginArray("Array"));
 
         CHECK(!reader.endArray());
@@ -175,7 +175,7 @@ SUITE(DataReaderWriter)
         CHECK_EQUAL(3, vector3.z);
 
         CHECK(!reader.endArray());
-        
+
         Vector4<> vector4 = reader.readVector4();
         CHECK_EQUAL(1, vector4.x);
         CHECK_EQUAL(2, vector4.y);
@@ -191,7 +191,7 @@ SUITE(DataReaderWriter)
         {
             DataValueWriter writer;
             writeArray(writer);
-            dataValue = writer.rootDataValue();
+            dataValue = writer.currentDataValue();
         }
 
         {
@@ -228,10 +228,10 @@ SUITE(DataReaderWriter)
     void readArrayWithUnnamedObject(DataReader& reader)
     {
         CHECK(reader.beginArray("Array"));
-        
+
         CHECK(!reader.endArray());
 
-        CHECK(reader.beginObject());
+        reader.beginObject();
         CHECK_EQUAL("Testing 1 2 3", reader.readString("String"));
         reader.endObject();
 
@@ -244,7 +244,7 @@ SUITE(DataReaderWriter)
         {
             DataValueWriter writer;
             writeArrayWithUnnamedObject(writer);
-            dataValue = writer.rootDataValue();
+            dataValue = writer.currentDataValue();
         }
 
         {

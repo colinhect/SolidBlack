@@ -10,9 +10,6 @@ class AssetCache;
 class AssetEntryBase
 {
 public:
-
-    ///
-    /// Virtual destructor.
     virtual ~AssetEntryBase() { }
 };
 

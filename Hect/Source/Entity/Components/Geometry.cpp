@@ -54,20 +54,18 @@ void GeometrySerializer::load(Geometry& geometry, DataReader& reader, AssetCache
     {
         while (!reader.endArray())
         {
-            if (reader.beginObject())
+            reader.beginObject();
+            if (reader.hasMember("mesh") && reader.hasMember("material"))
             {
-                if (reader.hasMember("mesh") && reader.hasMember("material"))
-                {
-                    std::string meshPath = reader.readString("mesh");
-                    std::string materialPath = reader.readString("material");
+                std::string meshPath = reader.readString("mesh");
+                std::string materialPath = reader.readString("material");
 
-                    AssetHandle<Mesh> mesh = assetCache.getHandle<Mesh>(meshPath);
-                    AssetHandle<Material> material = assetCache.getHandle<Material>(materialPath);
+                AssetHandle<Mesh> mesh = assetCache.getHandle<Mesh>(meshPath);
+                AssetHandle<Material> material = assetCache.getHandle<Material>(materialPath);
 
-                    geometry.addSurface(mesh, material);
-                }
-
+                geometry.addSurface(mesh, material);
             }
+
             reader.endObject();
         }
     }

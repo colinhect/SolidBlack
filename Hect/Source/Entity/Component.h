@@ -24,8 +24,6 @@ public:
     /// Returns the next available component type id.
     static ComponentTypeId nextTypeId();
 
-    ///
-    /// Virtual destructor.
     virtual ~BaseComponent() { }
 
     ///
@@ -49,12 +47,7 @@ public:
     /// Returns the component type id for this type of component.
     static ComponentTypeId typeId();
 
-    ///
-    /// \copydoc BaseComponent::clone()
     BaseComponent* clone() const;
-
-    ///
-    /// \copydoc BaseComponent::componentTypeId()
     ComponentTypeId componentTypeId() const;
 };
 

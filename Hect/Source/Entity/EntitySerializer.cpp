@@ -35,7 +35,7 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
 
         // Save the resulting data value from the writer to the member data
         // value
-        dataValue.addMember(typeName, writer.rootDataValue());
+        dataValue.addMember(typeName, writer.currentDataValue());
     }
 }
 

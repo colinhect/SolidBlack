@@ -28,7 +28,7 @@ public:
     ///
     /// Returns the meshes.
     const AssetHandle<Mesh>::Array& meshes() const;
-    
+
     ///
     /// Returns the materials
     AssetHandle<Material>::Array& materials();

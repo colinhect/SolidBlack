@@ -28,33 +28,21 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     }
     else if (fileSystem.exists("Test.scene"))
     {
-        DataValue sceneValue;
-        {
-            FileReadStream stream = assetCache.fileSystem().openFileForRead("Test.scene");
-            DataValueJsonFormat::load(sceneValue, stream);
-        }
-        _scene.load(sceneValue, assetCache);
+        DataValue::Ref sceneValue = assetCache.get<DataValue>("Test.scene");
+        _scene.load(*sceneValue, assetCache);
         _scene.refresh();
     }
     else
     {
-        DataValue debugCameraValue;
-        {
-            FileReadStream stream = assetCache.fileSystem().openFileForRead("Testing/DebugCamera.entity");
-            DataValueJsonFormat::load(debugCameraValue, stream);
-        }
+        DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Testing/DebugCamera.entity");
         _debugCamera = _scene.createEntity();
-        _debugCamera.load(debugCameraValue, assetCache);
+        _debugCamera.load(*debugCameraValue, assetCache);
         _debugCamera.activate();
     }
 
-    DataValue testRigidBodyValue;
-    {
-        FileReadStream stream = assetCache.fileSystem().openFileForRead("Testing/TestRigidBody.entity");
-        DataValueJsonFormat::load(testRigidBodyValue, stream);
-    }
+    DataValue::Ref testRigidBodyValue = assetCache.get<DataValue>("Testing/TestRigidBody.entity");
     _testRigidBody = _scene.createEntity();
-    _testRigidBody.load(testRigidBodyValue, assetCache);
+    _testRigidBody.load(*testRigidBodyValue, assetCache);
 }
 
 TestState::~TestState()
@@ -130,12 +118,14 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
     {
         if (_cameraSystem.hasCamera())
         {
-            Entity testRigidBody = _testRigidBody.clone();
-            Transform& transform = testRigidBody.component<Transform>();
-            RigidBody& rigidBody = testRigidBody.component<RigidBody>();
-
             Camera& camera = _cameraSystem.camera();
+
+            Entity testRigidBody = _testRigidBody.clone();
+
+            Transform& transform = testRigidBody.component<Transform>();
             transform.setPosition(camera.position());
+
+            RigidBody& rigidBody = testRigidBody.component<RigidBody>();
             rigidBody.setLinearVelocity(camera.front() * 10);
 
             testRigidBody.activate();

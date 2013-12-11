@@ -7,6 +7,11 @@ DataValueWriter::DataValueWriter()
     _valueStack.push(DataValue(DataValueType::Object));
 }
 
+DataValue DataValueWriter::currentDataValue() const
+{
+    return _valueStack.top();
+}
+
 void DataValueWriter::beginObject()
 {
     DataValue& top = _valueStack.top();
@@ -58,7 +63,7 @@ void DataValueWriter::beginArray(const char* name)
     {
         throw Error("Cannot begin a named array when the current value is an array");
     }
-    
+
     _nameStack.push(name);
     _valueStack.push(DataValue(DataValueType::Array));
 }
@@ -126,11 +131,6 @@ void DataValueWriter::writeVector4(const Vector4<>& value)
 void DataValueWriter::writeVector4(const char* name, const Vector4<>& value)
 {
     _write(name, value);
-}
-
-DataValue DataValueWriter::rootDataValue() const
-{
-    return _valueStack.top();
 }
 
 void DataValueWriter::_write(const DataValue& value)

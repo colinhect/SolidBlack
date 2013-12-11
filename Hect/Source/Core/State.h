@@ -18,8 +18,6 @@ public:
     /// Constructs a state.
     State();
 
-    ///
-    /// Virtual destructor.
     virtual ~State() { }
 
     ///

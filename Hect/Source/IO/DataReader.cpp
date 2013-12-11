@@ -8,7 +8,7 @@ DataValueReader::DataValueReader(const DataValue& dataValue) :
     _valueStack.push(dataValue);
 }
 
-bool DataValueReader::beginObject()
+void DataValueReader::beginObject()
 {
     DataValue& top = _valueStack.top();
     if (!top.isArray())
@@ -16,13 +16,7 @@ bool DataValueReader::beginObject()
         throw Error("Cannot begin an unnamed object when the current value is an object");
     }
 
-    if (_elementIndex >= top.size())
-    {
-        return false;
-    }
-
     _valueStack.push(_read());
-    return true;
 }
 
 bool DataValueReader::beginObject(const char* name)
@@ -182,10 +176,9 @@ BinaryDataReader::BinaryDataReader(ReadStream& stream) :
 {
 }
 
-bool BinaryDataReader::beginObject()
+void BinaryDataReader::beginObject()
 {
     ++_elementIndex;
-    return true;
 }
 
 bool BinaryDataReader::beginObject(const char* name)

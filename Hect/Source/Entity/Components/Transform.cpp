@@ -131,7 +131,7 @@ void TransformSerializer::load(Transform& transform, DataReader& reader, AssetCa
         {
             axis = reader.readVector3("axis");
         }
-        
+
         if (reader.hasMember("angle"))
         {
             double degrees = reader.readDouble("angle");

@@ -36,11 +36,11 @@ public:
     int64_t microseconds();
 
     ///
-    /// Returns the time in milliseconds.
+    /// Returns the time span in milliseconds.
     int64_t milliseconds();
 
     ///
-    /// Returns the time in seconds.
+    /// Returns the time span in seconds.
     double seconds();
 
     ///

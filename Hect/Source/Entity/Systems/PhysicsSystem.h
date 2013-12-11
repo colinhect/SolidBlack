@@ -19,7 +19,7 @@ public:
     ~PhysicsSystem();
 
     ///
-    /// \copydoc System::includeEntity()
+    /// \copydoc System::includesEntity()
     bool includesEntity(const Entity& entity) const;
 
     ///
