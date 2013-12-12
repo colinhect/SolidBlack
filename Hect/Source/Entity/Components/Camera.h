@@ -11,9 +11,6 @@ class Camera :
     public Component<Camera>
 {
 public:
-
-    ///
-    /// Constructs a camera component with sensible default values.
     Camera();
 
     ///

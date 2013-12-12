@@ -9,10 +9,10 @@
          },
          "DebugCamera" : {},
          "Transform" : {
-            "position" : [ 5.542149667400151, 2.554560038504847, -37.19024997917560 ],
+            "position" : [ -11.98300257913910, -2.199852121460677, -34.78472448323712 ],
             "rotation" : {
-               "angle" : 147.4629689625344,
-               "axis" : [ 0.9645244059670342, 0.1543544321831554, 0.2141667097364937 ]
+               "angle" : 181.7639800586917,
+               "axis" : [ 0.5577436120996357, 0.1543037620487829, -0.8155442429320703 ]
             },
             "scale" : [ 1.0, 1.0, 1.0 ]
          }
@@ -50,102 +50,6 @@
          "DirectionalLight" : {
             "color" : [ 20.0, 20.0, 20.0 ],
             "direction" : [ 0.5773502691896258, -0.5773502691896258, -0.5773502691896258 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "surfaces" : [
-               {
-                  "material" : "Common/Diffuse.material",
-                  "mesh" : "Testing/Test.Cube.mesh"
-               }
-            ]
-         },
-         "RigidBody" : {
-            "angularVelocity" : [ 0.0, 0.0, 0.0 ],
-            "linearVelocity" : [ 6.375278338866689, -3.534459288443668, 6.845686498833516 ],
-            "mass" : 123.0,
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 121.7696623547909, -82.31540306969153, 119.9307499291083 ],
-            "rotation" : {
-               "angle" : 270.0,
-               "axis" : [ -1.0, 0.0, 0.0 ]
-            },
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "surfaces" : [
-               {
-                  "material" : "Common/Diffuse.material",
-                  "mesh" : "Testing/Test.Cube.mesh"
-               }
-            ]
-         },
-         "RigidBody" : {
-            "angularVelocity" : [ 0.0, 0.0, 0.0 ],
-            "linearVelocity" : [ 2.392122383058370, -5.402980267161150, 8.067561883068414 ],
-            "mass" : 123.0,
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ 29.21066076873493, -112.8338442539515, 130.9147430065854 ],
-            "rotation" : {
-               "angle" : 270.0,
-               "axis" : [ -1.0, 0.0, 0.0 ]
-            },
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "surfaces" : [
-               {
-                  "material" : "Common/Diffuse.material",
-                  "mesh" : "Testing/Test.Cube.mesh"
-               }
-            ]
-         },
-         "RigidBody" : {
-            "angularVelocity" : [ 0.0, 0.0, 0.0 ],
-            "linearVelocity" : [ -2.997558573983774, -7.603833308117812, 5.761628382488278 ],
-            "mass" : 123.0,
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -17.27110649236215, -92.05857795199229, 43.08106645297273 ],
-            "rotation" : {
-               "angle" : 270.0,
-               "axis" : [ -1.0, 0.0, 0.0 ]
-            },
-            "scale" : [ 1.0, 1.0, 1.0 ]
-         }
-      },
-      {
-         "Geometry" : {
-            "surfaces" : [
-               {
-                  "material" : "Common/Diffuse.material",
-                  "mesh" : "Testing/Test.Cube.mesh"
-               }
-            ]
-         },
-         "RigidBody" : {
-            "angularVelocity" : [ 0.0, 0.0, 0.0 ],
-            "linearVelocity" : [ -2.395048480088841, -7.670104789913314, 5.95258223712810 ],
-            "mass" : 123.0,
-            "mesh" : "Testing/Test.Cube.mesh"
-         },
-         "Transform" : {
-            "position" : [ -10.52303707585207, -78.38762664853347, 33.09350434100060 ],
-            "rotation" : {
-               "angle" : 270.0,
-               "axis" : [ -1.0, 0.0, 0.0 ]
-            },
-            "scale" : [ 1.0, 1.0, 1.0 ]
          }
       }
    ]

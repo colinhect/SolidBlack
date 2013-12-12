@@ -54,7 +54,7 @@ protected:
     virtual void activate();
 
     ///
-    /// Called when another state is made active.
+    /// Called when another state is made inactive.
     virtual void deactivate();
 
 private:

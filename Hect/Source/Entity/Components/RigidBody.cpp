@@ -5,29 +5,8 @@ using namespace hect;
 #include "Internal/Bullet.h"
 
 RigidBody::RigidBody() :
-    _mass(0),
-    _bulletRigidBody(nullptr),
-    _bulletMesh(nullptr)
+    _mass(0)
 {
-}
-
-RigidBody::~RigidBody()
-{
-    // Delete the Bullet rigid body
-    if (_bulletRigidBody)
-    {
-        btRigidBody* rigidBody = (btRigidBody*)_bulletRigidBody;
-        delete rigidBody->getMotionState();
-        delete rigidBody->getCollisionShape();
-        delete rigidBody;
-    }
-
-    // Delete up the Bullet mesh
-    if (_bulletMesh)
-    {
-        btTriangleMesh* mesh = (btTriangleMesh*)_bulletMesh;
-        delete mesh;
-    }
 }
 
 double RigidBody::mass() const
@@ -37,7 +16,7 @@ double RigidBody::mass() const
 
 void RigidBody::setMass(double mass)
 {
-    if (_bulletRigidBody)
+    if (_rigidBody)
     {
         throw Error("Cannot set mass after the rigid body is created");
     }
@@ -47,10 +26,9 @@ void RigidBody::setMass(double mass)
 const Vector3<>& RigidBody::linearVelocity() const
 {
     // Update the current value from the Bullet rigid body
-    if (_bulletRigidBody)
+    if (_rigidBody)
     {
-        btRigidBody* rigidBody = (btRigidBody*)_bulletRigidBody;
-        _linearVelocity = convertFromBullet(rigidBody->getLinearVelocity());
+        _linearVelocity = convertFromBullet(_rigidBody->getLinearVelocity());
     }
 
     return _linearVelocity;
@@ -59,10 +37,9 @@ const Vector3<>& RigidBody::linearVelocity() const
 void RigidBody::setLinearVelocity(const Vector3<>& linearVelocity)
 {
     // Set the new value in the bullet rigid body as well
-    if (_bulletRigidBody)
+    if (_rigidBody)
     {
-        btRigidBody* rigidBody = (btRigidBody*)_bulletRigidBody;
-        rigidBody->setLinearVelocity(convertToBullet(linearVelocity));
+        _rigidBody->setLinearVelocity(convertToBullet(linearVelocity));
     }
 
     _linearVelocity = linearVelocity;
@@ -71,10 +48,9 @@ void RigidBody::setLinearVelocity(const Vector3<>& linearVelocity)
 const Vector3<>& RigidBody::angularVelocity() const
 {
     // Update the current value from the Bullet rigid body
-    if (_bulletRigidBody)
+    if (_rigidBody)
     {
-        btRigidBody* rigidBody = (btRigidBody*)_bulletRigidBody;
-        _angularVelocity = convertFromBullet(rigidBody->getAngularVelocity());
+        _angularVelocity = convertFromBullet(_rigidBody->getAngularVelocity());
     }
 
     return _angularVelocity;
@@ -83,10 +59,9 @@ const Vector3<>& RigidBody::angularVelocity() const
 void RigidBody::setAngularVelocity(const Vector3<>& angularVelocity)
 {
     // Set the new value in the bullet rigid body as well
-    if (_bulletRigidBody)
+    if (_rigidBody)
     {
-        btRigidBody* rigidBody = (btRigidBody*)_bulletRigidBody;
-        rigidBody->setLinearVelocity(convertToBullet(angularVelocity));
+        _rigidBody->setAngularFactor(convertToBullet(angularVelocity));
     }
 
     _angularVelocity = angularVelocity;
@@ -104,7 +79,7 @@ const AssetHandle<Mesh>& RigidBody::mesh() const
 
 void RigidBody::setMesh(const AssetHandle<Mesh>& mesh)
 {
-    if (_bulletRigidBody)
+    if (_rigidBody)
     {
         throw Error("Cannot set mesh after the rigid body is created");
     }

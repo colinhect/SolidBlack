@@ -1,5 +1,10 @@
 #pragma once
 
+// Forward declare Bullet classes
+class btRigidBody;
+class btMotionState;
+class btCollisionShape;
+
 namespace hect
 {
 
@@ -10,14 +15,7 @@ class RigidBody :
 {
     friend class PhysicsSystem;
 public:
-
-    ///
-    /// Constructs a rigidy body.
     RigidBody();
-
-    ///
-    /// Destructor.
-    ~RigidBody();
 
     ///
     /// Returns the mass.
@@ -68,9 +66,10 @@ private:
     mutable Vector3<> _linearVelocity;
     mutable Vector3<> _angularVelocity;
     AssetHandle<Mesh> _mesh;
-
-    void* _bulletRigidBody;
-    void* _bulletMesh;
+    
+    std::shared_ptr<btRigidBody> _rigidBody;
+    std::shared_ptr<btMotionState> _motionState;
+    std::shared_ptr<btCollisionShape> _collisionShape;
 };
 
 ///

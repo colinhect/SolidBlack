@@ -9,9 +9,6 @@ class AmbientLight :
     public Component<AmbientLight>
 {
 public:
-
-    ///
-    /// Constructs an ambient light.
     AmbientLight();
 
     ///

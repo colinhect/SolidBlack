@@ -1,22 +1,24 @@
 #pragma once
 
+// Forward declare Bullet classes
+class btCollisionConfiguration;
+class btCollisionDispatcher;
+class btBroadphaseInterface;
+class btConstraintSolver;
+class btDynamicsWorld;
+class btTriangleMesh;
+
 namespace hect
 {
 
 ///
 /// Simulates physical interactions of physical bodies.
 class PhysicsSystem :
-    public System
+    public System,
+    public Uncopyable
 {
 public:
-
-    ///
-    /// Constructs the system.
     PhysicsSystem();
-
-    ///
-    /// Destructor.
-    ~PhysicsSystem();
 
     ///
     /// \copydoc System::includesEntity()
@@ -44,11 +46,15 @@ protected:
     void removeEntity(Entity& entity);
 
 private:
-    void* _configuration;
-    void* _dispatcher;
-    void* _broadphase;
-    void* _solver;
-    void* _world;
+    btTriangleMesh* _toBulletMesh(Mesh* mesh);
+
+    std::shared_ptr<btCollisionConfiguration> _configuration;
+    std::shared_ptr<btCollisionDispatcher> _dispatcher;
+    std::shared_ptr<btBroadphaseInterface> _broadphase;
+    std::shared_ptr<btConstraintSolver> _solver;
+    std::shared_ptr<btDynamicsWorld> _world;
+
+    std::map<Mesh*, std::shared_ptr<btTriangleMesh>> _bulletMeshes;
 
     Vector3<> _gravity;
 };

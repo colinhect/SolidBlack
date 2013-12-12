@@ -9,9 +9,6 @@ class DirectionalLight :
     public Component<DirectionalLight>
 {
 public:
-
-    ///
-    /// Constructs a directional light.
     DirectionalLight();
 
     ///
