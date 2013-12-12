@@ -48,6 +48,7 @@
     <ClCompile Include="Source\Entity\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Entity\Systems\PhysicsSystem.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\MeshBinaryFormat.cpp" />
     <ClCompile Include="Source\Graphics\MeshReader.cpp" />
     <ClCompile Include="Source\Graphics\Renderer.cpp" />
     <ClCompile Include="Source\Graphics\RendererObject.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Source\Entity\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Entity\Systems\PhysicsSystem.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\MeshBinaryFormat.h" />
     <ClInclude Include="Source\Graphics\MeshReader.h" />
     <ClInclude Include="Source\Graphics\Renderer.h" />
     <ClInclude Include="Source\Graphics\RendererObject.h" />

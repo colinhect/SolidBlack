@@ -4,10 +4,18 @@ using namespace hect;
 
 void AssetLoader<Mesh>::load(Mesh& mesh, const Path& assetPath, AssetCache& assetCache)
 {
-    DataValue dataValue;
+    FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
+    uint32_t signature = stream.readUnsignedInt();
+    stream.seek(0);
+
+    if (signature == MeshBinaryFormat::FormatSignature)
     {
-        FileReadStream stream = assetCache.fileSystem().openFileForRead(assetPath);
-        DataValueJsonFormat::load(dataValue, stream);
+        MeshBinaryFormat::load(mesh, assetPath.toString(), stream);
     }
-    MeshDataValueFormat::load(mesh, assetPath.toString(), dataValue);
+    else
+    {
+        DataValue dataValue;
+        DataValueJsonFormat::load(dataValue, stream);
+        MeshDataValueFormat::load(mesh, assetPath.toString(), dataValue);
+    }
 }

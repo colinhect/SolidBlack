@@ -12,8 +12,8 @@ public:
     ///
     /// Loads a mesh from a data value.
     ///
-    /// \param name The name of the mesh.
     /// \param mesh The mesh to load to.
+    /// \param name The name of the mesh.
     /// \param dataValue The root data value.
     static void load(Mesh& mesh, const std::string& name, const DataValue& dataValue);
 

@@ -315,6 +315,9 @@
     <ClCompile Include="Source\Core\LogicFlow.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\MeshBinaryFormat.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -595,6 +598,9 @@
     </ClInclude>
     <ClInclude Include="Source\Core\LogicFlow.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\MeshBinaryFormat.h">
+      <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

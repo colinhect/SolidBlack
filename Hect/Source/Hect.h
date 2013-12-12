@@ -100,6 +100,7 @@ const double pi = 3.14159265358979323846;
 #include "Graphics/Mesh.h"
 #include "Graphics/MeshWriter.h"
 #include "Graphics/MeshReader.h"
+#include "Graphics/MeshBinaryFormat.h"
 #include "Graphics/MeshDataValueFormat.h"
 #include "Graphics/VideoMode.h"
 #include "Graphics/VideoModeDataValueFormat.h"
