@@ -2,13 +2,13 @@
 
 using namespace hect;
 
-const uint32_t MeshBinaryFormat::FormatSignature = 0xFE01;
+const uint32_t MeshBinaryFormat::Signature = 0xFE01;
 
 void MeshBinaryFormat::load(Mesh& mesh, const std::string& name, ReadStream& stream)
 {
-    // Read/check the signature
+    // Check the signature
     uint32_t signature = stream.readUnsignedInt();
-    if (signature != FormatSignature)
+    if (signature != Signature)
     {
         throw Error("The stream does not contain valid mesh data");
     }
@@ -55,7 +55,7 @@ void MeshBinaryFormat::load(Mesh& mesh, const std::string& name, ReadStream& str
 void MeshBinaryFormat::save(const Mesh& mesh, WriteStream& stream)
 {
     // Write the signature
-    stream.writeUnsignedInt(FormatSignature);
+    stream.writeUnsignedInt(Signature);
 
     // Write the attribute count
     const VertexLayout& vertexLayout = mesh.vertexLayout();

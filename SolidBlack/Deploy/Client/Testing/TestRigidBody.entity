@@ -13,7 +13,7 @@
         "surfaces" :
         [
             {
-                "mesh" : "Testing/Test.Cube.mesh",
+                "mesh" : "Testing/AlphaGunship.Hull.mesh",
                 "material" : "Common/Diffuse.material"
             }
         ]
@@ -21,6 +21,6 @@
     "RigidBody" :
     {
         "mass" : 123,
-        "mesh" : "Testing/Test.Cube.mesh"
+        "mesh" : "Testing/AlphaGunship.Hull.mesh"
     }
 }
