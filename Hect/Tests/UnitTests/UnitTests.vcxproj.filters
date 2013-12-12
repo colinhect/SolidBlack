@@ -70,9 +70,6 @@
     <ClInclude Include="Source\MaterialDataFormatTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StateFlowTests.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SceneTests.h">
       <Filter>Source</Filter>
     </ClInclude>

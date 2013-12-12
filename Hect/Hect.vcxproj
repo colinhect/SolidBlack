@@ -25,11 +25,10 @@
     <ClCompile Include="Source\Core\DataValue.cpp" />
     <ClCompile Include="Source\Core\DataValueLoader.cpp" />
     <ClCompile Include="Source\Core\Error.cpp" />
-    <ClCompile Include="Source\Core\StateFlow.cpp" />
+    <ClCompile Include="Source\Core\Logic.cpp" />
     <ClCompile Include="Source\Core\Format.cpp" />
     <ClCompile Include="Source\Core\Logging.cpp" />
     <ClCompile Include="Source\Core\Memory.cpp" />
-    <ClCompile Include="Source\Core\State.cpp" />
     <ClCompile Include="Source\Core\TaskPool.cpp" />
     <ClCompile Include="Source\Core\Timer.cpp" />
     <ClCompile Include="Source\Core\TimeSpan.cpp" />
@@ -112,11 +111,11 @@
     <ClInclude Include="Source\Core\DataValueJsonFormat.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Error.h" />
-    <ClInclude Include="Source\Core\StateFlow.h" />
+    <ClInclude Include="Source\Core\Logic.h" />
+    <ClInclude Include="Source\Core\LogicLayer.h" />
     <ClInclude Include="Source\Core\Format.h" />
     <ClInclude Include="Source\Core\Logging.h" />
     <ClInclude Include="Source\Core\Memory.h" />
-    <ClInclude Include="Source\Core\State.h" />
     <ClInclude Include="Source\Core\TaskPool.h" />
     <ClInclude Include="Source\Core\Timer.h" />
     <ClInclude Include="Source\Core\TimeSpan.h" />

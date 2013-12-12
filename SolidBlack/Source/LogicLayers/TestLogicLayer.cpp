@@ -1,6 +1,7 @@
 #include "SolidBlack.h"
 
-TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer) :
+TestLogicLayer::TestLogicLayer(Logic& logic, AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer) :
+    _logic(&logic),
     _assetCache(&assetCache),
     _input(&inputSystem),
     _window(&window),
@@ -45,18 +46,13 @@ TestState::TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& w
     _testRigidBody.load(*testRigidBodyValue, assetCache);
 }
 
-TestState::~TestState()
+TestLogicLayer::~TestLogicLayer()
 {
     _input->keyboard().removeListener(*this);
 }
 
-void TestState::update(double timeStep)
+void TestLogicLayer::update(double timeStep)
 {
-    if (!isActivated())
-    {
-        return;
-    }
-
     _cameraSystem.update();
     _debugCameraSystem.update(timeStep);
     _physicsSystem.update(timeStep, 1);
@@ -65,11 +61,11 @@ void TestState::update(double timeStep)
     _input->updateAxes(timeStep);
 }
 
-void TestState::render(double delta)
+void TestLogicLayer::render(double delta)
 {
     delta;
 
-    if (!isActivated() || !_cameraSystem.hasCamera())
+    if (!_cameraSystem.hasCamera())
     {
         return;
     }
@@ -82,7 +78,7 @@ void TestState::render(double delta)
     _window->swapBuffers();
 }
 
-void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
+void TestLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
 {
     if (event.type != KeyboardEventType::KeyDown)
     {
@@ -91,7 +87,7 @@ void TestState::receiveKeyboardEvent(const KeyboardEvent& event)
 
     if (event.key == Key::Esc)
     {
-        setDone(true);
+        _logic->removeLayer(*this);
     }
     else if (event.key == Key::Tab)
     {

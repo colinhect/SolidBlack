@@ -13,4 +13,4 @@ using namespace hect;
 #include "Systems/DebugCameraSystem.h"
 #include "Systems/RenderingSystem.h"
 
-#include "States/TestState.h"
+#include "LogicLayers/TestLogicLayer.h"

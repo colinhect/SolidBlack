@@ -52,17 +52,17 @@ int main()
 
         // Create asset cache
         AssetCache assetCache(fileSystem);
+        
+        Logic logic;
 
-        StateFlow stateFlow;
-
-        State::Ref testState(new TestState(assetCache, inputSystem, window, renderer));
-        stateFlow.push(testState);
+        TestLogicLayer testLogicLayer(logic, assetCache, inputSystem, window, renderer);
+        logic.addLayer(testLogicLayer);
 
         TimeSpan timeStep = TimeSpan::fromSeconds(1.0 / 60.0);
 
-        while (window.pollEvents(inputSystem) && stateFlow.transition())
+        while (window.pollEvents(inputSystem) && logic.layerCount() > 0)
         {
-            stateFlow.update(timeStep);
+            logic.update(timeStep);
         }
     }
     catch (Error& error)

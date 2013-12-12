@@ -1,13 +1,13 @@
 #pragma once
 
-class TestState :
-    public State,
+class TestLogicLayer :
+    public LogicLayer,
     public KeyboardListener,
     public Uncopyable
 {
 public:
-    TestState(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer);
-    ~TestState();
+    TestLogicLayer(Logic& logic, AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer);
+    ~TestLogicLayer();
 
     void update(double timeStep);
     void render(double delta);
@@ -15,6 +15,7 @@ public:
     void receiveKeyboardEvent(const KeyboardEvent& event);
 
 private:
+    Logic* _logic;
     AssetCache* _assetCache;
     InputSystem* _input;
     Window* _window;

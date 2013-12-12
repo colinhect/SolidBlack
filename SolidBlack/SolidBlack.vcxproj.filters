@@ -15,7 +15,7 @@
     <Filter Include="Source\Systems">
       <UniqueIdentifier>{df1c6677-cf47-47d5-a80a-a84dfd9a6941}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\States">
+    <Filter Include="Source\LogicLayers">
       <UniqueIdentifier>{a573acc7-6e9e-4a6f-b028-58ce860e8f6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -29,14 +29,14 @@
     <ClCompile Include="Source\Network\Server.cpp">
       <Filter>Source\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Source\States\TestState.cpp">
-      <Filter>Source\States</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Systems\DebugCameraSystem.cpp">
       <Filter>Source\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Source\Systems\RenderingSystem.cpp">
       <Filter>Source\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LogicLayers\TestLogicLayer.cpp">
+      <Filter>Source\LogicLayers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,14 +58,14 @@
     <ClInclude Include="Source\Components\DebugCamera.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\States\TestState.h">
-      <Filter>Source\States</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Systems\DebugCameraSystem.h">
       <Filter>Source\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\Systems\RenderingSystem.h">
       <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogicLayers\TestLogicLayer.h">
+      <Filter>Source\LogicLayers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

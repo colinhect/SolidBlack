@@ -87,9 +87,6 @@
     <ClCompile Include="Source\Core\Memory.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\State.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\TaskPool.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
@@ -264,9 +261,6 @@
     <ClCompile Include="Source\Input\InputSystem.cpp">
       <Filter>Source\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\StateFlow.cpp">
-      <Filter>Source\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Entity\EntitySerializer.cpp">
       <Filter>Source\Entity</Filter>
     </ClCompile>
@@ -315,6 +309,9 @@
     <ClCompile Include="Source\IO\DataWriter.cpp">
       <Filter>Source\IO</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Logic.cpp">
+      <Filter>Source\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -345,9 +342,6 @@
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Memory.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\State.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\TaskPool.h">
@@ -542,9 +536,6 @@
     <ClInclude Include="Source\Input\InputSystem.h">
       <Filter>Source\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\StateFlow.h">
-      <Filter>Source\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Entity\EntitySerializer.h">
       <Filter>Source\Entity</Filter>
     </ClInclude>
@@ -595,6 +586,12 @@
     </ClInclude>
     <ClInclude Include="Source\IO\DataWriter.h">
       <Filter>Source\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Logic.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\LogicLayer.h">
+      <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
