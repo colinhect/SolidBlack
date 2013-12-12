@@ -3,23 +3,40 @@
 namespace hect
 {
 
+///
+/// A layer of logic within a flow.
 class LogicLayer
 {
 public:
+    LogicLayer();
     virtual ~LogicLayer() { }
 
     ///
     /// Called once every time step.
     ///
-    /// \param timeStep The duration of time between each update (in seconds).
-    virtual void update(double timeStep) { timeStep; }
+    /// \param timeStep The duration of time between each fixed update (in
+    /// seconds).
+    virtual void fixedUpdate(double timeStep);
 
     ///
-    /// Called when the a frame is rendered.
+    /// Called once every frame.
     ///
-    /// \param delta The delta between the last call to update() and the next
-    /// call to update() (useful for interpolation).
-    virtual void render(double delta) { delta; }
+    /// \param delta The delta between the last fixed update and the next
+    /// fixed update.
+    virtual void frameUpdate(double delta);
+
+    ///
+    /// Returns whether the layer is active.
+    bool isActive() const;
+
+    ///
+    /// Sets whether the layer is active.
+    ///
+    /// \param active True if the layer is active; false otherwise.
+    void setActive(bool active);
+
+private:
+    bool _active;
 };
 
 }

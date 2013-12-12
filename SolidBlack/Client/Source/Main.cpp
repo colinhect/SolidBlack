@@ -24,9 +24,11 @@ int main()
         fileSystem.setWriteDirectory(workingDirectory);
 
         // Load the settings
-        std::string settingsJson = fileSystem.openFileForRead("Settings.json").readAllToString();
         DataValue settings;
-        DataValueJsonFormat::load(settings, settingsJson);
+        {
+            FileReadStream stream = fileSystem.openFileForRead("Settings.json");
+            DataValueJsonFormat::load(settings, stream);
+        }
 
         // Add the data sources listed in the settings
         for (const DataValue& dataSource : settings["dataSources"])
@@ -53,16 +55,19 @@ int main()
         // Create asset cache
         AssetCache assetCache(fileSystem);
         
-        Logic logic;
+        LogicFlow logicFlow;
 
-        TestLogicLayer testLogicLayer(logic, assetCache, inputSystem, window, renderer);
-        logic.addLayer(testLogicLayer);
+        TestLogicLayer testLogicLayer(assetCache, inputSystem, window, renderer);
+        logicFlow.addLayer(testLogicLayer);
 
         TimeSpan timeStep = TimeSpan::fromSeconds(1.0 / 60.0);
 
-        while (window.pollEvents(inputSystem) && logic.layerCount() > 0)
+        while (window.pollEvents(inputSystem))
         {
-            logic.update(timeStep);
+            if (!logicFlow.update(timeStep))
+            {
+                break;
+            }
         }
     }
     catch (Error& error)

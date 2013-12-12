@@ -25,9 +25,10 @@
     <ClCompile Include="Source\Core\DataValue.cpp" />
     <ClCompile Include="Source\Core\DataValueLoader.cpp" />
     <ClCompile Include="Source\Core\Error.cpp" />
-    <ClCompile Include="Source\Core\Logic.cpp" />
+    <ClCompile Include="Source\Core\LogicFlow.cpp" />
     <ClCompile Include="Source\Core\Format.cpp" />
     <ClCompile Include="Source\Core\Logging.cpp" />
+    <ClCompile Include="Source\Core\LogicLayer.cpp" />
     <ClCompile Include="Source\Core\Memory.cpp" />
     <ClCompile Include="Source\Core\TaskPool.cpp" />
     <ClCompile Include="Source\Core\Timer.cpp" />
@@ -111,7 +112,7 @@
     <ClInclude Include="Source\Core\DataValueJsonFormat.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Error.h" />
-    <ClInclude Include="Source\Core\Logic.h" />
+    <ClInclude Include="Source\Core\LogicFlow.h" />
     <ClInclude Include="Source\Core\LogicLayer.h" />
     <ClInclude Include="Source\Core\Format.h" />
     <ClInclude Include="Source\Core\Logging.h" />

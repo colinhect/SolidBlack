@@ -138,4 +138,4 @@ const double pi = 3.14159265358979323846;
 #include "Entity/Systems/PhysicsSystem.h"
 
 #include "Core/LogicLayer.h"
-#include "Core/Logic.h"
+#include "Core/LogicFlow.h"

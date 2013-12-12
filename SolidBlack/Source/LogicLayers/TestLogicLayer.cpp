@@ -1,7 +1,6 @@
 #include "SolidBlack.h"
 
-TestLogicLayer::TestLogicLayer(Logic& logic, AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer) :
-    _logic(&logic),
+TestLogicLayer::TestLogicLayer(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer) :
     _assetCache(&assetCache),
     _input(&inputSystem),
     _window(&window),
@@ -51,7 +50,7 @@ TestLogicLayer::~TestLogicLayer()
     _input->keyboard().removeListener(*this);
 }
 
-void TestLogicLayer::update(double timeStep)
+void TestLogicLayer::fixedUpdate(double timeStep)
 {
     _cameraSystem.update();
     _debugCameraSystem.update(timeStep);
@@ -61,7 +60,7 @@ void TestLogicLayer::update(double timeStep)
     _input->updateAxes(timeStep);
 }
 
-void TestLogicLayer::render(double delta)
+void TestLogicLayer::frameUpdate(double delta)
 {
     delta;
 
@@ -87,7 +86,7 @@ void TestLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
 
     if (event.key == Key::Esc)
     {
-        _logic->removeLayer(*this);
+        setActive(false);
     }
     else if (event.key == Key::Tab)
     {
@@ -131,13 +130,15 @@ void TestLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
     {
         DataValue dataValue;
         _scene.save(dataValue);
-
-        FileWriteStream stream = _assetCache->fileSystem().openFileForWrite("Test.scene");
+        
+        FileSystem& fileSystem = _assetCache->fileSystem();
+        FileWriteStream stream = fileSystem.openFileForWrite("Test.scene");
         DataValueJsonFormat::save(dataValue, stream);
     }
     else if (event.key == Key::F6)
     {
-        FileWriteStream stream = _assetCache->fileSystem().openFileForWrite("TestBinary.scene");
+        FileSystem& fileSystem = _assetCache->fileSystem();
+        FileWriteStream stream = fileSystem.openFileForWrite("TestBinary.scene");
         _scene.save(stream);
     }
 }

@@ -6,16 +6,15 @@ class TestLogicLayer :
     public Uncopyable
 {
 public:
-    TestLogicLayer(Logic& logic, AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer);
+    TestLogicLayer(AssetCache& assetCache, InputSystem& inputSystem, Window& window, Renderer& renderer);
     ~TestLogicLayer();
 
-    void update(double timeStep);
-    void render(double delta);
+    void fixedUpdate(double timeStep);
+    void frameUpdate(double delta);
 
     void receiveKeyboardEvent(const KeyboardEvent& event);
 
 private:
-    Logic* _logic;
     AssetCache* _assetCache;
     InputSystem* _input;
     Window* _window;
