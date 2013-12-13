@@ -19,7 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\LogicLayers\BaseLogicLayer.cpp" />
+    <ClCompile Include="Source\LogicLayers\ClientLogicLayer.cpp" />
+    <ClCompile Include="Source\LogicLayers\ClientSceneLogicLayer.cpp" />
+    <ClCompile Include="Source\LogicLayers\ServerLogicLayer.cpp" />
     <ClCompile Include="Source\LogicLayers\TestLogicLayer.cpp" />
+    <ClCompile Include="Source\Network\Bubble.cpp" />
     <ClCompile Include="Source\Network\Client.cpp" />
     <ClCompile Include="Source\Network\Player.cpp" />
     <ClCompile Include="Source\Network\Server.cpp" />
@@ -28,7 +33,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Components\DebugCamera.h" />
+    <ClInclude Include="Source\LogicLayers\BaseLogicLayer.h" />
+    <ClInclude Include="Source\LogicLayers\ClientLogicLayer.h" />
+    <ClInclude Include="Source\LogicLayers\ClientSceneLogicLayer.h" />
+    <ClInclude Include="Source\LogicLayers\ServerLogicLayer.h" />
     <ClInclude Include="Source\LogicLayers\TestLogicLayer.h" />
+    <ClInclude Include="Source\Network\Bubble.h" />
     <ClInclude Include="Source\Network\Client.h" />
     <ClInclude Include="Source\Network\PacketType.h" />
     <ClInclude Include="Source\Network\Player.h" />

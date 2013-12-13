@@ -29,6 +29,10 @@ public:
     void removeLayer(LogicLayer& layer);
 
     ///
+    /// Removes all layers from the flow.
+    void removeAllLayers();
+
+    ///
     /// Updates all layers in the flow.
     ///
     /// \param timeStep The duration of time between each fixed update.

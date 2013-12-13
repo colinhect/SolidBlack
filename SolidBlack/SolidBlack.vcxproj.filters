@@ -38,6 +38,21 @@
     <ClCompile Include="Source\LogicLayers\TestLogicLayer.cpp">
       <Filter>Source\LogicLayers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LogicLayers\ClientLogicLayer.cpp">
+      <Filter>Source\LogicLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LogicLayers\ServerLogicLayer.cpp">
+      <Filter>Source\LogicLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LogicLayers\BaseLogicLayer.cpp">
+      <Filter>Source\LogicLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LogicLayers\ClientSceneLogicLayer.cpp">
+      <Filter>Source\LogicLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\Bubble.cpp">
+      <Filter>Source\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SolidBlack.h">
@@ -66,6 +81,21 @@
     </ClInclude>
     <ClInclude Include="Source\LogicLayers\TestLogicLayer.h">
       <Filter>Source\LogicLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogicLayers\ClientLogicLayer.h">
+      <Filter>Source\LogicLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogicLayers\ServerLogicLayer.h">
+      <Filter>Source\LogicLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogicLayers\BaseLogicLayer.h">
+      <Filter>Source\LogicLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogicLayers\ClientSceneLogicLayer.h">
+      <Filter>Source\LogicLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Network\Bubble.h">
+      <Filter>Source\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

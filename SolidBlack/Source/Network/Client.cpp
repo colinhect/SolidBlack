@@ -14,7 +14,7 @@ Client::~Client()
 
         // Wait for the disconnect event
         SocketEvent event;
-        while (_socket.pollEvent(event, TimeSpan::fromSeconds(3)))
+        while (_socket.pollEvent(event, TimeSpan::fromSeconds(0.5)))
         {
             if (event.type == SocketEventType::Disconnect)
             {

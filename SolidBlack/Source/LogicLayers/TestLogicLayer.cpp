@@ -84,11 +84,7 @@ void TestLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
         return;
     }
 
-    if (event.key == Key::Esc)
-    {
-        setActive(false);
-    }
-    else if (event.key == Key::Tab)
+    if (event.key == Key::Tab)
     {
         bool cursorLocked = _window->isCursorLocked();
         _window->setCursorLocked(!cursorLocked);

@@ -12,6 +12,11 @@ void LogicFlow::removeLayer(LogicLayer& layer)
     _layers.erase(std::remove(_layers.begin(), _layers.end(), &layer), _layers.end());
 }
 
+void LogicFlow::removeAllLayers()
+{
+    _layers.clear();
+}
+
 bool LogicFlow::update(TimeSpan timeStep)
 {
     _removeInactiveLayers();
