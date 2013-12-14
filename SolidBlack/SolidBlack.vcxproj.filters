@@ -20,13 +20,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Network\Client.cpp">
-      <Filter>Source\Network</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Network\Player.cpp">
-      <Filter>Source\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Network\Server.cpp">
       <Filter>Source\Network</Filter>
     </ClCompile>
     <ClCompile Include="Source\Systems\DebugCameraSystem.cpp">
@@ -47,27 +41,21 @@
     <ClCompile Include="Source\LogicLayers\BaseLogicLayer.cpp">
       <Filter>Source\LogicLayers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LogicLayers\ClientSceneLogicLayer.cpp">
-      <Filter>Source\LogicLayers</Filter>
+    <ClCompile Include="Source\Components\Broadcast.cpp">
+      <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Network\Bubble.cpp">
-      <Filter>Source\Network</Filter>
+    <ClCompile Include="Source\Systems\BroadcastSystem.cpp">
+      <Filter>Source\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SolidBlack.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Network\Client.h">
-      <Filter>Source\Network</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Network\PacketType.h">
       <Filter>Source\Network</Filter>
     </ClInclude>
     <ClInclude Include="Source\Network\Player.h">
-      <Filter>Source\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Network\Server.h">
       <Filter>Source\Network</Filter>
     </ClInclude>
     <ClInclude Include="Source\Components\DebugCamera.h">
@@ -91,11 +79,11 @@
     <ClInclude Include="Source\LogicLayers\BaseLogicLayer.h">
       <Filter>Source\LogicLayers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LogicLayers\ClientSceneLogicLayer.h">
-      <Filter>Source\LogicLayers</Filter>
+    <ClInclude Include="Source\Components\Broadcast.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Network\Bubble.h">
-      <Filter>Source\Network</Filter>
+    <ClInclude Include="Source\Systems\BroadcastSystem.h">
+      <Filter>Source\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

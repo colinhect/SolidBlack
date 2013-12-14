@@ -8,7 +8,9 @@
     },
     "dataSources" :
     [
-        "Client"
+        "Common",
+        "Client",
+        "Server"
     ],
     "inputAxes" :
     {

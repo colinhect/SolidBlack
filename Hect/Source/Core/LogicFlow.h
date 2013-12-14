@@ -14,6 +14,13 @@ class LogicFlow :
 public:
 
     ///
+    /// Constructs a logic flow given the duration of time between each fixed
+    /// update.
+    ///
+    /// \param timeStep The duration of time between each fixed update.
+    LogicFlow(TimeSpan timeStep);
+
+    ///
     /// Adds a layer to the flow.
     ///
     /// \remarks The layer will remain in the flow until it is inactive or
@@ -35,15 +42,14 @@ public:
     ///
     /// Updates all layers in the flow.
     ///
-    /// \param timeStep The duration of time between each fixed update.
-    ///
     /// \returns True if there are layers in the flow; false otherwise.
-    bool update(TimeSpan timeStep);
+    bool update();
 
 private:
     void _removeInactiveLayers();
 
     Timer _timer;
+    TimeSpan _timeStep;
     TimeSpan _accumulator;
     TimeSpan _delta;
 

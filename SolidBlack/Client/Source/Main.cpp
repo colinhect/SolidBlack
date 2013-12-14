@@ -56,25 +56,22 @@ int main()
         AssetCache assetCache(fileSystem);
 
         // Server logic flow
-        LogicFlow serverLogicFlow;
+        LogicFlow serverLogicFlow(TimeSpan::fromSeconds(1.0 / 60.0));
         ServerLogicLayer serverLogicLayer(assetCache);
         serverLogicFlow.addLayer(serverLogicLayer);
 
         // Client logic flow
-        LogicFlow clientLogicFlow;
+        LogicFlow clientLogicFlow(TimeSpan::fromSeconds(1.0 / 60.0));
         BaseLogicLayer baseLogicLayer(clientLogicFlow, inputSystem);
         clientLogicFlow.addLayer(baseLogicLayer);
         ClientLogicLayer clientLogicLayer(IpAddress::localAddress(), 6006);
         clientLogicFlow.addLayer(clientLogicLayer);
-        //TestLogicLayer testLogicLayer(assetCache, inputSystem, window, renderer);
-        //clientLogicFlow.addLayer(testLogicLayer);
+        TestLogicLayer testLogicLayer(assetCache, inputSystem, window, renderer);
+        clientLogicFlow.addLayer(testLogicLayer);
         
-        TimeSpan clientTimeStep = TimeSpan::fromSeconds(1.0 / 60.0);
-        TimeSpan serverTimeStep = TimeSpan::fromSeconds(1.0 / 30.0);
-
         while (window.pollEvents(inputSystem))
         {
-            if (!clientLogicFlow.update(clientTimeStep) || !serverLogicFlow.update(serverTimeStep))
+            if (!clientLogicFlow.update() || !serverLogicFlow.update())
             {
                 break;
             }

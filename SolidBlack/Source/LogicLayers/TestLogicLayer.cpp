@@ -17,28 +17,15 @@ TestLogicLayer::TestLogicLayer(AssetCache& assetCache, InputSystem& inputSystem,
     _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
 
-    FileSystem& fileSystem = assetCache.fileSystem();
-    if (fileSystem.exists("TestBinary.scene"))
-    {
-        {
-            FileReadStream stream = assetCache.fileSystem().openFileForRead("TestBinary.scene");
-            _scene.load(stream, assetCache);
-        }
-        _scene.refresh();
-    }
-    else if (fileSystem.exists("Test.scene"))
-    {
-        DataValue::Ref sceneValue = assetCache.get<DataValue>("Test.scene");
-        _scene.load(*sceneValue, assetCache);
-        _scene.refresh();
-    }
-    else
-    {
-        DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Testing/DebugCamera.entity");
-        _debugCamera = _scene.createEntity();
-        _debugCamera.load(*debugCameraValue, assetCache);
-        _debugCamera.activate();
-    }
+    DataValue::Ref debugCameraValue = assetCache.get<DataValue>("Testing/DebugCamera.entity");
+    _debugCamera = _scene.createEntity();
+    _debugCamera.load(*debugCameraValue, assetCache);
+    _debugCamera.activate();
+
+    DataValue::Ref sunValue = assetCache.get<DataValue>("Sun.Client.entity");
+    Entity sun = _scene.createEntity();
+    sun.load(*sunValue, assetCache);
+    sun.activate();
 
     DataValue::Ref testRigidBodyValue = assetCache.get<DataValue>("Testing/TestRigidBody.entity");
     _testRigidBody = _scene.createEntity();
@@ -122,6 +109,7 @@ void TestLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
             testRigidBody.activate();
         }
     }
+    /*
     else if (event.key == Key::F5)
     {
         DataValue dataValue;
@@ -137,4 +125,5 @@ void TestLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
         FileWriteStream stream = fileSystem.openFileForWrite("TestBinary.scene");
         _scene.save(stream);
     }
+    */
 }

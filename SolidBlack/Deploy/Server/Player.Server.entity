@@ -1,0 +1,6 @@
+{
+    "Broadcast" :
+    {
+        "clientEntity" : "Player.Client.entity"
+    }
+}

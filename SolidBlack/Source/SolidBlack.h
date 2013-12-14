@@ -5,12 +5,11 @@ using namespace hect;
 
 #include "Network/PacketType.h"
 #include "Network/Player.h"
-#include "Network/Client.h"
-#include "Network/Server.h"
-#include "Network/Bubble.h"
 
+#include "Components/Broadcast.h"
 #include "Components/DebugCamera.h"
 
+#include "Systems/BroadcastSystem.h"
 #include "Systems/DebugCameraSystem.h"
 #include "Systems/RenderingSystem.h"
 

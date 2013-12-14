@@ -25,7 +25,7 @@ void Scene::refresh()
     // Add all activated entities to systems that include them
     for (Entity::Id id : _activatedEntityIds)
     {
-        Entity entity = _entityWithId(id);
+        Entity entity = entityWithId(id);
         for (System* system : _systems)
         {
             if (system->includesEntity(entity))
@@ -42,7 +42,7 @@ void Scene::refresh()
     // Remove all destroyed entities from systems that include them
     for (Entity::Id id : _destroyedEntityIds)
     {
-        Entity entity = _entityWithId(id);
+        Entity entity = entityWithId(id);
         for (System* system : _systems)
         {
             if (system->includesEntity(entity))
@@ -75,7 +75,7 @@ void Scene::addSystem(System& system)
     // Add any entities the systems is filtered for
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
     {
-        Entity entity = _entityWithId(id);
+        Entity entity = entityWithId(id);
         if (entity && entity.isActivated() && system.includesEntity(entity))
         {
             system.addEntity(entity);
@@ -96,22 +96,30 @@ Entity Scene::createEntity()
 {
     Entity::Id id;
 
-    // Re-use ids as often as possible to avoid resizing the pool
-    if (!_nextEntityIds.empty())
+    while (true)
     {
-        id = _nextEntityIds.back();
-        _nextEntityIds.pop();
-    }
-    else
-    {
-        id = _nextEntityId++;
-
-        // Resize the pool if needed
-        if (id >= _entityComponents.size())
+        // Re-use ids as often as possible to avoid resizing the pool
+        if (!_nextEntityIds.empty())
         {
-            size_t size = _entityComponents.size() * 2;
-            _entityData.resize(size);
-            _entityComponents.resize(size);
+            id = _nextEntityIds.back();
+            _nextEntityIds.pop();
+        }
+        else
+        {
+            id = _nextEntityId++;
+
+            // Resize the pool if needed
+            if (id >= _entityComponents.size())
+            {
+                size_t size = _entityComponents.size() * 2;
+                _entityData.resize(size);
+                _entityComponents.resize(size);
+            }
+        }
+
+        if (!entityWithId(id))
+        {
+            break;
         }
     }
 
@@ -121,13 +129,36 @@ Entity Scene::createEntity()
     return Entity(*this, id);
 }
 
+Entity Scene::createEntity(Entity::Id id)
+{
+    Entity entity = entityWithId(id);
+    if (entity)
+    {
+        throw Error(format("There is already an entity with ID '%d'", id));
+    }
+
+    // Set the entity as no longer being null; the rest of the data is
+    // properly initialized
+    _entityData[id].setNull(false);
+    return Entity(*this, id);
+}
+
+Entity Scene::entityWithId(Entity::Id id) const
+{
+    if (id >= _entityData.size())
+    {
+        return Entity();
+    }
+    return Entity(*const_cast<Scene*>(this), id);
+}
+
 void Scene::save(DataValue& dataValue) const
 {
     // Save each activated entity to a separate data value
     DataValue entities(DataValueType::Array);
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
     {
-        Entity entity = _entityWithId(id);
+        Entity entity = entityWithId(id);
         if (entity && entity.isActivated())
         {
             // Save the entity to a data value
@@ -150,7 +181,7 @@ void Scene::save(WriteStream& stream) const
     // Serialize each activated entity to the stream
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
     {
-        Entity entity = _entityWithId(id);
+        Entity entity = entityWithId(id);
         if (entity && entity.isActivated())
         {
             // Serialize the entity
@@ -164,9 +195,20 @@ void Scene::load(const DataValue& dataValue, AssetCache& assetCache)
     // For each entity data value
     for (const DataValue& entityValue : dataValue["entities"])
     {
-        // Create an entity and load the components
         Entity entity = createEntity();
-        entity.load(entityValue, assetCache);
+
+        if (entityValue.isString())
+        {
+            // Load the components using the referenced file
+            DataValue::Ref value = assetCache.get<DataValue>(entityValue.asString());
+            entity.load(*value, assetCache);
+        }
+        else
+        {
+            // Load the components using the inline data value
+            entity.load(entityValue, assetCache);
+        }
+
         entity.activate();
     }
 }
@@ -181,11 +223,6 @@ void Scene::load(ReadStream& stream, AssetCache& assetCache)
         entity.load(stream, assetCache);
         entity.activate();
     }
-}
-
-Entity Scene::_entityWithId(Entity::Id id) const
-{
-    return Entity(*const_cast<Scene*>(this), id);
 }
 
 Entity Scene::_cloneEntity(const Entity& entity)

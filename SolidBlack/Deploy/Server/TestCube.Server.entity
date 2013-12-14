@@ -1,0 +1,6 @@
+{
+    "Broadcast" :
+    {
+        "clientEntity" : "TestCube.Client.entity"
+    }
+}

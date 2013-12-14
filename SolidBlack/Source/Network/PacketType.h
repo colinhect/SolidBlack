@@ -1,8 +1,11 @@
 #pragma once
 
-enum class PacketType :
-uint8_t
+enum class PacketType
 {
     AuthorizationRequest,
-    Authorization
+    Authorization,
+
+    ClearScene,
+    CreateEntity,
+    DestroyEntity
 };

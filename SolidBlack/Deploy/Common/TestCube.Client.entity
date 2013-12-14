@@ -1,0 +1,16 @@
+{
+    "Transform" :
+    {
+        "position" : [ 0, 0, 0 ]
+    },
+    "Geometry" :
+    {
+        "surfaces" :
+        [
+           {
+              "mesh" : "Testing/Test.Cube.mesh",
+              "material" : "Common/Diffuse.material"
+           }
+        ]
+    }
+}

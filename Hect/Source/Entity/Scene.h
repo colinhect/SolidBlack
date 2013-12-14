@@ -47,10 +47,22 @@ public:
     void removeSystem(System& system);
 
     ///
-    /// Creates a new entity.
+    /// Creates a new entity using the next available ID.
     ///
     /// \returns The new entity.
     Entity createEntity();
+
+    ///
+    /// Creates a new entity using the given ID.
+    ///
+    /// \returns The new entity.
+    ///
+    /// \throws Error If there is already an entity with the given ID.
+    Entity createEntity(Entity::Id id);
+
+    ///
+    /// Returns the entity of the given ID.
+    Entity entityWithId(Entity::Id id) const;
 
     ///
     /// Serializes all activated entities in the scene to a data value.
@@ -94,8 +106,6 @@ private:
     {
         InitialPoolSize = 128
     };
-
-    Entity _entityWithId(Entity::Id id) const;
 
     Entity _cloneEntity(const Entity& entity);
 

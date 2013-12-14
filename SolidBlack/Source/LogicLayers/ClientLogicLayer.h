@@ -6,9 +6,15 @@ class ClientLogicLayer :
 {
 public:
     ClientLogicLayer(IpAddress serverAddress, Port port);
-
+    ~ClientLogicLayer();
+    
     void fixedUpdate(double timeStep);
+    void frameUpdate(double delta);
 
 private:
-    Client _client;
+    void _receivePacketEvent(SocketEvent& event);
+    void _sendAuthorization();
+
+    Socket _socket;
+    Peer _server;
 };

@@ -2,6 +2,11 @@
 
 using namespace hect;
 
+LogicFlow::LogicFlow(TimeSpan timeStep) :
+    _timeStep(timeStep)
+{
+}
+
 void LogicFlow::addLayer(LogicLayer& layer)
 {
     _layers.push_back(&layer);
@@ -17,7 +22,7 @@ void LogicFlow::removeAllLayers()
     _layers.clear();
 }
 
-bool LogicFlow::update(TimeSpan timeStep)
+bool LogicFlow::update()
 {
     _removeInactiveLayers();
 
@@ -32,22 +37,22 @@ bool LogicFlow::update(TimeSpan timeStep)
     _accumulator += deltaTime;
     _delta += deltaTime;
 
-    while (_accumulator.microseconds() >= timeStep.microseconds())
+    while (_accumulator.microseconds() >= _timeStep.microseconds())
     {
         // Update the layers
         for (LogicLayer* layer : _layers)
         {
-            layer->fixedUpdate(timeStep.seconds());
+            layer->fixedUpdate(_timeStep.seconds());
         }
 
         _delta = TimeSpan();
-        _accumulator -= timeStep;
+        _accumulator -= _timeStep;
     }
 
     // Render the layers
     for (LogicLayer* layer : _layers)
     {
-        layer->frameUpdate(_delta.seconds() / timeStep.seconds());
+        layer->frameUpdate(_delta.seconds() / _timeStep.seconds());
     }
 
     return true;
