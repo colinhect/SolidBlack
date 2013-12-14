@@ -57,17 +57,18 @@ int main()
 
         // Server logic flow
         LogicFlow serverLogicFlow(TimeSpan::fromSeconds(1.0 / 60.0));
+
         ServerLogicLayer serverLogicLayer(assetCache);
         serverLogicFlow.addLayer(serverLogicLayer);
 
         // Client logic flow
         LogicFlow clientLogicFlow(TimeSpan::fromSeconds(1.0 / 60.0));
+
         BaseLogicLayer baseLogicLayer(clientLogicFlow, inputSystem);
         clientLogicFlow.addLayer(baseLogicLayer);
-        ClientLogicLayer clientLogicLayer(IpAddress::localAddress(), 6006);
+
+        ClientLogicLayer clientLogicLayer(IpAddress::localAddress(), 6006, assetCache, inputSystem, window, renderer);
         clientLogicFlow.addLayer(clientLogicLayer);
-        TestLogicLayer testLogicLayer(assetCache, inputSystem, window, renderer);
-        clientLogicFlow.addLayer(testLogicLayer);
         
         while (window.pollEvents(inputSystem))
         {

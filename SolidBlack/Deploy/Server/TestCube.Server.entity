@@ -1,6 +1,6 @@
 {
-    "Broadcast" :
+    "Proxy" :
     {
-        "clientEntity" : "TestCube.Client.entity"
+        "entity" : "TestCube.Client.entity"
     }
 }

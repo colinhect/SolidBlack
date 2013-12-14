@@ -29,9 +29,6 @@
     <ClCompile Include="Source\Systems\RenderingSystem.cpp">
       <Filter>Source\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LogicLayers\TestLogicLayer.cpp">
-      <Filter>Source\LogicLayers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\LogicLayers\ClientLogicLayer.cpp">
       <Filter>Source\LogicLayers</Filter>
     </ClCompile>
@@ -41,10 +38,10 @@
     <ClCompile Include="Source\LogicLayers\BaseLogicLayer.cpp">
       <Filter>Source\LogicLayers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Components\Broadcast.cpp">
+    <ClCompile Include="Source\Components\Proxy.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Systems\BroadcastSystem.cpp">
+    <ClCompile Include="Source\Systems\ProxySystem.cpp">
       <Filter>Source\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -67,9 +64,6 @@
     <ClInclude Include="Source\Systems\RenderingSystem.h">
       <Filter>Source\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LogicLayers\TestLogicLayer.h">
-      <Filter>Source\LogicLayers</Filter>
-    </ClInclude>
     <ClInclude Include="Source\LogicLayers\ClientLogicLayer.h">
       <Filter>Source\LogicLayers</Filter>
     </ClInclude>
@@ -79,10 +73,10 @@
     <ClInclude Include="Source\LogicLayers\BaseLogicLayer.h">
       <Filter>Source\LogicLayers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Components\Broadcast.h">
+    <ClInclude Include="Source\Components\Proxy.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Systems\BroadcastSystem.h">
+    <ClInclude Include="Source\Systems\ProxySystem.h">
       <Filter>Source\Systems</Filter>
     </ClInclude>
   </ItemGroup>

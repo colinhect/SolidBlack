@@ -18,6 +18,11 @@ Scene& Entity::scene() const
     return *_scene;
 }
 
+Entity::Id Entity::id() const
+{
+    return _id;
+}
+
 void Entity::save(DataValue& dataValue)
 {
     if (!_scene)

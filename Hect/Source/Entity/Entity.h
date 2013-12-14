@@ -29,6 +29,10 @@ public:
     Scene& scene() const;
 
     ///
+    /// Returns the entity ID.
+    Id id() const;
+
+    ///
     /// Serializes the entity's components to a data value.
     ///
     /// \param dataValue The data value.

@@ -1,6 +1,6 @@
 {
-    "Broadcast" :
+    "Proxy" :
     {
-        "clientEntity" : "Player.Client.entity"
+        "entity" : "Player.Client.entity"
     }
 }

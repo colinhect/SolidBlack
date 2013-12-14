@@ -24,4 +24,10 @@ private:
 
     Socket _socket;
     Player _players[MaxPlayerCount];
+
+    PhysicsSystem _physicsSystem;
+
+    Scene _scene;
+
+    ProxySystem _proxySystem;
 };

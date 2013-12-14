@@ -1,9 +1,23 @@
 #include "SolidBlack.h"
 
 ServerLogicLayer::ServerLogicLayer(AssetCache& assetCache) :
-    _socket(Port, MaxPlayerCount, ChannelCount)
+    _socket(Port, MaxPlayerCount, ChannelCount),
+    _scene(),
+    _proxySystem(_scene, assetCache, _socket)
 {
     assetCache;
+    _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
+    _scene.registerComponent<Proxy, ProxySerializer>("Proxy");
+
+    _scene.addSystem(_proxySystem);
+    _scene.addSystem(_physicsSystem);
+
+    {
+        DataValue::Ref sceneValue = assetCache.get<DataValue>("Test.scene");
+        _scene.load(*sceneValue, assetCache);
+    }
+
+    _scene.refresh();
 }
 
 void ServerLogicLayer::fixedUpdate(double timeStep)
@@ -26,6 +40,8 @@ void ServerLogicLayer::fixedUpdate(double timeStep)
             break;
         }
     }
+
+    _scene.refresh();
 }
 
 void ServerLogicLayer::_connectionEvent(SocketEvent& event)
@@ -34,6 +50,8 @@ void ServerLogicLayer::_connectionEvent(SocketEvent& event)
     LOG_INFO(format("Connection (peerId  = %d)", peerId));
 
     Player& player = _players[peerId];
+    player.peer = event.peer;
+
     if (player.authorized)
     {
         LOG_INFO("Player is already authorized");
@@ -77,6 +95,8 @@ void ServerLogicLayer::_receivePacketEvent(SocketEvent& event)
         player.name = name;
 
         LOG_INFO(format("Player authorized as \"%s\" (peerId  = %d)", name.c_str(), peerId));
+
+        _proxySystem.broadcastAll(player.peer);
     }
     break;
     }
