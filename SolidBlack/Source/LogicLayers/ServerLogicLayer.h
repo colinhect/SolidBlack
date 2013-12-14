@@ -2,6 +2,7 @@
 
 class ServerLogicLayer :
     public LogicLayer,
+    public ServerListener,
     public Uncopyable
 {
 public:
@@ -9,25 +10,12 @@ public:
 
     void fixedUpdate(double timeStep);
 
+    void receivePacket(const Player& player, PacketType type, PacketReadStream& stream);
+
 private:
-    void _connectionEvent(SocketEvent& event);
-    void _disconnectionEvent(SocketEvent& event);
-    void _receivePacketEvent(SocketEvent& event);
-    void _sendAuthorizationRequest(Peer peer);
-
-    enum
-    {
-        MaxPlayerCount = 128,
-        Port = 6006,
-        ChannelCount = 2
-    };
-
-    Socket _socket;
-    Player _players[MaxPlayerCount];
+    Server _server;
 
     PhysicsSystem _physicsSystem;
-
     Scene _scene;
-
     ProxySystem _proxySystem;
 };

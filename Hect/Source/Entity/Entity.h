@@ -29,7 +29,7 @@ public:
     Scene& scene() const;
 
     ///
-    /// Returns the entity ID.
+    /// Returns the entity id.
     Id id() const;
 
     ///

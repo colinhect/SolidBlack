@@ -47,21 +47,21 @@ public:
     void removeSystem(System& system);
 
     ///
-    /// Creates a new entity using the next available ID.
+    /// Creates a new entity using the next available id.
     ///
     /// \returns The new entity.
     Entity createEntity();
 
     ///
-    /// Creates a new entity using the given ID.
+    /// Creates a new entity using the given id.
     ///
     /// \returns The new entity.
     ///
-    /// \throws Error If there is already an entity with the given ID.
+    /// \throws Error If there is already an entity with the given id.
     Entity createEntity(Entity::Id id);
 
     ///
-    /// Returns the entity of the given ID.
+    /// Returns the entity of the given id.
     Entity entityWithId(Entity::Id id) const;
 
     ///

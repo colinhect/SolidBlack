@@ -1,8 +1,8 @@
 {
     "entities" :
     [
+        "Player.Server.entity",
         "TestCube.Server.entity",
-        "Sun.Server.entity",
-        "Player.Server.entity"
+        "Sun.Server.entity"
     ]
 }

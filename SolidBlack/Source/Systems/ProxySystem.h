@@ -12,10 +12,11 @@ public:
     void addEntity(Entity& entity);
     void removeEntity(Entity& entity);
 
-    void broadcastAll(Peer peer);
+    void createAll(Peer peer);
 
 private:
-    void _createBroadcastPacket(Entity& entity, Packet& packet);
+    void _createCreationPacket(Entity& entity, Packet& packet);
+    void _createDestructionPacket(Entity& entity, Packet& packet);
 
     Scene* _scene;
     AssetCache* _assetCache;

@@ -16,40 +16,37 @@ void ProxySystem::addEntity(Entity& entity)
 {
     System::addEntity(entity);
 
-    LOG_INFO(format("Server: Proxying entity with ID '%d' to all", entity.id()));
+    LOG_TRACE(format("Server: Sending proxy entity creation for id '%d' to all", entity.id()));
 
     Packet packet(PacketFlag::Reliable);
-    _createBroadcastPacket(entity, packet);
-    _socket->broadcastPacket(0, packet);
-    _socket->flush();
+    _createCreationPacket(entity, packet);
+    _socket->broadcastPacket(1, packet);
 }
 
 void ProxySystem::removeEntity(Entity& entity)
 {
+    LOG_TRACE(format("Server: Sending proxy entity destruction for id '%d' to all", entity.id()));
+
     Packet packet(PacketFlag::Reliable);
-    PacketWriteStream stream = packet.writeStream();
-    stream.writeByte((uint8_t)PacketType::DestroyEntity);
-    stream.writeUnsignedInt((uint32_t)entity.id());
-    _socket->broadcastPacket(0, packet);
-    _socket->flush();
+    _createDestructionPacket(entity, packet);
+    _socket->broadcastPacket(1, packet);
 
     System::removeEntity(entity);
 }
 
-void ProxySystem::broadcastAll(Peer peer)
+void ProxySystem::createAll(Peer peer)
 {
     for (Entity& entity : entities())
     {
-        LOG_INFO(format("Server: Proxying entity with ID '%d' to peer '%d'", entity.id(), peer.id()));
+        LOG_TRACE(format("Server: Sending proxy entity creation for id '%d' to peer '%d'", entity.id(), peer.id()));
 
         Packet packet(PacketFlag::Reliable);
-        _createBroadcastPacket(entity, packet);
-        _socket->sendPacket(peer, 0, packet);
-        _socket->flush();
+        _createCreationPacket(entity, packet);
+        _socket->sendPacket(peer, 1, packet);
     }
 }
 
-void ProxySystem::_createBroadcastPacket(Entity& entity, Packet& packet)
+void ProxySystem::_createCreationPacket(Entity& entity, Packet& packet)
 {
     Proxy& proxy = entity.component<Proxy>();
 
@@ -57,4 +54,11 @@ void ProxySystem::_createBroadcastPacket(Entity& entity, Packet& packet)
     stream.writeByte((uint8_t)PacketType::CreateEntity);
     stream.writeUnsignedInt((uint32_t)entity.id());
     stream.writeString(proxy.entity());
+}
+
+void ProxySystem::_createDestructionPacket(Entity& entity, Packet& packet)
+{
+    PacketWriteStream stream = packet.writeStream();
+    stream.writeByte((uint8_t)PacketType::DestroyEntity);
+    stream.writeUnsignedInt((uint32_t)entity.id());
 }

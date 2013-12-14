@@ -126,14 +126,14 @@ bool Socket::pollEvent(SocketEvent& event, TimeSpan timeOut)
 void Socket::sendPacket(Peer peer, uint8_t channel, const Packet& packet)
 {
     const std::vector<uint8_t>& data = packet._data;
-    ENetPacket* enetPacket = enet_packet_create(&data[0], data.size(), packet._flags | ENET_PACKET_FLAG_NO_ALLOCATE);
+    ENetPacket* enetPacket = enet_packet_create(&data[0], data.size(), packet._flags);
     enet_peer_send((ENetPeer*)peer._enetPeer, channel, enetPacket);
 }
 
 void Socket::broadcastPacket(uint8_t channel, const Packet& packet)
 {
     const std::vector<uint8_t>& data = packet._data;
-    ENetPacket* enetPacket = enet_packet_create(&data[0], data.size(), packet._flags | ENET_PACKET_FLAG_NO_ALLOCATE);
+    ENetPacket* enetPacket = enet_packet_create(&data[0], data.size(), packet._flags);
     enet_host_broadcast((ENetHost*)_enetHost, channel, enetPacket);
 }
 

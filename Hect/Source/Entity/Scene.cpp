@@ -134,7 +134,7 @@ Entity Scene::createEntity(Entity::Id id)
     Entity entity = entityWithId(id);
     if (entity)
     {
-        throw Error(format("There is already an entity with ID '%d'", id));
+        throw Error(format("There is already an entity with id '%d'", id));
     }
 
     // Set the entity as no longer being null; the rest of the data is

@@ -5,6 +5,7 @@ using namespace hect;
 
 #include "Network/PacketType.h"
 #include "Network/Player.h"
+#include "Network/Server.h"
 
 #include "Components/Proxy.h"
 #include "Components/DebugCamera.h"
@@ -16,3 +17,5 @@ using namespace hect;
 #include "LogicLayers/BaseLogicLayer.h"
 #include "LogicLayers/ServerLogicLayer.h"
 #include "LogicLayers/ClientLogicLayer.h"
+
+#include "Network/Bubble.h"

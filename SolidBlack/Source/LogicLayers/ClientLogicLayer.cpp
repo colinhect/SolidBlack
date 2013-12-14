@@ -51,10 +51,10 @@ void ClientLogicLayer::fixedUpdate(double timeStep)
         switch (event.type)
         {
         case SocketEventType::Connect:
-            LOG_INFO("Connection established");
+            LOG_TRACE("Client: Connection established");
             break;
         case SocketEventType::Disconnect:
-            LOG_INFO("Disconnection occurred");
+            LOG_TRACE("Client: Disconnection occurred");
             break;
         case SocketEventType::Receive:
             _receivePacketEvent(event);
@@ -100,7 +100,7 @@ void ClientLogicLayer::_receivePacketEvent(SocketEvent& event)
     case PacketType::CreateEntity:
         {
             Entity::Id id = (Entity::Id)stream.readUnsignedInt();
-            LOG_INFO(format("Client: Creating entity with ID '%d'", id));
+            LOG_TRACE(format("Client: Creating entity with id '%d'", id));
 
             std::string entityPath = stream.readString();
             DataValue::Ref entityValue = _assetCache->get<DataValue>(entityPath);
@@ -116,7 +116,7 @@ void ClientLogicLayer::_sendAuthorization()
 {
     static const std::string name("Colin");
 
-    LOG_INFO(format("Sending authorization as \"%s\"", name.c_str()));
+    LOG_TRACE(format("Client: Sending authorization as '%s'", name.c_str()));
 
     Packet packet(PacketFlag::Reliable);
     PacketWriteStream stream = packet.writeStream();
@@ -124,7 +124,6 @@ void ClientLogicLayer::_sendAuthorization()
     stream.writeString(name);
 
     _socket.sendPacket(_server, 0, packet);
-    _socket.flush();
 }
 
 void ClientLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
