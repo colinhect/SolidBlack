@@ -23,9 +23,11 @@
     <ClCompile Include="Source\LogicLayers\BaseLogicLayer.cpp" />
     <ClCompile Include="Source\LogicLayers\ClientLogicLayer.cpp" />
     <ClCompile Include="Source\LogicLayers\ServerLogicLayer.cpp" />
-    <ClCompile Include="Source\Network\Bubble.cpp" />
+    <ClCompile Include="Source\Network\ServerBubble.cpp" />
+    <ClCompile Include="Source\Network\EntityIdTranslator.cpp" />
     <ClCompile Include="Source\Network\Player.cpp" />
     <ClCompile Include="Source\Network\Server.cpp" />
+    <ClCompile Include="Source\Network\ServerListener.cpp" />
     <ClCompile Include="Source\Systems\ProxySystem.cpp" />
     <ClCompile Include="Source\Systems\DebugCameraSystem.cpp" />
     <ClCompile Include="Source\Systems\RenderingSystem.cpp" />
@@ -36,10 +38,12 @@
     <ClInclude Include="Source\LogicLayers\BaseLogicLayer.h" />
     <ClInclude Include="Source\LogicLayers\ClientLogicLayer.h" />
     <ClInclude Include="Source\LogicLayers\ServerLogicLayer.h" />
-    <ClInclude Include="Source\Network\Bubble.h" />
+    <ClInclude Include="Source\Network\ServerBubble.h" />
+    <ClInclude Include="Source\Network\EntityIdTranslator.h" />
     <ClInclude Include="Source\Network\PacketType.h" />
     <ClInclude Include="Source\Network\Player.h" />
     <ClInclude Include="Source\Network\Server.h" />
+    <ClInclude Include="Source\Network\ServerListener.h" />
     <ClInclude Include="Source\SolidBlack.h" />
     <ClInclude Include="Source\Systems\ProxySystem.h" />
     <ClInclude Include="Source\Systems\DebugCameraSystem.h" />

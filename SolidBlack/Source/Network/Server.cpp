@@ -1,12 +1,5 @@
 #include "SolidBlack.h"
 
-void ServerListener::receivePacket(const Player& player, PacketType type, PacketReadStream& stream)
-{
-    player;
-    type;
-    stream;
-}
-
 Server::Server() :
     _socket(Port, MaxPlayerCount, ChannelCount)
 {
@@ -95,6 +88,8 @@ void Server::_receivePacketEvent(SocketEvent& event)
     PacketReadStream stream = event.packet.readStream();
     uint8_t packetType = stream.readByte();
 
+    size_t position = stream.position();
+
     switch (packetType)
     {
     case PacketType::Authorization:
@@ -109,6 +104,7 @@ void Server::_receivePacketEvent(SocketEvent& event)
 
     for (ServerListener* listener : _listeners)
     {
+        stream.seek(position);
         listener->receivePacket(player, (PacketType)packetType, stream);
     }
 }

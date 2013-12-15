@@ -602,6 +602,9 @@
     <ClInclude Include="Source\Graphics\MeshBinaryFormat.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\IdPool.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -669,6 +672,9 @@
     </None>
     <None Include="Source\Graphics\MeshReader.inl">
       <Filter>Source\Graphics</Filter>
+    </None>
+    <None Include="Source\Core\IdPool.inl">
+      <Filter>Source\Core</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -44,10 +44,16 @@
     <ClCompile Include="Source\Systems\ProxySystem.cpp">
       <Filter>Source\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Network\Bubble.cpp">
+    <ClCompile Include="Source\Network\Server.cpp">
       <Filter>Source\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Network\Server.cpp">
+    <ClCompile Include="Source\Network\EntityIdTranslator.cpp">
+      <Filter>Source\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\ServerBubble.cpp">
+      <Filter>Source\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\ServerListener.cpp">
       <Filter>Source\Network</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,10 +91,16 @@
     <ClInclude Include="Source\Systems\ProxySystem.h">
       <Filter>Source\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Network\Bubble.h">
+    <ClInclude Include="Source\Network\Server.h">
       <Filter>Source\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Network\Server.h">
+    <ClInclude Include="Source\Network\EntityIdTranslator.h">
+      <Filter>Source\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Network\ServerBubble.h">
+      <Filter>Source\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Network\ServerListener.h">
       <Filter>Source\Network</Filter>
     </ClInclude>
   </ItemGroup>

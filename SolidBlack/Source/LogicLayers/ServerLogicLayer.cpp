@@ -1,40 +1,18 @@
 #include "SolidBlack.h"
 
-ServerLogicLayer::ServerLogicLayer(AssetCache& assetCache) :
-    _server(),
-    _scene(),
-    _proxySystem(_scene, assetCache, _server.socket())
+ServerLogicLayer::ServerLogicLayer(AssetCache& assetCache)
 {
-    _server.addListener(*this);
-
-    _scene.registerComponent<DebugCamera, DebugCameraSerializer>("DebugCamera");
-    _scene.registerComponent<Proxy, ProxySerializer>("Proxy");
-
-    _scene.addSystem(_proxySystem);
-    _scene.addSystem(_physicsSystem);
-
-    {
-        DataValue::Ref sceneValue = assetCache.get<DataValue>("Test.scene");
-        _scene.load(*sceneValue, assetCache);
-    }
-
-    _scene.refresh();
+    _bubbles.push_back(ServerBubble::Ref(new ServerBubble(_server, assetCache)));
 }
 
 void ServerLogicLayer::fixedUpdate(double timeStep)
 {
     timeStep;
 
-    _server.refresh();
-    _scene.refresh();
-}
-
-void ServerLogicLayer::receivePacket(const Player& player, PacketType type, PacketReadStream& stream)
-{
-    switch (type)
+    for (const ServerBubble::Ref& bubble : _bubbles)
     {
-    case PacketType::Authorization:
-        _proxySystem.createAll(player.peer);
-        break;
+        bubble->fixedUpdate(timeStep);
     }
+
+    _server.refresh();
 }

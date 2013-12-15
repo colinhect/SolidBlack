@@ -53,14 +53,6 @@ public:
     Entity createEntity();
 
     ///
-    /// Creates a new entity using the given id.
-    ///
-    /// \returns The new entity.
-    ///
-    /// \throws Error If there is already an entity with the given id.
-    Entity createEntity(Entity::Id id);
-
-    ///
     /// Returns the entity of the given id.
     Entity entityWithId(Entity::Id id) const;
 
@@ -128,12 +120,8 @@ private:
     // The number of activated entities
     size_t _activatedEntityCount;
 
-    // The next entity id to use when creating an entity (if the queue is
-    // empty)
-    Entity::Id _nextEntityId;
-
-    // A queue of entity ids to use next when creating an entity
-    std::queue<Entity::Id> _nextEntityIds;
+    // The entity id pool
+    IdPool<Entity::Id> _entityIdPool;
 
     // Data for each entity
     std::vector<EntityData> _entityData;
@@ -142,10 +130,10 @@ private:
     std::vector<std::map<ComponentTypeId, BaseComponent::Ref>> _entityComponents;
 
     // Entities activated since the last call to refresh()
-    std::vector<Entity::Id> _activatedEntityIds;
+    std::vector<Entity::Id> _activatedEntities;
 
     // Entities destroyed since the last call to refresh()
-    std::vector<Entity::Id> _destroyedEntityIds;
+    std::vector<Entity::Id> _destroyedEntities;
 
     // Systems involved in the scene
     std::vector<System*> _systems;

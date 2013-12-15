@@ -113,6 +113,7 @@
     <ClInclude Include="Source\Core\DataValueJsonFormat.h" />
     <ClInclude Include="Source\Core\DataValue.h" />
     <ClInclude Include="Source\Core\Error.h" />
+    <ClInclude Include="Source\Core\IdPool.h" />
     <ClInclude Include="Source\Core\LogicFlow.h" />
     <ClInclude Include="Source\Core\LogicLayer.h" />
     <ClInclude Include="Source\Core\Format.h" />
@@ -205,6 +206,7 @@
     <None Include="Source\Asset\AssetEntry.inl" />
     <None Include="Source\Asset\AssetHandle.inl" />
     <None Include="Source\Core\Any.inl" />
+    <None Include="Source\Core\IdPool.inl" />
     <None Include="Source\Entity\ComponentSerializer.inl" />
     <None Include="Source\Entity\Entity.inl" />
     <None Include="Source\Entity\Component.inl" />

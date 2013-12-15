@@ -4,7 +4,6 @@ using namespace hect;
 
 Scene::Scene() :
     _activatedEntityCount(0),
-    _nextEntityId(0),
     _entityData(InitialPoolSize),
     _entityComponents(InitialPoolSize)
 {
@@ -23,7 +22,7 @@ Scene::~Scene()
 void Scene::refresh()
 {
     // Add all activated entities to systems that include them
-    for (Entity::Id id : _activatedEntityIds)
+    for (Entity::Id id : _activatedEntities)
     {
         Entity entity = entityWithId(id);
         for (System* system : _systems)
@@ -37,10 +36,10 @@ void Scene::refresh()
         // Maintain the activated entity count
         ++_activatedEntityCount;
     }
-    _activatedEntityIds.clear();
+    _activatedEntities.clear();
 
     // Remove all destroyed entities from systems that include them
-    for (Entity::Id id : _destroyedEntityIds)
+    for (Entity::Id id : _destroyedEntities)
     {
         Entity entity = entityWithId(id);
         for (System* system : _systems)
@@ -62,9 +61,9 @@ void Scene::refresh()
         _entityData[id] = EntityData();
 
         // Re-use this id
-        _nextEntityIds.push(id);
+        _entityIdPool.destroy(id);
     }
-    _destroyedEntityIds.clear();
+    _destroyedEntities.clear();
 }
 
 void Scene::addSystem(System& system)
@@ -94,47 +93,14 @@ void Scene::removeSystem(System& system)
 
 Entity Scene::createEntity()
 {
-    Entity::Id id;
+    Entity::Id id = _entityIdPool.create();
 
-    while (true)
+    // Resize the pool if needed
+    if (id >= _entityComponents.size())
     {
-        // Re-use ids as often as possible to avoid resizing the pool
-        if (!_nextEntityIds.empty())
-        {
-            id = _nextEntityIds.back();
-            _nextEntityIds.pop();
-        }
-        else
-        {
-            id = _nextEntityId++;
-
-            // Resize the pool if needed
-            if (id >= _entityComponents.size())
-            {
-                size_t size = _entityComponents.size() * 2;
-                _entityData.resize(size);
-                _entityComponents.resize(size);
-            }
-        }
-
-        if (!entityWithId(id))
-        {
-            break;
-        }
-    }
-
-    // Set the entity as no longer being null; the rest of the data is
-    // properly initialized
-    _entityData[id].setNull(false);
-    return Entity(*this, id);
-}
-
-Entity Scene::createEntity(Entity::Id id)
-{
-    Entity entity = entityWithId(id);
-    if (entity)
-    {
-        throw Error(format("There is already an entity with id '%d'", id));
+        size_t size = _entityComponents.size() * 2;
+        _entityData.resize(size);
+        _entityComponents.resize(size);
     }
 
     // Set the entity as no longer being null; the rest of the data is
@@ -263,7 +229,7 @@ void Scene::_destroyEntity(Entity& entity)
     // Set the entity as destroyed and enqueue it to be removed from the
     // systems
     data.setDestroyed(true);
-    _destroyedEntityIds.push_back(id);
+    _destroyedEntities.push_back(id);
 }
 
 void Scene::_activateEntity(Entity& entity)
@@ -283,7 +249,7 @@ void Scene::_activateEntity(Entity& entity)
     // Set the entity as activated and enqueue it to be removed from the
     // systems
     data.setActivated(true);
-    _activatedEntityIds.push_back(id);
+    _activatedEntities.push_back(id);
 }
 
 bool Scene::_isActivated(const Entity& entity) const

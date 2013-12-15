@@ -1,7 +1,6 @@
 #include "SolidBlack.h"
 
-ProxySystem::ProxySystem(Scene& scene, AssetCache& assetCache, Socket& socket) :
-    _scene(&scene),
+ProxySystem::ProxySystem(AssetCache& assetCache, Socket& socket) :
     _assetCache(&assetCache),
     _socket(&socket)
 {

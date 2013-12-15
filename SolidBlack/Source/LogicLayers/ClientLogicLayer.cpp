@@ -105,7 +105,7 @@ void ClientLogicLayer::_receivePacketEvent(SocketEvent& event)
             std::string entityPath = stream.readString();
             DataValue::Ref entityValue = _assetCache->get<DataValue>(entityPath);
 
-            Entity entity = _scene.createEntity(id);
+            Entity entity = _scene.createEntity();
             entity.load(*entityValue, *_assetCache);
             entity.activate();
         } break;

@@ -45,6 +45,7 @@ const double pi = 3.14159265358979323846;
 #include "Core/TimeSpan.h"
 #include "Core/Timer.h"
 #include "Core/TaskPool.h"
+#include "Core/IdPool.h"
 
 #include "Math/Angle.h"
 #include "Math/Vector2.h"
