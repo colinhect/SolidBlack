@@ -183,6 +183,24 @@ void MeshWriter::_setComponentValue(const VertexAttribute* attribute, unsigned i
     // Set the vertex data based on the type
     switch (attribute->type())
     {
+    case VertexAttributeType::Byte:
+        *(int8_t*)&_mesh->_vertexData[offset + index * 1] = (int8_t)value;
+        break;
+    case VertexAttributeType::UnsignedByte:
+        *(uint8_t*)&_mesh->_vertexData[offset + index * 1] = (uint8_t)value;
+        break;
+    case VertexAttributeType::Short:
+        *(int16_t*)&_mesh->_vertexData[offset + index * 2] = (int16_t)value;
+        break;
+    case VertexAttributeType::UnsignedShort:
+        *(uint16_t*)&_mesh->_vertexData[offset + index * 2] = (uint16_t)value;
+        break;
+    case VertexAttributeType::Int:
+        *(int32_t*)&_mesh->_vertexData[offset + index * 4] = (int32_t)value;
+        break;
+    case VertexAttributeType::UnsignedInt:
+        *(uint32_t*)&_mesh->_vertexData[offset + index * 4] = (uint32_t)value;
+        break;
     case VertexAttributeType::Half:
         throw Error("16-bit floats are not yet implemented");
         break;

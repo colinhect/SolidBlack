@@ -57,8 +57,14 @@ void _checkGLError()
     }
 }
 
-GLenum _vertexAttributeTypeLookUp[2] =
+GLenum _vertexAttributeTypeLookUp[8] =
 {
+    GL_BYTE, // Byte
+    GL_UNSIGNED_BYTE, // UnsignedByte
+    GL_SHORT, // Short
+    GL_UNSIGNED_SHORT, // UnsignedShort
+    GL_INT, // Int
+    GL_UNSIGNED_INT, // UnsignedInt
     GL_HALF_FLOAT, // Half
     GL_FLOAT // Float
 };
@@ -776,16 +782,32 @@ void Renderer::uploadMesh(Mesh& mesh)
     for (const VertexAttribute& attribute : vertexLayout.attributes())
     {
         GL_ASSERT( glEnableVertexAttribArray(attributeIndex); )
-        GL_ASSERT(
-            glVertexAttribPointer(
-                attributeIndex,
-                attribute.cardinality(),
-                _vertexAttributeTypeLookUp[(int)attribute.type()],
-                GL_FALSE,
-                vertexLayout.vertexSize(),
-                (GLfloat*)attribute.offset()
-            );
-        )
+
+        if (attribute.type() == VertexAttributeType::Half || attribute.type() == VertexAttributeType::Float)
+        {
+            GL_ASSERT(
+                glVertexAttribPointer(
+                    attributeIndex,
+                    attribute.cardinality(),
+                    _vertexAttributeTypeLookUp[(int)attribute.type()],
+                    GL_FALSE,
+                    vertexLayout.vertexSize(),
+                    (GLfloat*)attribute.offset()
+                );
+            )
+        }
+        else
+        {
+            GL_ASSERT(
+                glVertexAttribIPointer(
+                    attributeIndex,
+                    attribute.cardinality(),
+                    _vertexAttributeTypeLookUp[(int)attribute.type()],
+                    vertexLayout.vertexSize(),
+                    (GLfloat*)attribute.offset()
+                );
+            )
+        }
 
         ++attributeIndex;
     }

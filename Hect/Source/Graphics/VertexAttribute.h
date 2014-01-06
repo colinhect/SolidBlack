@@ -65,6 +65,29 @@ enum class VertexAttributeSemantic
 /// A type of a vertex attribute.
 enum class VertexAttributeType
 {
+    ///
+    /// An 8-bit signed integer.
+    Byte,
+    
+    ///
+    /// An 8-bit unsigned integer.
+    UnsignedByte,
+
+    ///
+    /// A 16-bit signed integer.
+    Short,
+
+    ///
+    /// A 16-bit unsigned integer.
+    UnsignedShort,
+
+    ///
+    /// A 32-bit signed integer.
+    Int,
+
+    ///
+    /// A 32-bit unsigned integer.
+    UnsignedInt,
 
     ///
     /// A 16-bit float.

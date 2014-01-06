@@ -243,6 +243,24 @@ float MeshReader::_readComponentValue(const VertexAttribute* attribute, unsigned
     float value = 0;
     switch (attribute->type())
     {
+    case VertexAttributeType::Byte:
+        value = (float)*(int8_t*)&_mesh->vertexData()[offset + index * 1];
+        break;
+    case VertexAttributeType::UnsignedByte:
+        value = (float)*(uint8_t*)&_mesh->vertexData()[offset + index * 1];
+        break;
+    case VertexAttributeType::Short:
+        value = (float)*(int16_t*)&_mesh->vertexData()[offset + index * 2];
+        break;
+    case VertexAttributeType::UnsignedShort:
+        value = (float)*(uint16_t*)&_mesh->vertexData()[offset + index * 2];
+        break;
+    case VertexAttributeType::Int:
+        value = (float)*(int32_t*)&_mesh->vertexData()[offset + index * 4];
+        break;
+    case VertexAttributeType::UnsignedInt:
+        value = (float)*(uint32_t*)&_mesh->vertexData()[offset + index * 4];
+        break;
     case VertexAttributeType::Half:
         throw Error("16-bit floats are not yet implemented");
         break;
