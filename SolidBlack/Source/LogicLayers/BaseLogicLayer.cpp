@@ -4,15 +4,15 @@ BaseLogicLayer::BaseLogicLayer(LogicFlow& logicFlow, InputSystem& inputSystem) :
     _logicFlow(&logicFlow),
     _inputSystem(&inputSystem)
 {
-    _inputSystem->keyboard().addListener(*this);
+    _inputSystem->keyboard().addObserver(*this);
 }
 
 BaseLogicLayer::~BaseLogicLayer()
 {
-    _inputSystem->keyboard().removeListener(*this);
+    _inputSystem->keyboard().removeObserver(*this);
 }
 
-void BaseLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
+void BaseLogicLayer::receiveEvent(const KeyboardEvent& event)
 {
     if (event.key == Key::Esc && event.type == KeyboardEventType::KeyDown)
     {

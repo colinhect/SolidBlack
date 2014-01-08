@@ -13,6 +13,7 @@ Hect/Ignore.txt
 Hect/Doc/*
 Hect/Intermediate/*
 Hect/Tests/UnitTests/Intermediate/*
+Hect/Samples/Common/Intermediate/*
 SolidBlack/Intermediate/*
 SolidBlack/Server/Intermediate/*
 SolidBlack/Client/Intermediate/*

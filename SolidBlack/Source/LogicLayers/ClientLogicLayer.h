@@ -2,7 +2,7 @@
 
 class ClientLogicLayer :
     public LogicLayer,
-    public KeyboardListener,
+    public Observer<KeyboardEvent>,
     public Uncopyable
 {
 public:
@@ -12,7 +12,7 @@ public:
     void fixedUpdate(double timeStep);
     void frameUpdate(double delta);
 
-    void receiveKeyboardEvent(const KeyboardEvent& event);
+    void receiveEvent(const KeyboardEvent& event);
 
 private:
     void _receivePacketEvent(SocketEvent& event);

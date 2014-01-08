@@ -114,7 +114,8 @@ public:
 
 ///
 /// Provides access to the system keyboard.
-class Keyboard
+class Keyboard :
+    public Subject<KeyboardEvent>
 {
     friend class InputSystem;
 public:
@@ -125,29 +126,12 @@ public:
     /// \param key The key to check if it is down.
     bool isKeyDown(Key key) const;
 
-    ///
-    /// Adds a listener to receive dispatched events.
-    ///
-    /// \remarks If the listener is already added then nothing happens.
-    ///
-    /// \param listener The listener to add.
-    void addListener(KeyboardListener& listener);
-
-    ///
-    /// Removes a listener from receiving dispatched events.
-    ///
-    /// \remarks If the listener was not added then nothing happens.
-    ///
-    /// \param listener The listener to remove.
-    void removeListener(KeyboardListener& listener);
-
 private:
     Keyboard();
 
     void _enqueueEvent(const KeyboardEvent& event);
     void _dispatchEvents();
 
-    std::vector<KeyboardListener*> _listeners;
     std::vector<KeyboardEvent> _events;
 
     std::vector<bool> _keyStates;

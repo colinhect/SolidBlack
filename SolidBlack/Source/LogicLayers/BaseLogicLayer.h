@@ -2,14 +2,14 @@
 
 class BaseLogicLayer :
     public LogicLayer,
-    public KeyboardListener,
+    public Observer<KeyboardEvent>,
     public Uncopyable
 {
 public:
     BaseLogicLayer(LogicFlow& logicFlow, InputSystem& inputSystem);
     ~BaseLogicLayer();
 
-    void receiveKeyboardEvent(const KeyboardEvent& event);
+    void receiveEvent(const KeyboardEvent& event);
 
 private:
     LogicFlow* _logicFlow;

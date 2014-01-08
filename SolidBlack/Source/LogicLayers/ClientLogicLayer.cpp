@@ -17,13 +17,13 @@ ClientLogicLayer::ClientLogicLayer(IpAddress serverAddress, Port port, AssetCach
     _scene.addSystem(_debugCameraSystem);
     _scene.addSystem(_physicsSystem);
 
-    _input->keyboard().addListener(*this);
+    _input->keyboard().addObserver(*this);
     _window->setCursorLocked(true);
 }
 
 ClientLogicLayer::~ClientLogicLayer()
 {
-    _input->keyboard().removeListener(*this);
+    _input->keyboard().removeObserver(*this);
 
     if (_server.state() == PeerState::Connected)
     {
@@ -126,7 +126,7 @@ void ClientLogicLayer::_sendAuthorization()
     _socket.sendPacket(_server, 0, packet);
 }
 
-void ClientLogicLayer::receiveKeyboardEvent(const KeyboardEvent& event)
+void ClientLogicLayer::receiveEvent(const KeyboardEvent& event)
 {
     if (event.type != KeyboardEventType::KeyDown)
     {
