@@ -34,6 +34,7 @@ const double epsilon = 0.0001;
 #include "PlaneTests.h"
 #include "QuaternionTests.h"
 #include "SceneTests.h"
+#include "SubjectObserverTests.h"
 #include "TaskPoolTests.h"
 #include "TimeSpanTests.h"
 #include "Vector2Tests.h"

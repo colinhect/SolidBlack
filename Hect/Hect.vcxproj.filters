@@ -605,6 +605,12 @@
     <ClInclude Include="Source\Core\IdPool.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Observer.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Subject.h">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Asset\AssetCache.inl">
@@ -674,6 +680,9 @@
       <Filter>Source\Graphics</Filter>
     </None>
     <None Include="Source\Core\IdPool.inl">
+      <Filter>Source\Core</Filter>
+    </None>
+    <None Include="Source\Core\Subject.inl">
       <Filter>Source\Core</Filter>
     </None>
   </ItemGroup>
