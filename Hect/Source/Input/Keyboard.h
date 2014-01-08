@@ -99,23 +99,8 @@ public:
 };
 
 ///
-/// Receives notifications of keyboard events.
-class KeyboardListener
-{
-public:
-    virtual ~KeyboardListener() { }
-
-    ///
-    /// Notifies the listener of a keyboard event.
-    ///
-    /// \param event The keyboard event.
-    virtual void receiveKeyboardEvent(const KeyboardEvent& event) = 0;
-};
-
-///
 /// Provides access to the system keyboard.
-class Keyboard :
-    public Subject<KeyboardEvent>
+class Keyboard
 {
     friend class InputSystem;
 public:
@@ -126,12 +111,17 @@ public:
     /// \param key The key to check if it is down.
     bool isKeyDown(Key key) const;
 
+    ///
+    /// Returns the dispatcher of keyboard events.
+    Dispatcher<KeyboardEvent>& dispatcher();
+
 private:
     Keyboard();
 
     void _enqueueEvent(const KeyboardEvent& event);
     void _dispatchEvents();
 
+    Dispatcher<KeyboardEvent> _dispatcher;
     std::vector<KeyboardEvent> _events;
 
     std::vector<bool> _keyStates;

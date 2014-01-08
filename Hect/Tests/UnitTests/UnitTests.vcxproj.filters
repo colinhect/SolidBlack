@@ -88,7 +88,7 @@
     <ClInclude Include="Source\DataReaderWriterTests.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SubjectObserverTests.h">
+    <ClInclude Include="Source\EventTests.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,13 +17,13 @@ ClientLogicLayer::ClientLogicLayer(IpAddress serverAddress, Port port, AssetCach
     _scene.addSystem(_debugCameraSystem);
     _scene.addSystem(_physicsSystem);
 
-    _input->keyboard().addObserver(*this);
+    _input->keyboard().addListener(*this);
     _window->setCursorLocked(true);
 }
 
 ClientLogicLayer::~ClientLogicLayer()
 {
-    _input->keyboard().removeObserver(*this);
+    _input->keyboard().removeListener(*this);
 
     if (_server.state() == PeerState::Connected)
     {

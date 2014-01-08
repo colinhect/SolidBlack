@@ -605,10 +605,10 @@
     <ClInclude Include="Source\Core\IdPool.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Observer.h">
+    <ClInclude Include="Source\Core\Dispatcher.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Subject.h">
+    <ClInclude Include="Source\Core\Listener.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -682,7 +682,7 @@
     <None Include="Source\Core\IdPool.inl">
       <Filter>Source\Core</Filter>
     </None>
-    <None Include="Source\Core\Subject.inl">
+    <None Include="Source\Core\Dispatcher.inl">
       <Filter>Source\Core</Filter>
     </None>
   </ItemGroup>

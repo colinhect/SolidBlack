@@ -4,12 +4,12 @@ BaseLogicLayer::BaseLogicLayer(LogicFlow& logicFlow, InputSystem& inputSystem) :
     _logicFlow(&logicFlow),
     _inputSystem(&inputSystem)
 {
-    _inputSystem->keyboard().addObserver(*this);
+    _inputSystem->keyboard().addListener(*this);
 }
 
 BaseLogicLayer::~BaseLogicLayer()
 {
-    _inputSystem->keyboard().removeObserver(*this);
+    _inputSystem->keyboard().removeListener(*this);
 }
 
 void BaseLogicLayer::receiveEvent(const KeyboardEvent& event)

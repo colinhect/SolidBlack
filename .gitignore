@@ -1,6 +1,9 @@
 Bin/*
 Win32/*
 x64/*
+Hect/Ignore.txt
+Hect/Doc/*
+Hect/Intermediate/*
 Hect/Dependencies/Bullet/Intermediate/*
 Hect/Dependencies/ENet/Intermediate/*
 Hect/Dependencies/Glew/Intermediate/*
@@ -9,14 +12,9 @@ Hect/Dependencies/LodePng/Intermediate/*
 Hect/Dependencies/PhysFS/Intermediate/*
 Hect/Dependencies/Sfml/Intermediate/*
 Hect/Dependencies/UnitTest++/Intermediate/*
-Hect/Ignore.txt
-Hect/Doc/*
-Hect/Intermediate/*
-Hect/Tests/UnitTests/Intermediate/*
 Hect/Samples/Common/Intermediate/*
-SolidBlack/Intermediate/*
-SolidBlack/Server/Intermediate/*
-SolidBlack/Client/Intermediate/*
+Hect/Samples/Cubes/Intermediate/*
+Hect/Tests/UnitTests/Intermediate/*
 *.opensdf
 *.sdf
 *.suo

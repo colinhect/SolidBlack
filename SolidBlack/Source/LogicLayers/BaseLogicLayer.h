@@ -2,7 +2,7 @@
 
 class BaseLogicLayer :
     public LogicLayer,
-    public Observer<KeyboardEvent>,
+    public Listener<KeyboardEvent>,
     public Uncopyable
 {
 public:
