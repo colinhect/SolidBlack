@@ -13,7 +13,7 @@ EntitySerializer::EntitySerializer()
     registerComponent<RigidBody, RigidBodySerializer>("RigidBody");
 }
 
-void EntitySerializer::save(Entity& entity, DataValue& dataValue)
+void EntitySerializer::save(const Entity& entity, DataValue& dataValue)
 {
     if (!entity)
     {
@@ -39,7 +39,7 @@ void EntitySerializer::save(Entity& entity, DataValue& dataValue)
     }
 }
 
-void EntitySerializer::save(Entity& entity, WriteStream& stream)
+void EntitySerializer::save(const Entity& entity, WriteStream& stream)
 {
     if (!entity)
     {
@@ -65,7 +65,7 @@ void EntitySerializer::save(Entity& entity, WriteStream& stream)
     }
 }
 
-void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCache& assetCache)
+void EntitySerializer::load(const Entity& entity, const DataValue& dataValue, AssetCache& assetCache)
 {
     if (!entity)
     {
@@ -90,7 +90,7 @@ void EntitySerializer::load(Entity& entity, const DataValue& dataValue, AssetCac
     }
 }
 
-void EntitySerializer::load(Entity& entity, ReadStream& stream, AssetCache& assetCache)
+void EntitySerializer::load(const Entity& entity, ReadStream& stream, AssetCache& assetCache)
 {
     if (!entity)
     {

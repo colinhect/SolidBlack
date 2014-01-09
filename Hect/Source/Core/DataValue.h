@@ -37,8 +37,7 @@ enum class DataValueType
 /// A hierarchical structure of data.
 ///
 /// \remarks Data values are normally constructed from JSON.  The majority of
-/// asset types are defined in JSON and parsed through data values.  Once
-/// constructed, a data value is immutable.
+/// asset types are defined in JSON and parsed through data values.
 class DataValue
 {
 public:

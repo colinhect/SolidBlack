@@ -23,41 +23,27 @@ Entity::Id Entity::id() const
     return _id;
 }
 
-void Entity::save(DataValue& dataValue)
+void Entity::save(DataValue& dataValue) const
 {
     if (!_scene)
     {
         throw Error("Entity is null");
     }
 
-    _scene->_entitySerializer.save(*this, dataValue);
+    _scene->entitySerializer().save(*this, dataValue);
 }
 
-void Entity::save(WriteStream& stream)
+void Entity::save(WriteStream& stream) const
 {
     if (!_scene)
     {
         throw Error("Entity is null");
     }
 
-    _scene->_entitySerializer.save(*this, stream);
+    _scene->entitySerializer().save(*this, stream);
 }
 
-void Entity::load(const DataValue& dataValue, AssetCache& assetCache)
-{
-    if (!_scene)
-    {
-        throw Error("Entity is null");
-    }
-    else if (isActivated())
-    {
-        throw Error("Entity is activated");
-    }
-
-    _scene->_entitySerializer.load(*this, dataValue, assetCache);
-}
-
-void Entity::load(ReadStream& stream, AssetCache& assetCache)
+void Entity::load(const DataValue& dataValue, AssetCache& assetCache) const
 {
     if (!_scene)
     {
@@ -68,10 +54,24 @@ void Entity::load(ReadStream& stream, AssetCache& assetCache)
         throw Error("Entity is activated");
     }
 
-    _scene->_entitySerializer.load(*this, stream, assetCache);
+    _scene->entitySerializer().load(*this, dataValue, assetCache);
 }
 
-void Entity::destroy()
+void Entity::load(ReadStream& stream, AssetCache& assetCache) const
+{
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+    else if (isActivated())
+    {
+        throw Error("Entity is activated");
+    }
+
+    _scene->entitySerializer().load(*this, stream, assetCache);
+}
+
+void Entity::destroy() const
 {
     if (!_scene)
     {
@@ -91,7 +91,7 @@ Entity Entity::clone() const
     return _scene->_cloneEntity(*this);
 }
 
-void Entity::activate()
+void Entity::activate() const
 {
     if (!_scene)
     {
@@ -116,7 +116,27 @@ bool Entity::isNull() const
     return !_scene || _scene->_isNull(*this);
 }
 
-void Entity::addComponent(BaseComponent* component)
+bool Entity::isSerializable() const
+{
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
+    return _scene->_isSerializable(*this);
+}
+
+void Entity::setSerializable(bool serializable) const
+{
+    if (!_scene)
+    {
+        throw Error("Entity is null");
+    }
+
+    _scene->_setSerializable(*this, serializable);
+}
+
+void Entity::addComponent(BaseComponent* component) const
 {
     if (!_scene)
     {

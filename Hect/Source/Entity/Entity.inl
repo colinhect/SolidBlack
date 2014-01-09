@@ -13,7 +13,7 @@ bool Entity::hasComponent() const
 }
 
 template <typename T>
-T& Entity::addComponent()
+T& Entity::addComponent() const
 {
     if (!_scene)
     {
@@ -24,7 +24,7 @@ T& Entity::addComponent()
 }
 
 template <typename T>
-T& Entity::component()
+T& Entity::component() const
 {
     if (!_scene)
     {

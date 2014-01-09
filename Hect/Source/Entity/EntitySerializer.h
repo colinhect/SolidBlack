@@ -24,7 +24,7 @@ public:
     /// \param dataValue The data value.
     ///
     /// \throws Error If the entity is null.
-    void save(Entity& entity, DataValue& dataValue);
+    void save(const Entity& entity, DataValue& dataValue);
 
     ///
     /// Serializes an entity's components to a binary stream.
@@ -33,7 +33,7 @@ public:
     /// \param stream The stream to write to.
     ///
     /// \throws Error If the entity is null.
-    void save(Entity& entity, WriteStream& stream);
+    void save(const Entity& entity, WriteStream& stream);
 
     ///
     /// Deserializes and adds components to an entity from a data value.
@@ -43,7 +43,7 @@ public:
     /// \param assetCache The asset cache to use to load referenced assets.
     ///
     /// \throws Error If the entity is null or activated.
-    void load(Entity& entity, const DataValue& dataValue, AssetCache& assetCache);
+    void load(const Entity& entity, const DataValue& dataValue, AssetCache& assetCache);
 
     ///
     /// Deserializes and adds components to an entity from a binary stream.
@@ -53,7 +53,7 @@ public:
     /// \param assetCache The asset cache to use to load referenced assets.
     ///
     /// \throws Error If the entity is null or activated.
-    void load(Entity& entity, ReadStream& stream, AssetCache& assetCache);
+    void load(const Entity& entity, ReadStream& stream, AssetCache& assetCache);
 
     ///
     /// Registers a component with its serializer.

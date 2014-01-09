@@ -121,6 +121,7 @@ SUITE(Scene)
 
         CHECK(!a.isNull());
         CHECK(!a.isActivated());
+        CHECK(a.isSerializable());
 
         a.destroy();
 
@@ -174,7 +175,6 @@ SUITE(Scene)
         a.destroy();
         scene.refresh();
 
-        CHECK(!a.isActivated());
         CHECK(a.isNull());
     }
 
@@ -191,7 +191,7 @@ SUITE(Scene)
             entities.push_back(entity);
         }
 
-        for (Entity& entity : entities)
+        for (const Entity& entity : entities)
         {
             CHECK(!entity.isNull());
             CHECK(entity.hasComponent<Name>());
@@ -304,8 +304,10 @@ SUITE(Scene)
         AssetCache assetCache(fileSystem);
 
         Scene scene;
-        scene.registerComponent<Name, NameSerializer>("Name");
-        scene.registerComponent<Position, PositionSerializer>("Position");
+
+        EntitySerializer& entitySerializer = scene.entitySerializer();
+        entitySerializer.registerComponent<Name, NameSerializer>("Name");
+        entitySerializer.registerComponent<Position, PositionSerializer>("Position");
 
         Entity frank = scene.createEntity();
         frank.addComponent<Name>().value = "Frank";
@@ -330,8 +332,10 @@ SUITE(Scene)
         AssetCache assetCache(fileSystem);
 
         Scene scene;
-        scene.registerComponent<Name, NameSerializer>("Name");
-        scene.registerComponent<Position, PositionSerializer>("Position");
+
+        EntitySerializer& entitySerializer = scene.entitySerializer();
+        entitySerializer.registerComponent<Name, NameSerializer>("Name");
+        entitySerializer.registerComponent<Position, PositionSerializer>("Position");
 
         Entity frank = scene.createEntity();
         frank.addComponent<Name>().value = "Frank";
@@ -366,15 +370,22 @@ SUITE(Scene)
         DataValue sceneValue;
         {
             Scene scene;
-            scene.registerComponent<Name, NameSerializer>("Name");
+
+            EntitySerializer& entitySerializer = scene.entitySerializer();
+            entitySerializer.registerComponent<Name, NameSerializer>("Name");
 
             Entity frank = scene.createEntity();
             frank.addComponent<Name>().value = "Frank";
             frank.activate();
-
+            
             Entity joe = scene.createEntity();
             joe.addComponent<Name>().value = "Joe";
             joe.activate();
+
+            Entity billy = scene.createEntity();
+            billy.addComponent<Name>().value = "Billy";
+            billy.setSerializable(false);
+            billy.activate();
 
             scene.refresh();
             scene.save(sceneValue);
@@ -383,7 +394,9 @@ SUITE(Scene)
         NamingSystem namingSystem;
 
         Scene scene;
-        scene.registerComponent<Name, NameSerializer>("Name");
+
+        EntitySerializer& entitySerializer = scene.entitySerializer();
+        entitySerializer.registerComponent<Name, NameSerializer>("Name");
 
         scene.addSystem(namingSystem);
 
@@ -406,7 +419,9 @@ SUITE(Scene)
         std::vector<uint8_t> data;
         {
             Scene scene;
-            scene.registerComponent<Name, NameSerializer>("Name");
+
+            EntitySerializer& entitySerializer = scene.entitySerializer();
+            entitySerializer.registerComponent<Name, NameSerializer>("Name");
 
             Entity frank = scene.createEntity();
             frank.addComponent<Name>().value = "Frank";
@@ -415,6 +430,11 @@ SUITE(Scene)
             Entity joe = scene.createEntity();
             joe.addComponent<Name>().value = "Joe";
             joe.activate();
+
+            Entity billy = scene.createEntity();
+            billy.addComponent<Name>().value = "Billy";
+            billy.setSerializable(false);
+            billy.activate();
 
             scene.refresh();
             {
@@ -426,7 +446,9 @@ SUITE(Scene)
         NamingSystem namingSystem;
 
         Scene scene;
-        scene.registerComponent<Name, NameSerializer>("Name");
+
+        EntitySerializer& entitySerializer = scene.entitySerializer();
+        entitySerializer.registerComponent<Name, NameSerializer>("Name");
 
         scene.addSystem(namingSystem);
 

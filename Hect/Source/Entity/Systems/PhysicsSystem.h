@@ -42,8 +42,8 @@ public:
     void setGravity(const Vector3<>& gravity);
 
 protected:
-    void addEntity(Entity& entity);
-    void removeEntity(Entity& entity);
+    void addEntity(const Entity& entity);
+    void removeEntity(const Entity& entity);
 
 private:
     btTriangleMesh* _toBulletMesh(Mesh* mesh);

@@ -1,12 +1,6 @@
 namespace hect
 {
 
-template <typename T, typename S>
-void Scene::registerComponent(const std::string& componentTypeName)
-{
-    _entitySerializer.registerComponent<T, S>(componentTypeName);
-}
-
 template <typename T>
 bool Scene::_hasComponent(const Entity& entity) const
 {
@@ -22,7 +16,7 @@ bool Scene::_hasComponent(const Entity& entity) const
 }
 
 template <typename T>
-T& Scene::_addComponent(Entity& entity, const BaseComponent::Ref& component)
+T& Scene::_addComponent(const Entity& entity, const BaseComponent::Ref& component)
 {
     _addComponentWithoutReturn(entity, component);
     return *(T*)component.get();

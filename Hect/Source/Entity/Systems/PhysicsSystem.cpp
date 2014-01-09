@@ -25,7 +25,7 @@ void PhysicsSystem::update(double timeStep, unsigned maxSubStepCount)
     _world->stepSimulation(timeStep, maxSubStepCount);
 
     // Update the transform for all entities with a rigid body
-    for (Entity& entity : entities())
+    for (const Entity& entity : entities())
     {
         RigidBody& rigidBody = entity.component<RigidBody>();
         Transform& transform = entity.component<Transform>();
@@ -44,7 +44,7 @@ void PhysicsSystem::setGravity(const Vector3<>& gravity)
     _world->setGravity(convertToBullet(gravity));
 }
 
-void PhysicsSystem::addEntity(Entity& entity)
+void PhysicsSystem::addEntity(const Entity& entity)
 {
     System::addEntity(entity);
 
@@ -74,7 +74,7 @@ void PhysicsSystem::addEntity(Entity& entity)
     _world->addRigidBody(rigidBody._rigidBody.get());
 }
 
-void PhysicsSystem::removeEntity(Entity& entity)
+void PhysicsSystem::removeEntity(const Entity& entity)
 {
     RigidBody& rigidBody = entity.component<RigidBody>();
     _world->removeRigidBody(rigidBody._rigidBody.get());

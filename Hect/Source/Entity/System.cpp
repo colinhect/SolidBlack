@@ -2,12 +2,12 @@
 
 using namespace hect;
 
-void System::addEntity(Entity& entity)
+void System::addEntity(const Entity& entity)
 {
     _entities.push_back(entity);
 }
 
-void System::removeEntity(Entity& entity)
+void System::removeEntity(const Entity& entity)
 {
     // Possible performance issue
     _entities.erase(std::remove(_entities.begin(), _entities.end(), entity), _entities.end());

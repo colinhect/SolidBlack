@@ -125,7 +125,7 @@ void Scene::save(DataValue& dataValue) const
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
     {
         Entity entity = entityWithId(id);
-        if (entity && entity.isActivated())
+        if (entity && entity.isActivated() && entity.isSerializable())
         {
             // Save the entity to a data value
             DataValue entityDataValue;
@@ -148,7 +148,7 @@ void Scene::save(WriteStream& stream) const
     for (Entity::Id id = 0; id < _entityData.size(); ++id)
     {
         Entity entity = entityWithId(id);
-        if (entity && entity.isActivated())
+        if (entity && entity.isActivated() && entity.isSerializable())
         {
             // Serialize the entity
             entity.save(stream);
@@ -191,6 +191,11 @@ void Scene::load(ReadStream& stream, AssetCache& assetCache)
     }
 }
 
+EntitySerializer& Scene::entitySerializer()
+{
+    return _entitySerializer;
+}
+
 Entity Scene::_cloneEntity(const Entity& entity)
 {
     // Create the cloned entity
@@ -212,7 +217,7 @@ Entity Scene::_cloneEntity(const Entity& entity)
     return clone;
 }
 
-void Scene::_destroyEntity(Entity& entity)
+void Scene::_destroyEntity(const Entity& entity)
 {
     Entity::Id id = entity._id;
     EntityData& data = _entityData[id];
@@ -232,7 +237,7 @@ void Scene::_destroyEntity(Entity& entity)
     _destroyedEntities.push_back(id);
 }
 
-void Scene::_activateEntity(Entity& entity)
+void Scene::_activateEntity(const Entity& entity)
 {
     Entity::Id id = entity._id;
     EntityData& data = _entityData[id];
@@ -257,6 +262,12 @@ bool Scene::_isActivated(const Entity& entity) const
     // Check the entity data to see if the entity is activated
     Entity::Id id = entity._id;
     const EntityData& data = _entityData[id];
+
+    if (data.isNull())
+    {
+        throw Error("Entity is null");
+    }
+
     return data.isActivated();
 }
 
@@ -268,7 +279,34 @@ bool Scene::_isNull(const Entity& entity) const
     return data.isNull();
 }
 
-void Scene::_addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref& component)
+bool Scene::_isSerializable(const Entity& entity) const
+{
+    // Check the entity data to see if the entity is serializable
+    Entity::Id id = entity._id;
+    const EntityData& data = _entityData[id];
+
+    if (data.isNull())
+    {
+        throw Error("Entity is null");
+    }
+
+    return data.isSerializable();
+}
+
+void Scene::_setSerializable(const Entity& entity, bool serializable)
+{
+    Entity::Id id = entity._id;
+    EntityData& data = _entityData[id];
+
+    if (data.isNull())
+    {
+        throw Error("Entity is null");
+    }
+
+    data.setSerializable(serializable);
+}
+
+void Scene::_addComponentWithoutReturn(const Entity& entity, const BaseComponent::Ref& component)
 {
     Entity::Id id = entity._id;
     EntityData& data = _entityData[id];

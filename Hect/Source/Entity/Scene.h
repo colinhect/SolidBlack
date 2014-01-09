@@ -83,15 +83,10 @@ public:
     /// \param stream The stream to read from.
     /// \param assetCache The asset cache to use to load referenced assets.
     void load(ReadStream& stream, AssetCache& assetCache);
-
+    
     ///
-    /// Registers a component with its serializer.
-    ///
-    /// \param componentTypeName The type name of the component.
-    ///
-    /// \throws Error If the component type is already registered.
-    template <typename T, typename S>
-    void registerComponent(const std::string& componentTypeName);
+    /// Returns the entity serializer;
+    EntitySerializer& entitySerializer();
 
 private:
     enum
@@ -101,18 +96,21 @@ private:
 
     Entity _cloneEntity(const Entity& entity);
 
-    void _destroyEntity(Entity& entity);
-    void _activateEntity(Entity& entity);
+    void _destroyEntity(const Entity& entity);
+    void _activateEntity(const Entity& entity);
 
     bool _isActivated(const Entity& entity) const;
     bool _isNull(const Entity& entity) const;
+
+    bool _isSerializable(const Entity& entity) const;
+    void _setSerializable(const Entity& entity, bool serializable);
 
     template <typename T>
     bool _hasComponent(const Entity& entity) const;
 
     template <typename T>
-    T& _addComponent(Entity& entity, const BaseComponent::Ref& component);
-    void _addComponentWithoutReturn(Entity& entity, const BaseComponent::Ref& component);
+    T& _addComponent(const Entity& entity, const BaseComponent::Ref& component);
+    void _addComponentWithoutReturn(const Entity& entity, const BaseComponent::Ref& component);
 
     template <typename T>
     T& _component(const Entity& entity);

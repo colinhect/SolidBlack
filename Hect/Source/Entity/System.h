@@ -13,13 +13,13 @@ public:
     /// Adds an entity to the system.
     ///
     /// \param entity The entity.
-    virtual void addEntity(Entity& entity);
+    virtual void addEntity(const Entity& entity);
 
     ///
     /// Removes an entity from the system.
     ///
     /// \param entity The entity.
-    virtual void removeEntity(Entity& entity);
+    virtual void removeEntity(const Entity& entity);
 
     ///
     /// Removes all from the system.

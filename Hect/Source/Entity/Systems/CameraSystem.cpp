@@ -20,7 +20,7 @@ Camera& CameraSystem::camera()
 
 void CameraSystem::update()
 {
-    for (Entity& entity : entities())
+    for (const Entity& entity : entities())
     {
         Camera& camera = entity.component<Camera>();
         Transform& transform = entity.component<Transform>();

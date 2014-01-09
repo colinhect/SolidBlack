@@ -4,6 +4,7 @@ using namespace hect;
 
 enum class EntityDataBit
 {
+    NotSerializable = 60,
     Destroyed = 61,
     Activated = 62,
     NotNull = 63
@@ -37,6 +38,16 @@ bool EntityData::isNull() const
 void EntityData::setNull(bool null)
 {
     _bitset.set((size_t)EntityDataBit::NotNull, !null);
+}
+
+bool EntityData::isSerializable() const
+{
+    return !_bitset.test((size_t)EntityDataBit::NotSerializable);
+}
+
+void EntityData::setSerializable(bool serializable)
+{
+    _bitset.set((size_t)EntityDataBit::NotSerializable, !serializable);
 }
 
 bool EntityData::hasComponent(ComponentTypeId typeId) const

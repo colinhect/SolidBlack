@@ -38,7 +38,7 @@ public:
     /// \param dataValue The data value.
     ///
     /// \throws Error If the entity is null.
-    void save(DataValue& dataValue);
+    void save(DataValue& dataValue) const;
 
     ///
     /// Serializes the entity's components to a binary stream.
@@ -46,7 +46,7 @@ public:
     /// \param stream The stream to write to.
     ///
     /// \throws Error If the entity is null.
-    void save(WriteStream& stream);
+    void save(WriteStream& stream) const;
 
     ///
     /// Deserializes and adds components to the entity from a data value.
@@ -55,7 +55,7 @@ public:
     /// \param assetCache The asset cache to use to load referenced assets.
     ///
     /// \throws Error If the entity is null or activated.
-    void load(const DataValue& dataValue, AssetCache& assetCache);
+    void load(const DataValue& dataValue, AssetCache& assetCache) const;
 
     ///
     /// Deserializes and adds components to the entity from a binary stream.
@@ -64,7 +64,7 @@ public:
     /// \param assetCache The asset cache to use to load referenced assets.
     ///
     /// \throws Error If the entity is null or activated.
-    void load(ReadStream& stream, AssetCache& assetCache);
+    void load(ReadStream& stream, AssetCache& assetCache) const;
 
     ///
     /// Activates the entity, enqueuing it to be added to systems in the scene
@@ -74,7 +74,7 @@ public:
     /// added or removed.  The entity cannot be deactivated.
     ///
     /// \throws Error If the entity is already activated or is null.
-    void activate();
+    void activate() const;
 
     ///
     /// Destroys the entity, enqueuing it to be removed from systems in the
@@ -83,7 +83,7 @@ public:
     /// \remarks The entity cannot be re-created.
     ///
     /// \throws Error If the entity is already destroyed or is null.
-    void destroy();
+    void destroy() const;
 
     ///
     /// Creates a clone of the entity.
@@ -99,6 +99,18 @@ public:
     ///
     /// Returns whether the entity is null.
     bool isNull() const;
+
+    ///
+    /// Returns whether the entity should be serialized when the scene it is
+    /// in is serialized.
+    bool isSerializable() const;
+
+    ///
+    /// Sets whether the entity should be serialized when the scene it is in is
+    /// serialized.
+    ///
+    /// \param serializable The new serializable value.
+    void setSerializable(bool serializable) const;
 
     ///
     /// Returns whether an entity has a component of a certain type.
@@ -117,7 +129,7 @@ public:
     /// \throws Error If the entity is activated or already has a component of
     /// the type.
     template <typename T>
-    T& addComponent();
+    T& addComponent() const;
 
     ///
     /// Adds a new component to the entity.
@@ -127,7 +139,7 @@ public:
     ///
     /// \throws Error If the entity is activated or already has a component of
     /// the type.
-    void addComponent(BaseComponent* component);
+    void addComponent(BaseComponent* component) const;
 
     ///
     /// Returns the component of a certain type from an entity.
@@ -136,7 +148,7 @@ public:
     ///
     /// \throws Error If the entity does not have a component of the type.
     template <typename T>
-    T& component();
+    T& component() const;
 
     ///
     /// Returns the components of the entity.

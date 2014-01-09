@@ -40,6 +40,18 @@ public:
     void setNull(bool null);
 
     ///
+    /// Returns whether the entity should be serialized when the scene it is
+    /// in is serialized.
+    bool isSerializable() const;
+
+    ///
+    /// Sets whether the entity should be serialized when the scene it is in is
+    /// serialized.
+    ///
+    /// \param serializable The new serializable value.
+    void setSerializable(bool serializable);
+
+    ///
     /// Returns whether the entity as a component of a certain type.
     ///
     /// \param typeId The component type id.
