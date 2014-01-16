@@ -4,13 +4,13 @@ using namespace hect;
 
 void ShaderDataValueFormat::load(Shader& shader, const std::string& name, const DataValue& dataValue, AssetCache& assetCache)
 {
-    ShaderModule::RefArray modules;
+    AssetHandle<ShaderModule>::Array modules;
 
     // Add all modules
     for (const DataValue& module : dataValue["modules"])
     {
         AssetHandle<ShaderModule> moduleHandle = assetCache.getHandle<ShaderModule>(module.asString());
-        modules.push_back(moduleHandle.getShared());
+        modules.push_back(moduleHandle);
     }
 
     Uniform::Array uniforms;

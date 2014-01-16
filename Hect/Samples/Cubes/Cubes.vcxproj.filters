@@ -6,15 +6,33 @@
       <Extensions>
       </Extensions>
     </Filter>
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{c45f72b0-9d30-46aa-9c34-e3ee49b9adcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Systems">
+      <UniqueIdentifier>{ceac3003-9a89-4e7f-b5c1-f273847efd42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\CubesSample.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\CubesSample.cpp">
+    <ClCompile Include="Source\Cubes.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MainLogicLayer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Systems\PlayerCameraSystem.cpp">
+      <Filter>Source\Systems</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\MainLogicLayer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Systems\PlayerCameraSystem.h">
+      <Filter>Source\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\PlayerCamera.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,14 +10,6 @@ class Material
 public:
 
     ///
-    /// A shared reference to a material.
-    typedef std::shared_ptr<Material> Ref;
-
-    ///
-    /// An array of shared material references.
-    typedef std::vector<Material::Ref> RefArray;
-
-    ///
     /// Constructs a material without any techniques.
     Material();
 

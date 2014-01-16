@@ -6,7 +6,7 @@ namespace hect
 ///
 /// Provides access to input peripherals connected to the system.
 class InputSystem :
-    public MouseListener
+    public Listener<MouseEvent>
 {
     friend class Window;
 public:
@@ -45,9 +45,7 @@ public:
     /// Returns the keyboard connected to the system.
     Keyboard& keyboard();
 
-    ///
-    /// \copydoc MouseListener::receiveMouseEvent()
-    void receiveMouseEvent(const MouseEvent& event);
+    void receiveEvent(const MouseEvent& event);
 
 private:
     void _enqueueEvent(const MouseEvent& event);

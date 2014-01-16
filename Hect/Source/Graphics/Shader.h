@@ -11,10 +11,6 @@ class Shader :
 public:
 
     ///
-    /// A shared reference to a shader.
-    typedef std::shared_ptr<Shader> Ref;
-
-    ///
     /// Constructs a shader without any modules or uniforms.
     Shader();
 
@@ -24,7 +20,7 @@ public:
     /// \param name The name.
     /// \param modules The modules.
     /// \param uniforms The uniforms.
-    Shader(const std::string& name, const ShaderModule::RefArray& modules, const Uniform::Array& uniforms);
+    Shader(const std::string& name, const AssetHandle<ShaderModule>::Array& modules, const Uniform::Array& uniforms);
 
     ///
     /// Destroys the shader if it is uploaded.
@@ -36,7 +32,7 @@ public:
 
     ///
     /// Returns the modules.
-    const ShaderModule::RefArray& modules() const;
+    const AssetHandle<ShaderModule>::Array& modules() const;
 
     ///
     /// Returns the uniforms.
@@ -56,7 +52,7 @@ public:
 
 private:
     std::string _name;
-    ShaderModule::RefArray _modules;
+    AssetHandle<ShaderModule>::Array _modules;
     Uniform::Array _uniforms;
 };
 

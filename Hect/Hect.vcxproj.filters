@@ -318,6 +318,9 @@
     <ClCompile Include="Source\Graphics\MeshBinaryFormat.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity\Systems\BasicRenderSystem.cpp">
+      <Filter>Source\Entity\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Asset\AssetCache.h">
@@ -610,6 +613,9 @@
     </ClInclude>
     <ClInclude Include="Source\Core\Listener.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity\Systems\BasicRenderSystem.h">
+      <Filter>Source\Entity\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

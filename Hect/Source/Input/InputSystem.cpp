@@ -4,7 +4,8 @@ using namespace hect;
 
 InputSystem::InputSystem()
 {
-    _mouse.addListener(*this);
+    Dispatcher<MouseEvent>& mouseDispatcher = _mouse.dispatcher();
+    mouseDispatcher.addListener(*this);
 }
 
 InputSystem::InputSystem(const InputAxis::Array& axes) :
@@ -21,7 +22,8 @@ InputSystem::InputSystem(const InputAxis::Array& axes) :
         _mappedAxes[axis.name()] = &axis;
     }
 
-    _mouse.addListener(*this);
+    Dispatcher<MouseEvent>& mouseDispatcher = _mouse.dispatcher();
+    mouseDispatcher.addListener(*this);
 }
 
 const InputAxis& InputSystem::axisWithName(const std::string& name) const
@@ -86,7 +88,7 @@ Keyboard& InputSystem::keyboard()
     return _keyboard;
 }
 
-void InputSystem::receiveMouseEvent(const MouseEvent& event)
+void InputSystem::receiveEvent(const MouseEvent& event)
 {
     if (event.type == MouseEventType::Movement)
     {

@@ -8,8 +8,7 @@ SUITE(AssetCache)
         AssetCache assetCache(fileSystem);
 
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
-
-        CHECK(a.get());
+        a.get();
     }
 
     TEST(GetNonExistingAsset)
@@ -44,7 +43,7 @@ SUITE(AssetCache)
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
         AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Window.vert");
 
-        CHECK_EQUAL(a.get(), b.get());
+        CHECK_EQUAL(&a.get(), &b.get());
     }
 
     TEST(GetSeparateAssets)
@@ -57,8 +56,8 @@ SUITE(AssetCache)
         AssetHandle<ShaderModule> a = assetCache.getHandle<ShaderModule>("Window.vert");
         AssetHandle<ShaderModule> b = assetCache.getHandle<ShaderModule>("Window.frag");
 
-        CHECK(a.get() != b.get());
-        CHECK(ShaderModuleType::Vertex == a.get()->type());
-        CHECK(ShaderModuleType::Pixel == b.get()->type());
+        CHECK(&a.get() != &b.get());
+        CHECK(ShaderModuleType::Vertex == a.get().type());
+        CHECK(ShaderModuleType::Pixel == b.get().type());
     }
 }

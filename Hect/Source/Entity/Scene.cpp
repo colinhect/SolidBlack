@@ -166,8 +166,8 @@ void Scene::load(const DataValue& dataValue, AssetCache& assetCache)
         if (entityValue.isString())
         {
             // Load the components using the referenced file
-            DataValue::Ref value = assetCache.get<DataValue>(entityValue.asString());
-            entity.load(*value, assetCache);
+            DataValue& value = assetCache.get<DataValue>(entityValue.asString());
+            entity.load(value, assetCache);
         }
         else
         {

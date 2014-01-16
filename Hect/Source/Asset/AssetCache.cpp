@@ -7,6 +7,11 @@ AssetCache::AssetCache(FileSystem& fileSystem) :
 {
 }
 
+void AssetCache::clear()
+{
+    _entries.clear();
+}
+
 FileSystem& AssetCache::fileSystem()
 {
     return _fileSystem;

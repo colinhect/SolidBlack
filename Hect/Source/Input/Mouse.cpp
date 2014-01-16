@@ -13,24 +13,14 @@ bool Mouse::isButtonDown(MouseButton button) const
     return _buttonStates[(int)button];
 }
 
-void Mouse::addListener(MouseListener& listener)
-{
-    if (std::find(_listeners.begin(), _listeners.end(), &listener) != _listeners.end())
-    {
-        return;  // This listener was already added
-    }
-
-    _listeners.push_back(&listener);
-}
-
-void Mouse::removeListener(MouseListener& listener)
-{
-    _listeners.erase(std::remove(_listeners.begin(), _listeners.end(), &listener), _listeners.end());
-}
-
 const Vector2<int>& Mouse::cursorPosition() const
 {
     return _cursorPosition;
+}
+
+Dispatcher<MouseEvent>& Mouse::dispatcher()
+{
+    return _dispatcher;
 }
 
 Mouse::Mouse() :
@@ -49,10 +39,7 @@ void Mouse::_dispatchEvents()
 {
     for (const MouseEvent& event : _events)
     {
-        for (MouseListener* listener : _listeners)
-        {
-            listener->receiveMouseEvent(event);
-        }
+        _dispatcher.notifyEvent(event);
     }
 
     _events.clear();

@@ -29,14 +29,6 @@ class ShaderModule :
 public:
 
     ///
-    /// A shared reference to a shader module.
-    typedef std::shared_ptr<ShaderModule> Ref;
-
-    ///
-    /// An array of shared shader module references.
-    typedef std::vector<ShaderModule::Ref> RefArray;
-
-    ///
     /// Constructs an empty shader module.
     ShaderModule();
 

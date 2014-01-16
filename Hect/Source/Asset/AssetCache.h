@@ -17,14 +17,14 @@ public:
     AssetCache(FileSystem& fileSystem);
 
     ///
-    /// Returns a shared reference to the asset at the given path.
+    /// Returns a reference to the asset at the given path.
     ///
     /// \param path The case-sensitive path to the asset.
     ///
     /// \throws Error If the asset at the given path is of a different type or
     /// failed to load.
     template <typename T>
-    std::shared_ptr<T> get(const Path& path);
+    T& get(const Path& path);
 
     ///
     /// Returns a handle for the asset at the given path.
@@ -37,6 +37,10 @@ public:
     /// \throws Error If the asset at the given path is of a different type.
     template <typename T>
     AssetHandle<T> getHandle(const Path& path);
+
+    ///
+    /// Clears all cached resources.
+    void clear();
 
     ///
     /// Returns the file system.

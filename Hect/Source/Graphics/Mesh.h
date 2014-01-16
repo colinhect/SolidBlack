@@ -40,14 +40,6 @@ public:
     typedef std::vector<uint8_t> IndexData;
 
     ///
-    /// A shared reference to a mesh
-    typedef std::shared_ptr<Mesh> Ref;
-
-    ///
-    /// An array of shared mesh references.
-    typedef std::vector<Mesh::Ref> RefArray;
-
-    ///
     /// Constructs a mesh with the default vertex layout, primitive type,
     /// and index type.
     Mesh();

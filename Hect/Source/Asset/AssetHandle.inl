@@ -8,19 +8,19 @@ AssetHandle<T>::AssetHandle() :
 }
 
 template <typename T>
-AssetHandle<T>::AssetHandle(AssetEntry<T>& entry) :
-    _entry(&entry)
+AssetHandle<T>::AssetHandle(const std::shared_ptr<AssetEntry<T>>& entry) :
+    _entry(entry)
 {
 }
 
 template <typename T>
-T* AssetHandle<T>::get()
+T& AssetHandle<T>::get() const
 {
-    return getShared().get();
+    return *getShared();
 }
 
 template <typename T>
-std::shared_ptr<T> AssetHandle<T>::getShared()
+std::shared_ptr<T> AssetHandle<T>::getShared() const
 {
     if (_entry)
     {

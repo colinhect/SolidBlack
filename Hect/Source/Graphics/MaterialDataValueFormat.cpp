@@ -11,7 +11,7 @@ void MaterialDataValueFormat::load(Material& material, const std::string& name, 
     {
         Path basePath = dataValue["base"].asString();
         AssetHandle<Material> handle = assetCache.getHandle<Material>(basePath);
-        techniques = handle.get()->techniques(); // Copy the base material techniques
+        techniques = handle.get().techniques(); // Copy the base material techniques
     }
 
     // Techniques
@@ -29,8 +29,8 @@ void MaterialDataValueFormat::load(Material& material, const std::string& name, 
         for (const DataValue& passValue : techniqueValue)
         {
             RenderMode renderMode;
-            Texture::RefArray textures;
-            Shader::Ref shader;
+            AssetHandle<Texture>::Array textures;
+            AssetHandle<Shader> shader;
             PassUniformValue::Array uniformValues;
 
             if (passIndex < passes.size())
@@ -45,19 +45,14 @@ void MaterialDataValueFormat::load(Material& material, const std::string& name, 
             if (passValue["shader"].isString())
             {
                 Path path = passValue["shader"].asString();
-                shader = assetCache.get<Shader>(path);
+                shader = assetCache.getHandle<Shader>(path);
             }
 
             // Uniform values
             const DataValue& uniformValue = passValue["uniformValues"];
             for (const std::string& name : uniformValue.memberNames())
             {
-                if (!shader)
-                {
-                    throw Error("Cannot have uniform values without a shader");
-                }
-
-                const Uniform& uniform = shader->uniformWithName(name);
+                const Uniform& uniform = shader.get().uniformWithName(name);
                 UniformValue value = ShaderDataValueFormat::parseValue(uniform.type(), uniformValue[name]);
 
                 bool foundUniformValue = false;
@@ -87,7 +82,7 @@ void MaterialDataValueFormat::load(Material& material, const std::string& name, 
                 }
 
                 Path path = textureValue.asString();
-                Texture::Ref texture = assetCache.get<Texture>(path);
+                AssetHandle<Texture> texture = assetCache.getHandle<Texture>(path);
 
                 // Append a new texture if needed
                 if (textureIndex >= textures.size())

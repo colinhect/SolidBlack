@@ -6,7 +6,7 @@ Shader::Shader()
 {
 }
 
-Shader::Shader(const std::string& name, const ShaderModule::RefArray& modules, const Uniform::Array& uniforms) :
+Shader::Shader(const std::string& name, const AssetHandle<ShaderModule>::Array& modules, const Uniform::Array& uniforms) :
     _name(name),
     _modules(modules),
     _uniforms(uniforms)
@@ -26,7 +26,7 @@ const std::string& Shader::name() const
     return _name;
 }
 
-const ShaderModule::RefArray& Shader::modules() const
+const AssetHandle<ShaderModule>::Array& Shader::modules() const
 {
     return _modules;
 }

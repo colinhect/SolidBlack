@@ -140,6 +140,7 @@ const double pi = 3.14159265358979323846;
 
 #include "Entity/Systems/CameraSystem.h"
 #include "Entity/Systems/PhysicsSystem.h"
+#include "Entity/Systems/BasicRenderSystem.h"
 
 #include "Core/LogicLayer.h"
 #include "Core/LogicFlow.h"

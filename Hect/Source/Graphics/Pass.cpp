@@ -2,13 +2,12 @@
 
 using namespace hect;
 
-Pass::Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const PassUniformValue::Array& uniformValues) :
+Pass::Pass(const RenderMode& renderMode, const AssetHandle<Texture>::Array& textures, const AssetHandle<Shader>& shader, const PassUniformValue::Array& uniformValues) :
     _renderMode(renderMode),
     _textures(textures),
     _shader(shader),
     _uniformValues(uniformValues)
 {
-    assert(shader);
     _resolvePassUniformValues();
 }
 
@@ -19,17 +18,14 @@ void Pass::prepare(Renderer& renderer) const
 
     // Bind the textures in the pass
     unsigned textureIndex = 0;
-    for (const Texture::Ref& texture : _textures)
+    for (const AssetHandle<Texture>& texture : _textures)
     {
-        if (texture)
-        {
-            renderer.bindTexture(*texture, textureIndex);
-        }
+        renderer.bindTexture(texture.get(), textureIndex);
         ++textureIndex;
     }
 
     // Bind the shader
-    renderer.bindShader(*_shader);
+    renderer.bindShader(_shader.get());
 
     // Set the uniform values
     for (auto& pair : _resolvedUniformValues)
@@ -50,12 +46,12 @@ const RenderMode& Pass::renderMode() const
     return _renderMode;
 }
 
-const Texture::RefArray& Pass::textures() const
+const AssetHandle<Texture>::Array& Pass::textures() const
 {
     return _textures;
 }
 
-const Shader::Ref& Pass::shader() const
+const AssetHandle<Shader>& Pass::shader() const
 {
     return _shader;
 }
@@ -67,13 +63,11 @@ const PassUniformValue::Array& Pass::uniformValues() const
 
 void Pass::_resolvePassUniformValues()
 {
-    assert(_shader);
-
     // Resolve the uniforms that the uniform values refer to (this would be
     // invalidated if the shader changes)
     for (const PassUniformValue& uniformValue : _uniformValues)
     {
-        const Uniform& uniform = _shader->uniformWithName(uniformValue.uniformName());
+        const Uniform& uniform = _shader.get().uniformWithName(uniformValue.uniformName());
         _resolvedUniformValues[&uniform] = uniformValue.value();
     }
 }

@@ -76,20 +76,6 @@ public:
 };
 
 ///
-/// Receives notifications of mouse events.
-class MouseListener
-{
-public:
-    virtual ~MouseListener() { }
-
-    ///
-    /// Notifies the listener of a mouse event.
-    ///
-    /// \param event The mouse event.
-    virtual void receiveMouseEvent(const MouseEvent& event) = 0;
-};
-
-///
 /// Provides access to the system mouse.
 class Mouse
 {
@@ -103,24 +89,12 @@ public:
     bool isButtonDown(MouseButton button) const;
 
     ///
-    /// Adds a listener to receive dispatched events.
-    ///
-    /// \remarks If the listener is already added then nothing happens.
-    ///
-    /// \param listener The listener to add.
-    void addListener(MouseListener& listener);
-
-    ///
-    /// Removes a listener from receiving dispatched events.
-    ///
-    /// \remarks If the listener was not added then nothing happens.
-    ///
-    /// \param listener The listener to remove.
-    void removeListener(MouseListener& listener);
-
-    ///
     /// Returns the position of the cursor in window space.
     const Vector2<int>& cursorPosition() const;
+
+    ///
+    /// Returns the dispatcher of mouse events.
+    Dispatcher<MouseEvent>& dispatcher();
 
 private:
     Mouse();
@@ -128,7 +102,7 @@ private:
     void _enqueueEvent(const MouseEvent& event);
     void _dispatchEvents();
 
-    std::vector<MouseListener*> _listeners;
+    Dispatcher<MouseEvent> _dispatcher;
     std::vector<MouseEvent> _events;
 
     bool _cursorLocked;

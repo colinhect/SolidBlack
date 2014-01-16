@@ -24,16 +24,8 @@ class Texture :
 public:
 
     ///
-    /// A shared reference to a texture.
-    typedef std::shared_ptr<Texture> Ref;
-
-    ///
     /// An array of textures.
     typedef std::vector<Texture> Array;
-
-    ///
-    /// An array of shared texture references.
-    typedef std::vector<Texture::Ref> RefArray;
 
     ///
     /// Constructs a default 2-dimensional texture.

@@ -23,7 +23,7 @@ public:
     /// \param textures The textures that the pass will bind.
     /// \param shader The shader that the pass will bind.
     /// \param uniformValues The values for the uniforms in the shader.
-    Pass(const RenderMode& renderMode, const Texture::RefArray& textures, Shader::Ref shader, const PassUniformValue::Array& uniformValues);
+    Pass(const RenderMode& renderMode, const AssetHandle<Texture>::Array& textures, const AssetHandle<Shader>& shader, const PassUniformValue::Array& uniformValues);
 
     ///
     /// Prepares a renderer to begin using this pass.
@@ -41,11 +41,11 @@ public:
 
     ///
     /// Returns the textures.
-    const Texture::RefArray& textures() const;
+    const AssetHandle<Texture>::Array& textures() const;
 
     ///
     /// Returns the shader.
-    const Shader::Ref& shader() const;
+    const AssetHandle<Shader>& shader() const;
 
     ///
     /// Returns the uniform values.
@@ -58,8 +58,8 @@ private:
     void _resolvePassUniformValues();
 
     RenderMode _renderMode;
-    Texture::RefArray _textures;
-    Shader::Ref _shader;
+    AssetHandle<Texture>::Array _textures;
+    AssetHandle<Shader> _shader;
 
     PassUniformValue::Array _uniformValues;
     std::map<const Uniform*, UniformValue> _resolvedUniformValues;

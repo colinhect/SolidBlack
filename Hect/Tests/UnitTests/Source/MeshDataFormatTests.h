@@ -7,13 +7,13 @@ SUITE(MeshDataFormat)
 
         AssetCache assetCache(fileSystem);
 
-        Mesh* mesh = assetCache.getHandle<Mesh>("Window.mesh").get();
+        Mesh& mesh = assetCache.get<Mesh>("Window.mesh");
 
-        CHECK_EQUAL(4, mesh->vertexCount());
-        CHECK_EQUAL(6, mesh->indexCount());
-        CHECK_EQUAL(false, mesh->isUploaded());
-        CHECK(IndexType::UnsignedShort == mesh->indexType());
-        CHECK(PrimitiveType::Triangles == mesh->primitiveType());
+        CHECK_EQUAL(4, mesh.vertexCount());
+        CHECK_EQUAL(6, mesh.indexCount());
+        CHECK_EQUAL(false, mesh.isUploaded());
+        CHECK(IndexType::UnsignedShort == mesh.indexType());
+        CHECK(PrimitiveType::Triangles == mesh.primitiveType());
     }
 
     TEST(IndexType)
@@ -23,9 +23,9 @@ SUITE(MeshDataFormat)
 
         AssetCache assetCache(fileSystem);
 
-        Mesh* mesh = assetCache.getHandle<Mesh>("IndexType.mesh").get();
+        Mesh& mesh = assetCache.get<Mesh>("IndexType.mesh");
 
-        CHECK(IndexType::UnsignedByte == mesh->indexType());
+        CHECK(IndexType::UnsignedByte == mesh.indexType());
     }
 
     TEST(PrimitiveType)
@@ -35,8 +35,8 @@ SUITE(MeshDataFormat)
 
         AssetCache assetCache(fileSystem);
 
-        Mesh* mesh = assetCache.getHandle<Mesh>("PrimitiveType.mesh").get();
+        Mesh& mesh = assetCache.get<Mesh>("PrimitiveType.mesh");
 
-        CHECK(PrimitiveType::Points == mesh->primitiveType());
+        CHECK(PrimitiveType::Points == mesh.primitiveType());
     }
 }
